@@ -1,0 +1,55 @@
+{% extends 'layout.html' %}
+{% block content %}
+{% for r in pricedata %}
+<div  style="margin-top: 2vh;">
+  <div align="center" class="card text-white bg-danger mb-3" style="max-width: 25rem;">
+      <div class="card-header"><h3>รายละเอียด ราคาเเละส่วนลด</h3></div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item"> <h4>รุ่นรถ : {{r.submodel}}</h4> </li>
+        <li class="list-group-item"><h4>ราคา : {{r.price}}  บาท</h4> </li>
+        <li class="list-group-item"><h4>ส่วนลด : {{r.margin}}  บาท</h4> </li>
+      </ul>
+  </div>
+</div>
+               <form action="Payment" method="POST"> <!--เรียกข้อมูลที่ส่งมาเเสดง-->
+                {% csrf_token %}
+                    <label for="formGroupExampleInput2" class="col-sm-2 col-form-label col-form-label-lg">สีตัวถัง</label>
+                    <select class="form-select form-select-lg mb-3" name="bodycolor" aria-label=".form-select-lg example">
+                        <option selected>เลือกสีตัวถัง</option> <!--ใช้ for loop run ตาม database-->
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                      </select>
+                    <label for="formGroupExampleInput2" class="col-sm-2 col-form-label col-form-label-lg">ประเภทการซื้อ</label>
+                    <select class="form-select form-select-lg mb-3" name="paytype" aria-label=".form-select-lg example">
+                        <option selected>เลือกประเภทการซื้อ</option>
+                        <option value="cash">เงินสด</option>
+                        <option value="finance">จัดไฟเเนนซ์</option>
+                      </select>
+                    <label for="formGroupExampleInput2" class="col-sm-2 col-form-label col-form-label-lg">ประเภทการจดทะเบียน</label>
+                      <select class="form-select form-select-lg mb-3" name="registype" aria-label=".form-select-lg example">
+                          <option selected>เลือกประเภทการจดทะเบียน</option>
+                          <option value="person">บุคคล</option>
+                          <option value="company">นิติบุคคล</option>
+                        </select>
+                    <label for="formGroupExampleInput2" class="col-sm-2 col-form-label col-form-label-lg">สาขา</label>
+                      <select class="form-select form-select-lg mb-3" name="mgbranch" aria-label=".form-select-lg example">
+                          <option selected>เลือกสาขาที่จะออกรถ</option>
+                          <option value="Srinakarin">ศรีนครินทร์</option>
+                          <option value="Ransit">รังสิตคลองสี่</option>
+                          <option value="Hathairat">หทัยราษฎร์</option>
+                        </select>
+                    <div style="margin-top: 3vh;  height: 6vh;" class="d-grid gap-1">
+                                    <button type="submit" class="btn btn-success">ดำเนินการต่อ</button>
+                     </div>
+                    
+               </form>
+              
+
+               
+{% endfor %} 
+{% endblock %}
+
+
+
+
+

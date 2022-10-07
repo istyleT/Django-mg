@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+{% block content %}
+{% load static %}
+     <h1  style="text-align:center; margin: 1vw ;">ยินดีต้อนรับ คุณ {{username}}</h1>
+     
+     <img  src="{% static 'picture/Newmghs.png' %}" class="img-fluid" alt="..."/>
+     <form  action="queryprice"  method="get">
+        <label for="formGroupExampleInput2" class="col-sm-2 col-form-label col-form-label-lg">เลือกรุ่นย่อย</label>
+        <select class="form-select form-select-lg mb-3" name="submodel" aria-label=".form-select-lg example">
+            <option selected>Choose Model Grade</option>
+            <option value="MG HS 1.5T X 2022">MG HS 1.5T X 2022</option>
+            <option value="MG HS 1.5T D 2022">MG HS 1.5T D 2022</option>
+            <option value="MG HS 1.5T C 2022">MG HS 1.5T C 2022</option>
+          </select>
+
+        <div style="margin-top: 2vh;" class="d-grid gap-1">
+            <button type="submit" class="btn btn-info">สอบถาม ราคา เเละ ส่วนลด</button>
+        </div>
+    </form>
+    <form>
+      <div style="margin-top: 2vh;" class="d-grid gap-1">
+        <button type="submit" class="btn btn-warning">รายละเอียดรถรุ่น</button>
+      </div>
+
+    </form>
+    
+{% endblock %}

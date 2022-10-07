@@ -1,0 +1,49 @@
+{% extends 'layout1.html' %}
+
+
+
+{% block content-1 %}
+<div align="center" style="margin-top: 2vh;">
+<div  class="card text-white bg-primary mb-3" style="max-width: 25rem;">
+                    <div class="card-header"><h4>รายละเอียด</h4></div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">รุ่น : {{submodel}}</li>
+                        <li class="list-group-item">สีตัวถัง : {{bodycolor}}</li>
+                        <li class="list-group-item">ประเภทการซื้อ : จัดไฟเเนนซ์</li>
+                        <li class="list-group-item">สาขา : {{mgbranch}}</li>
+                        {% if registype == 'person' %}
+                        <li class="list-group-item">ประเภทการจดทะเบียน  : บุคคล</li>
+                        {% else %}
+                        <li class="list-group-item">ประเภทการจดทะเบียน  : บริษัท</li>
+                        {% endif %}
+                        <!--กระจาย regiscost เพื่อสร้างเงื่อนไขการเเสดงผล-->
+                        {% for r in regiscost %}
+                        {% if registype == 'person' %} 
+                        <li class="list-group-item">ค่าจดทะเบียน : {{r.regis_personal}}</li>
+                        {% else %} 
+                        <li class="list-group-item">ค่าจดทะเบียน : {{r.regis_company}}</li>
+                        {% endif %}
+                        {% endfor %}
+                    </ul>
+</div>
+</div>
+
+<div style="margin-top: 3vh; height: 6vh;" class="d-grid gap-1">
+  <button type="submit" class="btn btn-success ">ออกรถสบาย</button>
+</div>
+<div style="margin-top: 1vh; height: 6vh;" class="d-grid gap-1">
+  <button type="submit" class="btn btn-warning">ผ่อนสบาย</button>
+</div>
+<div style="margin-top: 1vh; height: 6vh;" class="d-grid gap-1">
+  <button type="submit" class="btn btn-danger">ออกเเบบเอง</button>
+</div>
+
+
+
+{% endblock %}
+
+
+
+
+
+                

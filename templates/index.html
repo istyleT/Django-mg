@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block style %}
+<link  href="{% static 'css/custom.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+<form action="firstdata" method="post"> <!--สร้างตัวเเปร name เพื่อรับค่าส่งผ่าน url โดย method get-->
+   {% csrf_token %}
+  <div class="mb-3">
+      <label class="col-sm-2 col-form-label col-form-label-lg">ชื่อผู้ใช้งาน</label>
+     <input type="text" class="form-control form-control-lg" name="username"  placeholder="Enter Your Name">
+   </div>
+   <div class="mb-3">
+     <label  class="col-sm-2 col-form-label col-form-label-lg">เบอร์ติดต่อ</label>
+     <input type="text" class="form-control form-control-lg" name="telnumber"  placeholder="Enter Your Telephone number">
+   </div>
+   <label  class="col-sm-2 col-form-label col-form-label-lg">รุ่นรถ MG</label>
+   <select class="form-select form-select-lg mb-3" name="mainmodel" aria-label=".form-select-lg example">
+     <option selected>Choose MG Model</option>
+     <option value="MG5">New MG5 MY2022</option>
+     <option value="MGVSHEV">NEW MG VS HEV</option>
+     <option value="MGZS">MG ZS 2020</option>
+     <option value="MGETD">MG EXTENDER(2021)</option>
+     <option value="MGHSPHEV">MG HS PHEV 2022</option>
+     <option value="MGHS">MG HS 2022</option>
+   </select>
+   <div class="d-grid gap-1">
+       <input type="submit" class="btn btn-success"/>
+   </div>
+</form>
+                     
+
+{% endblock %}

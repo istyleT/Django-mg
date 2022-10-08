@@ -90,3 +90,16 @@ def static_css (request):
 
 def static_js (request):
     return render(request, 'static-js.html')
+
+
+def addmargin(request):
+    return render(request, 'addmargin.html')
+
+
+# คำนวนค่างวดรถ final function 
+#def calculate (request):
+#    # cost_fi = ยอดจัดไฟเเนนซ์
+#    # rate_fi = อัตราดอกเบี้ยสุดท้าย
+#    # total_month = จำนวนงวดที่ผ่อน
+#    car_payment = (((cost_fi*rate_fi)*(total_month/12))+cost_fi)/total_month
+#    return render(request, 'calculate.html')

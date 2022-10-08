@@ -24,6 +24,6 @@ urlpatterns = [
     path('queryprice/',views.showprice),
     path('queryprice/Payment',views.PaymentRegis),
     path('static-css',views.static_css), #นำเข้า static css มาใช้ใน webappmg
-    path('static-js',views.static_js) #นำเข้า static js มาใช้ใน webappmg
-    
+    path('static-js',views.static_js), #นำเข้า static js มาใช้ใน webappmg
+    path('queryprice/addmargin',views.addmargin) 
 ]

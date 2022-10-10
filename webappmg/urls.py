@@ -19,11 +19,12 @@ from sellmg import views #นำเข้า view จาก app ย่อย
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('static-css',views.static_css), #นำเข้า static css มาใช้ใน webappmg
+    path('static-js',views.static_js), #นำเข้า static js มาใช้ใน webappmg
     path('',views.firstpage), #ตังค่า path เเละ function ที่จะทำงาน
     path('firstdata',views.collectdata), # ถ้า method POST ไม่ต้องต่อ url ด้วย/
-    path('queryprice/',views.showprice),
-    path('queryprice/Payment',views.PaymentRegis),
-    path('static-css',views.static_css), #นำเข้า static css มาใช้ใน webappmg
-    path('static-js',views.static_js) #นำเข้า static js มาใช้ใน webappmg
-    
+    path('queryprice',views.showprice),
+    path('Payment',views.PaymentRegis),
+    path('Normalcalculate',views.Normalcalculate),
+    path('conditionfinance',views.conditionfinance) 
 ]

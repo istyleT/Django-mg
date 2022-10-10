@@ -30,16 +30,14 @@ class Accmg(models.Model) :
       acc_model = models.CharField(max_length=10)
 
 
-# ตารางเเละฟอร์มดอกเ
-#class FinanceTISCO(models.Model) :        
-#      fi_model = models.CharField(max_length=30)
-#      fi_down = models.FloatField()
-#      fi_in_48 = models.FloatField()
-#      fi_in_60 = models.FloatField()
-#      fi_in_72 = models.FloatField()
-#      fi_in_84 = models.FloatField()
-#      fi_commit = models.FloatField()
-
-      
-                       
+# ตารางดอกเบีย
+class Tisconormal(models.Model) :        
+      fi_model = models.CharField(max_length=30)
+      fi_down = models.FloatField()
+      fi_in_48 = models.FloatField()
+      fi_in_60 = models.FloatField()
+      fi_in_72 = models.FloatField()
+      fi_in_84 = models.FloatField()   
+      def __str__(self) :
+              return f'{self.fi_model} | {self.fi_down} | {self.fi_in_48} | {self.fi_in_60} | {self.fi_in_72} | {self.fi_in_84}'        
 

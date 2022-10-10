@@ -1,7 +1,4 @@
 {% extends 'layout1.html' %}
-
-
-
 {% block content-1 %}
 <div align="center" style="margin-top: 2vh;">
 <div  class="card text-white bg-success mb-3" style="max-width: 25rem;">
@@ -28,26 +25,69 @@
 {% endblock %}
 
 
-
-
 {% block content-2 %}
-<div align="center" style="margin-top: 2vh;"> <!--ใช้ loop for เพื่อวน เเล้วเเสดงรายการตาม item-->
-  <div class="card text-white bg-danger mb-3" style="max-width: 40rem;">
-  <div class="card-header">อุปกรณ์ตกเเต่ง</div>
-  <ul class="list-group list-group-flush">
-  
-  {% for i in mainacc %}
-        <li class="list-group-item">
-           <div class="form-check">
-             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
-             <label class="form-check-label" for="flexCheckDefault">
-                {{i.acc_name}}  <br>  ประเภท: {{i.acc_type}}   ราคา: {{i.acc_price}} บาท
-             </label>
-           </div>
-        </li>
-        
-  {% endfor %}   
-  </ul>                            
+<div class="accordion" id="accordionPanelsStayOpenExample">
+<div class="accordion-item">
+  <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+    <button id="#scrollspyHeading1" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+     <strong >ลดราคารถ</strong>
+    </button>
+  </h2>
+  <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+    <div class="accordion-body">
+
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="ใส่ส่วนลดที่ต้องการ" aria-label="Recipient's username" aria-describedby="button-addon2">
+        <button class="btn btn-outline-secondary" type="button" id="button-addon2">OK</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+</div>
+
+{% endblock %}
+
+
+{% block content-3 %}
+<div class="accordion-item">
+  <h2 class="accordion-header" id="headingTwo">
+    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+     <strong id="scrollspyHeading2">รายการของบังคับ</strong>
+    </button>
+  </h2>
+  <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+    <div class="accordion-body">
+      <div class="form-check">
+
+        {% for r in regiscost %}
+        {% if registype == 'person' %} 
+        <label class="form-check-label" for="flexCheckChecked">
+          ค่าจดทะเบียน {{r.regis_personal}} บาท
+        </label>
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+        {% else %}
+        <label class="form-check-label" for="flexCheckChecked">
+          ค่าจดทะเบียน {{r.regis_company}} บาท
+        </label>
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+        {% endif %}
+        {% endfor %}
+
+        <label class="form-check-label" for="flexCheckChecked">
+          ค่า PDI (ตรวจสอบก่อนส่งมอบ) 500 บาท
+        </label>
+        <input class="form-check-input" type="checkbox" value="500" id="flexCheckChecked" checked>
+        <label class="form-check-label" for="flexCheckChecked">
+          กรอบป้ายค่าทะเบียน 130 บาท
+        </label>
+        <input class="form-check-input" type="checkbox" value="130" id="flexCheckChecked" checked>
+        <label class="form-check-label" for="flexCheckChecked">
+          ขัดเคลือบสีรถใหม่ 500 บาท
+        </label>
+        <input class="form-check-input" type="checkbox" value="500" id="flexCheckChecked" checked>
+      </div>
+    </div>
   </div>
 </div>
 {% endblock %}
@@ -56,46 +96,39 @@
 
 
 
-{% block content-3 %}
-<div align="center" style="margin-top: 2vh;">
-                    <div  class="card text-dark bg-info mb-3" style="max-width: 18rem;">
-                                        <div class="card-header">รายละเอียดวันออกรถ</div>
-                                        <ul class="list-group list-group-flush">
-                                          <li class="list-group-item">รุ่น : {{submodel}}</li>
-                                          <li class="list-group-item">ประเภทการซื้อ : เงินสด</li>
-                                          {% if registype == 'person' %}
-                                          <li class="list-group-item">ประเภทการจดทะเบียน  : บุคคล</li>
-                                          {% else %}
-                                          <li class="list-group-item">ประเภทการจดทะเบียน  : บริษัท</li>
-                                          {% endif %}
-                                          <li class="list-group-item">ค่าจดทะเบียน : {{regiscost}}</li>
-                                        </ul>
-                    </div>
-                    </div>
-
-{% endblock %}
-
-
-
-
 {% block content-4 %}
-<div align="center" style="margin-top: 2vh;">
-                    <div  class="card text-white bg-dark mb-3" style="max-width: 18rem;">
-                                        <div class="card-header">รายละเอียดวันออกรถ</div>
-                                        <ul class="list-group list-group-flush">
-                                          <li class="list-group-item">รุ่น : {{submodel}}</li>
-                                          <li class="list-group-item">ประเภทการซื้อ : เงินสด</li>
-                                          {% if registype == 'person' %}
-                                          <li class="list-group-item">ประเภทการจดทะเบียน  : บุคคล</li>
-                                          {% else %}
-                                          <li class="list-group-item">ประเภทการจดทะเบียน  : บริษัท</li>
-                                          {% endif %}
-                                          <li class="list-group-item">ค่าจดทะเบียน : {{regiscost}}</li>
-                                        </ul>
-                    </div>
-                    </div>
+
+<div class="accordion-item">
+  <h2 class="accordion-header" >
+    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+     <strong id="scrollspyHeading3">อุปกรณ์ตกเเต่ง</strong> 
+    </button>
+  </h2>
+  <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+    <div class="accordion-body">
+      <ul class="list-group list-group-flush">
+  
+        {% for i in mainacc %}
+              <li class="list-group-item">
+                 <div class="form-check">
+                   <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
+                   <label class="form-check-label" for="flexCheckDefault">
+                      {{i.acc_name}}  <br>  ประเภท: {{i.acc_type}}   ราคา: {{i.acc_price}} บาท
+                   </label>
+                 </div>
+              </li> 
+              
+        {% endfor %}   
+        </ul>                 
+    </div>
+  </div>
+</div>
 
 {% endblock %}
+
+
+
+
 
 
 
@@ -105,3 +138,9 @@
 
 
 {% endblock %}
+
+
+
+
+
+

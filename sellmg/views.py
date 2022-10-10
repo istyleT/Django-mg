@@ -101,38 +101,40 @@ def PaymentRegis(request):
 def Normalcalculate (request):
    
     #สร้างตัวเเปรการเก็บของข้อมูลรุ่นจากข้อมูลที่ส่งมาก่อนหน้า ใช้ request.session
-    productprice = int(request.session.get('productprice'))
-    productmargin = int(request.session.get('productmargin'))
+    #productprice = int(request.session.get('productprice'))
+    #productmargin = int(request.session.get('productmargin'))
     mainmodel = request.session.get('mainmodel')
-    submodel = request.session.get('submodel') 
+    #submodel = request.session.get('submodel') 
+
+
     #ส่งข้อมูลให้ view ในหน้าต่อไป
-    request.session['productprice'] = productprice
-    request.session['productmargin'] = productmargin
-    request.session['mainmodel'] = mainmodel
-    request.session['submodel'] = submodel  
+    #request.session['productprice'] = productprice
+    #request.session['productmargin'] = productmargin
+    #request.session['mainmodel'] = mainmodel
+    #request.session['submodel'] = submodel  
     # สร้างตัวเเปรมาเก็บข้อมูลจากหน้าปัจจุบัน
     financecompany = request.POST.get('financecompany')
-    monthqty = int(request.POST.get('monthqty'))
-    downpay = int(request.POST.get('downpay'))
-    downcost = float(productprice*(downpay/100))
+    request.session['financecompany'] = financecompany
     if financecompany == 'TISCO' :
-        condition_inter = Tisconormal.objects.filter(Q(fi_model = mainmodel) & Q(fi_down = downpay)).values_list('fi_down', 'fi_in_48','fi_in_60', 'fi_in_72', 'fi_in_84',named=True)
-        for i in condition_inter :
-            if monthqty == 48 :
-               rate_inter = i.fi_in_48
-            elif monthqty == 60 :
-                rate_inter = i.fi_in_60
-            elif monthqty == 72 :
-                rate_inter = i.fi_in_72
-            elif monthqty == 84 :
-                rate_inter = i.fi_in_84
-            else :
-                rate_inter = 0
-                 #ต้องฟ่อง errors
-        rate_inter = rate_inter/100
-        financecost = float(productprice-downcost)
-        car_payment = int(((((financecost)*rate_inter)*(monthqty/12))+(financecost))/monthqty)
-        return render(request,'begincarpay.html', {'downcost':downcost, 'car_payment':car_payment, 'monthqty': monthqty})
+        condition_inter = Tisconormal.objects.filter(Q(fi_model = mainmodel)).values_list('fi_down','fi_in_48','fi_in_60', named=True)
+        return render(request, 'test.html', {'condition_inter': condition_inter, 'financecompany':financecompany})
+        #condition_inter = Tisconormal.objects.filter(Q(fi_model = mainmodel) & Q(fi_down = downpay)).values_list('fi_down', 'fi_in_48','fi_in_60', 'fi_in_72', 'fi_in_84',named=True)
+        #for i in condition_inter :
+        #    if monthqty == 48 :
+        #       rate_inter = i.fi_in_48
+        #    elif monthqty == 60 :
+        #        rate_inter = i.fi_in_60
+        #    elif monthqty == 72 :
+        #        rate_inter = i.fi_in_72
+        #    elif monthqty == 84 :
+        #        rate_inter = i.fi_in_84
+        #    else :
+        #        rate_inter = 0
+        #         #ต้องฟ่อง errors
+        #rate_inter = rate_inter/100
+        #financecost = float(productprice-downcost)
+        #car_payment = int(((((financecost)*rate_inter)*(monthqty/12))+(financecost))/monthqty)
+        #return render(request,'begincarpay.html', {'downcost':downcost, 'car_payment':car_payment, 'monthqty': monthqty})
         
         
         
@@ -141,4 +143,29 @@ def Normalcalculate (request):
     #return render(request, 'Normalcalculate.html', {'condition_inter': condition_inter, 'financecompany':financecompany})
 
 def conditionfinance (request):
-    return render(request, 'conditionfinance.html')
+    #สร้างตัวเเปรการเก็บของข้อมูลรุ่นจากข้อมูลที่ส่งมาก่อนหน้า ใช้ request.session
+    productprice = int(request.session.get('productprice'))
+    mainmodel = request.session.get('mainmodel')
+    financecompany = request.session.get('financecompany')
+    #เก็บตัวเเปรจากหน้าตัวเอง
+    downpay = int(request.POST.get('downpay'))
+    monthqty= int(request.POST.get('monthqty'))
+    # คำนวนค่าดาว์น
+    downcost = float(productprice*(downpay/100))
+    if financecompany == 'TISCO' :
+        inter = Tisconormal.objects.filter(Q(fi_model = mainmodel) & Q(fi_down = downpay)).values_list('fi_down', 'fi_in_48','fi_in_60', 'fi_in_72', 'fi_in_84',named=True)
+        for i in inter :
+           if monthqty == 48 :
+              rate_inter = i.fi_in_48
+           elif monthqty == 60 :
+               rate_inter = i.fi_in_60
+           elif monthqty == 72 :
+               rate_inter = i.fi_in_72
+           elif monthqty == 84 :
+               rate_inter = i.fi_in_84
+        rate_inter = rate_inter/100
+        financecost = float(productprice-downcost)
+        car_payment = int(((((financecost)*rate_inter)*(monthqty/12))+(financecost))/monthqty)
+        return render(request,'begincarpay.html', {'downcost':downcost, 'car_payment':car_payment, 'monthqty': monthqty})
+    else:
+        pass

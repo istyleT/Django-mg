@@ -21,15 +21,15 @@ def firstpage(request):
 
 
 #อยู่หน้าเเรก Page1
-def collectdata(request): #create variablr for collect data from url
-                    # เเก้ปัญหาเรื่องความปลอดภัยของข้อมูล
+def collectdata(request): 
+                    
                     if 'username' not in request.POST :
                         return render(request, 'index.html')
                     else :
                          username =request.POST.get('username')
                          telphone = request.POST.get('telphone')
                          mainmodel = request.POST.get('mainmodel')
-                         #ส่งข้อมูลให้ view ในหน้าต่อไป
+                         #ส่งข้อมูลออก
                          request.session['mainmodel'] = mainmodel
                          
                          if mainmodel == "MG5" :
@@ -87,60 +87,37 @@ def PaymentRegis(request):
                     mainacc = Accmg.objects.filter(acc_model = mainmodel).values_list('acc_name','acc_price','acc_type', named=True)
                     regiscost = Regiscost.objects.filter(regis_code = submodel)
                     #สร้างตัวเเปรกำหนดค่า
-                    x = 0
                     if paytype == 'cash' :              
-                                        return render(request, 'managecash.html',{'submodel':submodel ,'registype':registype, 'regiscost':regiscost, 'bodycolor':bodycolor, 'mgbranch':mgbranch, 'mainacc':mainacc})
+                                        return render(request, 'managecash.html',{'submodel':submodel ,'registype':registype, 'regiscost': regiscost, 'bodycolor':bodycolor, 'mgbranch':mgbranch, 'mainacc':mainacc})
                     elif paytype == 'finance' :
                                         regiscost = Regiscost.objects.filter(regis_code = submodel)
-                                        return render(request, 'managefinance.html',{'submodel':submodel, 'registype':registype, 'regiscost':regiscost, 'bodycolor':bodycolor, 'mgbranch':mgbranch, 'mainacc':mainacc})
+                                        return render(request, 'managefinance.html',{'submodel':submodel, 'registype':registype, 'regiscost': regiscost, 'bodycolor':bodycolor, 'mgbranch':mgbranch, 'mainacc':mainacc})
 
 
 
 
-# สร้างเงื่อนไขการคำนวน
+# เลือกบริษัทไฟเเนนซ์
 def Normalcalculate (request):
    
     #สร้างตัวเเปรการเก็บของข้อมูลรุ่นจากข้อมูลที่ส่งมาก่อนหน้า ใช้ request.session
-    #productprice = int(request.session.get('productprice'))
-    #productmargin = int(request.session.get('productmargin'))
+    productprice = int(request.session.get('productprice'))
     mainmodel = request.session.get('mainmodel')
-    #submodel = request.session.get('submodel') 
-
-
-    #ส่งข้อมูลให้ view ในหน้าต่อไป
-    #request.session['productprice'] = productprice
-    #request.session['productmargin'] = productmargin
-    #request.session['mainmodel'] = mainmodel
-    #request.session['submodel'] = submodel  
     # สร้างตัวเเปรมาเก็บข้อมูลจากหน้าปัจจุบัน
     financecompany = request.POST.get('financecompany')
-    request.session['financecompany'] = financecompany
+    request.session['financecompany'] = financecompany #ส่งข้อมูลออก
+
     if financecompany == 'TISCO' :
-        condition_inter = Tisconormal.objects.filter(Q(fi_model = mainmodel)).values_list('fi_down','fi_in_48','fi_in_60', named=True)
-        return render(request, 'test.html', {'condition_inter': condition_inter, 'financecompany':financecompany})
-        #condition_inter = Tisconormal.objects.filter(Q(fi_model = mainmodel) & Q(fi_down = downpay)).values_list('fi_down', 'fi_in_48','fi_in_60', 'fi_in_72', 'fi_in_84',named=True)
-        #for i in condition_inter :
-        #    if monthqty == 48 :
-        #       rate_inter = i.fi_in_48
-        #    elif monthqty == 60 :
-        #        rate_inter = i.fi_in_60
-        #    elif monthqty == 72 :
-        #        rate_inter = i.fi_in_72
-        #    elif monthqty == 84 :
-        #        rate_inter = i.fi_in_84
-        #    else :
-        #        rate_inter = 0
-        #         #ต้องฟ่อง errors
-        #rate_inter = rate_inter/100
-        #financecost = float(productprice-downcost)
-        #car_payment = int(((((financecost)*rate_inter)*(monthqty/12))+(financecost))/monthqty)
-        #return render(request,'begincarpay.html', {'downcost':downcost, 'car_payment':car_payment, 'monthqty': monthqty})
-        
-        
-        
+        #ส่งข้อมูลเงินดาวน์
+        condition_inter = Tisconormal.objects.filter(Q(fi_model = mainmodel)).values_list('fi_down', named=True)
+        #ส่งข้อมูลจำนวนงวด
+        fi_monthqty = Tisconormal.objects.exclude(fi_monthqty = None).values_list('fi_monthqty', named=True)
+        return render(request, 'test.html', {'condition_inter': condition_inter, 'financecompany':financecompany, 'fi_monthqty':fi_monthqty})
+    #elif financecompany == 'CITY' :
+    #    condition_inter = Tisconormal.objects.filter(Q(fi_model = mainmodel)).values_list('fi_down', named=True)
+
     else :
         pass
-    #return render(request, 'Normalcalculate.html', {'condition_inter': condition_inter, 'financecompany':financecompany})
+
 
 def conditionfinance (request):
     #สร้างตัวเเปรการเก็บของข้อมูลรุ่นจากข้อมูลที่ส่งมาก่อนหน้า ใช้ request.session
@@ -151,7 +128,7 @@ def conditionfinance (request):
     downpay = int(request.POST.get('downpay'))
     monthqty= int(request.POST.get('monthqty'))
     # คำนวนค่าดาว์น
-    downcost = float(productprice*(downpay/100))
+    downcost = int(productprice*(downpay/100))
     if financecompany == 'TISCO' :
         inter = Tisconormal.objects.filter(Q(fi_model = mainmodel) & Q(fi_down = downpay)).values_list('fi_down', 'fi_in_48','fi_in_60', 'fi_in_72', 'fi_in_84',named=True)
         for i in inter :
@@ -164,8 +141,8 @@ def conditionfinance (request):
            elif monthqty == 84 :
                rate_inter = i.fi_in_84
         rate_inter = rate_inter/100
-        financecost = float(productprice-downcost)
+        financecost = int(productprice-downcost)
         car_payment = int(((((financecost)*rate_inter)*(monthqty/12))+(financecost))/monthqty)
-        return render(request,'begincarpay.html', {'downcost':downcost, 'car_payment':car_payment, 'monthqty': monthqty})
+        return render(request,'begincarpay.html', {'downcost':'{:,}'.format(downcost), 'car_payment':'{:,}'.format(car_payment), 'monthqty': monthqty})
     else:
         pass

@@ -7,18 +7,17 @@
                     <label  class="col-sm-2 col-form-label col-form-label-lg">เงินดาวน์</label>
                     <select class="form-select form-select-lg mb-3" name="downpay" aria-label=".form-select-lg example">
                       <option selected>เลือกเงินดาวน์</option>
-                      {% for i in condition_inter %}
-                      <option value= {{i.fi_down}} >{{i.fi_down}} %</option>
+                      {% for d in condition_inter %}
+                      <option value= {{d.fi_down}} >{{d.fi_down}}% </option>
                        {% endfor %}
                     </select>
                     <label  class="col-sm-2 col-form-label col-form-label-lg">จำนวนงวด</label>
                     <select class="form-select form-select-lg mb-3" name="monthqty" aria-label=".form-select-lg example">
                       <option selected>เลือกจำนวนงวด</option>
                       <!--สร้างcolum จำนวนงวดเเล้วใช้ for loop วนสร้างจำนวนงวด-->
-                      <option value= 48> 48 </option>
-                      <option value= 60> 60 </option>
-                      <option value= 72> 72 </option>
-                      <option value= 84> 84 </option>
+                      {% for m in fi_monthqty %}
+                      <option value= {{m.fi_monthqty}}> {{m.fi_monthqty}} เดือน</option>
+                      {% endfor %}
                       
                     </select>
                     <div style="margin-top: 3vh;  height: 6vh;" class="d-grid gap-1">

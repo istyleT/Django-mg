@@ -1,8 +1,25 @@
 {% extends 'layout.html' %}
 {% block content %}
+<div style="margin-top : 2vh;">
 
-{{productmargin}}
-{{total_reduce}}
-{{final_margin}}
+<h3>ส่วนลดเริ่มต้น : {{productmargin}} บาท</h3>
+<h3>ใช้ส่วนลด : {{total_reduce}} บาท</h3>
+<h3>ส่วนลดคงเหลือ : {{final_margin}} บาท</h3>
+
+</div>
+
+{% if final_margin > 0 %}
+<form >
+     <div style="margin-top: 2vh;" class="d-grid gap-1">
+         <button type="submit" class="btn btn-success">สรุปรายการ</button>
+     </div>
+</form> 
+{% endif %}
+    <div style="margin-top: 2vh;" class="d-grid gap-1">
+      <button type="submit" class="btn btn-warning">เเก้ไขการใช้ส่วนลด</button>
+    </div>
+
+
+
 
 {% endblock %}

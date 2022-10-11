@@ -161,6 +161,6 @@ def cashusemargin (request):
     final_margin = productmargin-total_reduce 
 
     
-    return render(request,'showcashfinalmargin.html', {'productmargin':productmargin, 'total_reduce':total_reduce, 'final_margin':final_margin})
+    return render(request,'showcashfinalmargin.html', {'productmargin':'{:,}'.format(productmargin), 'total_reduce':'{:,}'.format(total_reduce), 'final_margin':'{:,}'.format(final_margin), 'final_margin':final_margin})
      
     

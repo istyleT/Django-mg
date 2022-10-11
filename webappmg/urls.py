@@ -26,5 +26,6 @@ urlpatterns = [
     path('queryprice',views.showprice),
     path('Payment',views.PaymentRegis),
     path('Normalcalculate',views.Normalcalculate),
-    path('conditionfinance',views.conditionfinance) 
+    path('conditionfinance',views.conditionfinance),
+    path('cashusemargin',views.cashusemargin)
 ]

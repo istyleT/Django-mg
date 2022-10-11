@@ -54,7 +54,7 @@ def showprice(request): #ลูกค้าเลือกรุ่นย่อ�
                     submodel = request.POST.get('submodel') #รับข้อมูลจาก form ที่ลูกค้ากรอก
                     # เอา submodel ไป filter ในตาราง product เก็บข้อมูลลงในตัวเเปร productdata
                     productdata = Product.objects.filter( submodel = submodel)
-                    #ส่งข้อมูลให้ view ในหน้าต่อไป
+                    #ส่งข้อมูลออก
                     request.session['mainmodel'] = mainmodel
                     request.session['submodel'] = submodel
                     for i in productdata :
@@ -73,11 +73,7 @@ def PaymentRegis(request):
                     productmargin = request.session.get('productmargin')
                     mainmodel = request.session.get('mainmodel')
                     submodel = request.session.get('submodel') 
-                    #ส่งข้อมูลให้ view ในหน้าต่อไป
-                    request.session['productprice'] = productprice
-                    request.session['productmargin'] = productmargin
-                    request.session['mainmodel'] = mainmodel
-                    request.session['submodel'] = submodel  
+
                     # สร้างตัวเเปรมาเก็บข้อมูลจากหน้าปัจจุบัน
                     paytype = request.POST.get('paytype')
                     registype = request.POST.get('registype')
@@ -100,7 +96,6 @@ def PaymentRegis(request):
 def Normalcalculate (request):
    
     #สร้างตัวเเปรการเก็บของข้อมูลรุ่นจากข้อมูลที่ส่งมาก่อนหน้า ใช้ request.session
-    productprice = int(request.session.get('productprice'))
     mainmodel = request.session.get('mainmodel')
     # สร้างตัวเเปรมาเก็บข้อมูลจากหน้าปัจจุบัน
     financecompany = request.POST.get('financecompany')
@@ -146,3 +141,26 @@ def conditionfinance (request):
         return render(request,'begincarpay.html', {'downcost':'{:,}'.format(downcost), 'car_payment':'{:,}'.format(car_payment), 'monthqty': monthqty})
     else:
         pass
+
+
+def cashusemargin (request):
+    #สร้างตัวเเปรการเก็บของข้อมูลรุ่นจากข้อมูลที่ส่งมาก่อนหน้า ใช้ request.session
+    productmargin = int(request.session.get('productmargin'))
+   
+    #เก็บตัวเเปรจากหน้าตัวเอง (รายการอุปกรณ์ตกเเต่งยังไม่เก็บ)
+    reduceproductprice = int(request.POST.get('reduceproductprice'))
+    regiscost = int(request.POST.get('regiscost'))
+    pdicost = int(request.POST.get('pdicost'))
+    frame = int(request.POST.get('frame'))
+    polishing = int(request.POST.get('polishing'))
+    
+    #รวมการใช้ส่วนลด
+    total_reduce = reduceproductprice+regiscost+pdicost+frame+polishing
+   
+    #ส่วนลดคงเหลือ 
+    final_margin = productmargin-total_reduce 
+
+    
+    return render(request,'showcashfinalmargin.html', {'productmargin':productmargin, 'total_reduce':total_reduce, 'final_margin':final_margin})
+     
+    

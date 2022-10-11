@@ -5,6 +5,7 @@
                     <div class="card-header">รายละเอียดสินค้า</div>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">รุ่น : {{submodel}}</li>
+                        <li class="list-group-item">ส่วนลด : {{productmargin}} บาท</li>
                         <li class="list-group-item">ประเภทการซื้อ : เงินสด</li>
                         {% if registype == 'person' %}
                         <li class="list-group-item">ประเภทการจดทะเบียน  : บุคคล</li>
@@ -26,7 +27,7 @@
 
 <form  method="POST" action="cashusemargin">
   {% csrf_token %}
-  
+
   <!-- ลดราคารถ -->
 <div class="accordion" id="accordionPanelsStayOpenExample">
   <div class="accordion-item">

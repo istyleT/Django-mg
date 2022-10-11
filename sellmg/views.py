@@ -84,13 +84,96 @@ def PaymentRegis(request):
                     regiscost = Regiscost.objects.filter(regis_code = submodel)
                     #สร้างตัวเเปรกำหนดค่า
                     if paytype == 'cash' :              
-                                        return render(request, 'managecash.html',{'submodel':submodel ,'registype':registype, 'regiscost': regiscost, 'bodycolor':bodycolor, 'mgbranch':mgbranch, 'mainacc':mainacc})
+                                        return render(request, 'managecash.html',{'productmargin':'{:,}'.format(productmargin), 'submodel':submodel ,'registype':registype, 'regiscost': regiscost, 'bodycolor':bodycolor, 'mgbranch':mgbranch, 'mainacc':mainacc})
                     elif paytype == 'finance' :
                                         regiscost = Regiscost.objects.filter(regis_code = submodel)
-                                        return render(request, 'managefinance.html',{'submodel':submodel, 'registype':registype, 'regiscost': regiscost, 'bodycolor':bodycolor, 'mgbranch':mgbranch, 'mainacc':mainacc})
+                                        return render(request, 'branchadd.html')
+
+
+def brancemin (request):
+    #เก็บข้อมูลหน้าตัวเอง
+    add_eq = request.POST.get('add_eq')
+    add_kickback = request.POST.get('add_kickback')
+    com_fi_percent = request.POST.get('com_fi_percent')
+    com_fi_month = request.POST.get('com_fi_month')
+    com_as_percent = request.POST.get('com_as_percent')
+    com_as_month = request.POST.get('com_as_month')
+    #ส่งข้อมูลออก
+    request.session['add_eq'] = add_eq
+    request.session['add_kickback'] = add_kickback
+    request.session['com_fi_percent'] = com_fi_percent
+    request.session['com_fi_monthl'] = com_fi_month
+    request.session['com_as_percent'] = com_as_percent
+    request.session['com_as_month'] = com_as_month
+    return render(request, 'branchmin.html')
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#-----------------------------------------ส่วนเเยกโปรเเกรม---------------------------------------------------
 
 # เลือกบริษัทไฟเเนนซ์
 def Normalcalculate (request):

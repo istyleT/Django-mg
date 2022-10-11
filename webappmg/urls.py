@@ -27,5 +27,5 @@ urlpatterns = [
     path('Payment',views.PaymentRegis),
     path('Normalcalculate',views.Normalcalculate),
     path('conditionfinance',views.conditionfinance),
-    path('cashusemargin',views.cashusemargin)
+    path('branchmin',views.brancemin) 
 ]

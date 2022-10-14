@@ -1,13 +1,18 @@
 {% extends 'layout.html' %}
 {% block content %}
-{% for r in pricedata %}
+{{productdata}}
+{% for i in productdata %}
+  {{i}}
+  {{i.price}}
+  {{i.margin}}
+{% endfor %}
 <div  style="margin-top: 2vh;">
   <div align="center" class="card text-white bg-danger mb-3" style="max-width: 25rem;">
       <div class="card-header"><h3>รายละเอียด ราคาเเละส่วนลด</h3></div>
       <ul class="list-group list-group-flush">
-        <li class="list-group-item"> <h4>รุ่นรถ : {{r.submodel}}</h4> </li>
-        <li class="list-group-item"><h4>ราคา : {{r.price}}  บาท</h4> </li>
-        <li class="list-group-item"><h4>ส่วนลด : {{r.margin}}  บาท</h4> </li>
+        <li class="list-group-item"> <h4>รุ่นรถ : {{submodel}}</h4> </li>
+        <li class="list-group-item"><h4>ราคา : {{productprice}}  บาท</h4> </li>
+        <li class="list-group-item"><h4>ส่วนลด : {{productmargin}}  บาท</h4> </li>
       </ul>
   </div>
 </div>
@@ -16,8 +21,16 @@
                     <label for="formGroupExampleInput2" class="col-sm-2 col-form-label col-form-label-lg">สีตัวถัง</label>
                     <select class="form-select form-select-lg mb-3" name="bodycolor" aria-label=".form-select-lg example">
                         <option selected>เลือกสีตัวถัง</option> <!--ใช้ for loop run ตาม database-->
-                        <option value="A">A</option>
-                        <option value="B">B</option>
+                        <option value="White">White</option>
+                        <option value="Black">Black</option>
+                        <option value="Red">Red</option>
+                        <option value="Grey">Grey</option>
+                        <option value="Yellow">Yellow</option>
+                        <option value="Silver">Silver</option>
+                        <option value="Blue">Blue</option>
+                        <option value="White/Black">White/Black</option>
+                        <option value="Grey/Black">Grey/Black</option>
+                        <option value="Green/Black">Green/Black</option>
                       </select>
                     <label for="formGroupExampleInput2" class="col-sm-2 col-form-label col-form-label-lg">ประเภทการซื้อ</label>
                     <select class="form-select form-select-lg mb-3" name="paytype" aria-label=".form-select-lg example">
@@ -44,9 +57,6 @@
                     
                </form>
               
-
-               
-{% endfor %} 
 {% endblock %}
 
 

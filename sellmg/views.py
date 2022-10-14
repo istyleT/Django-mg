@@ -17,99 +17,232 @@ def static_js (request):
 
 
 def firstpage(request):
-                    return render(request, 'index.html')
+    return render(request, 'index.html')
 
 
-#อยู่หน้าเเรก Page1
 def collectdata(request): 
-                    
-                    if 'username' not in request.POST :
-                        return render(request, 'index.html')
-                    else :
-                         username =request.POST.get('username')
-                         telphone = request.POST.get('telphone')
-                         mainmodel = request.POST.get('mainmodel')
-                         #ส่งข้อมูลออก
-                         request.session['mainmodel'] = mainmodel
-                         
-                         if mainmodel == "MG5" :
-                                             return render(request, 'Model_A.html',{'username':username,'telphone':telphone})
-                         elif mainmodel == "MGVSHEV" :
-                                             return render(request, 'Model_B.html',{'username':username,'telphone':telphone})
-                         elif mainmodel == "MGZS" :
-                                             return render(request, 'Model_C.html',{'username':username,'telphone':telphone})
-                         elif mainmodel == "MGETD" :
-                                             return render(request, 'Model_D.html',{'username':username,'telphone':telphone})
-                         elif mainmodel == "MGHSPHEV" :
-                                             return render(request, 'Model_E.html',{'username':username,'telphone':telphone})
-                         elif mainmodel == "MGHS" :
-                                             return render(request, 'Model_F.html',{'username':username,'telphone':telphone})
-                         else :
-                                             return redirect(firstpage) ;  
+
+    # สร้างตัวเเปรมาเก็บข้อมูลจากหน้าปัจจุบัน
+    username =request.POST.get('username')
+    telphone = request.POST.get('telphone')
+    mainmodel = request.POST.get('mainmodel')
+
+    #ส่งข้อมูลออก
+    request.session['username '] = username 
+    request.session['telphone'] = telphone
+    request.session['mainmodel'] = mainmodel
+    
+    #เงื่อนไขการ render หน้าต่อไป
+    if mainmodel == "MG5" :
+                        return render(request, 'Model_A.html',{'username':username})
+    elif mainmodel == "MGVSHEV" :
+                        return render(request, 'Model_B.html',{'username':username})
+    elif mainmodel == "MGZS" :
+                        return render(request, 'Model_C.html',{'username':username})
+    elif mainmodel == "MGETD" :
+                        return render(request, 'Model_D.html',{'username':username})
+    elif mainmodel == "MGHSPHEV" :
+                        return render(request, 'Model_E.html',{'username':username})
+    elif mainmodel == "MGHS" :
+                        return render(request, 'Model_F.html',{'username':username})
+    else :
+                        return redirect(firstpage) ;  
 
    
-#อยู่หน้า model Page2
-def showprice(request): #ลูกค้าเลือกรุ่นย่อย 
-                    mainmodel = request.session.get('mainmodel')#รับข้อมูลหน้าที่เเล้ว
-                    submodel = request.POST.get('submodel') #รับข้อมูลจาก form ที่ลูกค้ากรอก
-                    # เอา submodel ไป filter ในตาราง product เก็บข้อมูลลงในตัวเเปร productdata
-                    productdata = Product.objects.filter( submodel = submodel)
-                    #ส่งข้อมูลออก
-                    request.session['mainmodel'] = mainmodel
-                    request.session['submodel'] = submodel
-                    for i in productdata :
-                                        print (i.price)                  
-                    request.session['productprice'] = i.price     
-                    request.session['productmargin'] = i.margin     
-                    
-                    # render page ส่งข้อมูล
-                    return render(request, 'showprice.html',{'pricedata':productdata})
+def showprice(request): 
+
+    # สร้างตัวเเปรมาเก็บข้อมูลจากหน้าปัจจุบัน    
+    submodel = request.POST.get('submodel') 
+
+    #ส่งข้อมูลออก
+    request.session['submodel'] = submodel
+    productdata = Product.objects.filter( submodel = submodel).values_list('price','margin', named=True)
+    for i in productdata :
+            productprice =  int(i.price)
+            productmargin = int(i.margin)               
+    request.session['productprice'] = productprice     
+    request.session['productmargin'] = productmargin     
+    
+    return render(request, 'showprice.html',{"productprice": '{:,}'.format(productprice), "productmargin": '{:,}'.format(productmargin), "submodel": submodel})
 
 
 #อยู่หน้า showprice Page3
 def PaymentRegis(request):
-                    #สร้างตัวเเปรการเก็บของข้อมูลรุ่นจากข้อมูลที่ส่งมาก่อนหน้า ใช้ request.session
-                    productprice = request.session.get('productprice')
-                    productmargin = request.session.get('productmargin')
-                    mainmodel = request.session.get('mainmodel')
-                    submodel = request.session.get('submodel') 
+    #สร้างตัวเเปรการเก็บของข้อมูลรุ่นจากข้อมูลที่ส่งมาก่อนหน้า ใช้ request.session
+    submodel = request.session.get('submodel')
+    mainmodel = request.session.get('mainmodel')
 
-                    # สร้างตัวเเปรมาเก็บข้อมูลจากหน้าปัจจุบัน
-                    paytype = request.POST.get('paytype')
-                    registype = request.POST.get('registype')
-                    bodycolor = request.POST.get('bodycolor')
-                    mgbranch = request.POST.get('mgbranch')
-                    # query ข้อมูลจาก database
-                    mainacc = Accmg.objects.filter(acc_model = mainmodel).values_list('acc_name','acc_price','acc_type', named=True)
-                    regiscost = Regiscost.objects.filter(regis_code = submodel)
-                    #สร้างตัวเเปรกำหนดค่า
-                    if paytype == 'cash' :              
-                                        return render(request, 'managecash.html',{'productmargin':'{:,}'.format(productmargin), 'submodel':submodel ,'registype':registype, 'regiscost': regiscost, 'bodycolor':bodycolor, 'mgbranch':mgbranch, 'mainacc':mainacc})
-                    elif paytype == 'finance' :
-                                        regiscost = Regiscost.objects.filter(regis_code = submodel)
-                                        return render(request, 'branchadd.html')
+    # สร้างตัวเเปรมาเก็บข้อมูลจากหน้าปัจจุบัน
+    paytype = request.POST.get('paytype')
+    bodycolor = request.POST.get('bodycolor')
+    mgbranch = request.POST.get('mgbranch')
+    registype = request.POST.get('registype')
 
-
-def brancemin (request):
-    #เก็บข้อมูลหน้าตัวเอง
-    add_eq = request.POST.get('add_eq')
-    add_kickback = request.POST.get('add_kickback')
-    com_fi_percent = request.POST.get('com_fi_percent')
-    com_fi_month = request.POST.get('com_fi_month')
-    com_as_percent = request.POST.get('com_as_percent')
-    com_as_month = request.POST.get('com_as_month')
     #ส่งข้อมูลออก
+    request.session['paytype'] = paytype
+    request.session['bodycolor'] = bodycolor
+    request.session['mgbranch'] = mgbranch
+    regiscost = Regiscost.objects.filter(regis_code = submodel).values_list('regis_personal','regis_company', named=True)
+    for i in regiscost :
+        if registype == 'person' :
+           regiscost = int(i.regis_personal)
+        elif registype == 'company' :
+           regiscost = int(i.regis_company)
+    request.session['regiscost'] = regiscost
+    # query หา acc ตามเงื่อนไข (หาวิธีเก็บข้อมูลเป็นก้อน)
+    mainacc = Accmg.objects.filter(Q(acc_model = mainmodel)).values_list('acc_code', 'acc_name','acc_price','acc_type', named=True)
+
+
+
+
+    return render(request, 'branchadd.html',{'regiscost':'{:,}'.format(regiscost),'mainacc':mainacc})
+
+
+
+
+def branceadd (request):
+    
+    #สร้างตัวเเปรการเก็บของข้อมูลรุ่นจากข้อมูลที่ส่งมาก่อนหน้า ใช้ request.session
+    regiscost = int(request.session.get('regiscost'))
+    productprice = int(request.session.get('productprice'))
+    productmargin  = int(request.session.get('productmargin'))
+    
+    #กำหนดค่าคงที่
+    red_frame = int(3000)
+
+    #เก็บข้อมูลหน้าตัวเอง
+    gen_down = int(request.POST.get('gen_down'))
+    gen_month= int(request.POST.get('gen_month'))
+    gen_inter= float(request.POST.get('gen_inter'))
+    add_eq = int(request.POST.get('add_eq')) 
+    add_kickback = int(request.POST.get('add_kickback'))
+    com_fi_percent = int(request.POST.get('com_fi_percent'))
+    com_fi_month = int(request.POST.get('com_fi_month'))
+    com_as_percent = int(request.POST.get('com_as_percent'))
+    com_as_month = int(request.POST.get('com_as_month'))
+    min_prosub = int(request.POST.get('min_prosub'))
+    min_reduce = int(request.POST.get('min_reduce'))
+    condition_finance = str(request.POST.get('condition_finance'))
+    min_regis = str(request.POST.get('min_regis','N'))
+    if min_regis == 'N':
+       min_regis = 0
+    else: 
+       min_regis = regiscost
+    min_pdi = str(request.POST.get('min_pdi','N'))
+    if min_pdi == 'N':
+       min_pdi = 0
+    else: 
+       min_pdi = 500
+    min_frame = str(request.POST.get('min_frame','N'))
+    if min_frame == 'N':
+       min_frame = 0
+    else: 
+       min_frame = 130
+    min_polish = str(request.POST.get('min_polish','N'))
+    if min_polish == 'N':
+       min_polish = 0
+    else: 
+       min_polish = 500
+    min_subdown = int(request.POST.get('min_subdown'))
+    min_inter = int(request.POST.get('min_inter'))
+    min_acc = str(request.POST.get('min_acc'))
+
+    #ทดสอบ
+  
+
+    #ส่งข้อมูลออก
+    request.session['gen_down'] = gen_down
+    request.session['gen_month'] = gen_month
+    request.session['gen_inter'] = gen_inter
     request.session['add_eq'] = add_eq
     request.session['add_kickback'] = add_kickback
     request.session['com_fi_percent'] = com_fi_percent
     request.session['com_fi_monthl'] = com_fi_month
     request.session['com_as_percent'] = com_as_percent
     request.session['com_as_month'] = com_as_month
-    return render(request, 'branchmin.html')
+    request.session['min_prosub'] = min_prosub
+    request.session['min_reduce'] = min_reduce
+    request.session['min_regis'] = min_regis
+    request.session['min_pdi'] = min_pdi
+    request.session['min_frame'] = min_frame
+    request.session['min_polish'] = min_polish
+    request.session['min_subdown'] = min_subdown
+    request.session['min_inter'] = min_inter
+
+    #------------คำนวณค่า--------------
+    
+    #เงินดาวน์
+    cost_down = int(productprice*(gen_down/100))
+    #เงินดาวน๋วันออกรถ 
+    exit_cost_down = int(cost_down-(0.93*min_subdown))
+    #ยอดจัด
+    cost_finance = int((productprice+add_eq-min_reduce)-cost_down)
+    #ดอกเบี้ยทั้งหมด
+    total_inter = int(((cost_finance*(gen_inter/100))*(gen_month/12))-min_inter)
+    #ค่างวด
+    month_payment = int((total_inter+cost_finance)/gen_month)
+    #ค่าใช้จ่ายทั้งหมดที่ให้กับ finance
+    total_payment = int(month_payment*gen_month)
+    #ค่าใช้จ่ายทั้งหมดที่ลูกค้าต้องจ่าย
+    net_total_payment = total_payment + exit_cost_down
+    #com-finance
+    total_com_finance = int((cost_finance*(gen_inter/100)*(com_fi_percent/100)*com_fi_month)/1.07)
+    #com-ansure
+    total_com_ansure = 0
+    #ส่วนเพิ่มส่วนลด
+    total_addmargin = int(add_eq + add_kickback + total_com_finance + total_com_ansure)
+    #ส่วนลดส่วนลด
+    total_minmargin = int(min_prosub + min_reduce + min_regis + min_pdi + min_frame + min_polish + min_subdown + min_inter)
+    #ส่วนลดสุทธิ
+    total_margin = int(productmargin + total_addmargin - total_minmargin)
+    #รวมรายการบังคับ
+    fix_cost = int(min_regis + min_pdi + min_frame + min_polish)
+    #ค่าใช้จ่ายวันออกรถ
+    if min_regis == 0 and condition_finance == 'BEGIN' :
+        total_exit = int(exit_cost_down + red_frame + regiscost + month_payment)
+    elif min_regis == 0 and condition_finance != 'BEGIN' :
+        total_exit = int(exit_cost_down + red_frame + regiscost)
+    elif min_regis != 0 and condition_finance == 'BEGIN' :
+        total_exit = int(exit_cost_down + red_frame + month_payment)
+    else:
+        total_exit = int(exit_cost_down + red_frame)
+
+    #รวบรวมข้อมูลเพื่อส่ง
+    data = {'regiscost':'{:,}'.format(regiscost),
+            'add_eq':'{:,}'.format(add_eq),
+            'add_kickback':'{:,}'.format(add_kickback),
+            'min_prosub':'{:,}'.format(min_prosub),
+            'min_reduce':'{:,}'.format(min_reduce),
+            'fix_cost':'{:,}'.format(fix_cost),
+            'min_subdown':'{:,}'.format(min_subdown),
+            'min_inter':'{:,}'.format(min_inter),
+            'productmargin':'{:,}'.format(productmargin),
+            'exit_cost_down':'{:,}'.format(exit_cost_down),
+            'red_frame':'{:,}'.format(red_frame),
+            'total_exit':'{:,}'.format(total_exit),
+            'net_total_payment':'{:,}'.format(net_total_payment),
+            'min_regis':'{:,}'.format(min_regis),
+            'gen_down':gen_down,
+            'gen_month':gen_month,
+            'gen_inter':gen_inter,
+            'min_acc':min_acc,
+            'condition_finance':condition_finance,
+            'cost_down':'{:,}'.format(cost_down),
+            'cost_finance':'{:,}'.format(cost_finance),
+            'total_inter' :'{:,}'.format(total_inter),
+            'month_payment':'{:,}'.format(month_payment),
+            'total_payment':'{:,}'.format(total_payment),
+            'total_com_finance':'{:,}'.format(total_com_finance),
+            'total_com_ansure':total_com_ansure,
+            'total_addmargin':'{:,}'.format(total_addmargin),
+            'total_minmargin':'{:,}'.format(total_minmargin),
+            'total_margin':'{:,}'.format(total_margin)
+    }
+  
+    return render(request, 'branchmin.html', data)
 
 
-
-
+    
 
 
 

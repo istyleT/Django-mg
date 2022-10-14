@@ -1,19 +1,80 @@
 {% extends 'layout.html' %}
 {% block content %}
 
-<form method="POST" action="branchmin">
+<form method="POST" action="branchadd">
 {% csrf_token %}
-    <div class="accordion accordion-flush" id="accordionFlushExample" style="margin-top: 2vh;">
+    <div class="accordion accordion-flush" id="accordionFlushExample" style="margin-top: 1vh;">
+                        <!----->
+                        <div class="accordion-item ">
+                          <h2 class="accordion-header" id="flush-headingSix">
+                            <button class="accordion-button collapsed text-primary " type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSix" aria-expanded="false" aria-controls="flush-collapseSix">
+                              <strong>เงินดาวน์</strong>
+                            </button>
+                          </h2>
+                          <div id="flush-collapseSix" class="accordion-collapse collapse" aria-labelledby="flush-headingSix" data-bs-parent="#accordionFlushExample">
+                                         <div class="input-group" style="margin-top: 1vh;">
+                                                             <input name="gen_down" type="number" class="form-control" />
+                                                             <span class="input-group-text">%</span>
+                                         </div>
+                          </div>
+                        </div>
+                        <!----->
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="flush-headingSeven">
+                            <button class="accordion-button collapsed text-primary" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSeven" aria-expanded="false" aria-controls="flush-collapseSeven">
+                              <strong>จำนวนงวด</strong>
+                            </button>
+                          </h2>
+                          <div id="flush-collapseSeven" class="accordion-collapse collapse" aria-labelledby="flush-headingSeven" data-bs-parent="#accordionFlushExample">
+                            <div class="input-group mb-3" style="margin-top: 1vh;">
+                              <label class="input-group-text" for="inputGroupSelect01">จำนวนปี</label>
+                              <select name="gen_month" class="form-select" id="inputGroupSelect01">
+                                <option value=0 selected>-</option>
+                                <option value=12>1 ปี</option>
+                                <option value=24>2 ปี</option>
+                                <option value=36>3 ปี</option>
+                                <option value=48>4 ปี</option>
+                                <option value=60>5 ปี</option>
+                                <option value=72>6 ปี</option>
+                                <option value=84>7 ปี</option>
+                              </select>
+                             </div>
+                          </div>
+                        </div>
+                        <!----->
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="flush-headingOne">
+                            <button class="accordion-button collapsed text-primary" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                              <strong>อัตราดอกเบี้ย/เงื่อนไขดอกเบี้ย</strong>
+                            </button>
+                          </h2>
+                          <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                         <div class="input-group" style="margin-top: 1vh;">
+                                                             <input name="gen_inter" type="float" class="form-control" >
+                                                             <span class="input-group-text">%</span>
+                                         </div>
+
+                                         <div class="input-group mb-3" style="margin-top: 1vh;">
+                                          <label class="input-group-text" for="inputGroupSelect01">เงื่อนไขดอกเบี้ย</label>
+                                          <select name="condition_finance" class="form-select" id="inputGroupSelect01">
+                                            <option value='END' selected=>Ending</option>
+                                            <option value='BEGIN'>Beginning</option>
+                                          </select>
+                                        </div>
+              
+                          </div>
+                          
+                        </div>
                         <!----->
                            <div class="accordion-item">
-                             <h2 class="accordion-header" id="flush-headingOne">
-                               <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                             <h2 class="accordion-header" id="flush-headingFive">
+                               <button class="accordion-button collapsed text-success" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseOne">
                                  <strong>บวกหัวค่าอุปกรณ์</strong>
                                </button>
                              </h2>
-                             <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                             <div id="flush-collapseFive" class="accordion-collapse collapse" aria-labelledby="flush-headingFive" data-bs-parent="#accordionFlushExample">
                                             <div class="input-group" style="margin-top: 1vh;">
-                                                                <input name="add_eq" type="text" class="form-control" >
+                                                                <input name="add_eq" type="number" class="form-control" >
                                                                 <span class="input-group-text">บาท</span>
                                             </div>
                              </div>
@@ -21,13 +82,13 @@
                         <!---->
                            <div class="accordion-item">
                              <h2 class="accordion-header" id="flush-headingTwo">
-                               <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                               <button class="accordion-button collapsed text-success" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
                                  <strong>Kickback</strong>
                                </button>
                              </h2>
                              <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
                                             <div class="input-group" style="margin-top: 1vh;">
-                                                                <input name="add_kickback" type="text" class="form-control" >
+                                                                <input name="add_kickback" type="number" class="form-control" >
                                                                 <span class="input-group-text">บาท</span>
                                             </div>
                              </div>
@@ -35,7 +96,7 @@
                         <!---->
                            <div class="accordion-item">
                              <h2 class="accordion-header" id="flush-headingThree">
-                               <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                               <button class="accordion-button collapsed text-success" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
                                  <strong>Com ไฟเเนนซ์</strong>
                                </button>
                              </h2>
@@ -43,36 +104,36 @@
                                             <div class="input-group mb-3" style="margin-top: 1vh;">
                                                                 <label class="input-group-text" for="inputGroupSelect01">% Com ไฟเเนนซ์</label>
                                                                 <select name="com_fi_percent" class="form-select" id="inputGroupSelect01">
-                                                                  <option selected>-</option>
-                                                                  <option value="0">0%</option>
-                                                                  <option value="0.04">4%</option>
-                                                                  <option value="0.08">8%</option>
-                                                                  <option value="0.10">10%</option>
-                                                                  <option value="0.12">12%</option>
-                                                                  <option value="0.14">14%</option>
-                                                                  <option value="0.16">16%</option>
+                                                                  <option value=0 selected>-</option>
+                                                                  <option value=0>0%</option>
+                                                                  <option value=4>4%</option>
+                                                                  <option value=8>8%</option>
+                                                                  <option value=10>10%</option>
+                                                                  <option value=12>12%</option>
+                                                                  <option value=14>14%</option>
+                                                                  <option value=16>16%</option>
                                                                 </select>
                                             </div>
                                             <div class="input-group mb-3" style="margin-top: 1vh;">
                                                                 <label class="input-group-text" for="inputGroupSelect01">จำนวนปี</label>
                                                                 <select name="com_fi_month" class="form-select" id="inputGroupSelect01">
-                                                                  <option selected>-</option>
-                                                                  <option value="12">1 ปี</option>
-                                                                  <option value="24">2 ปี</option>
-                                                                  <option value="36">3 ปี</option>
-                                                                  <option value="48">4 ปี</option>
-                                                                  <option value="60">5 ปี</option>
-                                                                  <option value="72">6 ปี</option>
-                                                                  <option value="84">7 ปี</option>
+                                                                  <option value=0 selected>-</option>
+                                                                  <option value=12>1 ปี</option>
+                                                                  <option value=24>2 ปี</option>
+                                                                  <option value=36>3 ปี</option>
+                                                                  <option value=48>4 ปี</option>
+                                                                  <option value=60>5 ปี</option>
+                                                                  <option value=72>6 ปี</option>
+                                                                  <option value=84>7 ปี</option>
                                                                 </select>
                                             </div>
                         
                              </div>
                            </div>
-                        <!---->
+                        <!------------------>
                            <div class="accordion-item">
                              <h2 class="accordion-header" id="flush-headingFour">
-                               <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFous">
+                               <button class="accordion-button collapsed text-success" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFous">
                                  <strong>Com ประกันภัย</strong>
                                </button>
                              </h2>
@@ -80,37 +141,166 @@
                                             <div class="input-group mb-3" style="margin-top: 1vh;">
                                                                 <label class="input-group-text" for="inputGroupSelect01">% Com ประกันภัย</label>
                                                                 <select name="com_as_percent" class="form-select" id="inputGroupSelect01">
-                                                                  <option selected>-</option>
-                                                                  <option value="0">0%</option>
-                                                                  <option value="0.04">4%</option>
-                                                                  <option value="0.08">8%</option>
-                                                                  <option value="0.10">10%</option>
-                                                                  <option value="0.12">12%</option>
-                                                                  <option value="0.14">14%</option>
-                                                                  <option value="0.16">16%</option>
+                                                                  <option value=0 selected>-</option>
+                                                                  <option value=0>0%</option>
+                                                                  <option value=4>4%</option>
+                                                                  <option value=8>8%</option>
+                                                                  <option value=10>10%</option>
+                                                                  <option value=12>12%</option>
+                                                                  <option value=14>14%</option>
+                                                                  <option value=16>16%</option>
                                                                 </select>
                                             </div>
                                             <div class="input-group mb-3" style="margin-top: 1vh;">
                                                                 <label class="input-group-text" for="inputGroupSelect01">จำนวนปี</label>
                                                                 <select name="com_as_month" class="form-select" id="inputGroupSelect01">
-                                                                  <option selected>-</option>
-                                                                  <option value="12">1 ปี</option>
-                                                                  <option value="24">2 ปี</option>
-                                                                  <option value="36">3 ปี</option>
-                                                                  <option value="48">4 ปี</option>
-                                                                  <option value="60">5 ปี</option>
-                                                                  <option value="72">6 ปี</option>
-                                                                  <option value="84">7 ปี</option>
+                                                                  <option value=0 selected>-</option>
+                                                                  <option value=12>1 ปี</option>
+                                                                  <option value=24>2 ปี</option>
+                                                                  <option value=36>3 ปี</option>
+                                                                  <option value=48>4 ปี</option>
+                                                                  <option value=60>5 ปี</option>
+                                                                  <option value=72>6 ปี</option>
+                                                                  <option value=84>7 ปี</option>
                                                                 </select>
                                             </div>
                              </div>
                            </div>
-                        
+                        <!------------------------->
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="flush-headingX">
+                            <button class="accordion-button collapsed text-danger" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseX" aria-expanded="false" aria-controls="flush-collapseX">
+                              <strong>โปรโมชั่น Subsidy</strong>
+                            </button>
+                          </h2>
+                          <div id="flush-collapseX" class="accordion-collapse collapse" aria-labelledby="flush-headingX" data-bs-parent="#accordionFlushExample">
+                                            <div class="input-group" style="margin-top: 1vh;">
+                                                                <input name="min_prosub" type="number" class="form-control" >
+                                                                <span class="input-group-text">บาท</span>
+                                            </div>
+                          </div>
                         </div>
+                        <!--------------------->
+
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="flush-headingA">
+                            <button class="accordion-button collapsed text-danger" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseA" aria-expanded="false" aria-controls="flush-collapseA">
+                              <strong>ส่วนลดจากราคาขาย</strong>
+                            </button>
+                          </h2>
+                          <div id="flush-collapseA" class="accordion-collapse collapse" aria-labelledby="flush-headingA" data-bs-parent="#accordionFlushExample">
+                                            <div class="input-group" style="margin-top: 1vh;">
+                                                                <input name="min_reduce" type="number" class="form-control" >
+                                                                <span class="input-group-text">บาท</span>
+                                            </div>
+                          </div>
+                        </div>
+                        <!--------------------->
+                    <div class="accordion-item">
+                      <h2 class="accordion-header" id="flush-headingB">
+                        <button class="accordion-button collapsed text-danger" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseB" aria-expanded="false" aria-controls="flush-collapseB">
+                          <strong>รายการของบังคับ</strong>
+                        </button>
+                      </h2>
+                      <div id="flush-collapseB" class="accordion-collapse collapse" aria-labelledby="flush-headingB" data-bs-parent="#accordionFlushExample">
+                                        
+                    
+                                          <li class="list-group-item">
+                                             <div class="form-check">
+                                               <input name="min_regis" class="form-check-input" type="checkbox"   id="flexCheckDefault" checked>
+                                               <label class="form-check-label" for="flexCheckDefault">
+                                                  ค่าจดทะเบียน {{regiscost}} บาท
+                                               </label>
+                                             </div>
+                                          </li> 
+                                          <li class="list-group-item">
+                                             <div class="form-check">
+                                               <input name="min_pdi" class="form-check-input" type="checkbox"   id="flexCheckDefault" checked>
+                                               <label class="form-check-label" for="flexCheckDefault">
+                                                  ค่า PDI (ตรวจสอบก่อนส่งมอบ) 500 บาท
+                                               </label>
+                                             </div>
+                                          </li> 
+                                          <li class="list-group-item">
+                                             <div class="form-check">
+                                               <input name="min_frame" class="form-check-input" type="checkbox"   id="flexCheckDefault" checked>
+                                               <label class="form-check-label" for="flexCheckDefault">
+                                                  กรอบป้ายทะเบียนโชว์รูม 130 บาท
+                                               </label>
+                                             </div>
+                                          </li> 
+                                          <li class="list-group-item">
+                                             <div class="form-check">
+                                               <input name="min_polish" class="form-check-input" type="checkbox"   id="flexCheckDefault" checked>
+                                               <label class="form-check-label" for="flexCheckDefault">
+                                                  ขัดเคลือบสีรถใหม่ 500 บาท
+                                               </label>
+                                             </div>
+                                          </li> 
+                      </div>
+                    </div>
+                     <!-------------------->
+                     <div class="accordion-item">
+                      <h2 class="accordion-header" id="flush-headingC">
+                        <button class="accordion-button collapsed text-danger" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseC" aria-expanded="false" aria-controls="flush-collapseC">
+                          <strong>ซับเงินดาวน์</strong>
+                        </button>
+                      </h2>
+                      <div id="flush-collapseC" class="accordion-collapse collapse" aria-labelledby="flush-headingC" data-bs-parent="#accordionFlushExample">
+    
+                                        <div class="input-group" style="margin-top: 1vh;">
+                                                            <input name="min_subdown" type="number" class="form-control" >
+                                                            <span class="input-group-text">บาท</span>
+                                        </div>
+                                                 
+                      </div>
+                    </div>
+                    <!------------------->
+                    <div class="accordion-item">
+                      <h2 class="accordion-header" id="flush-headingD">
+                        <button class="accordion-button collapsed text-danger" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseD" aria-expanded="false" aria-controls="flush-collapseD">
+                          <strong>อุปกรณ์ตกเเต่ง</strong>
+                        </button>
+                      </h2>
+                      <div id="flush-collapseD" class="accordion-collapse collapse" aria-labelledby="flush-headingD" data-bs-parent="#accordionFlushExample">
+                     
+
+                                        {% for i in mainacc %}
+                                               <li class="list-group-item">
+                                                  <div class="form-check">
+                                                   <!--ตัวเเปรราคาacc-->
+                                                    <input name="min_acc" class="form-check-input" type="checkbox" value= {{i.acc_price}}  id="flexCheckDefault"/>
+                                                    <label class="form-check-label" for="flexCheckDefault">
+                                                      ชื่อ: {{i.acc_name}}  <br>  ประเภท: {{i.acc_type}}   ราคา: {{i.acc_price}} บาท
+                                                    </label>
+                                                  </div>
+                                               </li> 
+                                               
+                                         {% endfor %}   
+                      </div>
+                    </div>
+                    <!----------------------->
+                    <div class="accordion-item">
+                      <h2 class="accordion-header" id="flush-headingE">
+                        <button class="accordion-button collapsed text-danger" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseE" aria-expanded="false" aria-controls="flush-collapseE">
+                          <strong>ซับดอกเบี้ย</strong>
+                        </button>
+                      </h2>
+                      <div id="flush-collapseE" class="accordion-collapse collapse" aria-labelledby="flush-headingE" data-bs-parent="#accordionFlushExample">
+                                        <div class="input-group" style="margin-top: 1vh;">
+                                                            <input name="min_inter" type="number" class="form-control" >
+                                                            <span class="input-group-text">บาท</span>
+                                        </div>
+                      </div>
+                    </div>
 
 
-                        <div style="margin-top: 2vh;" class="d-grid gap-1">
-                                  <button type="submit" class="btn btn-success">ดำเนินการต่อ</button>
+
+        </div>
+
+
+                        <div style="margin: 2vh;" class="d-grid gap-1">
+                                  <button type="submit" class="btn btn-secondary">ดำเนินการต่อ</button>
                         </div>
 </form>
 

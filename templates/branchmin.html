@@ -1,68 +1,195 @@
 {% extends 'layout.html' %}
 {% block content %}
-<form method="POST" >
-{% csrf_token %}
-<div class="accordion accordion-flush" id="accordionFlushExample">
-                    <!----------------->
-                    <div class="accordion-item">
-                      <h2 class="accordion-header" id="flush-headingOne">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                          <strong>ลดราคารถจากราคาขาย</strong>
-                        </button>
-                      </h2>
-                      <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                        <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.</div>
-                      </div>
-                    </div>
-                    <!--------------------->
-                    <div class="accordion-item">
-                      <h2 class="accordion-header" id="flush-headingTwo">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                          <strong>รายการของบังคับ</strong>
-                        </button>
-                      </h2>
-                      <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
-                        <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being filled with some actual content.</div>
-                      </div>
-                    </div>
-                    <!-------------------->
-                    <div class="accordion-item">
-                      <h2 class="accordion-header" id="flush-headingThree">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-                          <strong>อุปกรณ์ตกเเต่ง</strong>
-                        </button>
-                      </h2>
-                      <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
-                        <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
-                      </div>
-                    </div>
-                    <!------------------->
-                    <div class="accordion-item">
-                      <h2 class="accordion-header" id="flush-headingFour">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
-                          <strong>ซับเงินดาวน์</strong>
-                        </button>
-                      </h2>
-                      <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">
-                        <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
-                      </div>
-                    </div>
-                    <!----------------------->
-                    <div class="accordion-item">
-                      <h2 class="accordion-header" id="flush-headingFive">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
-                          <strong>ซับดอกเบี้ย</strong>
-                        </button>
-                      </h2>
-                      <div id="flush-collapseFive" class="accordion-collapse collapse" aria-labelledby="flush-headingFive" data-bs-parent="#accordionFlushExample">
-                        <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
-                      </div>
-                    </div>
-</div>
 
-           <div style="margin-top: 2vh;" class="d-grid gap-1">
-                    <button type="submit" class="btn btn-success">เเสดงรายละเอียด</button>
-          </div>
-</form>
+<div style="margin-top:1vh;" class="accordion" id="accordionPanelsStayOpenExample">
+<!----------->
+ 
+ <div class="accordion-item">
+  <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+    <button class="accordion-button " type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+      <strong class="text-primary">ส่วนลดคงเหลือ : ({{total_margin}}) บาท</strong>
+    </button>
+  </h2>
+  <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne">
+    <div class="accordion-body">
+
+      <li class="list-group-item">
+        <label >
+           <strong>ส่วนลดตามรุ่น</strong> : <strong class="text-dark">{{productmargin}}</strong> บาท
+        </label>
+      </li> 
+      <li class="list-group-item">
+        <label >
+           <strong>ส่วนเพิ่มส่วนลด</strong> : <strong class="text-success">{{total_addmargin}}</strong> บาท
+        </label>
+      </li> 
+      <li class="list-group-item">
+        <label >
+           <strong>การใช้ส่วนลด</strong> : <strong class="text-danger">{{total_minmargin}}</strong> บาท
+        </label>
+      </li> 
+      
+    </div>
+  </div>
+</div>
+<!-------------->
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="panelsStayOpen-headingA">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseA" aria-expanded="false" aria-controls="panelsStayOpen-collapseA">
+        <strong class="text-success" >ส่วนเพิ่มส่วนลด : (+{{total_addmargin}}) บาท</strong>
+      </button>
+    </h2>
+    <div id="panelsStayOpen-collapseA" class="accordion-collapse collapse " aria-labelledby="panelsStayOpen-headingA">
+      <div class="accordion-body">
+
+        <li class="list-group-item">
+            <label >
+               <strong>บวกหัวค่าอุปกรณ์</strong> : <strong class="text-success">+{{add_eq}}</strong> บาท
+            </label>
+       </li> 
+        <li class="list-group-item">
+            <label >
+               <strong>Kickback</strong> : <strong class="text-success">+{{add_kickback}}</strong> บาท
+            </label>
+       </li> 
+        <li class="list-group-item">
+            <label >
+               <strong>Com ไฟเเนนซ์</strong> : <strong class="text-success">+{{total_com_finance}}</strong> บาท
+            </label>
+       </li> 
+        <li class="list-group-item">
+            <label >
+               <strong>Com ประกันภัย</strong> : <strong class="text-success">+{{total_com_ansure}}</strong> บาท
+            </label>
+       </li> 
+
+
+      </div>
+    </div>
+  </div>
+<!-------------->
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+        <strong class="text-danger" >การใช้ส่วนลด : (-{{total_minmargin}}) บาท</strong>
+      </button>
+    </h2>
+    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+      <div class="accordion-body">
+
+        <li class="list-group-item">
+          <label >
+             <strong>โปรโมชั่น Subsidy</strong> : <strong class="text-danger">-{{min_prosub}}</strong> บาท
+          </label>
+        </li>  
+        <li class="list-group-item">
+          <label >
+             <strong>ส่วนลดจากราคาขาย</strong> : <strong class="text-danger">-{{min_reduce}}</strong> บาท
+          </label>
+        </li>  
+        <li class="list-group-item">
+          <label >
+             <strong>รายการของบังคับ</strong> : <strong class="text-danger">-{{fix_cost}}</strong> บาท
+          </label>
+        </li>  
+        <li class="list-group-item">
+          <label >
+             <strong>ซับเงินดาวน์</strong> : <strong class="text-danger">-{{min_subdown}}</strong> บาท
+          </label>
+        </li>  
+        <li class="list-group-item">
+          <label >
+             <strong>ซับดอกเบี้ย</strong> : <strong class="text-danger">-{{min_inter}}</strong> บาท
+          </label>
+        </li> 
+        
+
+      </div>
+    </div>
+  </div>
+
+  <!-------------->
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+        <strong class="text-muted">ค่าใช้จ่ายวันออกรถ : {{total_exit}} บาท</strong>
+      </button>
+    </h2>
+    <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
+      <div class="accordion-body">
+
+        <li class="list-group-item">
+          <label >
+             <strong>เงินดาวน์ </strong> : <strong class="text-muted">{{exit_cost_down}}</strong> บาท
+          </label>
+        </li> 
+        <li class="list-group-item">
+          <label >
+             <strong>ค่าประกันภัย ชั้น 1</strong> : <strong class="text-success">ฟรี</strong>
+          </label>
+        </li> 
+        <li class="list-group-item">
+          <label >
+             <strong>ค่า พ.ร.บ.</strong> : <strong class="text-success">ฟรี</strong>
+          </label>
+        </li> 
+        <li class="list-group-item">
+          <label >
+             <strong>ค่าประกันป้ายเเดง(ได้คืน)</strong> : <strong class="text-muted">{{red_frame}}</strong> บาท
+          </label>
+        </li> 
+        {% if min_regis == '0' %}
+        <li class="list-group-item">
+          <label >
+             <strong>ค่าจดทะเบียน</strong> : <strong class="text-muted">{{regiscost}}</strong> บาท
+          </label>
+        </li> 
+        {% endif %}
+        {% if condition_finance == 'BEGIN' %}
+        <li class="list-group-item">
+          <label >
+             <strong>ค่างวดเเรก</strong> : <strong class="text-muted">{{month_payment}}</strong> บาท
+          </label>
+        </li> 
+        {% endif %}
+        
+      </div>
+    </div>
+  </div>
+  <!-------------->
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="panelsStayOpen-headingX">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseX" aria-expanded="false" aria-controls="panelsStayOpen-collapseX">
+        <strong class="text-dark">รายละเอียดเพิ่มเติม</strong>
+      </button>
+    </h2>
+    <div id="panelsStayOpen-collapseX" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingX">
+      <div class="accordion-body">
+
+        <li class="list-group-item">
+          <label >
+             <strong>ค่างวดต่อเดือน</strong> : <strong class="text-dark">{{month_payment}}</strong> บาท
+          </label>
+        </li> 
+        <li class="list-group-item">
+          <label >
+             <strong>ดอกเบี้ยทั้งหมด</strong> : <strong class="text-dark">{{total_inter}}</strong> บาท
+          </label>
+        </li> 
+        <li class="list-group-item">
+          <label >
+             <strong>ค่าใช้จ่ายทั้งหมด</strong> : <strong class="text-dark">{{net_total_payment}}</strong> บาท
+          </label>
+        </li> 
+        
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+</div>
 
 {% endblock %}

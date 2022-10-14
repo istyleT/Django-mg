@@ -20,17 +20,10 @@
                 {% csrf_token %}
                     <label for="formGroupExampleInput2" class="col-sm-2 col-form-label col-form-label-lg">สีตัวถัง</label>
                     <select class="form-select form-select-lg mb-3" name="bodycolor" aria-label=".form-select-lg example">
-                        <option selected>เลือกสีตัวถัง</option> <!--ใช้ for loop run ตาม database-->
-                        <option value="White">White</option>
-                        <option value="Black">Black</option>
-                        <option value="Red">Red</option>
-                        <option value="Grey">Grey</option>
-                        <option value="Yellow">Yellow</option>
-                        <option value="Silver">Silver</option>
-                        <option value="Blue">Blue</option>
-                        <option value="White/Black">White/Black</option>
-                        <option value="Grey/Black">Grey/Black</option>
-                        <option value="Green/Black">Green/Black</option>
+                        <option selected>เลือกสี</option> <!--ใช้ for loop run ตาม database-->
+                        {% for i in productcolor %}
+                        <option value={{i.color}}>{{i.color}}</option>
+                        {% endfor %}
                       </select>
                     <label for="formGroupExampleInput2" class="col-sm-2 col-form-label col-form-label-lg">ประเภทการซื้อ</label>
                     <select class="form-select form-select-lg mb-3" name="paytype" aria-label=".form-select-lg example">
@@ -38,7 +31,7 @@
                         <option value="cash">เงินสด</option>
                         <option value="finance">จัดไฟเเนนซ์</option>
                       </select>
-                    <label for="formGroupExampleInput2" class="col-sm-2 col-form-label col-form-label-lg">ประเภทการจดทะเบียน</label>
+                    <label for="formGroupExampleInput2" class="col-sm-2 col-form-label col-form-label-lg">จดทะเบียน</label>
                       <select class="form-select form-select-lg mb-3" name="registype" aria-label=".form-select-lg example">
                           <option selected>เลือกประเภทการจดทะเบียน</option>
                           <option value="person">บุคคล</option>

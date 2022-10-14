@@ -1,22 +1,28 @@
+
+
 {% extends 'layout.html' %}
 {% block content %}
 {% load static %}
-     <h1  style="text-align:center; margin: 1vw ;">ยินดีต้อนรับ คุณ {{username}}</h1>
-     
-     <img  src="{% static 'picture/Newmgextendergc.png' %}" class="img-fluid" alt="..."/>
-     <form  action="queryprice"  method="get">
+   {% block style %}
+      <link  href="{% static 'css/custom.css' %}" rel="stylesheet">
+    {% endblock %}
+    {% if username != "" %}
+     <h1  style="text-align:center; margin: 1vh ;">ยินดีต้อนรับ คุณ {{username}}</h1>
+    {% endif %}
+    <img  src="{% static 'picture/Newmgextendergc.png' %}" class="img-fluid" alt="..."/>
+     <form  action="queryprice"  method="POST">
+      {% csrf_token %}
         <label for="formGroupExampleInput2" class="col-sm-2 col-form-label col-form-label-lg">เลือกรุ่นย่อย</label>
         <select class="form-select form-select-lg mb-3" name="submodel" aria-label=".form-select-lg example">
-            <option selected>Choose Model Grade</option>
-            <option value="EXTENDER 2.0 DC G 4WD X 6AT">EXTENDER 2.0 DC G 4WD X 6AT</option>
-            <option value="EXTENDER 2.0 DC G X 6AT">EXTENDER 2.0 DC G X 6AT</option>
-            <option value="EXTENDER 2.0 DC G D 6MT">EXTENDER 2.0 DC G D 6MT</option>
-            <option value="EXTENDER 2.0 GC G X 6MT">EXTENDER 2.0 GC G X 6MT</option>
-            <option value="EXTENDER 2.0 GC G D 6AT">EXTENDER 2.0 GC G D 6AT</option>
-            <option value="EXTENDER 2.0 GC G D 6MT">EXTENDER 2.0 GC G D 6MT</option>
-            <option value="EXTENDER 2.0 GC D 6MT">EXTENDER 2.0 GC D 6MT</option>
-            <option value="EXTENDER 2.0 GC C 6MT">EXTENDER 2.0 GC C 6MT</option>
-           
+          <option selected>Choose Model Grade</option>
+          <option value="EXTENDER2.0DCG4WDX6AT">EXTENDER 2.0 DC G 4WD X 6AT</option>
+          <option value="EXTENDER2.0DCGX6AT">EXTENDER 2.0 DC G X 6AT</option>
+          <option value="EXTENDER2.0DCGD6MT">EXTENDER 2.0 DC G D 6MT</option>
+          <option value="EXTENDER2.0GCGX6MT">EXTENDER 2.0 GC G X 6MT</option>
+          <option value="EXTENDER2.0GCGD6AT">EXTENDER 2.0 GC G D 6AT</option>
+          <option value="EXTENDER2.0GCGD6MT">EXTENDER 2.0 GC G D 6MT</option>
+          <option value="EXTENDER2.0GCD6MT">EXTENDER 2.0 GC D 6MT</option>
+          <option value="EXTENDER2.0GCC6MT">EXTENDER 2.0 GC C 6MT</option>
           </select>
 
         <div style="margin-top: 2vh;" class="d-grid gap-1">
@@ -27,6 +33,7 @@
       <div style="margin-top: 2vh;" class="d-grid gap-1">
         <button type="submit" class="btn btn-warning">รายละเอียดรถรุ่น</button>
       </div>
-    </form>
 
+    </form>
+    
 {% endblock %}

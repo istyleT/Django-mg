@@ -12,7 +12,7 @@ class Product(models.Model) :
 
 
 
-class Regiscost(models.Model):
+class Regiscosts(models.Model):
       regis_code = models.CharField(max_length=30)
       regis_personal = models.IntegerField()
       regis_company = models.IntegerField()
@@ -22,7 +22,7 @@ class Regiscost(models.Model):
       
 
 
-class Accmg(models.Model) :
+class Accmgs(models.Model) :
       acc_code = models.CharField(max_length=20)
       acc_name = models.CharField(max_length=100)
       acc_price = models.IntegerField()
@@ -30,15 +30,10 @@ class Accmg(models.Model) :
       acc_model = models.CharField(max_length=10)
 
 
-# ตารางดอกเบีย
-class Tisconormal(models.Model) :        
-      fi_model = models.CharField(max_length=30)
-      fi_down = models.FloatField()
-      fi_in_48 = models.FloatField()
-      fi_in_60 = models.FloatField()
-      fi_in_72 = models.FloatField()
-      fi_in_84 = models.FloatField()
-      fi_monthqty = models.IntegerField()
-      def __str__(self) :
-              return f'{self.fi_model} | {self.fi_down} | {self.fi_in_48} | {self.fi_in_60} | {self.fi_in_72} | {self.fi_in_84} | {self.fi_monthqty}'        
 
+class Colorsubmodels(models.Model):
+      submodel = models.CharField(max_length=50)
+      color = models.CharField(max_length=50)
+      
+      def __str__(self):
+             return f'{self.submodel} | {self.color}'

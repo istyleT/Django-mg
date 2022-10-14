@@ -6,12 +6,12 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('sellmg', '0003_regiscost'),
+        ('sellmg', '0002_regiscost'),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Accmg',
+            name='Accmgs',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('acc_code', models.CharField(max_length=20)),

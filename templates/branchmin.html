@@ -127,7 +127,14 @@
           <label >
              <strong>เงินดาวน์ </strong> : <strong class="text-muted">{{exit_cost_down}}</strong> บาท
           </label>
+        </li>
+        {% if statusvatdown == "0"  %} 
+        <li class="list-group-item">
+          <label >
+             <strong>VAT 7% ดาวน์ </strong> : <strong class="text-muted">{{exit_cost_down_vat}}</strong> บาท
+          </label>
         </li> 
+        {% endif %}
         <li class="list-group-item">
           <label >
              <strong>ค่าประกันภัย ชั้น 1</strong> : <strong class="text-success">ฟรี</strong>
@@ -140,7 +147,7 @@
         </li> 
         <li class="list-group-item">
           <label >
-             <strong>ค่าประกันป้ายเเดง(ได้คืน)</strong> : <strong class="text-muted">{{red_frame}}</strong> บาท
+             <strong>ค่าประกันป้ายเเดง</strong> : <strong class="text-muted">{{red_frame}}</strong> บาท
           </label>
         </li> 
         {% if min_regis == '0' %}
@@ -157,6 +164,11 @@
           </label>
         </li> 
         {% endif %}
+        <li class="list-group-item">
+          <label >
+             <strong>หักเงินจอง</strong> : <strong class="text-muted">-{{gen_prepay}}</strong> บาท
+          </label>
+        </li> 
         
       </div>
     </div>
@@ -173,7 +185,12 @@
 
         <li class="list-group-item">
           <label >
-             <strong>ค่างวดต่อเดือน</strong> : <strong class="text-dark">{{month_payment}}</strong> บาท
+             <strong>ค่างวดปกติ/เดือน</strong> : <strong class="text-dark">{{month_payment}}</strong> บาท
+          </label>
+        </li> 
+        <li class="list-group-item">
+          <label >
+             <strong>ค่างวดตามใบ PO</strong> : <strong class="text-dark">{{month_payment_PO}}</strong> บาท
           </label>
         </li> 
         <li class="list-group-item">

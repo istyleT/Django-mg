@@ -25,8 +25,6 @@ urlpatterns = [
     path('firstdata',views.collectdata), # ถ้า method POST ไม่ต้องต่อ url ด้วย/
     path('queryprice',views.showprice),
     path('Payment',views.PaymentRegis),
-    path('Normalcalculate',views.Normalcalculate),
-    path('conditionfinance',views.conditionfinance),
     path('branchadd',views.branceadd)
     
 ]

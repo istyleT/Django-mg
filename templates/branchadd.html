@@ -5,6 +5,30 @@
 {% csrf_token %}
     <div class="accordion accordion-flush" id="accordionFlushExample" style="margin-top: 1vh;">
                         <!----->
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="flush-headingNine">
+                            <button class="accordion-button collapsed text-primary" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseNine" aria-expanded="false" aria-controls="flush-collapseNine">
+                              <strong>บริษัทไฟเเนนซ์</strong>
+                            </button>
+                          </h2>
+                          <div id="flush-collapseNine" class="accordion-collapse collapse" aria-labelledby="flush-headingNine" data-bs-parent="#accordionFlushExample">
+                            <div class="input-group mb-3" style="margin-top: 1vh;">
+                              <label class="input-group-text" for="inputGroupSelect01">ไฟเเนนซ์</label>
+                              <select name="gen_company" class="form-select" id="inputGroupSelect01">
+                                <option value="" selected>กรุณาเลือก</option>
+                                <option value='K'>ลีสซิ่งกสิกรไทย</option>
+                                <option value='TTB'>ทหารไทยธนชาต</option>
+                                <option value='AY'>กรุงศรีออโต้</option>
+                                <option value='ICBC'>ICBC</option>
+                                <option value='KPP'>เกียรตินาคิน</option>
+                                <option value='TISCO'>TISCO</option>
+                                <option value='SCB'>ไทยพาณิชย์</option>
+                                <option value='CITY'>Cityleasing</option>
+                              </select>
+                             </div>
+                          </div>
+                        </div>
+                        <!----->
                         <div class="accordion-item ">
                           <h2 class="accordion-header" id="flush-headingSix">
                             <button class="accordion-button collapsed text-primary " type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSix" aria-expanded="false" aria-controls="flush-collapseSix">
@@ -29,7 +53,8 @@
                             <div class="input-group mb-3" style="margin-top: 1vh;">
                               <label class="input-group-text" for="inputGroupSelect01">จำนวนปี</label>
                               <select name="gen_month" class="form-select" id="inputGroupSelect01">
-                                <option value=12 selected>1 ปี</option>
+                                <option value=12 selected>กรุณาเลือก</option>
+                                <option value=12>1 ปี</option>
                                 <option value=24>2 ปี</option>
                                 <option value=36>3 ปี</option>
                                 <option value=48>4 ปี</option>
@@ -49,7 +74,7 @@
                           </h2>
                           <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                                          <div class="input-group" style="margin-top: 1vh;">
-                                                             <input name="gen_inter" type="number" class="form-control" >
+                                                             <input name="gen_inter"  class="form-control" >
                                                              <span class="input-group-text">%</span>
                                          </div>
 
@@ -62,8 +87,27 @@
                                         </div>
               
                           </div>
-                          
+                     
                         </div>
+                         <!----->
+                         <div class="accordion-item">
+                          <h2 class="accordion-header" id="flush-headingTen">
+                            <button class="accordion-button collapsed text-primary" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTen" aria-expanded="false" aria-controls="flush-collapseTen">
+                              <strong>เงินจอง</strong>
+                            </button>
+                          </h2>
+                          <div id="flush-collapseTen" class="accordion-collapse collapse" aria-labelledby="flush-headingTen" data-bs-parent="#accordionFlushExample">
+                                         <div class="input-group" style="margin-top: 1vh;">
+                                                             <input name="gen_prepay" type="number" class="form-control" >
+                                                             <span class="input-group-text">บาท</span>
+                                         </div>
+
+                              
+              
+                          </div>
+                     
+                        </div>
+
                         <!----->
                            <div class="accordion-item">
                              <h2 class="accordion-header" id="flush-headingFive">
@@ -133,10 +177,15 @@
                            <div class="accordion-item">
                              <h2 class="accordion-header" id="flush-headingFour">
                                <button class="accordion-button collapsed text-success" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFous">
-                                 <strong>Com ประกันภัย</strong>
+                                 <strong>เบี้ยประกัน ALP/Com ประกัน</strong>
                                </button>
                              </h2>
                              <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">
+                                            <div class="input-group" style="margin-top: 1vh;">
+                                              <label class="input-group-text">เบี้ยประกัน</label>
+                                              <input name="add_ALP" type="number" class="form-control" >
+                                              <span class="input-group-text">บาท</span>
+                                            </div>
                                             <div class="input-group mb-3" style="margin-top: 1vh;">
                                                                 <label class="input-group-text" for="inputGroupSelect01">% Com ประกันภัย</label>
                                                                 <select name="com_as_percent" class="form-select" id="inputGroupSelect01">
@@ -251,7 +300,14 @@
                                                             <input name="min_subdown" type="number" class="form-control" >
                                                             <span class="input-group-text">บาท</span>
                                         </div>
-                                                 
+                                        <li class="list-group-item">
+                                          <div class="form-check">
+                                            <input  value="Y" name="min_subdown_vat" class="form-check-input" type="checkbox"   id="flexCheckDefault" checked>
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                              Vat ซับดาวน์ 7%
+                                            </label>
+                                          </div>
+                                       </li>         
                       </div>
                     </div>
                     <!------------------->
@@ -267,7 +323,7 @@
 
                         <div class="input-group mb-3" style="margin-top: 1vh;">
                           <select name="min_acc1" class="form-select" id="inputGroupSelect01">
-                            <option value=0 selected>-</option>
+                            <option value=0 selected>กรุณาเลือก</option>
                           {% for i in mainacc %}
                             <option value={{i.acc_price}}>{{i.acc_name}}   ราคา:{{i.acc_price}} บาท         
                             </option>
@@ -276,7 +332,7 @@
                          </div>
                         <div class="input-group mb-3" style="margin-top: 1vh;">
                           <select name="min_acc2" class="form-select" id="inputGroupSelect01">
-                            <option value=0 selected>-</option>
+                            <option value=0 selected>กรุณาเลือก</option>
                           {% for i in mainacc %}
                             <option value={{i.acc_price}}>{{i.acc_name}}   ราคา:{{i.acc_price}} บาท         
                             </option>
@@ -285,7 +341,7 @@
                          </div>
                         <div class="input-group mb-3" style="margin-top: 1vh;">
                           <select name="min_acc3" class="form-select" id="inputGroupSelect01">
-                            <option value=0 selected>-</option>
+                            <option value=0 selected>กรุณาเลือก</option>
                           {% for i in mainacc %}
                             <option value={{i.acc_price}}>{{i.acc_name}}   ราคา:{{i.acc_price}} บาท         
                             </option>
@@ -294,7 +350,7 @@
                          </div>
                         <div class="input-group mb-3" style="margin-top: 1vh;">
                           <select name="min_acc4" class="form-select" id="inputGroupSelect01">
-                            <option value=0 selected>-</option>
+                            <option value=0 selected>กรุณาเลือก</option>
                           {% for i in mainacc %}
                             <option value={{i.acc_price}}>{{i.acc_name}}   ราคา:{{i.acc_price}} บาท         
                             </option>
@@ -303,7 +359,7 @@
                          </div>
                         <div class="input-group mb-3" style="margin-top: 1vh;">
                           <select name="min_acc5" class="form-select" id="inputGroupSelect01">
-                            <option value=0 selected>-</option>
+                            <option value=0 selected>กรุณาเลือก</option>
                           {% for i in mainacc %}
                             <option value={{i.acc_price}}>{{i.acc_name}}   ราคา:{{i.acc_price}} บาท         
                             </option>
@@ -312,7 +368,7 @@
                          </div>
                         <div class="input-group mb-3" style="margin-top: 1vh;">
                           <select name="min_acc6" class="form-select" id="inputGroupSelect01">
-                            <option value=0 selected>-</option>
+                            <option value=0 selected>กรุณาเลือก</option>
                           {% for i in mainacc %}
                             <option value={{i.acc_price}}>{{i.acc_name}}   ราคา:{{i.acc_price}} บาท         
                             </option>
@@ -321,7 +377,7 @@
                          </div>
                         <div class="input-group mb-3" style="margin-top: 1vh;">
                           <select name="min_acc7" class="form-select" id="inputGroupSelect01">
-                            <option value=0 selected>-</option>
+                            <option value=0 selected>กรุณาเลือก</option>
                           {% for i in mainacc %}
                             <option value={{i.acc_price}}>{{i.acc_name}}   ราคา:{{i.acc_price}} บาท         
                             </option>
@@ -330,7 +386,7 @@
                          </div>
                         <div class="input-group mb-3" style="margin-top: 1vh;">
                           <select name="min_acc8" class="form-select" id="inputGroupSelect01">
-                            <option value=0 selected>-</option>
+                            <option value=0 selected>กรุณาเลือก</option>
                           {% for i in mainacc %}
                             <option value={{i.acc_price}}>{{i.acc_name}}   ราคา:{{i.acc_price}} บาท         
                             </option>
@@ -339,7 +395,7 @@
                          </div>
                         <div class="input-group mb-3" style="margin-top: 1vh;">
                           <select name="min_acc9" class="form-select" id="inputGroupSelect01">
-                            <option value=0 selected>-</option>
+                            <option value=0 selected>กรุณาเลือก</option>
                           {% for i in mainacc %}
                             <option value={{i.acc_price}}>{{i.acc_name}}   ราคา:{{i.acc_price}} บาท         
                             </option>
@@ -348,7 +404,7 @@
                          </div>
                         <div class="input-group mb-3" style="margin-top: 1vh;">
                           <select name="min_acc10" class="form-select" id="inputGroupSelect01">
-                            <option value=0 selected>-</option>
+                            <option value=0 selected>กรุณาเลือก</option>
                           {% for i in mainacc %}
                             <option value={{i.acc_price}}>{{i.acc_name}}   ราคา:{{i.acc_price}} บาท         
                             </option>

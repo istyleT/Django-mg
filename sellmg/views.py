@@ -17,13 +17,8 @@ def static_css (request):
 def static_js (request):
     return render(request, 'static-js.html')
 
-
 def firstpage(request):
     return render(request, 'index.html')
-
-
-
-
 
 def collectdata(request): 
 
@@ -50,10 +45,7 @@ def collectdata(request):
                         return render(request, 'Model_E.html',{'username':username})
     elif mainmodel == "MGHS" :
                         return render(request, 'Model_F.html',{'username':username})
-    #else :
-    #                    return redirect(firstpage) ;  
-
-   
+  
 def showprice(request): 
 
     # สร้างตัวเเปรมาเก็บข้อมูลจากหน้าปัจจุบัน    
@@ -71,8 +63,6 @@ def showprice(request):
     
     return render(request, 'showprice.html',{"productprice": '{:,}'.format(productprice), "productmargin": '{:,}'.format(productmargin), "submodel": submodel, "productcolor": productcolor})
 
-
-#อยู่หน้า showprice Page3
 def PaymentRegis(request):
     #สร้างตัวเเปรการเก็บของข้อมูลรุ่นจากข้อมูลที่ส่งมาก่อนหน้า ใช้ request.session
     submodel = request.session.get('submodel')
@@ -89,6 +79,7 @@ def PaymentRegis(request):
     request.session['paytype'] = paytype
     request.session['bodycolor'] = bodycolor
     request.session['mgbranch'] = mgbranch
+    request.session['registype'] = registype
     regiscost = Regiscosts.objects.filter(regis_code = submodel).values_list('regis_personal','regis_company', named=True)
     for i in regiscost :
         if registype == 'person' :
@@ -111,10 +102,6 @@ def PaymentRegis(request):
     elif paytype == 'finance' :
         return render(request, 'branchadd.html',{'regiscost':'{:,}'.format(regiscost),'mainacc':mainacc,'productprice':productprice, 'array_acc1': array_acc1,'mainmodel': mainmodel})
    
-
-
-
-
 def branceadd (request):
     
     #สร้างตัวเเปรการเก็บของข้อมูลรุ่นจากข้อมูลที่ส่งมาก่อนหน้า ใช้ request.session
@@ -247,6 +234,10 @@ def branceadd (request):
       #ค่าใช้จ่ายทั้งหมดที่ลูกค้าต้องจ่าย
     net_total_payment = (month_payment*gen_month)+total_exit+gen_prepay-red_frame
 
+    #ส่งข้อมูลออก
+    
+
+
     data = {'regiscost':'{:,}'.format(regiscost), #ค่าจดทะเบียน
             'add_eq':'{:,}'.format(add_eq), #+บวกหัวอุปกรณ์
             'cost_down':'{:,}'.format(cost_down), 
@@ -282,11 +273,6 @@ def branceadd (request):
     }
   
     return render(request, 'showdatafinance.html', data)
-
-
-    
-
-
 
 def branchcash (request):
     #สร้างตัวเเปรการเก็บของข้อมูลรุ่นจากข้อมูลที่ส่งมาก่อนหน้า ใช้ request.session
@@ -373,7 +359,38 @@ def branchcash (request):
 
 
 def showdata(request):
-   return render(request, 'quotation.html')
+   from datetime import datetime
+   now = datetime.today() #วันที่
+   #รับข้อมูล
+   #ข้อมูลทั่วไป
+   submodel = str(request.session.get('submodel'))
+   bodycolor = str(request.session.get('bodycolor'))
+   mgbranch = str(request.session.get('mgbranch'))
+   registype = str(request.session.get('registype'))
+   paytype = str(request.session.get('paytype'))
+   #รายละเอียดการซื้อรถยนต์
+   productprice = int(request.session.get('productprice'))
+   add_eq = int(request.session.get('add_eq'))
+   min_reduce = int(request.session.get('min_reduce'))
+   
+   
+
+   # รวมข้อมูลเพื่อส่งไปหน้าใบเสนอราคา
+   details = {
+      'now':now, #ข้อมูลทั่วไป
+      'submodel':submodel,
+      'bodycolor':bodycolor,
+      'mgbranch':mgbranch,
+      'registype':registype,
+      'paytype':paytype, 
+      'productprice':'{:,.0f}'.format(productprice), 
+      'add_eq':'{:,.0f}'.format(add_eq), 
+      'min_reduce':'{:,.0f}'.format(min_reduce), 
+      
+       
+
+   }
+   return render(request, 'quotation.html', details)
 
 
 

@@ -1,5 +1,283 @@
-{% extends 'layout.html' %}
-{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+                    <meta charset="UTF-8">
+                    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>Quotation</title>
+                    <link rel="stylesheet"  href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+                    {% block style  %} {% endblock %}
 
-<h1>Quotation</h1>  
-{% endblock %}
+                    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"> </script>
+                    {% block script %} {% endblock %}
+</head>
+<body>
+<header class="header">
+                    <h1 align="center" >ใบเสนอราคา</h1>
+</header>
+
+<div class="container">
+   <table class="table">
+                    <thead>
+                      <tr>
+                        <th  colspan="2" class="text-success">ข้อมูลทั่วไป</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">วันที่ใบเสนอราคา :</th>
+                        <td>{{now|date:'d-M-Y'}}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">รถยนต์ MG รุ่น :</th>
+                        <td>{{submodel}}</td>
+
+                      </tr>
+                      <tr>
+                        <th scope="row">สีตัวถัง :</th>
+                        <td>{{bodycolor}}</td>
+ 
+                      </tr>
+                      <tr>
+                        <th scope="row">เงื่อนไขการซื้อ :</th>
+                        {% if paytype == 'cash' %}
+                        <td>เงินสด</td>
+                        {% elif paytype == 'finance' %}
+                        <td>จัดไฟเเนนซ์</td>
+                        {% endif %}
+                      </tr>
+                      <tr>
+                        <th scope="row">ประเภทจดทะเบียนภาษี :</th>
+                        {% if registype == 'person' %}
+                        <td>บุคคล</td>
+                        {% elif registype == 'company' %} 
+                        <td>นิติบุคคล</td>
+                        {% endif %}
+                      </tr>
+                      <tr>
+                        <th scope="row">สาขา :</th>
+                        {% if mgbranch == 'Ransit' %}
+                        <td>รังสิตคลองสี่</td>
+                        {% elif mgbranch == 'Srinakarin' %}
+                        <td>ศรีนครินทร์</td>
+                        {% elif mgbranch == 'Hathairat' %}
+                        <td>หทัยราษฎร์</td>
+                        {% endif %}
+                      </tr>
+                     
+                    
+                    </tbody>
+                  </table>             
+</div>
+   
+<div class="container">
+  
+  <table class="table">
+                    <thead>
+                      <tr>
+                        <th colspan="2" class="text-success">รายละเอียดการซื้อรถยนต์</th>
+                        
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th  scope="row">ราคารถยนต์</th>
+                        <td>{{productprice}} บาท</td>
+
+                      </tr>
+                      <tr>
+                        <th scope="row">บวกหัวค่าอุปกรณ์</th>
+                        <td>{{add_eq}} บาท</td>
+
+                      </tr>
+                      <tr>
+                        <th scope="row">ส่วนลดราคารถยนต์</th>
+                        <td>{{min_reduce}}</td>
+
+                      </tr>
+                      <tr>
+                        <th scope="row">ราคารถยนต์สุทธิ</th>
+                        <td>******</td>
+
+                      </tr>
+                      <tr>
+                        <th scope="row">เงินดาวน์ *** %</th>
+                        <td>*****</td>
+
+                      </tr>
+                      <tr>
+                        <th scope="row">ส่วนลดเงินดาวน์</th>
+                        <td>******</td>
+
+                      </tr>
+                      <tr>
+                        <th scope="row">เงินดาวน์สุทธิ</th>
+                        <td>*****</td>
+
+                      </tr>
+                      <tr>
+                        <th scope="row">ยอดจัดไฟแนนซ์</th>
+                        <td>****</td>
+
+                      </tr>
+                      <tr>
+                        <th scope="row">จำนวนงวด </th>
+                        <td>---ปี --- เดือน</td>
+
+
+                      </tr>
+                      <tr>
+                        <th scope="row">Kickback</th>
+                        <td>*****</td>
+
+                      </tr>
+                      <tr>
+                        <th scope="row">ดอกเบี้ย</th>
+                        <td>****</td>
+
+                      </tr>
+                      <tr>
+                        <th scope="row">ค่า Subsidy </th>
+                        <td>*****</td>
+
+                      </tr>
+                      <tr>
+                        <th scope="row">ค่า Subsidy ดอกเบี้ย</th>
+                        <td>******</td>
+
+                      </tr>
+                      <tr>
+                        <th scope="row">รวมค่า Subsidy ทั้งหมด</th>
+                        <td>****</td>
+
+                      </tr>
+                      <tr>
+                        <th scope="row">ค่างวด/เดือน</th>
+                        <td>****</td>
+
+                      </tr>
+                      <tr>
+                        <th scope="row">เงื่อนไขดอกเบี้ย</th>
+                        <td>****</td>
+
+                      </tr>
+                      <tr>
+                        <th scope="row">บริษัทสินเชื่อไฟแนนซ์</th>
+                        <td>******</td>
+
+                      </tr>
+                      
+                    </tbody>
+                  </table>
+</div>
+<div class="container">
+  <table class="table">
+                    <thead>
+                      <tr>
+                        <th colspan="2" class="text-success">รายการของเเถม/อุปกรณ์ตกเเต่ง</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">3</th>
+                        <td colspan="2">Larry the Bird</td>
+                      </tr>
+                    </tbody>
+                  </table>
+</div>
+<div class="container">
+  <table class="table">
+                    <thead>
+                      <tr>
+                        <th colspan="2" class="text-success">รายละเอียด Margin</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                      </tr>
+                    </tbody>
+                  </table>
+</div>
+<div class="container">
+  <table class="table">
+                    <thead>
+                      <tr>
+                        <th colspan="2" class="text-success">รายละเอียดค่าใช้จ่ายวันออกรถ</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                      </tr>
+
+                    </tbody>
+                  </table>
+</div>
+
+
+
+
+
+
+</body>
+</html>

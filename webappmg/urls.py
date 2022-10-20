@@ -16,7 +16,6 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from sellmg import views #นำเข้า view จาก app ย่อย
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('static-css',views.static_css), #นำเข้า static css มาใช้ใน webappmg

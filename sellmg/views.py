@@ -106,7 +106,7 @@ def PaymentRegis(request):
          return render(request, 'branchcash.html',{'regiscost':'{:,}'.format(regiscost),'mainacc':mainacc,'productprice':productprice})
 
     elif paytype == 'finance' :
-        return render(request, 'branchadd.html',{'regiscost':'{:,}'.format(regiscost),'mainacc':mainacc,'productprice':productprice, 'array_acc1': array_acc1})
+        return render(request, 'branchadd.html',{'regiscost':'{:,}'.format(regiscost),'mainacc':mainacc,'productprice':productprice, 'array_acc1': array_acc1,'mainmodel': mainmodel})
    
 
 
@@ -118,7 +118,7 @@ def branceadd (request):
     regiscost = int(request.session.get('regiscost'))
     productprice = int(request.session.get('productprice'))
     productmargin  = int(request.session.get('productmargin'))
-    mainmodel = request.session.get('mainmodel')
+    
 
     #กำหนดค่าคงที่
     red_frame = int(3000) #ค่าป้ายเเดง
@@ -266,7 +266,6 @@ def branceadd (request):
             'gen_down':gen_down,
             'gen_month':gen_month,
             'gen_inter':gen_inter,
-            'mainmodel':mainmodel, #ส่งไปเป็นเงื่อนไขในการเเสดงอุปกรณ์ตกเเต่ง
             'statusvatdown':statusvatdown,
             'min_acc':'{:,}'.format(min_acc),
             'condition_finance':condition_finance,

@@ -65,7 +65,7 @@ function resetdown(){
 
 
 function addacc() {
-     let test = document.querySelectorAll('[type="checkbox"]');
+     let test = document.querySelectorAll('[name = "addacc"]');
      acc_sum = 0 ;
      for ( chk in test ) {
           if (chk.checked) {

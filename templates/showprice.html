@@ -6,13 +6,13 @@
   {{i.price}}
   {{i.margin}}
 {% endfor %}
-<div  style="margin-top: 2vh;">
+<div align="center" style="margin-top: 2vh;">
   <div align="center" class="card text-white bg-danger mb-3" style="max-width: 25rem;">
       <div class="card-header"><h3>รายละเอียด ราคาเเละส่วนลด</h3></div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item"> <h4>รุ่นรถ : {{submodel}}</h4> </li>
         <li class="list-group-item"><h4>ราคา : {{productprice}}  บาท</h4> </li>
-        <li class="list-group-item"><h4>ส่วนลด : {{productmargin}}  บาท</h4> </li>
+        <li class="list-group-item"><h4>ส่วนลด : <strong  class="text-success">{{productmargin}}</strong>  บาท</h4> </li>
       </ul>
   </div>
 </div>

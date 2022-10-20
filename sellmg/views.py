@@ -6,6 +6,8 @@ from sellmg.models import Colorsubmodels ;
 from django.db.models import Q ;
 import math
 
+
+
 # Create your views here.
 
 #นำ css / java static มาใช้งาน
@@ -41,7 +43,7 @@ def collectdata(request):
                         return render(request, 'Model_C.html',{'username':username})
     elif mainmodel == "MGETD" :
                         return render(request, 'Model_D.html',{'username':username})
-    elif mainmodel == "MGHSPHEV" :
+    elif mainmodel == "MGHS" :
                         return render(request, 'Model_E.html',{'username':username})
     elif mainmodel == "MGHS" :
                         return render(request, 'Model_F.html',{'username':username})
@@ -72,13 +74,13 @@ def PaymentRegis(request):
     #สร้างตัวเเปรการเก็บของข้อมูลรุ่นจากข้อมูลที่ส่งมาก่อนหน้า ใช้ request.session
     submodel = request.session.get('submodel')
     mainmodel = request.session.get('mainmodel')
-
-    # สร้างตัวเเปรมาเก็บข้อมูลจากหน้าปัจจุบัน
+    productprice = request.session.get('productprice')
     
+    # สร้างตัวเเปรมาเก็บข้อมูลจากหน้าปัจจุบัน
     paytype = request.POST.get('paytype') 
-    bodycolor = request.POST.get('bodycolor' ) 
-    mgbranch = request.POST.get('mgbranch' ) 
-    registype = request.POST.get('registype' ) 
+    bodycolor = request.POST.get('bodycolor') 
+    mgbranch = request.POST.get('mgbranch') 
+    registype = request.POST.get('registype') 
    
     #ส่งข้อมูลออก
     request.session['paytype'] = paytype
@@ -91,12 +93,21 @@ def PaymentRegis(request):
         elif registype == 'company' :
            regiscost = int(i.regis_company)
     request.session['regiscost'] = regiscost
-    # query หา acc ตามเงื่อนไข (หาวิธีเก็บข้อมูลเป็นก้อน)
+    # query หา acc ตามเงื่อนไข
     mainacc = Accmgs.objects.filter(Q(acc_model = mainmodel) | Q(acc_model = 'ALL')).values_list('acc_code', 'acc_name','acc_price','acc_type', named=True)
-    try :
-      return render(request, 'branchadd.html',{'regiscost':'{:,}'.format(regiscost),'mainacc':mainacc})
-    except :
-        return redirect(PaymentRegis)
+    
+    array_acc1 = [mainacc]
+    array_acc = []
+    for a in array_acc1  :
+      array_acc += a
+      
+
+    if paytype == 'cash':
+         return render(request, 'branchcash.html',{'regiscost':'{:,}'.format(regiscost),'mainacc':mainacc,'productprice':productprice})
+
+    elif paytype == 'finance' :
+        return render(request, 'branchadd.html',{'regiscost':'{:,}'.format(regiscost),'mainacc':mainacc,'productprice':productprice, 'array_acc1': array_acc1})
+   
 
 
 
@@ -107,9 +118,10 @@ def branceadd (request):
     regiscost = int(request.session.get('regiscost'))
     productprice = int(request.session.get('productprice'))
     productmargin  = int(request.session.get('productmargin'))
-    
+    mainmodel = request.session.get('mainmodel')
+
     #กำหนดค่าคงที่
-    red_frame = int(3000)
+    red_frame = int(3000) #ค่าป้ายเเดง
 
     #เก็บข้อมูลหน้าตัวเอง
     gen_company = str(request.POST.get('gen_company'))
@@ -121,9 +133,6 @@ def branceadd (request):
     add_kickback = int(request.POST.get('add_kickback')or 0)
     com_fi_percent = int(request.POST.get('com_fi_percent'))
     com_fi_month = int(request.POST.get('com_fi_month'))
-    add_ALP = int(request.POST.get('add_ALP')or 0)
-    com_as_percent = int(request.POST.get('com_as_percent'))
-    com_as_month = int(request.POST.get('com_as_month'))
     min_prosub = int(request.POST.get('min_prosub')or 0)
     min_reduce = int(request.POST.get('min_reduce')or 0)
     condition_finance = str(request.POST.get('condition_finance'))
@@ -154,19 +163,9 @@ def branceadd (request):
     else:
         statusvatdown = "1" #เเถม
     
-
+   
     min_inter = int(request.POST.get('min_inter')or 0)
-    min_acc1 = int(request.POST.get('min_acc1'))
-    min_acc2 = int(request.POST.get('min_acc2'))
-    min_acc3 = int(request.POST.get('min_acc3'))
-    min_acc4 = int(request.POST.get('min_acc4'))
-    min_acc5 = int(request.POST.get('min_acc5'))
-    min_acc6 = int(request.POST.get('min_acc6'))
-    min_acc7 = int(request.POST.get('min_acc7'))
-    min_acc8 = int(request.POST.get('min_acc8'))
-    min_acc9 = int(request.POST.get('min_acc9'))
-    min_acc10 = int(request.POST.get('min_acc10'))
-    min_acc = min_acc1+min_acc2+min_acc3+min_acc4+min_acc5+min_acc6+min_acc7+min_acc8+min_acc9+min_acc10 
+    min_acc = 0 
 
     #ทดสอบ
   
@@ -181,8 +180,6 @@ def branceadd (request):
     request.session['add_kickback'] = add_kickback
     request.session['com_fi_percent'] = com_fi_percent
     request.session['com_fi_monthl'] = com_fi_month
-    request.session['com_as_percent'] = com_as_percent
-    request.session['com_as_month'] = com_as_month
     request.session['min_prosub'] = min_prosub
     request.session['min_reduce'] = min_reduce
     request.session['min_regis'] = min_regis
@@ -207,24 +204,19 @@ def branceadd (request):
     total_inter = int(((cost_finance*(gen_inter/100))*(gen_month/12))-min_inter) #edit
     #ค่างวดปกติ
     month_payment = float(math.ceil((((cost_finance*(gen_inter/100)*(gen_month/12))-min_inter)+cost_finance)/gen_month)) #pass
-    #ค่างวดตามใบ PO
-    month_payment_PO = float(math.ceil(((((cost_finance+add_ALP)*(gen_inter/100)*(gen_month/12))-min_inter)+cost_finance)/gen_month)) #pass
-  
     #com-finance
     total_com_finance = float(((cost_finance)*(gen_inter/100)*(com_fi_percent/100)*(com_fi_month/12))/1.07) #pass
-    #com-ansure
-    total_com_ansure = float((add_ALP*(gen_inter/100)*(com_as_percent/100)*(com_as_month/12))/1.07) #pass
     #ส่วนเพิ่มส่วนลด
-    total_addmargin = float(add_eq + add_kickback + total_com_finance + total_com_ansure) #edit
+    total_addmargin = float(add_eq + add_kickback + total_com_finance) #edit
     #ส่วนลดส่วนลด
     if statusvatdown == "1" : 
          total_minmargin = float(min_prosub + min_reduce + min_regis + min_pdi + min_frame + min_polish + min_subdown + min_inter+ min_acc + exit_cost_down_vat)
     elif statusvatdown == "0":
          total_minmargin = float(min_prosub + min_reduce + min_regis + min_pdi + min_frame + min_polish + min_subdown + min_inter+ min_acc)
     #ส่วนลดสุทธิ
-    total_margin = float(productmargin + total_addmargin - total_minmargin)
+    total_margin = float(productmargin + total_addmargin - total_minmargin) #pass
     #รวมรายการบังคับ
-    fix_cost = int(min_regis + min_pdi + min_frame + min_polish) #edit
+    fix_cost = int(min_regis + min_pdi + min_frame + min_polish) #pass
 
     #ค่าใช้จ่ายวันออกรถ
     if min_regis == 0 and condition_finance == 'BEGIN' :
@@ -250,19 +242,19 @@ def branceadd (request):
     
 
       #ค่าใช้จ่ายทั้งหมดที่ลูกค้าต้องจ่าย
-    net_total_payment = (month_payment*gen_month)+total_exit+gen_prepay #edit
-    #รวบรวมข้อมูลเพื่อส่ง
-    data = {'regiscost':'{:,}'.format(regiscost),
-            'add_eq':'{:,}'.format(add_eq),
-            'cost_down':'{:,}'.format(cost_down),
-            'cost_finance':'{:,}'.format(cost_finance),
-            'productprice':'{:,}'.format(productprice),
-            'gen_prepay':'{:,}'.format(gen_prepay),
-            'add_kickback':'{:,}'.format(add_kickback),
-            'min_prosub':'{:,}'.format(min_prosub),
-            'min_reduce':'{:,}'.format(min_reduce),
-            'fix_cost':'{:,}'.format(fix_cost),
-            'min_subdown':'{:,}'.format(min_subdown),
+    net_total_payment = (month_payment*gen_month)+total_exit+gen_prepay-red_frame
+
+    data = {'regiscost':'{:,}'.format(regiscost), #ค่าจดทะเบียน
+            'add_eq':'{:,}'.format(add_eq), #+บวกหัวอุปกรณ์
+            'cost_down':'{:,}'.format(cost_down), 
+            'cost_finance':'{:,}'.format(cost_finance), #ยอดจัดไฟเเนนซ์
+            'productprice':'{:,}'.format(productprice), #ราคาขาย
+            'gen_prepay':'{:,}'.format(gen_prepay), #เงินจอง
+            'add_kickback':'{:,}'.format(add_kickback), #+ ค่า kickback
+            'min_prosub':'{:,}'.format(min_prosub), #-ค่า โปร subsidy
+            'min_reduce':'{:,}'.format(min_reduce), #-ลดราคาขาย
+            'fix_cost':'{:,}'.format(fix_cost), #-รวมการของบังคับ
+            'min_subdown':'{:,}'.format(min_subdown), # 
             'min_inter':'{:,}'.format(min_inter),
             'productmargin':'{:,}'.format(productmargin),
             'exit_cost_down':'{:,}'.format(exit_cost_down),
@@ -274,6 +266,7 @@ def branceadd (request):
             'gen_down':gen_down,
             'gen_month':gen_month,
             'gen_inter':gen_inter,
+            'mainmodel':mainmodel, #ส่งไปเป็นเงื่อนไขในการเเสดงอุปกรณ์ตกเเต่ง
             'statusvatdown':statusvatdown,
             'min_acc':'{:,}'.format(min_acc),
             'condition_finance':condition_finance,
@@ -281,19 +274,100 @@ def branceadd (request):
             'total_inter' :'{:,}'.format(total_inter),
             'month_payment':'{:,.0f}'.format(month_payment),
             'total_com_finance':'{:,.2f}'.format(total_com_finance),
-            'total_com_ansure':'{:,.2f}'.format(total_com_ansure),
             'total_addmargin':'{:,.0f}'.format(total_addmargin),
             'total_minmargin':'{:,.0f}'.format(total_minmargin),
             'total_margin':'{:,.0f}'.format(total_margin),
-            'month_payment_PO':'{:,.0f}'.format(month_payment_PO)
     }
   
-    return render(request, 'branchmin.html', data)
+    return render(request, 'showdatafinance.html', data)
 
 
     
 
 
+
+def branchcash (request):
+    #สร้างตัวเเปรการเก็บของข้อมูลรุ่นจากข้อมูลที่ส่งมาก่อนหน้า ใช้ request.session
+    regiscost = int(request.session.get('regiscost'))
+    productprice = int(request.session.get('productprice'))
+    productmargin  = int(request.session.get('productmargin'))
+    
+    #กำหนดค่าคงที่
+    red_frame = int(3000) #ค่าป้ายเเดง
+
+    #เก็บข้อมูลหน้าตัวเอง
+    gen_prepay= int(request.POST.get('gen_prepay')or 0)
+    min_reduce = int(request.POST.get('min_reduce')or 0)
+    min_regis = str(request.POST.get('min_regis','N'))
+    if min_regis == 'N':
+       min_regis = 0
+    else: 
+       min_regis = regiscost
+    min_pdi = str(request.POST.get('min_pdi','N'))
+    if min_pdi == 'N':
+       min_pdi = 0
+    else: 
+       min_pdi = 500
+    min_frame = str(request.POST.get('min_frame','N'))
+    if min_frame == 'N':
+       min_frame = 0
+    else: 
+       min_frame = 130
+    min_polish = str(request.POST.get('min_polish','N'))
+    if min_polish == 'N':
+       min_polish = 0
+    else: 
+       min_polish = 500
+
+    min_acc1 = int(request.POST.get('min_acc1'))
+    min_acc2 = int(request.POST.get('min_acc2'))
+    min_acc3 = int(request.POST.get('min_acc3'))
+    min_acc4 = int(request.POST.get('min_acc4'))
+    min_acc5 = int(request.POST.get('min_acc5'))
+    min_acc6 = int(request.POST.get('min_acc6'))
+    min_acc7 = int(request.POST.get('min_acc7'))
+    min_acc8 = int(request.POST.get('min_acc8'))
+    min_acc9 = int(request.POST.get('min_acc9'))
+    min_acc10 = int(request.POST.get('min_acc10'))
+    min_acc = min_acc1+min_acc2+min_acc3+min_acc4+min_acc5+min_acc6+min_acc7+min_acc8+min_acc9+min_acc10
+   
+
+   #------------คำนวณค่า--------------
+    
+    
+    #รวมรายการบังคับ
+    fix_cost = int(min_regis + min_pdi + min_frame + min_polish) #pass
+
+    #รวมการใช้ส่วนลด
+    total_minmargin = min_reduce + min_acc + fix_cost
+    #ส่วนลดสุทธิ
+    total_margin = float(productmargin- total_minmargin) #pass
+    #ราคารถสุทธิ
+    net_productprice = productprice-min_reduce
+
+    #ค่าใช้จ่ายวันออกรถ
+    if min_regis == 0 :
+        total_exit = int((productprice-min_reduce)+red_frame- gen_prepay+regiscost)
+    else : 
+        total_exit = int((productprice-min_reduce)+red_frame- gen_prepay)
+    
+    #รวบรวมข้อมูลเพื่อส่ง
+    data = {'regiscost':'{:,}'.format(regiscost), #ค่าจดทะเบียน
+            'productprice':'{:,}'.format(productprice), #ราคาขาย
+            'gen_prepay':'{:,}'.format(gen_prepay), #เงินจอง
+            'min_reduce':'{:,}'.format(min_reduce), #-ลดราคาขาย
+            'fix_cost':'{:,}'.format(fix_cost), #-รวมการของบังคับ
+            'min_acc':'{:,}'.format(min_acc), 
+            'red_frame':'{:,}'.format(red_frame), 
+            'total_minmargin':'{:,.0f}'.format(total_minmargin), 
+            'productmargin':'{:,.0f}'.format(productmargin), 
+            'net_productprice':'{:,.0f}'.format(net_productprice),
+            'total_exit':'{:,.0f}'.format(total_exit),
+            'total_margin':'{:,.0f}'.format(total_margin)
+
+    }
+   
+    return render(request, 'showdatacash.html', data)
 
 
 

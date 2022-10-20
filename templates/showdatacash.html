@@ -1,0 +1,110 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div style="margin-top:1vh;" class="accordion" id="accordionPanelsStayOpenExample">
+                    <!----------->
+                     
+                     <div class="accordion-item">
+                      <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                        <button class="accordion-button " type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                          <strong class="text-primary">ส่วนลดคงเหลือ : ({{total_margin}}) บาท</strong>
+                        </button>
+                      </h2>
+                      <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne">
+                        <div class="accordion-body">
+                    
+                          <li class="list-group-item">
+                            <label >
+                               <strong>ส่วนลดตามรุ่น</strong> : <strong class="text-dark">{{productmargin}}</strong> บาท
+                            </label>
+                          </li> 
+                          <li class="list-group-item">
+                            <label >
+                               <strong>การใช้ส่วนลด</strong> : <strong class="text-danger">{{total_minmargin}}</strong> บาท
+                            </label>
+                          </li> 
+                          
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-------------->
+                      <div class="accordion-item">
+                        <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                            <strong class="text-danger" >การใช้ส่วนลด : (-{{total_minmargin}}) บาท</strong>
+                          </button>
+                        </h2>
+                        <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+                          <div class="accordion-body">
+
+                            <li class="list-group-item">
+                              <label >
+                                 <strong>ส่วนลดจากราคาขาย</strong> : <strong class="text-danger">-{{min_reduce}}</strong> บาท
+                              </label>
+                            </li>  
+                            <li class="list-group-item">
+                              <label >
+                                 <strong>รายการของบังคับ</strong> : <strong class="text-danger">-{{fix_cost}}</strong> บาท
+                              </label>
+                            </li>  
+                            <li class="list-group-item">
+                              <label >
+                                 <strong>อุปกรณ์ตกเเต่ง</strong> : <strong class="text-danger">-{{min_acc}}</strong> บาท
+                              </label>
+                            </li>  
+                          
+                    
+                          </div>
+                        </div>
+                      </div>
+                    
+                      <!-------------->
+                      <div class="accordion-item">
+                        <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+                            <strong class="text-muted">ค่าใช้จ่ายวันออกรถ : {{total_exit}} บาท</strong>
+                          </button>
+                        </h2>
+                        <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
+                          <div class="accordion-body">
+                    
+                            <li class="list-group-item">
+                              <label >
+                                 <strong>ราคารถสุทธิ</strong> : <strong class="text-success">{{net_productprice}}</strong>
+                              </label>
+                            </li> 
+                            <li class="list-group-item">
+                              <label >
+                                 <strong>ค่าประกันภัย ชั้น 1</strong> : <strong class="text-success">ฟรี</strong>
+                              </label>
+                            </li> 
+                            <li class="list-group-item">
+                              <label >
+                                 <strong>ค่า พ.ร.บ.</strong> : <strong class="text-success">ฟรี</strong>
+                              </label>
+                            </li> 
+                            <li class="list-group-item">
+                              <label >
+                                 <strong>ค่าประกันป้ายเเดง</strong> : <strong class="text-muted">{{red_frame}}</strong> บาท
+                              </label>
+                            </li> 
+                            {% if min_regis == '0' %}
+                            <li class="list-group-item">
+                              <label >
+                                 <strong>ค่าจดทะเบียน</strong> : <strong class="text-muted">{{regiscost}}</strong> บาท
+                              </label>
+                            </li> 
+                            {% endif %}
+                            <li class="list-group-item">
+                              <label >
+                                 <strong>หักเงินจอง</strong> : <strong class="text-muted">-{{gen_prepay}}</strong> บาท
+                              </label>
+                            </li> 
+                            
+                          </div>
+                        </div>
+                      </div>
+                             
+     </div>                    
+
+{% endblock %}

@@ -65,11 +65,12 @@ function resetdown(){
 
 
 function addacc() {
-     let test = document.querySelectorAll('[name = "addacc"]');
+     let test = document.getElementsByName("listacc");
      acc_sum = 0 ;
-     for ( chk in test ) {
-          if (chk.checked) {
-               acc_sum += test.value;
+     console.log(acc_sum);
+     for ( let chk in test ) {
+          if (chk.checked == true) {
+               acc_sum += chk.value ;
                console.log(acc_sum) ;
           }
           else {

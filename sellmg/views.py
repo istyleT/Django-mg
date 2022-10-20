@@ -22,6 +22,9 @@ def firstpage(request):
     return render(request, 'index.html')
 
 
+
+
+
 def collectdata(request): 
 
     # สร้างตัวเเปรมาเก็บข้อมูลจากหน้าปัจจุบัน
@@ -369,9 +372,8 @@ def branchcash (request):
     return render(request, 'showdatacash.html', data)
 
 
-
-
-
+def showdata(request):
+   return render(request, 'quotation.html')
 
 
 

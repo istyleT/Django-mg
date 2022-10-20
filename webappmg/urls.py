@@ -26,6 +26,7 @@ urlpatterns = [
     path('queryprice',views.showprice),
     path('Payment',views.PaymentRegis),
     path('branchadd',views.branceadd),
-    path('branchcash',views.branchcash)
-    
+    path('branchcash',views.branchcash),
+    path('showdata',views.showdata),
+
 ]

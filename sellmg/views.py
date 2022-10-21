@@ -90,17 +90,11 @@ def PaymentRegis(request):
     # query หา acc ตามเงื่อนไข
     mainacc = Accmgs.objects.filter(Q(acc_model = mainmodel) | Q(acc_model = 'ALL')).values_list('acc_code', 'acc_name','acc_price','acc_type', named=True)
     
-    array_acc1 = [mainacc]
-    array_acc = []
-    for a in array_acc1  :
-      array_acc += a
-      
-
     if paytype == 'cash':
          return render(request, 'branchcash.html',{'regiscost':'{:,}'.format(regiscost),'mainacc':mainacc,'productprice':productprice})
 
     elif paytype == 'finance' :
-        return render(request, 'branchadd.html',{'regiscost':'{:,}'.format(regiscost),'mainacc':mainacc,'productprice':productprice, 'array_acc1': array_acc1,'mainmodel': mainmodel})
+        return render(request, 'branchadd.html',{'regiscost':'{:,}'.format(regiscost),'mainacc':mainacc,'productprice':productprice,'mainmodel': mainmodel})
    
 def branceadd (request):
     
@@ -165,6 +159,7 @@ def branceadd (request):
     request.session['gen_prepay'] = gen_prepay
     request.session['gen_down'] = gen_down
     request.session['gen_month'] = gen_month
+    request.session['condition_finance'] = condition_finance
     request.session['gen_inter'] = gen_inter
     request.session['add_eq'] = add_eq
     request.session['add_kickback'] = add_kickback
@@ -193,7 +188,7 @@ def branceadd (request):
     #ดอกเบี้ยทั้งหมด
     total_inter = int(((cost_finance*(gen_inter/100))*(gen_month/12))-min_inter) #edit
     #ค่างวดปกติ
-    month_payment = float(math.ceil((((cost_finance*(gen_inter/100)*(gen_month/12))-min_inter)+cost_finance)/gen_month)) #pass
+    month_payment = int(math.ceil((((cost_finance*(gen_inter/100)*(gen_month/12))-min_inter)+cost_finance)/gen_month)) #pass
     #com-finance
     total_com_finance = float(((cost_finance)*(gen_inter/100)*(com_fi_percent/100)*(com_fi_month/12))/1.07) #pass
     #ส่วนเพิ่มส่วนลด
@@ -235,7 +230,17 @@ def branceadd (request):
     net_total_payment = (month_payment*gen_month)+total_exit+gen_prepay-red_frame
 
     #ส่งข้อมูลออก
-    
+    request.session['cost_down'] = cost_down
+    request.session['exit_cost_down'] = exit_cost_down
+    request.session['exit_cost_down_vat'] = exit_cost_down_vat
+    request.session['cost_finance'] = cost_finance
+    request.session['month_payment'] = month_payment
+    request.session['total_com_finance'] = total_com_finance
+    request.session['total_addmargin'] = total_addmargin
+    request.session['total_minmargin'] = total_minmargin
+    request.session['total_margin'] = total_margin
+    request.session['total_exit'] = total_exit
+  
 
 
     data = {'regiscost':'{:,}'.format(regiscost), #ค่าจดทะเบียน
@@ -361,7 +366,7 @@ def branchcash (request):
 def showdata(request):
    from datetime import datetime
    now = datetime.today() #วันที่
-   #รับข้อมูล
+   
    #ข้อมูลทั่วไป
    submodel = str(request.session.get('submodel'))
    bodycolor = str(request.session.get('bodycolor'))
@@ -372,6 +377,22 @@ def showdata(request):
    productprice = int(request.session.get('productprice'))
    add_eq = int(request.session.get('add_eq'))
    min_reduce = int(request.session.get('min_reduce'))
+   net_produceprice = int(productprice + add_eq - min_reduce) #ราคารถสุทธิ
+   gen_down = int(request.session.get('gen_down'))
+   cost_down = int(request.session.get('cost_down'))
+   min_subdown = int(request.session.get('min_subdown'))
+   exit_cost_down = int(request.session.get('exit_cost_down'))
+   cost_finance = int(request.session.get('cost_finance'))
+   gen_month = int(request.session.get('gen_month'))
+   add_kickback = int(request.session.get('add_kickback'))
+   gen_inter = float(request.session.get('gen_inter'))
+   min_prosub = int(request.session.get('min_prosub'))
+   min_inter = int(request.session.get('min_inter'))
+   month_payment = int(request.session.get('month_payment'))
+   condition_finance = str(request.session.get('condition_finance'))
+   gen_company = str(request.session.get('gen_company'))
+   
+   
    
    
 
@@ -383,9 +404,23 @@ def showdata(request):
       'mgbranch':mgbranch,
       'registype':registype,
       'paytype':paytype, 
+      'gen_month':gen_month, 
+      'gen_company':gen_company, 
+      'condition_finance':condition_finance, 
       'productprice':'{:,.0f}'.format(productprice), 
+      'min_prosub':'{:,.0f}'.format(min_prosub), 
+      'exit_cost_down':'{:,.0f}'.format(exit_cost_down), 
+      'cost_down':'{:,.0f}'.format(cost_down), 
+      'net_produceprice':'{:,.0f}'.format(net_produceprice), 
+      'gen_down':'{:,.0f}'.format(gen_down), 
       'add_eq':'{:,.0f}'.format(add_eq), 
+      'min_subdown':'{:,.0f}'.format(min_subdown), 
       'min_reduce':'{:,.0f}'.format(min_reduce), 
+      'add_kickback':'{:,.0f}'.format(add_kickback), 
+      'cost_finance':'{:,}'.format(cost_finance), 
+      'month_payment':'{:,}'.format(month_payment), 
+      'min_inter':'{:,.0f}'.format(min_inter), 
+      'gen_inter':'{:,.2f}'.format(gen_inter), 
       
        
 

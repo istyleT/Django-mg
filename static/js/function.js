@@ -1,3 +1,35 @@
+
+
+
+const checkshowprice = document.getElementById('checkshowprice');
+checkshowprice.addEventListener("click", (e)=>{
+     const bodycolor = document.getElementById('bodycolor');
+     const paytype = document.getElementById('paytype');
+     const registype = document.getElementById('registype');
+     const mgbrand = document.getElementById('mgbrand');
+     if (bodycolor.value  == "" || bodycolor.value == null){
+          e.preventDefault();
+          document.getElementById('error-bodycolor').style.display = 'block';
+     }
+     if (paytype.value == "" || paytype.value == null){
+          e.preventDefault();
+          document.getElementById('error-paytype').style.display = 'block';
+     }
+     if (registype.value == "N" || registype.value == null){
+          e.preventDefault();
+          document.getElementById('error-registype').style.display = 'block';
+     }
+     if (mgbrand.value == "" || mgbrand.value == null){
+          e.preventDefault();
+          document.getElementById('error-mgbranch').style.display = 'block';
+     }
+});
+
+
+
+
+
+
 function caldown() {
 
      // เก็บค่าเตรียมคำนวณ
@@ -59,6 +91,8 @@ function resetdown(){
      d.value = "" ;
 
 }
+
+
 
 
 

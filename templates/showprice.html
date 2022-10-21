@@ -1,11 +1,16 @@
 {% extends 'layout.html' %}
+{% load static %}
+
+{% block style %}
+<link  href="{% static 'css/custom.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block script %}
+   <script type="text/javascript" src="{% static 'js/function.js' %}" defer></script>
+{%  endblock %}
+
 {% block content %}
-{{productdata}}
-{% for i in productdata %}
-  {{i}}
-  {{i.price}}
-  {{i.margin}}
-{% endfor %}
+
 <div align="center" style="margin-top: 2vh;">
   <div align="center" class="card text-white bg-danger mb-3" style="max-width: 25rem;">
       <div class="card-header"><h3>รายละเอียด ราคาเเละส่วนลด</h3></div>
@@ -19,33 +24,46 @@
                <form action="Payment" method="POST"> <!--เรียกข้อมูลที่ส่งมาเเสดง-->
                 {% csrf_token %}
                     <label for="formGroupExampleInput2" class="col-sm-2 col-form-label col-form-label-lg">สีตัวถัง</label>
-                    <select class="form-select form-select-lg mb-3" name="bodycolor" aria-label=".form-select-lg example">
-                        <option selected>เลือกสี</option> <!--ใช้ for loop run ตาม database-->
+                    <select id="bodycolor" class="form-select form-select-lg mb-3" name="bodycolor" aria-label=".form-select-lg example">
+                        <option value="" selected>เลือกสี</option> <!--ใช้ for loop run ตาม database-->
+                        <!--นำไปใช้กับอุปกรณ์ตกเเต่ง-->
                         {% for i in productcolor %}
                         <option value={{i.color}}>{{i.color}}</option>
                         {% endfor %}
                       </select>
+                      <div id="error-bodycolor" style="display: none;" class="alert alert-danger" role="alert">
+                        กรุณาเลือกสีตัวถัง
+                      </div>
                     <label for="formGroupExampleInput2" class="col-sm-2 col-form-label col-form-label-lg">ประเภทการซื้อ</label>
-                    <select class="form-select form-select-lg mb-3" name="paytype" aria-label=".form-select-lg example">
-                        <option selected>เลือกประเภทการซื้อ</option>
+                    <select id="paytype" class="form-select form-select-lg mb-3" name="paytype" aria-label=".form-select-lg example">
+                        <option value="" selected>เลือกประเภทการซื้อ</option>
                         <option value="cash">เงินสด</option>
                         <option value="finance">จัดไฟเเนนซ์</option>
                       </select>
+                      <div id="error-paytype" style="display: none;" class="alert alert-danger" role="alert">
+                        กรุณาเลือกประเภทการซื้อ
+                      </div>
                     <label for="formGroupExampleInput2" class="col-sm-2 col-form-label col-form-label-lg">การจดทะเบียน</label>
-                      <select class="form-select form-select-lg mb-3" name="registype" aria-label=".form-select-lg example">
+                      <select id="registype" class="form-select form-select-lg mb-3" name="registype" aria-label=".form-select-lg example">
                           <option  value='N'  selected>เลือกประเภทการจดทะเบียน</option>
                           <option value="person">บุคคล</option>
                           <option value="company">นิติบุคคล</option>
                         </select>
+                        <div id="error-registype" style="display: none;" class="alert alert-danger" role="alert">
+                          กรุณาเลือกประเภทการจดทะเบียน
+                        </div>
                     <label for="formGroupExampleInput2" class="col-sm-2 col-form-label col-form-label-lg">สาขา</label>
-                      <select class="form-select form-select-lg mb-3" name="mgbranch" aria-label=".form-select-lg example">
-                          <option selected>เลือกสาขาที่จะออกรถ</option>
+                      <select id="mgbranch" class="form-select form-select-lg mb-3" name="mgbranch" aria-label=".form-select-lg example">
+                          <option value="" selected>เลือกสาขาที่จะออกรถ</option>
                           <option value="Srinakarin">ศรีนครินทร์</option>
                           <option value="Ransit">รังสิตคลองสี่</option>
                           <option value="Hathairat">หทัยราษฎร์</option>
                         </select>
+                        <div id="error-mgbranch" style="display: none;" class="alert alert-danger" role="alert">
+                          กรุณาเลือกสาขาที่จะออกรถ
+                        </div>
                     <div style="margin: 3vh 0vh;  height: 6vh;" class="d-grid gap-1">
-                                    <button type="submit" class="btn btn-success">ดำเนินการต่อ</button>
+                                    <button type="submit"  id="checkshowprice" class="btn btn-success">ดำเนินการต่อ</button>
                      </div>
                     
                </form>

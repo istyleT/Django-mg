@@ -1,12 +1,9 @@
-
-
-
 const checkshowprice = document.getElementById('checkshowprice');
-checkshowprice.addEventListener("click", (e)=>{
+checkshowprice.addEventListener("click", function(e) {
      const bodycolor = document.getElementById('bodycolor');
      const paytype = document.getElementById('paytype');
      const registype = document.getElementById('registype');
-     const mgbrand = document.getElementById('mgbrand');
+     const mgbranch = document.getElementById('mgbranch');
      if (bodycolor.value  == "" || bodycolor.value == null){
           e.preventDefault();
           document.getElementById('error-bodycolor').style.display = 'block';
@@ -19,11 +16,28 @@ checkshowprice.addEventListener("click", (e)=>{
           e.preventDefault();
           document.getElementById('error-registype').style.display = 'block';
      }
-     if (mgbrand.value == "" || mgbrand.value == null){
+     if (mgbranch.value == "" || mgbranch.value == null){
           e.preventDefault();
           document.getElementById('error-mgbranch').style.display = 'block';
      }
 });
+
+
+
+let accPrice = document.getElementById('btn-accpprice'); //ใช้ form ซ้อนกันไม่ได้
+accPrice.addEventListener('click', function(e){
+     let sumPriceAcc = 0 ;
+     e.preventDefault();
+     let chk = document.getElementsByName('listacc');
+     for (let x ; x < chk.length ; x++){
+       if(chk[x].checked == true){
+           sumPriceAcc += chk[x].value;
+           console.log('sumPriceAcc');
+       }
+     }
+     
+});
+
 
 
 
@@ -90,26 +104,4 @@ function resetdown(){
      b.value = "" ;
      d.value = "" ;
 
-}
-
-
-
-
-
-
-
-function addacc() {
-     let test = document.getElementsByName("listacc");
-     acc_sum = 0 ;
-     console.log(acc_sum);
-     for ( let chk in test ) {
-          if (chk.checked == true) {
-               acc_sum += chk.value ;
-               console.log(acc_sum) ;
-          }
-          else {
-               console.log('None')
-          }
-     }
-        
 }

@@ -121,9 +121,9 @@ def branceadd (request):
     min_reduce = int(request.POST.get('min_reduce')or 0)
     condition_finance = str(request.POST.get('condition_finance'))
     min_regis = str(request.POST.get('min_regis','N'))
-    if min_regis == 'N':
+    if min_regis == 'N': #ไม่เเถมค่าจดทะเบียน  minregis = 0
        min_regis = 0
-    else: 
+    else:  # เเถมค่าจดทะเบียน minregis = regiscost
        min_regis = regiscost
     min_pdi = str(request.POST.get('min_pdi','N'))
     if min_pdi == 'N':
@@ -155,6 +155,7 @@ def branceadd (request):
   
 
     #ส่งข้อมูลออก
+    request.session['red_frame'] = red_frame
     request.session['gen_company'] = gen_company
     request.session['gen_prepay'] = gen_prepay
     request.session['gen_down'] = gen_down
@@ -194,9 +195,9 @@ def branceadd (request):
     #ส่วนเพิ่มส่วนลด
     total_addmargin = float(add_eq + add_kickback + total_com_finance) #edit
     #ส่วนลดส่วนลด
-    if statusvatdown == "1" : 
+    if statusvatdown == "1" : #เเถม vatsubdown
          total_minmargin = float(min_prosub + min_reduce + min_regis + min_pdi + min_frame + min_polish + min_subdown + min_inter+ min_acc + exit_cost_down_vat)
-    elif statusvatdown == "0":
+    elif statusvatdown == "0": # ไม่เเถม
          total_minmargin = float(min_prosub + min_reduce + min_regis + min_pdi + min_frame + min_polish + min_subdown + min_inter+ min_acc)
     #ส่วนลดสุทธิ
     total_margin = float(productmargin + total_addmargin - total_minmargin) #pass
@@ -235,6 +236,7 @@ def branceadd (request):
     request.session['exit_cost_down_vat'] = exit_cost_down_vat
     request.session['cost_finance'] = cost_finance
     request.session['month_payment'] = month_payment
+    request.session['statusvatdown'] = statusvatdown
     request.session['total_com_finance'] = total_com_finance
     request.session['total_addmargin'] = total_addmargin
     request.session['total_minmargin'] = total_minmargin
@@ -391,7 +393,14 @@ def showdata(request):
    month_payment = int(request.session.get('month_payment'))
    condition_finance = str(request.session.get('condition_finance'))
    gen_company = str(request.session.get('gen_company'))
-   
+   #รายละเอียดวันออกรถ
+   red_frame = int(request.session.get('red_frame'))
+   gen_prepay = int(request.session.get('gen_prepay'))
+   total_exit = int(request.session.get('total_exit'))
+   min_regis = (request.session.get('min_regis'))
+   regiscost = int(request.session.get('regiscost'))
+   statusvatdown = str(request.session.get('statusvatdown')) # 1 = เเถม
+   exit_cost_down_vat = int(request.session.get('exit_cost_down_vat'))
    
    
    
@@ -406,14 +415,19 @@ def showdata(request):
       'paytype':paytype, 
       'gen_month':gen_month, 
       'gen_company':gen_company, 
+      'min_regis':min_regis, 
       'condition_finance':condition_finance, 
+      'regiscost':'{:,.0f}'.format(regiscost), 
       'productprice':'{:,.0f}'.format(productprice), 
       'min_prosub':'{:,.0f}'.format(min_prosub), 
       'exit_cost_down':'{:,.0f}'.format(exit_cost_down), 
       'cost_down':'{:,.0f}'.format(cost_down), 
+      'red_frame':'{:,.0f}'.format(red_frame), 
+      'total_exit':'{:,.0f}'.format(total_exit), 
       'net_produceprice':'{:,.0f}'.format(net_produceprice), 
       'gen_down':'{:,.0f}'.format(gen_down), 
       'add_eq':'{:,.0f}'.format(add_eq), 
+      'gen_prepay':'{:,.0f}'.format(gen_prepay), 
       'min_subdown':'{:,.0f}'.format(min_subdown), 
       'min_reduce':'{:,.0f}'.format(min_reduce), 
       'add_kickback':'{:,.0f}'.format(add_kickback), 
@@ -421,6 +435,8 @@ def showdata(request):
       'month_payment':'{:,}'.format(month_payment), 
       'min_inter':'{:,.0f}'.format(min_inter), 
       'gen_inter':'{:,.2f}'.format(gen_inter), 
+      'statusvatdown':statusvatdown, 
+      'exit_cost_down_vat':'{:,.0f}'.format(exit_cost_down_vat), 
       
        
 

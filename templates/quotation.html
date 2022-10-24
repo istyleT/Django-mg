@@ -14,7 +14,7 @@
 </head>
 <body>
 <header class="header">
-                    <h1 align="center" >ใบเสนอราคา</h1>
+                    <h1 align="center" >Quotation</h1>
 </header>
 
 <div class="container">
@@ -193,18 +193,48 @@
                       </tr>
                     </thead>
                     <tbody>
+                      {% if statusvatdown != '0' %}
                       <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
+                        <th scope="row">Vat Sub ดาวน์ 7% :</th>
+                        <td>{{exit_cost_down_vat}} บาท</td>
+                      </tr>
+                      {% endif %}
+                      {% if min_regis != 0 %}
+                      <tr>
+                        <th scope="row">ค่าจดทะเบียน</th>
+                        <td>{{regiscost}} บาท</td>
+                      </tr>
+                      {% endif %}
+                      <tr>
+                        <th scope="row">ค่า PDI</th>
+                        <td>500 บาท</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">MSA-กรอบป้ายทะเบียนโชว์รูม</th>
+                        <td>130 บาท</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">MSA-ขัดเคลือบสีรถใหม่(ศูนย์บริการ)</th>
+                        <td>500 บาท</td>
+                      </tr>
+                
+                      <tr>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
                       </tr>
                       <tr>
                         <th scope="row">2</th>
                         <td>Jacob</td>
                       </tr>
                       <tr>
-                        <th scope="row">3</th>
-                        <td colspan="2">Larry the Bird</td>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
                       </tr>
+                      <tr>
+                        <th scope="row">รวมรายการรของเเถม/อุปกรณ์ตกเเต่ง</th>
+                        <td>**** บาท</td>
+                      </tr>
+                    
                     </tbody>
                   </table>
 </div>
@@ -212,33 +242,56 @@
   <table class="table">
                     <thead>
                       <tr>
-                        <th colspan="2" class="text-success">รายละเอียด Margin</th>
+                        <th colspan="2" class="text-success">รายละเอียดค่าใช้จ่ายวันออกรถยนต์</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
+                        {% if paytype == 'finance' %}
+                        <th scope="row">เงินดาวน์ :</th>
+                        <td>{{exit_cost_down}} บาท</td>
+                        {% elif paytype == 'cash' %}
+                        <th scope="row">ราคารถยนต์ :</th>
+                        <td>{{productprice}} บาท</td>
+                        {% endif %}
                       </tr>
                       <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
+                        <th scope="row">ค่าประกันภัย ชั้น 1 :</th>
+                        <td><strong class="text-success">ฟรี</strong></td>
                       </tr>
                       <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
+                        <th scope="row">ค่า พ.ร.บ. :</th>
+                        <td><strong class="text-success">ฟรี</strong></td>
+                      </tr>
+                      {% if min_regis == 0 %}
+                      <tr>
+                        <th scope="row">ค่าจดทะเบียน :</th>
+                        <td>{{regiscost}} บาท</td>
                       </tr>
                       <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
+                      {% endif %}
+                        <th scope="row">ค่าประกันป้ายแดง(ได้คืน) :</th>
+                        <td>{{red_frame}} บาท</td>
+                      </tr>
+                      {% if condition_finance == 'BEGIN' %}
+                      <tr>
+                        <th scope="row">ค่างวดแรก(Beginning) :</th>
+                        <td>{{month_payment}} บาท</td>
+                      </tr>
+                      {% endif %}
+                      {% if statusvatdown == '0' %}
+                      <tr>
+                        <th scope="row">Vat Sub ดาวน์ 7% :</th>
+                        <td>{{exit_cost_down_vat}} บาท</td>
+                      </tr>
+                      {% endif %}
+                      <tr>
+                        <th scope="row">หักเงินจอง :</th>
+                        <td>{{gen_prepay}} บาท</td>
                       </tr>
                       <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
+                        <th scope="row">รวมยอดชำระวันออกรถ :</th>
+                        <td>{{total_exit}} บาท</td>
                       </tr>
                     </tbody>
                   </table>

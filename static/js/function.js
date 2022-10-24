@@ -24,19 +24,23 @@ checkshowprice.addEventListener("click", function(e) {
 
 
 
-let accPrice = document.getElementById('btn-accpprice'); //ใช้ form ซ้อนกันไม่ได้
-accPrice.addEventListener('click', function(e){
+function accPrice(){
      let sumPriceAcc = 0 ;
-     e.preventDefault();
+     console.log(sumPriceAcc);
      let chk = document.getElementsByName('listacc');
+     console.log(chk);
      for (let x ; x < chk.length ; x++){
-       if(chk[x].checked == true){
+       console.log(x);
+       if(chk[x].checked){
            sumPriceAcc += chk[x].value;
            console.log('sumPriceAcc');
        }
+       else{
+          console.log('Toon');
+       }
      }
      
-});
+};
 
 
 

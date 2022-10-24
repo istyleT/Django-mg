@@ -149,9 +149,31 @@ def branceadd (request):
     
    
     min_inter = int(request.POST.get('min_inter')or 0)
-    min_acc = 0 
+    # เก็บค่าอุปกรณ์ตกเเต่ง
+    min_acc_1 = int(request.POST.get('min_acc_1')or 0)
+    min_acc_2 = int(request.POST.get('min_acc_2')or 0)
+    min_acc_3 = int(request.POST.get('min_acc_3')or 0)
+    min_acc_4 = int(request.POST.get('min_acc_4')or 0)
+    min_acc_5 = int(request.POST.get('min_acc_5')or 0)
+    min_acc_6 = int(request.POST.get('min_acc_6')or 0)
+    min_acc_7 = int(request.POST.get('min_acc_7')or 0)
+    min_acc_8 = int(request.POST.get('min_acc_8')or 0)
+    min_acc_9 = int(request.POST.get('min_acc_9')or 0)
+    min_acc_10 = int(request.POST.get('min_acc_10')or 0)
+    min_acc_11 = int(request.POST.get('min_acc_11')or 0)
+    min_acc_12 = int(request.POST.get('min_acc_12')or 0)
+    min_acc_13 = int(request.POST.get('min_acc_13')or 0)
+    min_acc_14 = int(request.POST.get('min_acc_14')or 0)
+    min_acc_15 = int(request.POST.get('min_acc_15')or 0)
+    min_acc_16 = int(request.POST.get('min_acc_16')or 0)
+    min_acc_17 = int(request.POST.get('min_acc_17')or 0)
+    min_acc_18 = int(request.POST.get('min_acc_18')or 0)
+    min_acc_19 = int(request.POST.get('min_acc_19')or 0)
+    min_acc_20 = int(request.POST.get('min_acc_20')or 0)
+    min_acc = int(min_acc_1+min_acc_2+min_acc_3+min_acc_4+min_acc_5+min_acc_6+min_acc_7
+    +min_acc_8+min_acc_9+min_acc_10+min_acc_11+min_acc_12+min_acc_13+min_acc_14+min_acc_15
+    +min_acc_16+min_acc_17+min_acc_18+min_acc_19+min_acc_20)
 
-    #ทดสอบ
   
 
     #ส่งข้อมูลออก
@@ -194,15 +216,17 @@ def branceadd (request):
     total_com_finance = float(((cost_finance)*(gen_inter/100)*(com_fi_percent/100)*(com_fi_month/12))/1.07) #pass
     #ส่วนเพิ่มส่วนลด
     total_addmargin = float(add_eq + add_kickback + total_com_finance) #edit
+    #รวมรายการของเเถมอุปกรณ์ตกเเต่ง
+    total_gift = int(min_regis + min_pdi + min_frame + min_polish + min_acc) #pass
     #ส่วนลดส่วนลด
+
     if statusvatdown == "1" : #เเถม vatsubdown
          total_minmargin = float(min_prosub + min_reduce + min_regis + min_pdi + min_frame + min_polish + min_subdown + min_inter+ min_acc + exit_cost_down_vat)
     elif statusvatdown == "0": # ไม่เเถม
          total_minmargin = float(min_prosub + min_reduce + min_regis + min_pdi + min_frame + min_polish + min_subdown + min_inter+ min_acc)
     #ส่วนลดสุทธิ
     total_margin = float(productmargin + total_addmargin - total_minmargin) #pass
-    #รวมรายการบังคับ
-    fix_cost = int(min_regis + min_pdi + min_frame + min_polish) #pass
+    
 
     #ค่าใช้จ่ายวันออกรถ
     if min_regis == 0 and condition_finance == 'BEGIN' :
@@ -254,7 +278,7 @@ def branceadd (request):
             'add_kickback':'{:,}'.format(add_kickback), #+ ค่า kickback
             'min_prosub':'{:,}'.format(min_prosub), #-ค่า โปร subsidy
             'min_reduce':'{:,}'.format(min_reduce), #-ลดราคาขาย
-            'fix_cost':'{:,}'.format(fix_cost), #-รวมการของบังคับ
+            'total_gift':'{:,}'.format(total_gift), #-รวมการของบังคับ
             'min_subdown':'{:,}'.format(min_subdown), # 
             'min_inter':'{:,}'.format(min_inter),
             'productmargin':'{:,}'.format(productmargin),
@@ -401,6 +425,16 @@ def showdata(request):
    regiscost = int(request.session.get('regiscost'))
    statusvatdown = str(request.session.get('statusvatdown')) # 1 = เเถม
    exit_cost_down_vat = int(request.session.get('exit_cost_down_vat'))
+   #รายการของเเถมอุปกรณ์ตกเเต่ง 
+   min_acc = int(request.session.get('min_acc'))
+   min_pdi = int(request.session.get('min_pdi'))
+   min_frame = int(request.session.get('min_frame'))
+   min_polish = int(request.session.get('min_polish'))
+   if statusvatdown == '1' : #เเถมจะส่งเลข 1
+       total_gift = int(min_acc+min_pdi+min_frame+min_polish+regiscost+exit_cost_down_vat)
+   else :
+       total_gift = int(min_acc+min_pdi+min_frame+min_polish+regiscost)
+      
    
    
    
@@ -437,6 +471,11 @@ def showdata(request):
       'gen_inter':'{:,.2f}'.format(gen_inter), 
       'statusvatdown':statusvatdown, 
       'exit_cost_down_vat':'{:,.0f}'.format(exit_cost_down_vat), 
+      'min_acc':'{:,.0f}'.format(min_acc), 
+      'min_pdi':'{:,.0f}'.format(min_pdi), 
+      'min_frame':'{:,.0f}'.format(min_frame), 
+      'min_polish':'{:,.0f}'.format(min_polish), 
+      'total_gift':'{:,.0f}'.format(total_gift), 
       
        
 

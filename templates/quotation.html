@@ -14,7 +14,7 @@
 </head>
 <body>
 <header class="header">
-                    <h1 align="center" >Quotation</h1>
+                    <h1 align="center" >สรุปรายการ</h1>
 </header>
 
 <div class="container">
@@ -193,7 +193,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      {% if statusvatdown != '0' %}
+                      {% if statusvatdown == '1' %}
                       <tr>
                         <th scope="row">Vat Sub ดาวน์ 7% :</th>
                         <td>{{exit_cost_down_vat}} บาท</td>
@@ -205,34 +205,31 @@
                         <td>{{regiscost}} บาท</td>
                       </tr>
                       {% endif %}
+                      {% if min_pdi != 0 %}
                       <tr>
                         <th scope="row">ค่า PDI</th>
                         <td>500 บาท</td>
                       </tr>
+                      {% endif %}
+                      {% if min_frame != 0 %}
                       <tr>
                         <th scope="row">MSA-กรอบป้ายทะเบียนโชว์รูม</th>
                         <td>130 บาท</td>
                       </tr>
+                      {% endif %}
+                      {% if min_polish != 0 %}
                       <tr>
                         <th scope="row">MSA-ขัดเคลือบสีรถใหม่(ศูนย์บริการ)</th>
                         <td>500 บาท</td>
                       </tr>
-                
+                      {% endif %}
                       <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
+                        <th scope="row">รายการอุปกรณ์ตกเเต่ง</th>
+                        <td>{{min_acc}} บาท</td>
                       </tr>
                       <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">รวมรายการรของเเถม/อุปกรณ์ตกเเต่ง</th>
-                        <td>**** บาท</td>
+                        <th scope="row">รวมของเเถม/อุปกรณ์ตกเเต่ง</th>
+                        <td>{{total_gift}} บาท</td>
                       </tr>
                     
                     </tbody>

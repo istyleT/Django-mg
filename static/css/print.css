@@ -1,0 +1,9 @@
+@page {
+                    size: A4;
+                    margin-top: 3vh;
+}
+
+#print {
+                    display: none;
+                    visibility: none;
+}

@@ -421,7 +421,7 @@ def showdata(request):
    red_frame = int(request.session.get('red_frame'))
    gen_prepay = int(request.session.get('gen_prepay'))
    total_exit = int(request.session.get('total_exit'))
-   min_regis = (request.session.get('min_regis'))
+   min_regis = int(request.session.get('min_regis'))
    regiscost = int(request.session.get('regiscost'))
    statusvatdown = str(request.session.get('statusvatdown')) # 1 = เเถม
    exit_cost_down_vat = int(request.session.get('exit_cost_down_vat'))
@@ -431,9 +431,9 @@ def showdata(request):
    min_frame = int(request.session.get('min_frame'))
    min_polish = int(request.session.get('min_polish'))
    if statusvatdown == '1' : #เเถมจะส่งเลข 1
-       total_gift = int(min_acc+min_pdi+min_frame+min_polish+regiscost+exit_cost_down_vat)
+       total_gift = int(min_acc+min_pdi+min_frame+min_polish+min_regis+exit_cost_down_vat)
    else :
-       total_gift = int(min_acc+min_pdi+min_frame+min_polish+regiscost)
+       total_gift = int(min_acc+min_pdi+min_frame+min_polish+min_regis)
       
    
    
@@ -449,8 +449,8 @@ def showdata(request):
       'paytype':paytype, 
       'gen_month':gen_month, 
       'gen_company':gen_company, 
-      'min_regis':min_regis, 
       'condition_finance':condition_finance, 
+      'min_regis':'{:,.0f}'.format(min_regis), 
       'regiscost':'{:,.0f}'.format(regiscost), 
       'productprice':'{:,.0f}'.format(productprice), 
       'min_prosub':'{:,.0f}'.format(min_prosub), 
@@ -472,9 +472,9 @@ def showdata(request):
       'statusvatdown':statusvatdown, 
       'exit_cost_down_vat':'{:,.0f}'.format(exit_cost_down_vat), 
       'min_acc':'{:,.0f}'.format(min_acc), 
-      'min_pdi':'{:,.0f}'.format(min_pdi), 
-      'min_frame':'{:,.0f}'.format(min_frame), 
-      'min_polish':'{:,.0f}'.format(min_polish), 
+      'min_pdi':min_pdi, 
+      'min_frame':min_frame, 
+      'min_polish':min_polish, 
       'total_gift':'{:,.0f}'.format(total_gift), 
       
        

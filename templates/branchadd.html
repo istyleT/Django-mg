@@ -19,36 +19,13 @@
 <form method="POST" action="branchadd">
 {% csrf_token %}
     <div class="accordion accordion-flush" id="accordionFlushExample" style="margin-top: 1vh;">
-                        <!-------บริษัทไฟเเนนซ์------->
-                        <div class="accordion-item">
-                          <h2 class="accordion-header" id="flush-headingNine">
-                            <button class="accordion-button collapsed text-primary" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseNine" aria-expanded="false" aria-controls="flush-collapseNine">
-                              <strong>บริษัทไฟเเนนซ์</strong>
-                            </button>
-                          </h2>
-                          <div id="flush-collapseNine" class="accordion-collapse collapse" aria-labelledby="flush-headingNine" data-bs-parent="#accordionFlushExample">
-                            <div class="input-group mb-3" style="margin-top: 1vh;">
-                              <label class="input-group-text" for="inputGroupSelect01">ไฟเเนนซ์</label>
-                              <select name="gen_company" class="form-select" id="inputGroupSelect02">
-                                <option value="" selected>กรุณาเลือก</option>
-                                <option value='K'>ลีสซิ่งกสิกรไทย</option>
-                                <option value='TTB'>ทหารไทยธนชาต</option>
-                                <option value='AY'>กรุงศรีออโต้</option>
-                                <option value='ICBC'>ICBC</option>
-                                <option value='KPP'>เกียรตินาคิน</option>
-                                <option value='TISCO'>TISCO</option>
-                                <option value='SCB'>ไทยพาณิชย์</option>
-                                <option value='CITY'>Cityleasing</option>
-                              </select>
-                             </div>
-                          </div>
-                        </div>
+                        
                          <!-----------------ส่วนลดจากราคาขาย-------------------------->
 
                          <div class="accordion-item">
                           <h2 class="accordion-header" id="flush-headingA">
                             <button class="accordion-button collapsed text-danger" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseA" aria-expanded="false" aria-controls="flush-collapseA">
-                              <strong>ส่วนลดจากราคาขาย</strong>
+                              <h4><strong>ส่วนลดจากราคาขาย</strong></h4>
                             </button>
                           </h2>
                           <div id="flush-collapseA" class="accordion-collapse collapse" aria-labelledby="flush-headingA" data-bs-parent="#accordionFlushExample">
@@ -62,7 +39,7 @@
                          <div class="accordion-item">
                           <h2 class="accordion-header" id="flush-headingFive">
                             <button class="accordion-button collapsed text-success" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseOne">
-                              <strong>บวกหัวค่าอุปกรณ์</strong>
+                              <h4><strong>บวกหัวค่าอุปกรณ์</strong></h4>
                             </button>
                           </h2>
                           <div id="flush-collapseFive" class="accordion-collapse collapse" aria-labelledby="flush-headingFive" data-bs-parent="#accordionFlushExample">
@@ -76,7 +53,7 @@
                          <div class="accordion-item">
                           <h2 class="accordion-header" id="flush-headingTwo">
                             <button class="accordion-button collapsed text-success" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                              <strong>Kickback</strong>
+                              <h4><strong>Kickback</strong></h4>
                             </button>
                           </h2>
                           <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
@@ -90,7 +67,7 @@
                          <div class="accordion-item">
                           <h2 class="accordion-header" id="flush-headingX">
                             <button class="accordion-button collapsed text-danger" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseX" aria-expanded="false" aria-controls="flush-collapseX">
-                              <strong>โปรโมชั่น Subsidy</strong>
+                              <h4><strong>โปรโมชั่น Subsidy</strong></h4>
                             </button>
                           </h2>
                           <div id="flush-collapseX" class="accordion-collapse collapse" aria-labelledby="flush-headingX" data-bs-parent="#accordionFlushExample">
@@ -104,7 +81,7 @@
                         <div class="accordion-item ">
                           <h2 class="accordion-header" id="flush-headingSix">
                             <button class="accordion-button collapsed text-primary " type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSix" aria-expanded="false" aria-controls="flush-collapseSix">
-                              <strong>เงินดาวน์</strong>
+                              <h4><strong>เงินดาวน์</strong></h4>
                             </button>
                           </h2>
                           <div id="flush-collapseSix" class="accordion-collapse collapse" aria-labelledby="flush-headingSix" data-bs-parent="#accordionFlushExample">
@@ -121,11 +98,11 @@
                                 <span class="form-control text-center" style="display: none;" id="show_down_bath" ></span><input id="gen_down_bath" type="number" style="display: block;"  class="form-control text-center" placeholder="เงินดาวน์ (บาท)" >
                               </div>
                               <div align="center">
-                                <button type="button" style="width: 50vw; margin-bottom: 1vh;" class="btn btn-outline-primary" onclick="resetdown()"><strong>Reset</strong></button>
+                                <button type="button" style="width: 50vw; margin-bottom: 1vh;" class="btn btn-outline-primary" onclick="resetdown()"><h4></h4><strong>Reset</strong></button>
                               </div>
                               
                               <div id="downerror" class="alert alert-danger text-center"  style="display: none;">
-                                <strong>กรุณาเลือกกรอกช่องใดช่องหนึ่ง</strong>
+                                <h4></h4><strong>กรุณาเลือกกรอกช่องใดช่องหนึ่ง</strong>
                               </div>
                         
                               </div>
@@ -135,7 +112,7 @@
                      <div class="accordion-item">
                       <h2 class="accordion-header" id="flush-headingC">
                         <button class="accordion-button collapsed text-danger" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseC" aria-expanded="false" aria-controls="flush-collapseC">
-                          <strong>ซับเงินดาวน์</strong>
+                          <h4><strong>ซับเงินดาวน์</strong></h4>
                         </button>
                       </h2>
                       <div id="flush-collapseC" class="accordion-collapse collapse" aria-labelledby="flush-headingC" data-bs-parent="#accordionFlushExample">
@@ -160,7 +137,7 @@
                         <div class="accordion-item">
                           <h2 class="accordion-header" id="flush-headingSeven">
                             <button class="accordion-button collapsed text-primary" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSeven" aria-expanded="false" aria-controls="flush-collapseSeven">
-                              <strong>จำนวนงวด</strong>
+                              <h4><strong>จำนวนงวด</strong></h4>
                             </button>
                           </h2>
                           <div id="flush-collapseSeven" class="accordion-collapse collapse" aria-labelledby="flush-headingSeven" data-bs-parent="#accordionFlushExample">
@@ -183,7 +160,7 @@
                         <div class="accordion-item">
                           <h2 class="accordion-header" id="flush-headingOne">
                             <button class="accordion-button collapsed text-primary" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                              <strong>อัตราดอกเบี้ย/เงื่อนไขดอกเบี้ย</strong>
+                              <h4><strong>อัตราดอกเบี้ย/เงื่อนไขดอกเบี้ย</strong></h4>
                             </button>
                           </h2>
                           <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
@@ -207,7 +184,7 @@
                         <div class="accordion-item">
                           <h2 class="accordion-header" id="flush-headingThree">
                             <button class="accordion-button collapsed text-success" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-                              <strong>Com ไฟเเนนซ์</strong>
+                              <h4><strong>Com ไฟเเนนซ์</strong></h4>
                             </button>
                           </h2>
                           <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
@@ -244,7 +221,7 @@
                     <div class="accordion-item">
                       <h2 class="accordion-header" id="flush-headingE">
                         <button class="accordion-button collapsed text-danger" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseE" aria-expanded="false" aria-controls="flush-collapseE">
-                          <strong>ซับดอกเบี้ย</strong>
+                          <h4><strong>ซับดอกเบี้ย</strong></h4>
                         </button>
                       </h2>
                       <div id="flush-collapseE" class="accordion-collapse collapse" aria-labelledby="flush-headingE" data-bs-parent="#accordionFlushExample">
@@ -265,7 +242,7 @@
                     <div class="accordion-item">
                       <h2 class="accordion-header" id="flush-headingD">
                         <button class="accordion-button collapsed text-danger" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseD" aria-expanded="false" aria-controls="flush-collapseD">
-                          <strong>ของเเถม/อุปกรณ์ตกเเต่ง</strong>
+                          <h4><strong>ของเเถม/อุปกรณ์ตกเเต่ง</strong></h4>
                         </button>
                       </h2>
                       <div id="flush-collapseD" class="accordion-collapse collapse" aria-labelledby="flush-headingD" data-bs-parent="#accordionFlushExample">
@@ -480,7 +457,7 @@
                       <div class="accordion-item">
                         <h2 class="accordion-header" id="flush-headingTen">
                           <button class="accordion-button collapsed text-primary" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTen" aria-expanded="false" aria-controls="flush-collapseTen">
-                            <strong>เงินจอง</strong>
+                            <h4><strong>เงินจอง</strong></h4>
                           </button>
                         </h2>
                         <div id="flush-collapseTen" class="accordion-collapse collapse" aria-labelledby="flush-headingTen" data-bs-parent="#accordionFlushExample">
@@ -494,13 +471,37 @@
                         </div>
                    
                       </div>
+                      <!-------บริษัทไฟเเนนซ์------->
+                      <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingNine">
+                          <button class="accordion-button collapsed text-primary" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseNine" aria-expanded="false" aria-controls="flush-collapseNine">
+                            <h4><strong>บริษัทไฟเเนนซ์</strong></h4>
+                          </button>
+                        </h2>
+                        <div id="flush-collapseNine" class="accordion-collapse collapse" aria-labelledby="flush-headingNine" data-bs-parent="#accordionFlushExample">
+                          <div class="input-group mb-3" style="margin-top: 1vh;">
+                            <label class="input-group-text" for="inputGroupSelect01">ไฟเเนนซ์</label>
+                            <select name="gen_company" class="form-select" id="inputGroupSelect02">
+                              <option value="" selected>กรุณาเลือก</option>
+                              <option value='K'>ลีสซิ่งกสิกรไทย</option>
+                              <option value='TTB'>ทหารไทยธนชาต</option>
+                              <option value='AY'>กรุงศรีออโต้</option>
+                              <option value='ICBC'>ICBC</option>
+                              <option value='KPP'>เกียรตินาคิน</option>
+                              <option value='TISCO'>TISCO</option>
+                              <option value='SCB'>ไทยพาณิชย์</option>
+                              <option value='CITY'>Cityleasing</option>
+                            </select>
+                           </div>
+                        </div>
+                      </div>
 
 
         </div>
 
 
                         <div style="margin: 2vh 0vh;" class="d-grid gap-1">
-                                  <button type="submit" class="btn btn-warning">ดำเนินการต่อ</button>
+                                  <button type="submit" class="btn btn-warning"><strong>ดำเนินการต่อ</strong></button>
                         </div>
 </form>
 

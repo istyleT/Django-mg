@@ -5,8 +5,9 @@
                     <meta charset="UTF-8">
                     <meta http-equiv="X-UA-Compatible" content="IE=edge">
                     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                    <title>Quotation</title>
+                    <title>Quotation Page</title>
                     <link rel="stylesheet"  href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+                    <link rel="stylesheet" href="{% static 'css/print.css' %}" media="print">
                     {% block style  %} {% endblock %}
 
                     <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"> </script>
@@ -14,7 +15,7 @@
 </head>
 <body>
 <header class="header">
-                    <h1 align="center" >สรุปรายการ</h1>
+                    <h1 align="center" >ใบสรุปรายการ</h1>
 </header>
 
 <div class="container">
@@ -199,36 +200,40 @@
                         <td>{{exit_cost_down_vat}} บาท</td>
                       </tr>
                       {% endif %}
-                      {% if min_regis != 0 %}
+
+                      {% if min_regis != '0' %}
                       <tr>
                         <th scope="row">ค่าจดทะเบียน</th>
-                        <td>{{regiscost}} บาท</td>
+                        <td>{{min_regis}} บาท</td>
                       </tr>
                       {% endif %}
+
                       {% if min_pdi != 0 %}
                       <tr>
                         <th scope="row">ค่า PDI</th>
-                        <td>500 บาท</td>
+                        <td>{{min_pdi}} บาท</td>
                       </tr>
                       {% endif %}
+
                       {% if min_frame != 0 %}
                       <tr>
-                        <th scope="row">MSA-กรอบป้ายทะเบียนโชว์รูม</th>
-                        <td>130 บาท</td>
+                        <th scope="row">กรอบป้ายทะเบียน</th>
+                        <td>{{min_frame}} บาท</td>
                       </tr>
                       {% endif %}
+
                       {% if min_polish != 0 %}
                       <tr>
-                        <th scope="row">MSA-ขัดเคลือบสีรถใหม่(ศูนย์บริการ)</th>
-                        <td>500 บาท</td>
+                        <th scope="row">ขัดเคลือบสีรถใหม่</th>
+                        <td>{{min_polish}} บาท</td>
                       </tr>
                       {% endif %}
                       <tr>
-                        <th scope="row">รายการอุปกรณ์ตกเเต่ง</th>
+                        <th scope="row">รายการอุปกรณ์ตกเเต่งอื่นๆ</th>
                         <td>{{min_acc}} บาท</td>
                       </tr>
                       <tr>
-                        <th scope="row">รวมของเเถม/อุปกรณ์ตกเเต่ง</th>
+                        <th scope="row">รวมยอดของเเถม/อุปกรณ์ตกเเต่ง</th>
                         <td>{{total_gift}} บาท</td>
                       </tr>
                     
@@ -260,13 +265,15 @@
                         <th scope="row">ค่า พ.ร.บ. :</th>
                         <td><strong class="text-success">ฟรี</strong></td>
                       </tr>
-                      {% if min_regis == 0 %}
+
+                      {% if min_regis == '0' %}
                       <tr>
                         <th scope="row">ค่าจดทะเบียน :</th>
                         <td>{{regiscost}} บาท</td>
                       </tr>
                       <tr>
                       {% endif %}
+
                         <th scope="row">ค่าประกันป้ายแดง(ได้คืน) :</th>
                         <td>{{red_frame}} บาท</td>
                       </tr>
@@ -292,6 +299,9 @@
                       </tr>
                     </tbody>
                   </table>
+</div>
+<div class="d-grid gap-1" style="margin: 3vh 14vw;">
+  <button id="print" class="btn btn-danger" onclick="window.print()"><strong>Print</strong></button>
 </div>
 
 

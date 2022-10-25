@@ -21,15 +21,23 @@ def firstpage(request):
     return render(request, 'index.html')
 
 def collectdata(request): 
-
-    # สร้างตัวเเปรมาเก็บข้อมูลจากหน้าปัจจุบัน
+ 
+    # เก็บข้อมูลการ login จาก user 
     username = str(request.POST.get('username'))
-    telphone = str(request.POST.get('telphone'))
+    password = str(request.POST.get('password'))
     mainmodel = str(request.POST.get('mainmodel'))
+    # เอาข้อมูลที่เก็บได้ไปเช็ค
+    
+    # ถ้ามี เข้า condition render หน้าต่อไป 
+
+    # ถ้าไม่มี สั่ง render หน้าเดิม
+   
+    #ดักการ login เข้าสู่ระบบ if not user redirect this page /else is user 
+    
 
     #ส่งข้อมูลออก
     request.session['username '] = username 
-    request.session['telphone'] = telphone
+    request.session['telphone'] = password
     request.session['mainmodel'] = mainmodel
     
     #เงื่อนไขการ render หน้าต่อไป

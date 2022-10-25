@@ -12,7 +12,7 @@
 {% block content %}
 
 <div align="center" style="margin-top: 2vh;">
-  <div align="center" class="card text-white bg-danger mb-3" style="max-width: 25rem;">
+  <div align="center" class="card text-white bg-danger mb-3" style="max-width: 35rem;">
       <div class="card-header"><h3>รายละเอียด ราคาเเละส่วนลด</h3></div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item"> <h4>รุ่นรถ : {{submodel}}</h4> </li>
@@ -34,7 +34,7 @@
                       <div id="error-bodycolor" style="display: none;" class="alert alert-danger" role="alert">
                         กรุณาเลือกสีตัวถัง
                       </div>
-                    <label for="formGroupExampleInput2" class="col-sm-2 col-form-label col-form-label-lg">ประเภทการซื้อ</label>
+                    <label for="formGroupExampleInput2" class="col-sm-3 col-form-label col-form-label-lg">ประเภทการซื้อ</label>
                     <select id="paytype" class="form-select form-select-lg mb-3" name="paytype" aria-label=".form-select-lg example">
                         <option value="" selected>เลือกประเภทการซื้อ</option>
                         <option value="cash">เงินสด</option>
@@ -43,7 +43,7 @@
                       <div id="error-paytype" style="display: none;" class="alert alert-danger" role="alert">
                         กรุณาเลือกประเภทการซื้อ
                       </div>
-                    <label for="formGroupExampleInput2" class="col-sm-2 col-form-label col-form-label-lg">การจดทะเบียน</label>
+                    <label for="formGroupExampleInput2" class="col-sm-3 col-form-label col-form-label-lg">การจดทะเบียน</label>
                       <select id="registype" class="form-select form-select-lg mb-3" name="registype" aria-label=".form-select-lg example">
                           <option  value='N'  selected>เลือกประเภทการจดทะเบียน</option>
                           <option value="person">บุคคล</option>
@@ -52,7 +52,7 @@
                         <div id="error-registype" style="display: none;" class="alert alert-danger" role="alert">
                           กรุณาเลือกประเภทการจดทะเบียน
                         </div>
-                    <label for="formGroupExampleInput2" class="col-sm-2 col-form-label col-form-label-lg">สาขา</label>
+                    <label for="formGroupExampleInput2" class="col-sm-3 col-form-label col-form-label-lg">สาขา</label>
                       <select id="mgbranch" class="form-select form-select-lg mb-3" name="mgbranch" aria-label=".form-select-lg example">
                           <option value="" selected>เลือกสาขาที่จะออกรถ</option>
                           <option value="Srinakarin">ศรีนครินทร์</option>

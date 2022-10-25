@@ -17,289 +17,290 @@
 <header class="header">
                     <h1 align="center" >ใบสรุปรายการ</h1>
 </header>
-
-<div class="container">
-   <table class="table">
-                    <thead>
-                      <tr>
-                        <th  colspan="2" class="text-success">ข้อมูลทั่วไป</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th scope="row">วันที่ใบเสนอราคา :</th>
-                        <td>{{now|date:'d-M-Y'}}</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">รถยนต์ MG รุ่น :</th>
-                        <td>{{submodel}}</td>
-
-                      </tr>
-                      <tr>
-                        <th scope="row">สีตัวถัง :</th>
-                        <td>{{bodycolor}}</td>
+<div id="onepage">
+  <div class="container" style="width: 80vw;">
+    <table class="table">
+                     <thead>
+                       <tr>
+                         <th  colspan="2" class="text-success">ข้อมูลทั่วไป</th>
+                       </tr>
+                     </thead>
+                     <tbody>
+                       <tr>
+                         <th scope="row">วันที่ใบเสนอราคา :</th>
+                         <td>{{now|date:'d-M-Y'}}</td>
+                       </tr>
+                       <tr>
+                         <th scope="row">รถยนต์ MG รุ่น :</th>
+                         <td>{{submodel}}</td>
  
-                      </tr>
-                      <tr>
-                        <th scope="row">เงื่อนไขการซื้อ :</th>
-                        {% if paytype == 'cash' %}
-                        <td>เงินสด</td>
-                        {% elif paytype == 'finance' %}
-                        <td>จัดไฟเเนนซ์</td>
-                        {% endif %}
-                      </tr>
-                      <tr>
-                        <th scope="row">ประเภทจดทะเบียนภาษี :</th>
-                        {% if registype == 'person' %}
-                        <td>บุคคล</td>
-                        {% elif registype == 'company' %} 
-                        <td>นิติบุคคล</td>
-                        {% endif %}
-                      </tr>
-                      <tr>
-                        <th scope="row">สาขา :</th>
-                        {% if mgbranch == 'Ransit' %}
-                        <td>รังสิตคลองสี่</td>
-                        {% elif mgbranch == 'Srinakarin' %}
-                        <td>ศรีนครินทร์</td>
-                        {% elif mgbranch == 'Hathairat' %}
-                        <td>หทัยราษฎร์</td>
-                        {% endif %}
-                      </tr>
-                     
-                    
-                    </tbody>
-                  </table>             
-</div>
-   
-<div class="container">
+                       </tr>
+                       <tr>
+                         <th scope="row">สีตัวถัง :</th>
+                         <td>{{bodycolor}}</td>
   
-  <table class="table">
-                    <thead>
-                      <tr>
-                        <th colspan="2" class="text-success">รายละเอียดการซื้อรถยนต์</th>
-                        
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th  scope="row">ราคารถยนต์ :</th>
-                        <td>{{productprice}} บาท</td>
-
-                      </tr>
-                      <tr>
-                        <th scope="row">บวกหัวค่าอุปกรณ์ :</th>
-                        <td>{{add_eq}} บาท</td>
-
-                      </tr>
-                      <tr>
-                        <th scope="row">ส่วนลดราคารถยนต์ :</th>
-                        <td>{{min_reduce}} บาท</td>
-
-                      </tr>
-                      <tr>
-                        <th scope="row">ราคารถยนต์สุทธิ :</th>
-                        <td>{{net_produceprice}} บาท</td>
-
-                      </tr>
-                      <tr>
-                        <th scope="row">เงินดาวน์ :</th>
-                        <td>{{gen_down}}% = {{cost_down}} บาท </td>
-
-                      </tr>
-                      <tr>
-                        <th scope="row">ส่วนลดเงินดาวน์ :</th>
-                        <td>{{min_subdown}} บาท</td>
-
-                      </tr>
-                      <tr>
-                        <th scope="row">เงินดาวน์สุทธิ :</th>
-                        <td>{{exit_cost_down}} บาท</td>
-
-                      </tr>
-                      <tr>
-                        <th scope="row">ยอดจัดไฟแนนซ์ :</th>
-                        <td>{{cost_finance}} บาท</td>
-
-                      </tr>
-                      <tr>
-                        <th scope="row">จำนวนงวด :</th>
-                        <td>{{gen_month}} เดือน</td>
-
-
-                      </tr>
-                      <tr>
-                        <th scope="row">Kickback :</th>
-                        <td>{{add_kickback}} บาท</td>
-
-                      </tr>
-                      <tr>
-                        <th scope="row">อัตราดอกเบี้ย :</th>
-                        <td>{{gen_inter}}%</td>
-
-                      </tr>
-                      <tr>
-                        <th scope="row">โปรโมชั่น Subsidy :</th>
-                        <td>{{min_prosub}} บาท</td>
-
-                      </tr>
-                      <tr>
-                        <th scope="row">ซับดอกเบี้ย :</th>
-                        <td>{{min_inter}} บาท</td>
-
-                      </tr>
-                      <tr>
-                        <th scope="row">ค่างวด/เดือน</th>
-                        <td>{{month_payment}} บาท</td>
-
-                      </tr>
-                      <tr>
-                        <th scope="row">เงื่อนไขดอกเบี้ย</th>
-                        {% if condition_finance == 'END' %}
-                        <td>Ending</td>
-                        {% elif condition_finance == 'BEGIN' %}
-                        <td>Begining</td>
-                        {% endif %}
-                      </tr>
-                      <tr>
-                        <th scope="row">บริษัทสินเชื่อไฟแนนซ์</th>
-                        {% if gen_company == 'K' %}
-                        <td>ลีสซิ่งกสิกรไทย</td>
-                        {% elif gen_company == 'TTB' %}
-                        <td>ทหารไทยธนชาต</td>
-                        {% elif gen_company == 'AY' %}
-                        <td>กรุงศรีออโต้</td>
-                        {% elif gen_company == 'ICBC' %}
-                        <td>ICBC</td>
-                        {% elif gen_company == 'KPP' %}
-                        <td>เกียรตินาคิน</td>
-                        {% elif gen_company == 'TISCO' %}
-                        <td>TISCO</td>
-                        {% elif gen_company == 'SCB' %}
-                        <td>ไทยพาณิชย์</td>
-                        {% elif gen_company == 'CITY' %}
-                        <td>Cityleasing</td>
-                        {% endif %}
-
-                      </tr>
+                       </tr>
+                       <tr>
+                         <th scope="row">เงื่อนไขการซื้อ :</th>
+                         {% if paytype == 'cash' %}
+                         <td>เงินสด</td>
+                         {% elif paytype == 'finance' %}
+                         <td>จัดไฟเเนนซ์</td>
+                         {% endif %}
+                       </tr>
+                       <tr>
+                         <th scope="row">ประเภทจดทะเบียนภาษี :</th>
+                         {% if registype == 'person' %}
+                         <td>บุคคล</td>
+                         {% elif registype == 'company' %} 
+                         <td>นิติบุคคล</td>
+                         {% endif %}
+                       </tr>
+                       <tr>
+                         <th scope="row">สาขา :</th>
+                         {% if mgbranch == 'Ransit' %}
+                         <td>รังสิตคลองสี่</td>
+                         {% elif mgbranch == 'Srinakarin' %}
+                         <td>ศรีนครินทร์</td>
+                         {% elif mgbranch == 'Hathairat' %}
+                         <td>หทัยราษฎร์</td>
+                         {% endif %}
+                       </tr>
                       
-                    </tbody>
-                  </table>
+                     
+                     </tbody>
+                   </table>  
+                   <table class="table">
+                     <thead>
+                       <tr>
+                         <th colspan="2" class="text-success">รายละเอียดการซื้อรถยนต์</th>
+                         
+                       </tr>
+                     </thead>
+                     <tbody>
+                       <tr>
+                         <th  scope="row">ราคารถยนต์ :</th>
+                         <td>{{productprice}} บาท</td>
+ 
+                       </tr>
+                       <tr>
+                         <th scope="row">บวกหัวค่าอุปกรณ์ :</th>
+                         <td>{{add_eq}} บาท</td>
+ 
+                       </tr>
+                       <tr>
+                         <th scope="row">ส่วนลดราคารถยนต์ :</th>
+                         <td>{{min_reduce}} บาท</td>
+ 
+                       </tr>
+                       <tr>
+                         <th scope="row">ราคารถยนต์สุทธิ :</th>
+                         <td>{{net_produceprice}} บาท</td>
+ 
+                       </tr>
+                       <tr>
+                         <th scope="row">เงินดาวน์ :</th>
+                         <td>{{gen_down}}% = {{cost_down}} บาท </td>
+ 
+                       </tr>
+                       <tr>
+                         <th scope="row">ส่วนลดเงินดาวน์ :</th>
+                         <td>{{min_subdown}} บาท</td>
+ 
+                       </tr>
+                       <tr>
+                         <th scope="row">เงินดาวน์สุทธิ :</th>
+                         <td>{{exit_cost_down}} บาท</td>
+ 
+                       </tr>
+                       <tr>
+                         <th scope="row">ยอดจัดไฟแนนซ์ :</th>
+                         <td>{{cost_finance}} บาท</td>
+ 
+                       </tr>
+                       <tr>
+                         <th scope="row">จำนวนงวด :</th>
+                         <td>{{gen_month}} เดือน</td>
+ 
+ 
+                       </tr>
+                       <tr>
+                         <th scope="row">Kickback :</th>
+                         <td>{{add_kickback}} บาท</td>
+ 
+                       </tr>
+                       <tr>
+                         <th scope="row">อัตราดอกเบี้ย :</th>
+                         <td>{{gen_inter}}%</td>
+ 
+                       </tr>
+                       <tr>
+                         <th scope="row">โปรโมชั่น Subsidy :</th>
+                         <td>{{min_prosub}} บาท</td>
+ 
+                       </tr>
+                       <tr>
+                         <th scope="row">ซับดอกเบี้ย :</th>
+                         <td>{{min_inter}} บาท</td>
+ 
+                       </tr>
+                       <tr>
+                         <th scope="row">ค่างวด/เดือน</th>
+                         <td>{{month_payment}} บาท</td>
+ 
+                       </tr>
+                       <tr>
+                         <th scope="row">เงื่อนไขดอกเบี้ย</th>
+                         {% if condition_finance == 'END' %}
+                         <td>Ending</td>
+                         {% elif condition_finance == 'BEGIN' %}
+                         <td>Begining</td>
+                         {% endif %}
+                       </tr>
+                       <tr>
+                         <th scope="row">บริษัทสินเชื่อไฟแนนซ์</th>
+                         {% if gen_company == 'K' %}
+                         <td>ลีสซิ่งกสิกรไทย</td>
+                         {% elif gen_company == 'TTB' %}
+                         <td>ทหารไทยธนชาต</td>
+                         {% elif gen_company == 'AY' %}
+                         <td>กรุงศรีออโต้</td>
+                         {% elif gen_company == 'ICBC' %}
+                         <td>ICBC</td>
+                         {% elif gen_company == 'KPP' %}
+                         <td>เกียรตินาคิน</td>
+                         {% elif gen_company == 'TISCO' %}
+                         <td>TISCO</td>
+                         {% elif gen_company == 'SCB' %}
+                         <td>ไทยพาณิชย์</td>
+                         {% elif gen_company == 'CITY' %}
+                         <td>Cityleasing</td>
+                         {% endif %}
+ 
+                       </tr>
+                       
+                     </tbody>
+                   </table>
+                   
+ 
+ </div>
+    
+ <div class="container" style="width: 80vw;">
+   <table class="table">
+                     <thead>
+                       <tr>
+                         <th colspan="2" class="text-success">รายการของเเถม/อุปกรณ์ตกเเต่ง</th>
+                       </tr>
+                     </thead>
+                     <tbody>
+                       {% if statusvatdown == '1' %}
+                       <tr>
+                         <th scope="row">Vat Sub ดาวน์ 7% :</th>
+                         <td>{{exit_cost_down_vat}} บาท</td>
+                       </tr>
+                       {% endif %}
+ 
+                       {% if min_regis != '0' %}
+                       <tr>
+                         <th scope="row">ค่าจดทะเบียน</th>
+                         <td>{{min_regis}} บาท</td>
+                       </tr>
+                       {% endif %}
+ 
+                       {% if min_pdi != 0 %}
+                       <tr>
+                         <th scope="row">ค่า PDI</th>
+                         <td>{{min_pdi}} บาท</td>
+                       </tr>
+                       {% endif %}
+ 
+                       {% if min_frame != 0 %}
+                       <tr>
+                         <th scope="row">กรอบป้ายทะเบียน</th>
+                         <td>{{min_frame}} บาท</td>
+                       </tr>
+                       {% endif %}
+ 
+                       {% if min_polish != 0 %}
+                       <tr>
+                         <th scope="row">ขัดเคลือบสีรถใหม่</th>
+                         <td>{{min_polish}} บาท</td>
+                       </tr>
+                       {% endif %}
+                       <tr>
+                         <th scope="row">รายการอุปกรณ์ตกเเต่งอื่นๆ</th>
+                         <td>{{min_acc}} บาท</td>
+                       </tr>
+                       <tr>
+                         <th scope="row">รวมยอดของเเถม/อุปกรณ์ตกเเต่ง</th>
+                         <td>{{total_gift}} บาท</td>
+                       </tr>
+                     
+                     </tbody>
+                   </table>
+                   <table class="table">
+                     <thead>
+                       <tr>
+                         <th colspan="2" class="text-success">รายละเอียดค่าใช้จ่ายวันออกรถยนต์</th>
+                       </tr>
+                     </thead>
+                     <tbody>
+                       <tr>
+                         {% if paytype == 'finance' %}
+                         <th scope="row">เงินดาวน์ :</th>
+                         <td>{{exit_cost_down}} บาท</td>
+                         {% elif paytype == 'cash' %}
+                         <th scope="row">ราคารถยนต์ :</th>
+                         <td>{{productprice}} บาท</td>
+                         {% endif %}
+                       </tr>
+                       <tr>
+                         <th scope="row">ค่าประกันภัย ชั้น 1 :</th>
+                         <td><strong class="text-success">ฟรี</strong></td>
+                       </tr>
+                       <tr>
+                         <th scope="row">ค่า พ.ร.บ. :</th>
+                         <td><strong class="text-success">ฟรี</strong></td>
+                       </tr>
+ 
+                       {% if min_regis == '0' %}
+                       <tr>
+                         <th scope="row">ค่าจดทะเบียน :</th>
+                         <td>{{regiscost}} บาท</td>
+                       </tr>
+                       <tr>
+                       {% endif %}
+ 
+                         <th scope="row">ค่าประกันป้ายแดง(ได้คืน) :</th>
+                         <td>{{red_frame}} บาท</td>
+                       </tr>
+                       {% if condition_finance == 'BEGIN' %}
+                       <tr>
+                         <th scope="row">ค่างวดแรก(Beginning) :</th>
+                         <td>{{month_payment}} บาท</td>
+                       </tr>
+                       {% endif %}
+                       {% if statusvatdown == '0' %}
+                       <tr>
+                         <th scope="row">Vat Sub ดาวน์ 7% :</th>
+                         <td>{{exit_cost_down_vat}} บาท</td>
+                       </tr>
+                       {% endif %}
+                       <tr>
+                         <th scope="row">หักเงินจอง :</th>
+                         <td>{{gen_prepay}} บาท</td>
+                       </tr>
+                       <tr>
+                         <th scope="row">รวมยอดชำระวันออกรถ :</th>
+                         <td>{{total_exit}} บาท</td>
+                       </tr>
+                     </tbody>
+                   </table>
+ 
+ </div>
 </div>
-<div class="container">
-  <table class="table">
-                    <thead>
-                      <tr>
-                        <th colspan="2" class="text-success">รายการของเเถม/อุปกรณ์ตกเเต่ง</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {% if statusvatdown == '1' %}
-                      <tr>
-                        <th scope="row">Vat Sub ดาวน์ 7% :</th>
-                        <td>{{exit_cost_down_vat}} บาท</td>
-                      </tr>
-                      {% endif %}
 
-                      {% if min_regis != '0' %}
-                      <tr>
-                        <th scope="row">ค่าจดทะเบียน</th>
-                        <td>{{min_regis}} บาท</td>
-                      </tr>
-                      {% endif %}
 
-                      {% if min_pdi != 0 %}
-                      <tr>
-                        <th scope="row">ค่า PDI</th>
-                        <td>{{min_pdi}} บาท</td>
-                      </tr>
-                      {% endif %}
-
-                      {% if min_frame != 0 %}
-                      <tr>
-                        <th scope="row">กรอบป้ายทะเบียน</th>
-                        <td>{{min_frame}} บาท</td>
-                      </tr>
-                      {% endif %}
-
-                      {% if min_polish != 0 %}
-                      <tr>
-                        <th scope="row">ขัดเคลือบสีรถใหม่</th>
-                        <td>{{min_polish}} บาท</td>
-                      </tr>
-                      {% endif %}
-                      <tr>
-                        <th scope="row">รายการอุปกรณ์ตกเเต่งอื่นๆ</th>
-                        <td>{{min_acc}} บาท</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">รวมยอดของเเถม/อุปกรณ์ตกเเต่ง</th>
-                        <td>{{total_gift}} บาท</td>
-                      </tr>
-                    
-                    </tbody>
-                  </table>
-</div>
-<div class="container">
-  <table class="table">
-                    <thead>
-                      <tr>
-                        <th colspan="2" class="text-success">รายละเอียดค่าใช้จ่ายวันออกรถยนต์</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        {% if paytype == 'finance' %}
-                        <th scope="row">เงินดาวน์ :</th>
-                        <td>{{exit_cost_down}} บาท</td>
-                        {% elif paytype == 'cash' %}
-                        <th scope="row">ราคารถยนต์ :</th>
-                        <td>{{productprice}} บาท</td>
-                        {% endif %}
-                      </tr>
-                      <tr>
-                        <th scope="row">ค่าประกันภัย ชั้น 1 :</th>
-                        <td><strong class="text-success">ฟรี</strong></td>
-                      </tr>
-                      <tr>
-                        <th scope="row">ค่า พ.ร.บ. :</th>
-                        <td><strong class="text-success">ฟรี</strong></td>
-                      </tr>
-
-                      {% if min_regis == '0' %}
-                      <tr>
-                        <th scope="row">ค่าจดทะเบียน :</th>
-                        <td>{{regiscost}} บาท</td>
-                      </tr>
-                      <tr>
-                      {% endif %}
-
-                        <th scope="row">ค่าประกันป้ายแดง(ได้คืน) :</th>
-                        <td>{{red_frame}} บาท</td>
-                      </tr>
-                      {% if condition_finance == 'BEGIN' %}
-                      <tr>
-                        <th scope="row">ค่างวดแรก(Beginning) :</th>
-                        <td>{{month_payment}} บาท</td>
-                      </tr>
-                      {% endif %}
-                      {% if statusvatdown == '0' %}
-                      <tr>
-                        <th scope="row">Vat Sub ดาวน์ 7% :</th>
-                        <td>{{exit_cost_down_vat}} บาท</td>
-                      </tr>
-                      {% endif %}
-                      <tr>
-                        <th scope="row">หักเงินจอง :</th>
-                        <td>{{gen_prepay}} บาท</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">รวมยอดชำระวันออกรถ :</th>
-                        <td>{{total_exit}} บาท</td>
-                      </tr>
-                    </tbody>
-                  </table>
-</div>
 <div class="d-grid gap-1" style="margin: 3vh 14vw;">
   <button id="print" class="btn btn-danger" onclick="window.print()"><strong>Print</strong></button>
 </div>

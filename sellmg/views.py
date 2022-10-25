@@ -67,7 +67,10 @@ def PaymentRegis(request):
     #สร้างตัวเเปรการเก็บของข้อมูลรุ่นจากข้อมูลที่ส่งมาก่อนหน้า ใช้ request.session
     submodel = request.session.get('submodel')
     mainmodel = request.session.get('mainmodel')
-    productprice = request.session.get('productprice')
+    productprice = int(request.session.get('productprice'))
+    productmargin = int(request.session.get('productmargin'))
+    
+    text_productprice = productprice
     
     # สร้างตัวเเปรมาเก็บข้อมูลจากหน้าปัจจุบัน
     paytype = request.POST.get('paytype') 
@@ -94,7 +97,7 @@ def PaymentRegis(request):
          return render(request, 'branchcash.html',{'regiscost':'{:,}'.format(regiscost),'mainacc':mainacc,'productprice':productprice})
 
     elif paytype == 'finance' :
-        return render(request, 'branchadd.html',{'regiscost':'{:,}'.format(regiscost),'mainacc':mainacc,'productprice':productprice,'mainmodel': mainmodel})
+        return render(request, 'branchadd.html',{'submodel': submodel,'productmargin':'{:,}'.format(productmargin),'regiscost':'{:,}'.format(regiscost),'text_productprice':'{:,}'.format(text_productprice),'mainacc':mainacc,'productprice':productprice,'mainmodel': mainmodel})
    
 def branceadd (request):
     

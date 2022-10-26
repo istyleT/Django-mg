@@ -43,6 +43,10 @@ function accPrice(){
 };
 
 
+function showTagData (){
+     let min_reduce = document.getElementsByName("min_reduce")
+     
+}
 
 
 

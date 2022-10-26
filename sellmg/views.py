@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, reverse ;
+from django.contrib.auth import authenticate, login, logout ;
 from sellmg.models import Product ;
 from sellmg.models import Regiscosts ;
 from sellmg.models import Accmgs ;
@@ -10,6 +11,11 @@ import math
 
 # Create your views here.
 
+def log_user_out(request):
+    # Log user out
+    logout(request)
+    return render(request,'index.html')
+    
 #นำ css / java static มาใช้งาน
 def static_css (request):
     return render(request, 'static-css.html')
@@ -20,39 +26,38 @@ def static_js (request):
 def firstpage(request):
     return render(request, 'index.html')
 
+
 def collectdata(request): 
  
     # เก็บข้อมูลการ login จาก user 
     username = str(request.POST.get('username'))
     password = str(request.POST.get('password'))
     mainmodel = str(request.POST.get('mainmodel'))
-    # เอาข้อมูลที่เก็บได้ไปเช็ค
-    
-    # ถ้ามี เข้า condition render หน้าต่อไป 
-
-    # ถ้าไม่มี สั่ง render หน้าเดิม
-   
-    #ดักการ login เข้าสู่ระบบ if not user redirect this page /else is user 
-    
-
     #ส่งข้อมูลออก
     request.session['username '] = username 
-    request.session['telphone'] = password
     request.session['mainmodel'] = mainmodel
-    
-    #เงื่อนไขการ render หน้าต่อไป
-    if mainmodel == "MG5" :
+    # เอาข้อมูลที่เก็บได้ไปเช็ค
+    user = authenticate(request, username=username, password=password)
+    # ถ้ามี เข้า condition render หน้าต่อไป 
+    if user is not None:
+        # Log a user in
+        login(request, user)
+        if mainmodel == "MG5" :
                         return render(request, 'Model_A.html',{'username':username})
-    elif mainmodel == "MGVSHEV" :
-                        return render(request, 'Model_B.html',{'username':username})
-    elif mainmodel == "MGZS" :
-                        return render(request, 'Model_C.html',{'username':username})
-    elif mainmodel == "MGETD" :
-                        return render(request, 'Model_D.html',{'username':username})
-    elif mainmodel == "MGHS" :
-                        return render(request, 'Model_E.html',{'username':username})
-    elif mainmodel == "MGHS" :
+        elif mainmodel == "MGVSHEV" :
+                            return render(request, 'Model_B.html',{'username':username})
+        elif mainmodel == "MGZS" :
+                            return render(request, 'Model_C.html',{'username':username})
+        elif mainmodel == "MGETD" :
+                            return render(request, 'Model_D.html',{'username':username})
+        elif mainmodel == "MGHS" :
+                            return render(request, 'Model_E.html',{'username':username})
+        elif mainmodel == "MGHS" :
                         return render(request, 'Model_F.html',{'username':username})
+    # ถ้าไม่มี สั่ง render หน้าเดิม
+    else:
+        return render(request,'index.html')
+    
   
 def showprice(request): 
 

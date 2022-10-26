@@ -27,5 +27,6 @@ urlpatterns = [
     path('branchadd',views.branceadd),
     path('branchcash',views.branchcash),
     path('showdata',views.showdata),
+    path('logout', views.log_user_out),
 
 ]

@@ -44,10 +44,7 @@ checkshowprice.addEventListener("click", function(e) {
 };
 
 
-function showTagData (){
-     let min_reduce = document.getElementsByName("min_reduce")
-     
-}*/
+*/
 
 
 

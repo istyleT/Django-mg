@@ -24,7 +24,8 @@ checkshowprice.addEventListener("click", function(e) {
 
 
 
-function accPrice(){
+
+/*function accPrice(){
      let sumPriceAcc = 0 ;
      console.log(sumPriceAcc);
      let chk = document.getElementsByName('listacc');
@@ -46,10 +47,11 @@ function accPrice(){
 function showTagData (){
      let min_reduce = document.getElementsByName("min_reduce")
      
-}
+}*/
 
 
 
+   
 
 
 function caldown() {
@@ -59,13 +61,8 @@ function caldown() {
      const gen_down_bath = document.getElementById('gen_down_bath').value | 0 ; //pass 
      const min_reduce = document.getElementById('min_reduce').value | 0; //pass 
      const productprice = document.getElementById('productprice').innerHTML ; //pass 
-     console.log(gen_down_percent) ; 
-     console.log(gen_down_bath) ; 
-     console.log(min_reduce) ; 
-     console.log(productprice) ; 
      //สร้างค่าตัวเเปรเริ่มต้น
      let net_productprice = productprice-min_reduce ; //pass
-     console.log(net_productprice) ; 
      //เริ่มคำนวณค่า
      if (gen_down_percent != 0 && gen_down_bath == 0) {
                    const down_bath = net_productprice*(gen_down_percent/100)

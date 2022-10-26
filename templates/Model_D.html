@@ -6,18 +6,16 @@
    {% block style %}
       <link  href="{% static 'css/custom.css' %}" rel="stylesheet">
     {% endblock %}
-    {% if username != "" %}
-     <h3  style="text-align:center; margin: 1vh ;">ยินดีต้อนรับ คุณ {{username}}</h3>
-    {% endif %}
+  
     <div align="center">
       <img  src="{% static 'picture/Newmgextendergc.png' %}" class="img-fluid" alt="..."/>
     </div>
     
      <form  action="queryprice"  method="POST">
       {% csrf_token %}
-        <label for="formGroupExampleInput2" class="col-sm-2 col-form-label col-form-label-lg">เลือกรุ่นย่อย</label>
+        <label for="formGroupExampleInput2" class="col-sm-3 col-form-label col-form-label-lg">เลือกรุ่นย่อย</label>
         <select class="form-select form-select-lg mb-3" name="submodel" aria-label=".form-select-lg example">
-          <option selected>Choose Model Grade</option>
+          <option value="-" selected>Choose Model Grade</option>
           <option value="EXTENDER2.0DCG4WDX6AT">EXTENDER 2.0 DC G 4WD X 6AT</option>
           <option value="EXTENDER2.0DCGX6AT">EXTENDER 2.0 DC G X 6AT</option>
           <option value="EXTENDER2.0DCGD6MT">EXTENDER 2.0 DC G D 6MT</option>

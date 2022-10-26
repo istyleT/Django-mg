@@ -1,21 +1,19 @@
 from django.shortcuts import render, redirect, reverse ;
-from django.contrib.auth import authenticate, login, logout ;
+from django.contrib.auth import authenticate, login, logout;
 from sellmg.models import Product ;
 from sellmg.models import Regiscosts ;
 from sellmg.models import Accmgs ;
 from sellmg.models import Colorsubmodels ;
 from django.db.models import Q ;
+from django.contrib.auth.decorators import login_required ;
 import math
 
 
 
 # Create your views here.
 
-def log_user_out(request):
-    # Log user out
-    logout(request)
-    return render(request,'index.html')
-    
+
+
 #นำ css / java static มาใช้งาน
 def static_css (request):
     return render(request, 'static-css.html')
@@ -26,6 +24,11 @@ def static_js (request):
 def firstpage(request):
     return render(request, 'index.html')
 
+# ฟังก์ชัน logout 
+def log_user_out(request):
+    # Log user out
+    logout(request)
+    return redirect(firstpage)
 
 def collectdata(request): 
  
@@ -58,9 +61,9 @@ def collectdata(request):
     else:
         return render(request,'index.html')
     
-  
+@login_required
 def showprice(request): 
-
+    
     # สร้างตัวเเปรมาเก็บข้อมูลจากหน้าปัจจุบัน    
     submodel = request.POST.get('submodel') 
 
@@ -76,6 +79,8 @@ def showprice(request):
     
     return render(request, 'showprice.html',{"productprice": '{:,}'.format(productprice), "productmargin": '{:,}'.format(productmargin), "submodel": submodel, "productcolor": productcolor})
 
+
+@login_required
 def PaymentRegis(request):
     #สร้างตัวเเปรการเก็บของข้อมูลรุ่นจากข้อมูลที่ส่งมาก่อนหน้า ใช้ request.session
     submodel = request.session.get('submodel')
@@ -111,7 +116,8 @@ def PaymentRegis(request):
 
     elif paytype == 'finance' :
         return render(request, 'branchadd.html',{'submodel': submodel,'productmargin':'{:,}'.format(productmargin),'regiscost':'{:,}'.format(regiscost),'text_productprice':'{:,}'.format(text_productprice),'mainacc':mainacc,'productprice':productprice,'mainmodel': mainmodel})
-   
+
+@login_required   
 def branceadd (request):
     
     #สร้างตัวเเปรการเก็บของข้อมูลรุ่นจากข้อมูลที่ส่งมาก่อนหน้า ใช้ request.session
@@ -321,6 +327,7 @@ def branceadd (request):
   
     return render(request, 'showdatafinance.html', data)
 
+@login_required
 def branchcash (request):
     #สร้างตัวเเปรการเก็บของข้อมูลรุ่นจากข้อมูลที่ส่งมาก่อนหน้า ใช้ request.session
     regiscost = int(request.session.get('regiscost'))
@@ -404,7 +411,7 @@ def branchcash (request):
    
     return render(request, 'showdatacash.html', data)
 
-
+@login_required
 def showdata(request):
    from datetime import datetime
    now = datetime.today() #วันที่

@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-h$sq+%6($l$ce@tl2mqmdm_6%hiw%spwf5%^gg1ecunj8r8zse
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['istyletoon-test-1.herokuapp.com']
+ALLOWED_HOSTS = ['djwebappmg-version1.herokuapp.com']
 
 
 LOGIN_URL = "auth/login"

@@ -507,7 +507,8 @@ def showdata(request):
    return render(request, 'quotation.html', details)
 
 
-
+def adminadddata(request):
+    return render(request,'adminadddata.html')
 
 def addcolor(request):
     # สร้างตัวเเปรมาเก็บข้อมูลจากหน้าปัจจุบัน

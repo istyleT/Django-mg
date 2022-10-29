@@ -29,32 +29,36 @@ def log_user_out(request):
 ##################### ฟังก์ชันฝั่งadmin #####################
 @login_required(login_url='/firstdata')
 def pageaddcolor(request):
-    return render(request,'addcolor.html')
-    
+    username = request.session.get('username')
+    if username == 'istyletoon':
+       return render(request,'addcolor.html')
+    else :
+       return render(request,'index.html')
+
+@login_required(login_url='/firstdata')   
 def pageaddregiscost(request):
     username = request.session.get('username')
-    password = request.session.get('password')
-    user = authenticate(request, username=username, password=password)
-    if user is not None:
+    if username == 'istyletoon':
        return render(request,'addregiscost.html')
     else:
        return render(request,'index.html')
+
+@login_required(login_url='/firstdata')       
 def pageaddproduct(request):
     username = request.session.get('username')
-    password = request.session.get('password')
-    user = authenticate(request, username=username, password=password)
-    if user is not None:
+    if username == 'istyletoon':
        return render(request,'addproduct.html')
     else:
        return render(request,'index.html')
+
+@login_required(login_url='/firstdata')      
 def pageaddacc(request):
     username = request.session.get('username')
-    password = request.session.get('password')
-    user = authenticate(request, username=username, password=password)
-    if user is not None:
+    if username == 'istyletoon':
        return render(request,'addacc.html')
     else:
        return render(request,'index.html')
+       
 def addcolor(request):
     # สร้างตัวเเปรมาเก็บข้อมูลจากหน้าปัจจุบัน
     submodel_add = request.POST.get('submodel') 
@@ -105,9 +109,8 @@ def collectdata(request):
     password = str(request.POST.get('password'))
     mainmodel = str(request.POST.get('mainmodel'))
     #ส่งข้อมูลออก
-    request.session['username '] = username 
+    request.session['username'] = username
     request.session['mainmodel'] = mainmodel
-    request.session['password'] = password
     # เอาข้อมูลที่เก็บได้ไปเช็ค
     user = authenticate(request, username=username, password=password)
     # ถ้ามี เข้า condition render หน้าต่อไป 

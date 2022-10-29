@@ -512,6 +512,8 @@ def adminadddata(request):
 
 def pageaddcolor(request):
     return render(request,'addcolor.html')
+def pageaddregiscost(request):
+    return render(request,'addregiscost.html')
 
 def addcolor(request):
     # สร้างตัวเเปรมาเก็บข้อมูลจากหน้าปัจจุบัน
@@ -521,6 +523,16 @@ def addcolor(request):
     # เชื่อมต่อ database
     Colorsubmodels.objects.create(submodel=submodel_add, color=color_add)
     return render(request, 'addcolor.html')
+
+def addregiscost(request):
+    # สร้างตัวเเปรมาเก็บข้อมูลจากหน้าปัจจุบัน
+    regis_code_add = request.POST.get('regis_code') 
+    regis_personal_add = request.POST.get('regis_personal') 
+    regis_company_add = request.POST.get('regis_company') 
+    
+    # เชื่อมต่อ database
+    Regiscosts.objects.create(regis_code= regis_code_add, regis_personal=regis_personal_add, regis_company=regis_company_add)
+    return render(request, 'addregiscost.html')
 
 
 

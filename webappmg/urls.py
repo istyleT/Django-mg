@@ -31,5 +31,7 @@ urlpatterns = [
     path('adminadddata', views.adminadddata),
     path('pageaddcolor', views.pageaddcolor),
     path('addcolor', views.addcolor),
+    path('pageaddregiscost', views.pageaddregiscost),
+    path('addregiscost', views.addregiscost),
 
 ]

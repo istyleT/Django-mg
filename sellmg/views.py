@@ -510,6 +510,9 @@ def showdata(request):
 def adminadddata(request):
     return render(request,'adminadddata.html')
 
+def pageaddcolor(request):
+    render(request,'addcolor.html')
+
 def addcolor(request):
     # สร้างตัวเเปรมาเก็บข้อมูลจากหน้าปัจจุบัน
     id_add = request.POST.get('id') 

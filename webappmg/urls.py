@@ -29,6 +29,7 @@ urlpatterns = [
     path('showdata',views.showdata),
     path('logout', views.log_user_out),
     path('adminadddata', views.adminadddata),
+    path('pageaddcolor', views.pageaddcolor),
     path('addcolor', views.addcolor),
 
 ]

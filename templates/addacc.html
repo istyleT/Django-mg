@@ -1,0 +1,35 @@
+{% extends 'adminadddata.html' %}
+{% block content %}
+<form method="POST" action="addacc">
+{% csrf_token %}
+<div class="container">
+                   
+                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">ACC CODE</label>
+                                        <input type="text" class="form-control" name="acc_code"  placeholder="Acc code">
+                    </div>
+                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">ACC NAME</label>
+                                        <input type="text" class="form-control" name="acc_name"  placeholder="acc name">
+                    </div>
+                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">ACC PRICE</label>
+                                        <input type="number" class="form-control" name="acc_price"  placeholder="acc price">
+                    </div>
+                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">ACC TYPE</label>
+                                        <input type="text" class="form-control" name="acc_type"  placeholder="acc type">
+                    </div>
+                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">ACC MODEL</label>
+                                        <input type="text" class="form-control" name="acc_model"  placeholder="acc model">
+                    </div>
+                    <div class="d-grid gap-1">
+                                        <button class="btn btn-success" type="submit"><storng>Save</storng></button>
+                    </div>
+
+
+</div>
+</form>
+
+{% endblock %}

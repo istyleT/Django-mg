@@ -1,0 +1,31 @@
+{% extends 'adminadddata.html' %}
+{% block content %}
+<form method="POST" action="addproduct">
+{% csrf_token %}
+<div class="container">
+                   
+                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">MAIN MODEL</label>
+                                        <input type="text" class="form-control" name="mainmodel"  placeholder="mainmodel">
+                    </div>
+                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">SUBMODEL</label>
+                                        <input type="text" class="form-control" name="submodel"  placeholder="submodel">
+                    </div>
+                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">PRICE</label>
+                                        <input type="number" class="form-control" name="price"  placeholder="price">
+                    </div>
+                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">MARGIN</label>
+                                        <input type="number" class="form-control" name="margin"  placeholder="margin">
+                    </div>
+                    <div class="d-grid gap-1">
+                                        <button class="btn btn-success" type="submit"><storng>Save</storng></button>
+                    </div>
+
+
+</div>
+</form>
+
+{% endblock %}

@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, reverse ;
+from django.shortcuts import render, redirect ;
 from django.contrib.auth import authenticate, login, logout;
 from sellmg.models import Product ;
 from sellmg.models import Regiscosts ;
@@ -8,18 +8,13 @@ from django.db.models import Q ;
 from django.contrib.auth.decorators import login_required ;
 import math
 
-
-
-# Create your views here.
-
-
-
-#นำ css / java static มาใช้งาน
+#########################นำ css / java static มาใช้งาน ##########################
 def static_css (request):
     return render(request, 'static-css.html')
 
 def static_js (request):
     return render(request, 'static-js.html')
+#################################################################################
 
 def firstpage(request):
     return render(request, 'index.html')
@@ -30,6 +25,60 @@ def log_user_out(request):
     logout(request)
     return redirect(firstpage)
 
+
+##################### ฟังก์ชันฝั่งadmin #####################
+def pageaddcolor(request):
+    return render(request,'addcolor.html')
+def pageaddregiscost(request):
+    return render(request,'addregiscost.html')
+def pageaddproduct(request):
+    return render(request,'addproduct.html')
+def pageaddacc(request):
+    return render(request,'addacc.html')
+
+def addcolor(request):
+    # สร้างตัวเเปรมาเก็บข้อมูลจากหน้าปัจจุบัน
+    submodel_add = request.POST.get('submodel') 
+    color_add = request.POST.get('color') 
+    # เชื่อมต่อ database
+    Colorsubmodels.objects.create(submodel=submodel_add, color=color_add)
+    return render(request, 'addcolor.html')
+
+def addregiscost(request):
+    # สร้างตัวเเปรมาเก็บข้อมูลจากหน้าปัจจุบัน
+    regis_code_add = request.POST.get('regis_code') 
+    regis_personal_add = request.POST.get('regis_personal') 
+    regis_company_add = request.POST.get('regis_company') 
+    # เชื่อมต่อ database
+    Regiscosts.objects.create(regis_code= regis_code_add, regis_personal=regis_personal_add, regis_company=regis_company_add)
+    return render(request, 'addregiscost.html')
+
+def addproduct(request):
+    # สร้างตัวเเปรมาเก็บข้อมูลจากหน้าปัจจุบัน
+    mainmodel_add = request.POST.get('mainmodel') 
+    submodel_add = request.POST.get('submodel') 
+    price_add = request.POST.get('price') 
+    margin_add = request.POST.get('margin') 
+    # เชื่อมต่อ database
+    Product.objects.create(mainmodel= mainmodel_add, submodel=submodel_add, price=price_add, margin=margin_add)
+    return render(request, 'addproduct.html')
+
+def addacc(request):
+    # สร้างตัวเเปรมาเก็บข้อมูลจากหน้าปัจจุบัน
+    acc_code_add = request.POST.get('acc_code') 
+    acc_name_add = request.POST.get('acc_name') 
+    acc_price_add = request.POST.get('acc_price') 
+    acc_type_add = request.POST.get('acc_type') 
+    acc_model_add = request.POST.get('acc_model') 
+    # เชื่อมต่อ database
+    Accmgs.objects.create(acc_code= acc_code_add, acc_name=acc_name_add, acc_price=acc_price_add, acc_type=acc_type_add, acc_model=acc_model_add)
+    return render(request, 'addacc.html')
+
+###############################################################
+
+
+
+##########################ฟังก์ชั่นฝั่ง user ################################
 def collectdata(request): 
  
     # เก็บข้อมูลการ login จาก user 
@@ -80,7 +129,6 @@ def showprice(request):
     
     return render(request, 'showprice.html',{"productprice": '{:,}'.format(productprice), "productmargin": '{:,}'.format(productmargin), "submodel": submodel, "productcolor": productcolor})
    
-
 
 def PaymentRegis(request):
     #สร้างตัวเเปรการเก็บของข้อมูลรุ่นจากข้อมูลที่ส่งมาก่อนหน้า ใช้ request.session
@@ -506,33 +554,8 @@ def showdata(request):
    }
    return render(request, 'quotation.html', details)
 
+##############################################################################
 
-def adminadddata(request):
-    return render(request,'adminadddata.html')
-
-def pageaddcolor(request):
-    return render(request,'addcolor.html')
-def pageaddregiscost(request):
-    return render(request,'addregiscost.html')
-
-def addcolor(request):
-    # สร้างตัวเเปรมาเก็บข้อมูลจากหน้าปัจจุบัน
-    submodel_add = request.POST.get('submodel') 
-    color_add = request.POST.get('color') 
-    
-    # เชื่อมต่อ database
-    Colorsubmodels.objects.create(submodel=submodel_add, color=color_add)
-    return render(request, 'addcolor.html')
-
-def addregiscost(request):
-    # สร้างตัวเเปรมาเก็บข้อมูลจากหน้าปัจจุบัน
-    regis_code_add = request.POST.get('regis_code') 
-    regis_personal_add = request.POST.get('regis_personal') 
-    regis_company_add = request.POST.get('regis_company') 
-    
-    # เชื่อมต่อ database
-    Regiscosts.objects.create(regis_code= regis_code_add, regis_personal=regis_personal_add, regis_company=regis_company_add)
-    return render(request, 'addregiscost.html')
 
 
 

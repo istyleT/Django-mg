@@ -28,10 +28,14 @@ urlpatterns = [
     path('branchcash',views.branchcash),
     path('showdata',views.showdata),
     path('logout', views.log_user_out),
-    path('adminadddata', views.adminadddata),
+    #path ของส่วน admin
     path('pageaddcolor', views.pageaddcolor),
     path('addcolor', views.addcolor),
     path('pageaddregiscost', views.pageaddregiscost),
     path('addregiscost', views.addregiscost),
-
+    path('pageaddacc', views.pageaddacc),
+    path('addacc', views.addacc),
+    path('pageproduct', views.pageaddproduct),
+    path('addproduct', views.addproduct),
+    
 ]

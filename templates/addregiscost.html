@@ -1,19 +1,19 @@
-{% extends 'layout.html' %}
+{% extends 'adminadddata.html' %}
 {% block content %}
 <form method="POST" action="addregiscost">
 {% csrf_token %}
 <div class="container">
                    
                     <div class="mb-3">
-                                        <label for="exampleFormControlInput1" class="form-label">Regis code</label>
+                                        <label for="exampleFormControlInput1" class="form-label">REGIS CODE</label>
                                         <input type="text" class="form-control" name="regis_code"  placeholder="regis code">
                     </div>
                     <div class="mb-3">
-                                        <label for="exampleFormControlInput1" class="form-label">Regis personal</label>
+                                        <label for="exampleFormControlInput1" class="form-label">REGIS PERSONAL</label>
                                         <input type="number" class="form-control" name="regis_personal"  placeholder="regis personal">
                     </div>
                     <div class="mb-3">
-                                        <label for="exampleFormControlInput1" class="form-label">Regis company</label>
+                                        <label for="exampleFormControlInput1" class="form-label">REGIS COMPANY</label>
                                         <input type="number" class="form-control" name="regis_company"  placeholder="regis company">
                     </div>
                     <div class="d-grid gap-1">

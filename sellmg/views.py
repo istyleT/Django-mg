@@ -515,12 +515,11 @@ def pageaddcolor(request):
 
 def addcolor(request):
     # สร้างตัวเเปรมาเก็บข้อมูลจากหน้าปัจจุบัน
-    id_add = request.POST.get('id') 
     submodel_add = request.POST.get('submodel') 
     color_add = request.POST.get('color') 
     
     # เชื่อมต่อ database
-    Colorsubmodels.objects.created(id=id_add, submodel=submodel_add, color=color_add)
+    Colorsubmodels.objects.create(submodel=submodel_add, color=color_add)
     return render(request, 'adminadddata.html')
 
 

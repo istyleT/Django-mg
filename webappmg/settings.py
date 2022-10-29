@@ -11,7 +11,8 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
-import os
+import os 
+from os import environ
 import dj_database_url
 import django_on_heroku
 
@@ -23,12 +24,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-h$sq+%6($l$ce@tl2mqmdm_6%hiw%spwf5%^gg1ecunj8r8zse'
+SECRET_KEY = environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['djwebappmg-version1.herokuapp.com']
+ALLOWED_HOSTS = ['djwebappmg-version1.herokuapp.com', '127.0.0.1']
 
 
 LOGIN_URL = "auth/login"
@@ -82,10 +83,11 @@ WSGI_APPLICATION = 'webappmg.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR,  'db.sqlite3'),
-    }
+    'default' : dj_database_url.config(conn_max_age=600, ssl_require=True)
+    #'default': {
+    #    'ENGINE': 'django.db.backends.sqlite3',
+    #    'NAME': os.path.join(BASE_DIR,  'db.sqlite3'),
+    #}
 }
 
 DATABASES['default'] = dj_database_url.config(default='postgres://igoizeksefnzes:edb1aef7f7cd24cf56e028f62da3d94c6c694c818650f7217e6565f75fd70001@ec2-44-195-132-31.compute-1.amazonaws.com:5432/denegok7gstlh9')
@@ -125,9 +127,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATICFILES_DIRS =[os.path.join(BASE_DIR, 'static')]
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressManifestStaticFilesStorage'
+
 
 
 # Default primary key field type

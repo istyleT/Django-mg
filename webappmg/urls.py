@@ -35,7 +35,7 @@ urlpatterns = [
     path('addregiscost', views.addregiscost),
     path('pageaddacc', views.pageaddacc),
     path('addacc', views.addacc),
-    path('pageproduct', views.pageaddproduct),
+    path('pageaddproduct', views.pageaddproduct),
     path('addproduct', views.addproduct),
     
 ]

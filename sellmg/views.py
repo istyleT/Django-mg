@@ -520,7 +520,7 @@ def addcolor(request):
     
     # เชื่อมต่อ database
     Colorsubmodels.objects.create(submodel=submodel_add, color=color_add)
-    return render(request, 'adminadddata.html')
+    return render(request, 'addcolor.html')
 
 
 

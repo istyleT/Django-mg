@@ -28,5 +28,6 @@ urlpatterns = [
     path('branchcash',views.branchcash),
     path('showdata',views.showdata),
     path('logout', views.log_user_out),
+    path('addcolor', views.addcolor),
 
 ]

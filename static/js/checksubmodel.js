@@ -1,10 +1,10 @@
-const submodel = document.getElementById('submodel');
+const submodelid = document.getElementById('submodelid');
 const formsubmodel = document.getElementById("formsubmode");
 const errorsubmodel = document.getElementById("errorsubmodel");
 
 formsubmodel.addEventListener("submit", (e)=> {
                     let box = []
-                    if (submodel.value === "" || submodel.value == null) {
+                    if (submodelid.value === "" || submodelid.value == null) {
                        box.push('กรุณาเลือกรุ่นย่อย')       
                     }
                     if (box.length > 0) {

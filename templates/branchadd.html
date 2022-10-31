@@ -13,12 +13,13 @@
 {% block content %}
 
 <p id="productprice" style="display: none;" >{{productprice}}</p> <!----สร้างเพื่อให้ javascript เก็บค่า-->
+
 <table class="table">
   <tr>
     <th>รุ่นรถ :</th>
-    <td>{{submodel}}</td>
+    <td><strong>{{submodel}}</strong></td>
     <th>ราคา :</th>
-    <td>{{text_productprice}} บาท</td>
+    <td><strong>{{text_productprice}}</strong> บาท</td>
   </tr>
 </table>
 
@@ -26,6 +27,27 @@
 <form method="POST" action="branchadd">
 {% csrf_token %}
     <div class="accordion accordion-flush" id="accordionFlushExample" style="margin-top: 1vh;">
+
+
+                         <!-----------------ส่วนลดตามรุ่น-------------------------->
+
+                         <div class="accordion-item">
+                          <h2 class="accordion-header" id="flush-headingF">
+                            <button class="accordion-button collapsed text-primary" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseF" aria-expanded="false" aria-controls="flush-collapseF">
+                              <h5><strong>ส่วนลดตามรุ่น</strong></h5>
+                              <span id = "productmargin"></span>
+                            </button>
+                          </h2>
+                          <div id="flush-collapseF" class="accordion-collapse collapse" aria-labelledby="flush-headingF" data-bs-parent="#accordionFlushExample">
+                                            <div class="input-group" style="margin-top: 1vh;">
+                                                                <input name="productmargin" type="number" class="form-control" placeholder="-">
+                                                                <span class="input-group-text">บาท</span>
+                                            </div>
+                          </div>
+                        </div>
+
+
+                         
                         
                          <!-----------------ส่วนลดจากราคาขาย-------------------------->
 

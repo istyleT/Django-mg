@@ -146,11 +146,11 @@ def showprice(request):
     productcolor = Colorsubmodels.objects.filter(submodel = submodel).values_list('submodel','color', named=True)
     for i in productdata :
             productprice =  int(i.price)
-            productmargin = int(i.margin)               
+            #productmargin = int(i.margin)               
     request.session['productprice'] = productprice     
-    request.session['productmargin'] = productmargin     
+    #request.session['productmargin'] = productmargin     
     
-    return render(request, 'showprice.html',{"productprice": '{:,}'.format(productprice), "productmargin": '{:,}'.format(productmargin), "submodel": submodel, "productcolor": productcolor})
+    return render(request, 'showprice.html',{"productprice": '{:,}'.format(productprice), "submodel": submodel, "productcolor": productcolor})
    
 
 def PaymentRegis(request):
@@ -158,7 +158,7 @@ def PaymentRegis(request):
     submodel = request.session.get('submodel')
     mainmodel = request.session.get('mainmodel')
     productprice = int(request.session.get('productprice'))
-    productmargin = int(request.session.get('productmargin'))
+    #productmargin = int(request.session.get('productmargin'))
     
     text_productprice = productprice
     
@@ -181,13 +181,22 @@ def PaymentRegis(request):
            regiscost = int(i.regis_company)
     request.session['regiscost'] = regiscost
     # query หา acc ตามเงื่อนไข ถ้าเป็น VS ใช้ของ ZS
-    mainacc = Accmgs.objects.filter(Q(acc_model = mainmodel) | Q(acc_model = 'ALL')).values_list('acc_code', 'acc_name','acc_price','acc_type', named=True)
+    if mainmodel == 'MGVSHEV' :
+        mainacc = Accmgs.objects.filter(Q(acc_model = 'MGZS') | Q(acc_model = 'ALL')).values_list('acc_code', 'acc_name','acc_price','acc_type', named=True)
+        if paytype == 'cash':
+             return render(request, 'branchcash.html',{'regiscost':'{:,}'.format(regiscost),'mainacc':mainacc,'productprice':productprice})
     
-    if paytype == 'cash':
-         return render(request, 'branchcash.html',{'regiscost':'{:,}'.format(regiscost),'mainacc':mainacc,'productprice':productprice})
+        elif paytype == 'finance' :
+            return render(request, 'branchadd.html',{'submodel': submodel,'regiscost':'{:,}'.format(regiscost),'text_productprice':'{:,}'.format(text_productprice),'mainacc':mainacc,'productprice':productprice,'mainmodel': mainmodel})
 
-    elif paytype == 'finance' :
-        return render(request, 'branchadd.html',{'submodel': submodel,'productmargin':'{:,}'.format(productmargin),'regiscost':'{:,}'.format(regiscost),'text_productprice':'{:,}'.format(text_productprice),'mainacc':mainacc,'productprice':productprice,'mainmodel': mainmodel})
+    else :
+        mainacc = Accmgs.objects.filter(Q(acc_model = mainmodel) | Q(acc_model = 'ALL')).values_list('acc_code', 'acc_name','acc_price','acc_type', named=True)
+
+        if paytype == 'cash':
+             return render(request, 'branchcash.html',{'regiscost':'{:,}'.format(regiscost),'mainacc':mainacc,'productprice':productprice})
+    
+        elif paytype == 'finance' :
+            return render(request, 'branchadd.html',{'submodel': submodel,'regiscost':'{:,}'.format(regiscost),'text_productprice':'{:,}'.format(text_productprice),'mainacc':mainacc,'productprice':productprice,'mainmodel': mainmodel})
 
  
 def branceadd (request):
@@ -195,13 +204,14 @@ def branceadd (request):
     #สร้างตัวเเปรการเก็บของข้อมูลรุ่นจากข้อมูลที่ส่งมาก่อนหน้า ใช้ request.session
     regiscost = int(request.session.get('regiscost'))
     productprice = int(request.session.get('productprice'))
-    productmargin  = int(request.session.get('productmargin'))
+    #productmargin  = int(request.session.get('productmargin'))
     
 
     #กำหนดค่าคงที่
     red_frame = int(3000) #ค่าป้ายเเดง
 
     #เก็บข้อมูลหน้าตัวเอง
+    productmargin = int(request.POST.get('productmargin')or 0)
     gen_company = str(request.POST.get('gen_company'))
     gen_down = int(request.POST.get('gen_down') or 0)
     gen_month= int(request.POST.get('gen_month'))

@@ -4,7 +4,7 @@ var errorsubmodel = document.getElementById("errorsubmodel");
 
 formsubmodel.addEventListener("submit", (e)=> {
                     let box = []
-                    if (submodelid.value === "" || submodelid.value == null) {
+                    if (submodelid.value == "-"){
                        box.push('กรุณาเลือกรุ่นย่อย')       
                     }
                     if (box.length > 0) {

@@ -10,7 +10,7 @@
 
 #onepage {
                     display: flex;
-                    font-size: 12px;
+                   
 }
 
 table {
@@ -18,5 +18,5 @@ table {
 }
 
 table tbody tr {
-                    margin-top: 1px;
+                    margin-top: 0px;
 }

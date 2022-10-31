@@ -1,6 +1,6 @@
 @page {
                     size: A4;
-                    margin-top: 2vh;
+                    margin-top: 3vh;
 }
 
 #print {
@@ -10,9 +10,9 @@
 
 #onepage {
                     display: flex;
-                    font-size: 14px;
+                    font-size: 12px;
 }
 
 table {
-                    font-size: 2px;
+                    font-size: 10px;
 }

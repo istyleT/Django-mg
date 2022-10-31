@@ -10,8 +10,12 @@
                     <link rel="stylesheet" href="{% static 'css/print.css' %}">
                     {% block style  %} {% endblock %}
 
-                    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"> </script>
+
+                    <script  src="{% static 'js/html2canvas.min.js' %}" defer></script>
                     {% block script %} {% endblock %}
+                    
+   
+
 </head>
 <body>
 <div id="onepage">
@@ -306,7 +310,7 @@
   <button id="dl-png" class="btn btn-danger"><strong>บันทึกรูปภาพ</strong></button>
 </div>
 
-<script src="html2canvas.min.js"></script>
+<script type="text/javascript" src="html2canvas.min.js"></script>
 <script>
   document.getElementById('dl-png').onclick = function(){
     const screenshot = document.getElementById('onepage');

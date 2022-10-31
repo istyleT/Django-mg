@@ -16,3 +16,7 @@
 table {
                     font-size: 10px;
 }
+
+table tbody tr {
+                    margin-top: 1px;
+}

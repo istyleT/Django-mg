@@ -3,11 +3,6 @@
                     margin-top: 2vh;
 }
 
-#print {
-                    display: none;
-                    visibility: none;
-}
-
 #onepage {
                     display: flex;
                    

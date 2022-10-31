@@ -7,7 +7,7 @@
                     <meta name="viewport" content="width=device-width, initial-scale=1.0">
                     <title>Quotation Page</title>
                     <link rel="stylesheet"  href="{% static 'bootstrap/css/bootstrap.min.css' %}">
-                    <link rel="stylesheet" href="{% static 'css/print.css' %}" media="print">
+                    <link rel="stylesheet" href="{% static 'css/print.css' %}">
                     {% block style  %} {% endblock %}
 
                     <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"> </script>
@@ -303,7 +303,7 @@
 
 
 <div class="d-grid gap-1" style="margin: 3vh 14vw;">
-  <button id="dl-png" class="btn btn-danger" onclick="window.print()"><strong>บันทึกรูปภาพ</strong></button>
+  <button id="dl-png" class="btn btn-danger"><strong>บันทึกรูปภาพ</strong></button>
 </div>
 
 <script src="html2canvas.min.js"></script>
@@ -320,5 +320,7 @@
     });
   };
 </script>
+
+
 </body>
 </html>

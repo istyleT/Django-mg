@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['djwebappmg-version1.herokuapp.com', '127.0.0.1']
 
@@ -89,6 +89,9 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR,  'db.sqlite3'),
     }
 }
+
+
+
 
 DATABASES['default'] = dj_database_url.config(default='postgres://igoizeksefnzes:edb1aef7f7cd24cf56e028f62da3d94c6c694c818650f7217e6565f75fd70001@ec2-44-195-132-31.compute-1.amazonaws.com:5432/denegok7gstlh9')
 

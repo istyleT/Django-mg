@@ -14,10 +14,10 @@
                     {% block script %} {% endblock %}
 </head>
 <body>
-<header class="header">
-                    <h5 align="center" >ใบสรุปรายการ</h5>
-</header>
 <div id="onepage">
+  <header class="header">
+    <h5 align="center" >ใบสรุปรายการ</h5>
+  </header>
   <div class="container" style="width: 80vw;">
     <table>
                      <thead>
@@ -227,7 +227,7 @@
                         <td>{{min_acc}} บาท</td>
                       </tr>
                       <tr>
-                        <th scope="row">รวมยอดของเเถม/อุปกรณ์ตกเเต่ง</th>
+                        <th scope="row">รวม</th>
                         <td>{{total_gift}} บาท</td>
                       </tr>
                     
@@ -292,7 +292,7 @@
                          <td>{{gen_prepay}} บาท</td>
                        </tr>
                        <tr>
-                         <th scope="row">รวมยอดชำระวันออกรถ :</th>
+                         <th scope="row">รวม :</th>
                          <td>{{total_exit}} บาท</td>
                        </tr>
                      </tbody>
@@ -303,9 +303,22 @@
 
 
 <div class="d-grid gap-1" style="margin: 3vh 14vw;">
-  <button id="print" class="btn btn-danger" onclick="window.print()"><strong>บันทึก</strong></button>
+  <button id="dl-png" class="btn btn-danger" onclick="window.print()"><strong>บันทึกรูปภาพ</strong></button>
 </div>
 
-
+<script src="html2canvas.min.js"></script>
+<script>
+  document.getElementById('dl-png').onclick = function(){
+    const screenshot = document.getElementById('onepage');
+    html2canvas(screenshot).then((canvas)=>{
+        const base64image = canvas.toDataURL('img/png');
+        var anchor = document.createElement('a');
+        anchor.setAttribute('href', base64image);
+        anchor.setAttribute('download', 'summary.png');
+        anchor.click();
+        anchor.remove();
+    });
+  };
+</script>
 </body>
 </html>

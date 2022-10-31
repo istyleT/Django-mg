@@ -1,6 +1,6 @@
 var submodelid = document.getElementById('submodelid');
-const formsubmodel = document.getElementById("formsubmode");
-const errorsubmodel = document.getElementById("errorsubmodel");
+var formsubmodel = document.getElementById("formsubmode");
+var errorsubmodel = document.getElementById("errorsubmodel");
 
 formsubmodel.addEventListener("submit", (e)=> {
                     let box = []

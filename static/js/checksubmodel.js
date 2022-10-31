@@ -1,4 +1,4 @@
-const submodel = document.getElementsById("submodel");
+const submodel = document.getElementById('submodel');
 const formsubmodel = document.getElementById("formsubmode");
 const errorsubmodel = document.getElementById("errorsubmodel");
 

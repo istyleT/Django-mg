@@ -25,32 +25,6 @@ checkshowprice.addEventListener("click", function(e) {
 
 
 
-/*function accPrice(){
-     let sumPriceAcc = 0 ;
-     console.log(sumPriceAcc);
-     let chk = document.getElementsByName('listacc');
-     console.log(chk);
-     for (let x ; x < chk.length ; x++){
-       console.log(x);
-       if(chk[x].checked){
-           sumPriceAcc += chk[x].value;
-           console.log('sumPriceAcc');
-       }
-       else{
-          console.log('Toon');
-       }
-     }
-     
-};
-
-
-*/
-
-
-
-   
-
-
 function caldown() {
 
      // เก็บค่าเตรียมคำนวณ

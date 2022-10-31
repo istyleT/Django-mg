@@ -180,7 +180,7 @@ def PaymentRegis(request):
         elif registype == 'company' :
            regiscost = int(i.regis_company)
     request.session['regiscost'] = regiscost
-    # query หา acc ตามเงื่อนไข
+    # query หา acc ตามเงื่อนไข ถ้าเป็น VS ใช้ของ ZS
     mainacc = Accmgs.objects.filter(Q(acc_model = mainmodel) | Q(acc_model = 'ALL')).values_list('acc_code', 'acc_name','acc_price','acc_type', named=True)
     
     if paytype == 'cash':

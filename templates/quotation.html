@@ -181,63 +181,64 @@
                        
                      </tbody>
                    </table>
+                   <table class="table">
+                    <thead>
+                      <tr>
+                        <th colspan="2" class="text-success">รายการของเเถม/อุปกรณ์ตกเเต่ง</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% if statusvatdown == '1' %}
+                      <tr>
+                        <th scope="row">Vat Sub ดาวน์ 7% :</th>
+                        <td>{{exit_cost_down_vat}} บาท</td>
+                      </tr>
+                      {% endif %}
+
+                      {% if min_regis != '0' %}
+                      <tr>
+                        <th scope="row">ค่าจดทะเบียน</th>
+                        <td>{{min_regis}} บาท</td>
+                      </tr>
+                      {% endif %}
+
+                      {% if min_pdi != 0 %}
+                      <tr>
+                        <th scope="row">ค่า PDI</th>
+                        <td>{{min_pdi}} บาท</td>
+                      </tr>
+                      {% endif %}
+
+                      {% if min_frame != 0 %}
+                      <tr>
+                        <th scope="row">กรอบป้ายทะเบียน</th>
+                        <td>{{min_frame}} บาท</td>
+                      </tr>
+                      {% endif %}
+
+                      {% if min_polish != 0 %}
+                      <tr>
+                        <th scope="row">ขัดเคลือบสีรถใหม่</th>
+                        <td>{{min_polish}} บาท</td>
+                      </tr>
+                      {% endif %}
+                      <tr>
+                        <th scope="row">รายการอุปกรณ์ตกเเต่งอื่นๆ</th>
+                        <td>{{min_acc}} บาท</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">รวมยอดของเเถม/อุปกรณ์ตกเเต่ง</th>
+                        <td>{{total_gift}} บาท</td>
+                      </tr>
+                    
+                    </tbody>
+                  </table>
                    
  
  </div>
     
  <div class="container" style="width: 80vw;">
-   <table class="table">
-                     <thead>
-                       <tr>
-                         <th colspan="2" class="text-success">รายการของเเถม/อุปกรณ์ตกเเต่ง</th>
-                       </tr>
-                     </thead>
-                     <tbody>
-                       {% if statusvatdown == '1' %}
-                       <tr>
-                         <th scope="row">Vat Sub ดาวน์ 7% :</th>
-                         <td>{{exit_cost_down_vat}} บาท</td>
-                       </tr>
-                       {% endif %}
- 
-                       {% if min_regis != '0' %}
-                       <tr>
-                         <th scope="row">ค่าจดทะเบียน</th>
-                         <td>{{min_regis}} บาท</td>
-                       </tr>
-                       {% endif %}
- 
-                       {% if min_pdi != 0 %}
-                       <tr>
-                         <th scope="row">ค่า PDI</th>
-                         <td>{{min_pdi}} บาท</td>
-                       </tr>
-                       {% endif %}
- 
-                       {% if min_frame != 0 %}
-                       <tr>
-                         <th scope="row">กรอบป้ายทะเบียน</th>
-                         <td>{{min_frame}} บาท</td>
-                       </tr>
-                       {% endif %}
- 
-                       {% if min_polish != 0 %}
-                       <tr>
-                         <th scope="row">ขัดเคลือบสีรถใหม่</th>
-                         <td>{{min_polish}} บาท</td>
-                       </tr>
-                       {% endif %}
-                       <tr>
-                         <th scope="row">รายการอุปกรณ์ตกเเต่งอื่นๆ</th>
-                         <td>{{min_acc}} บาท</td>
-                       </tr>
-                       <tr>
-                         <th scope="row">รวมยอดของเเถม/อุปกรณ์ตกเเต่ง</th>
-                         <td>{{total_gift}} บาท</td>
-                       </tr>
-                     
-                     </tbody>
-                   </table>
+   
                    <table class="table">
                      <thead>
                        <tr>
@@ -302,7 +303,7 @@
 
 
 <div class="d-grid gap-1" style="margin: 3vh 14vw;">
-  <button id="print" class="btn btn-danger" onclick="window.print()"><strong>Print</strong></button>
+  <button id="print" class="btn btn-danger" onclick="window.print()"><strong>บันทึก</strong></button>
 </div>
 
 

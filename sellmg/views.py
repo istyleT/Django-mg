@@ -125,7 +125,7 @@ def collectdata(request):
                             return render(request, 'Model_C.html')
         elif mainmodel == "MGETD" :
                             return render(request, 'Model_D.html')
-        elif mainmodel == "MGHS" :
+        elif mainmodel == "MGHSPHEV" :
                             return render(request, 'Model_E.html')
         elif mainmodel == "MGHS" :
                         return render(request, 'Model_F.html')
@@ -183,6 +183,13 @@ def PaymentRegis(request):
     # query หา acc ตามเงื่อนไข ถ้าเป็น VS ใช้ของ ZS
     if mainmodel == 'MGVSHEV' :
         mainacc = Accmgs.objects.filter(Q(acc_model = 'MGZS') | Q(acc_model = 'ALL')).values_list('acc_code', 'acc_name','acc_price','acc_type', named=True)
+        if paytype == 'cash':
+             return render(request, 'branchcash.html',{'regiscost':'{:,}'.format(regiscost),'mainacc':mainacc,'productprice':productprice})
+    
+        elif paytype == 'finance' :
+            return render(request, 'branchadd.html',{'submodel': submodel,'regiscost':'{:,}'.format(regiscost),'text_productprice':'{:,}'.format(text_productprice),'mainacc':mainacc,'productprice':productprice,'mainmodel': mainmodel})
+    elif mainmodel == 'MGHSPHEV' :
+        mainacc = Accmgs.objects.filter(Q(acc_model = 'MGHS') | Q(acc_model = 'ALL')).values_list('acc_code', 'acc_name','acc_price','acc_type', named=True)
         if paytype == 'cash':
              return render(request, 'branchcash.html',{'regiscost':'{:,}'.format(regiscost),'mainacc':mainacc,'productprice':productprice})
     

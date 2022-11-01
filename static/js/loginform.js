@@ -14,7 +14,7 @@ formlogin.addEventListener("submit", (e)=> {
                         box.push('กรุณากรอกรหัสผ่าน')  
                     } 
                     if (userbranch.value === "-" ){
-                        box.push('กรุณาเลือกสาขาผู้ใช้งาน')  
+                        box.push('เลือกสาขา')  
                     } 
                     
                     if (box.length > 0) {

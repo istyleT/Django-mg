@@ -107,7 +107,6 @@ def addacc(request):
 
 ##########################ฟังก์ชั่นฝั่ง user ################################
 def collectdata(request): 
- 
     # เก็บข้อมูลการ login จาก user 
     username = str(request.POST.get('username'))
     password = str(request.POST.get('password'))
@@ -122,7 +121,10 @@ def collectdata(request):
     # ถ้าไม่มี สั่ง render หน้าเดิม
     else:
         return render(request,'login.html')
-    
+
+def findsubmodel(request):
+    # เก็บค่าเบบ raido
+    return render(request)
 
 def showprice(request): 
     

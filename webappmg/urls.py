@@ -22,6 +22,7 @@ urlpatterns = [
     path('static-js',views.static_js), #นำเข้า static js มาใช้ใน webappmg
     path('',views.loginform),
     path('firstdata',views.collectdata), # ถ้า method POST ไม่ต้องต่อ url ด้วย/
+    path('mainmodel',views.findsubmodel), 
     path('queryprice',views.showprice),
     path('Payment',views.PaymentRegis),
     path('branchadd',views.branceadd),

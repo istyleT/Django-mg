@@ -12,30 +12,32 @@
 <form id="frm-mainmodel" action="mainmodel" method="POST"> 
    {% csrf_token %}
    <div class="list-group">
-    <label class="list-group-item">
-      <input class="form-check-input me-1" type="radio" value="MG5">
-      New MG5 MY2022
-    </label>
-    <label class="list-group-item">
-      <input class="form-check-input me-1" type="radio" value="MGVSHEV">
-      NEW MG VS HEV
-    </label>
-    <label class="list-group-item">
-      <input class="form-check-input me-1" type="radio" value="MGZS">
-      MG ZS 2020
-    </label>
-    <label class="list-group-item">
-      <input class="form-check-input me-1" type="radio" value="MGETD">
-      MG EXTENDER
-    </label>
-    <label class="list-group-item">
-      <input class="form-check-input me-1" type="radio" value="MGHSPHEV">
-      MG HS PHEV
-    </label>
-    <label class="list-group-item">
-      <input class="form-check-input me-1" type="radio" value="MGHS">
-      MG HS
-    </label>
+
+    <div class="form-check">
+      <input type="radio" class="form-check-input" id="radio1" name="optradio" value="MG5" checked>New MG5 MY2022
+      <label class="form-check-label" for="radio1"></label>
+    </div>
+    <div class="form-check">
+      <input type="radio" class="form-check-input" id="radio2" name="optradio" value="MGVSHEV" checked>NEW MG VS HEV
+      <label class="form-check-label" for="radio2"></label>
+    </div>
+    <div class="form-check">
+      <input type="radio" class="form-check-input" id="radio3" name="optradio" value="MGZS" checked>MG ZS 2020
+      <label class="form-check-label" for="radio3"></label>
+    </div>
+    <div class="form-check">
+      <input type="radio" class="form-check-input" id="radio4" name="optradio" value="MGETD" checked>MG EXTENDER
+      <label class="form-check-label" for="radio4"></label>
+    </div>
+    <div class="form-check">
+      <input type="radio" class="form-check-input" id="radio5" name="optradio" value="MGHSPHEV" checked>MG HS PHEV
+      <label class="form-check-label" for="radio5"></label>
+    </div>
+    <div class="form-check">
+      <input type="radio" class="form-check-input" id="radio6" name="optradio" value="MGHS" checked>MG HS
+      <label class="form-check-label" for="radio6"></label>
+    </div>
+    
     
   </div>
 

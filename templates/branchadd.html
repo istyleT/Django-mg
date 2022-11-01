@@ -551,10 +551,14 @@
 
 
 <script>
-  function tagPDMG() {
-     const tagproductmargin = document.getElementsById('tagproductmargin').value;
-     console.log(tagproductmargin)
-     document.getElementById('productmargin').innerHTML = tagproductmargin ;
+
+
+function tagPDMG() {
+  const tagproductmargin = document.getElementsByName('productmargin').value | 0;
+  console.log(tagproductmargin)
+  document.getElementById('productmargin').innerHTML = tagproductmargin ;
 };
+
+
 </script>
 {% endblock %}

@@ -287,6 +287,7 @@ def branceadd (request):
     #+min_acc_16+min_acc_17+min_acc_18+min_acc_19+min_acc_20)
      
     min_acc = min_acc_1[0] + min_acc_2[0]
+    min_acc = int(min_acc)
     min_acc_name = min_acc_1[1]
 
 

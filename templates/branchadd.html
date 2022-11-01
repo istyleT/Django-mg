@@ -57,13 +57,16 @@
                          <div class="accordion-item">
                           <h2 class="accordion-header" id="flush-headingA">
                             <button class="accordion-button collapsed text-danger" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseA" aria-expanded="false" aria-controls="flush-collapseA">
-                              <h5><strong>ส่วนลดจากราคาขาย</strong></h5>
-                              <span id = "min_reduce"></span>
+                              <h5>+
+                                <strong>ส่วนลดจากราคาขาย</strong>
+                                <strong align="right" id="min_reduce"></strong>
+                              </h5>
+                
                             </button>
                           </h2>
                           <div id="flush-collapseA" class="accordion-collapse collapse" aria-labelledby="flush-headingA" data-bs-parent="#accordionFlushExample">
                                             <div class="input-group" style="margin-top: 1vh;">
-                                                                <input name="min_reduce" type="number" class="form-control" placeholder="-">
+                                                                <input name="min_reduce" id="idmin_reduce" type="number" class="form-control" placeholder="-" onchange="tagMRD()">
                                                                 <span class="input-group-text">บาท</span>
                                             </div>
                           </div>
@@ -72,13 +75,17 @@
                          <div class="accordion-item">
                           <h2 class="accordion-header" id="flush-headingFive">
                             <button class="accordion-button collapsed text-success" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseOne">
-                              <h5><strong>บวกหัวค่าอุปกรณ์</strong></h5>
-                              <span id="add_eq"></span>
+                              <h5>
+                                <strong>บวกหัวค่าอุปกรณ์</strong>
+                                <strong align="right" id="agg_eq"></strong>
+                              </h5>
+                              
+
                             </button>
                           </h2>
                           <div id="flush-collapseFive" class="accordion-collapse collapse" aria-labelledby="flush-headingFive" data-bs-parent="#accordionFlushExample">
                                          <div class="input-group" style="margin-top: 1vh;">
-                                                             <input name="add_eq" type="number" class="form-control" placeholder="-" >
+                                                             <input name="add_eq" id="idadd_eq" type="number" class="form-control" placeholder="-" onchange="tagAEQ()">
                                                              <span class="input-group-text">บาท</span>
                                          </div>
                           </div>
@@ -87,13 +94,16 @@
                          <div class="accordion-item">
                           <h2 class="accordion-header" id="flush-headingTwo">
                             <button class="accordion-button collapsed text-success" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                              <h5><strong>Kickback</strong></h5>
-                              <span id="add_kickback"></span>
+                              <h5>
+                                <strong>Kickback</strong>
+                                <strong align="right" id="add_kickback"></strong>
+                              </h5>
+                          
                             </button>
                           </h2>
                           <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
                                          <div class="input-group" style="margin-top: 1vh;">
-                                                             <input name="add_kickback" type="number" class="form-control" placeholder="-">
+                                                             <input name="add_kickback" id="idadd_kickback" type="number" class="form-control" placeholder="-" onchange="tagAKB()">
                                                              <span class="input-group-text">บาท</span>
                                          </div>
                           </div>
@@ -102,13 +112,16 @@
                          <div class="accordion-item">
                           <h2 class="accordion-header" id="flush-headingX">
                             <button class="accordion-button collapsed text-danger" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseX" aria-expanded="false" aria-controls="flush-collapseX">
-                              <h5><strong>โปรโมชั่น Subsidy</strong></h5>
-                              <span id="min_prosub"></span>
+                              <h5>
+                                <strong>โปรโมชั่น Subsidy</strong>
+                                <strong align="right" id="min_prosub"></strong>
+                              </h5>
+                    
                             </button>
                           </h2>
                           <div id="flush-collapseX" class="accordion-collapse collapse" aria-labelledby="flush-headingX" data-bs-parent="#accordionFlushExample">
                                             <div class="input-group" style="margin-top: 1vh;">
-                                                                <input name="min_prosub" type="number" class="form-control" placeholder="-" >
+                                                                <input name="min_prosub" id="idmin_prosub" type="number" class="form-control" placeholder="-" onchange="tagMPS()">
                                                                 <span class="input-group-text">บาท</span>
                                             </div>
                           </div>
@@ -558,8 +571,23 @@
 
 function tagPDMG() {
   const tagproductmargin = document.getElementById('idproductmargin').value;
-  console.log(tagproductmargin);
-  document.getElementById('productmargin').innerHTML = tagproductmargin.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+' '+'บาท' ; 
+  document.getElementById('productmargin').innerHTML = tagproductmargin.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') ; 
+};
+function tagMRD() {
+  const tagmin_reduce = document.getElementById('idmin_reduce').value;
+  document.getElementById('min_reduce').innerHTML = tagmin_reduce.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') ; 
+};
+function tagAEQ() {
+  const tagadd_eq = document.getElementById('idadd_eq').value;
+  document.getElementById('add_eq').innerHTML = tagadd_eq.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') ; 
+};
+function tagAKB() {
+  const tagadd_kickback = document.getElementById('idadd_kickback').value;
+  document.getElementById('add_kickback').innerHTML = tagadd_kickback.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') ; 
+};
+function tagMPS() {
+  const tagmin_prosub = document.getElementById('idmin_prosub').value;
+  document.getElementById('min_prosub').innerHTML =  tagmin_prosub.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') ; 
 };
 
 

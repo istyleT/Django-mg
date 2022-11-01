@@ -263,7 +263,7 @@ def branceadd (request):
     min_inter = int(request.POST.get('min_inter')or 0)
     # เก็บค่าอุปกรณ์ตกเเต่ง
     min_acc_1 = list(request.POST.get('min_acc_1'))
-    min_acc_2 = int(request.POST.get('min_acc_2')or 0)
+    min_acc_2 = list(request.POST.get('min_acc_2'))
     min_acc_3 = int(request.POST.get('min_acc_3')or 0)
     min_acc_4 = int(request.POST.get('min_acc_4')or 0)
     min_acc_5 = int(request.POST.get('min_acc_5')or 0)
@@ -287,7 +287,7 @@ def branceadd (request):
     #+min_acc_16+min_acc_17+min_acc_18+min_acc_19+min_acc_20)
      
     min_acc = min_acc_1[0] + min_acc_2[0]
-
+    min_acc_name = min_acc_1[1]
 
 
     #ส่งข้อมูลออก
@@ -505,6 +505,11 @@ def branchcash (request):
 
 
 def showdata(request):
+   ############## test การเก็บข้อมูล ##########
+   
+
+
+
    from datetime import datetime
    now = datetime.today() #วันที่
    

@@ -83,3 +83,7 @@ function resetdown(){
 }
 
 
+document.getElementById('Acc_1').onchange = function(){
+     let name_acc_1 = document.getElementById('name_acc_1').innerText;
+     console.log(name_acc_1);
+}

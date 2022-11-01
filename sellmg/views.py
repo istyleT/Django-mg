@@ -262,7 +262,7 @@ def branceadd (request):
    
     min_inter = int(request.POST.get('min_inter')or 0)
     # เก็บค่าอุปกรณ์ตกเเต่ง
-    min_acc_1 = array(request.POST.get('min_acc_1'))
+    min_acc_1 = list(request.POST.get('min_acc_1'))
     min_acc_2 = int(request.POST.get('min_acc_2')or 0)
     min_acc_3 = int(request.POST.get('min_acc_3')or 0)
     min_acc_4 = int(request.POST.get('min_acc_4')or 0)

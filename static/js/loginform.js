@@ -1,11 +1,11 @@
 const username = document.getElementById("username");
 const password = document.getElementById("password");
-const mainmodel = document.getElementById("mainmodel");
-const form = document.getElementById("form");
+const userbranch = document.getElementById("userbranch");
+const formlogin = document.getElementById("formlogin");
 const errormessage = document.getElementById("error");
 
 
-form.addEventListener("submit", (e)=> {
+formlogin.addEventListener("submit", (e)=> {
                     let box = []
                     if (username.value === "" || username.value == null) {
                        box.push('กรุณากรอกชื่อผู้ใช้งาน')       
@@ -13,18 +13,15 @@ form.addEventListener("submit", (e)=> {
                     if (password.value === "" || password.value == null ){
                         box.push('กรุณากรอกรหัสผ่าน')  
                     } 
-                    if (mainmodel.value == 'N'){
-                         box.push('กรุณาเลือกรุ่นรถ')           
+                    if (userbranch.value === "-" ){
+                        box.push('กรุณาเลือกสาขาผู้ใช้งาน')  
                     } 
+                    
                     if (box.length > 0) {
                                         e.preventDefault(); 
                                         console.log('error')
                                         errormessage.innerHTML = box.join(',');
                                         document.getElementById("error").className = 'alert alert-danger'; 
-                    }
-
-     
-      
-              
+                    }         
 });
 

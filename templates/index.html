@@ -5,40 +5,50 @@
 <link  href="{% static 'css/custom.css' %}" rel="stylesheet">
 {% endblock %}
 
-{% block script %}
-   <script type="text/javascript" src="{% static 'js/custom.js' %}" defer></script>
-{%  endblock %}
 
 {% block content %}
 <strong class="text-center" style="margin: 1vh 0vh; "><div id="error"  role="alert" ></div></strong>
 
-<form id="form" action="firstdata" method="POST"> 
+<form id="frm-mainmodel" action="mainmodel" method="POST"> 
    {% csrf_token %}
-  <div class="mb-3">
-      <label class="col-sm-3 col-form-label col-form-label-lg">ชื่อผู้ใช้งาน</label>
-     <input id="username" type="text" class="form-control form-control-lg" name="username"  placeholder="Enter Your Name">
-   </div>
-   <div class="mb-3">
-     <label  class="col-sm-2 col-form-label col-form-label-lg">รหัสผ่าน</label>
-     <input id="password" type="password" class="form-control form-control-lg" name="password"  placeholder="Enter Your Password">
-   </div>
-   <label  class="col-sm-2 col-form-label col-form-label-lg">รุ่นรถ MG</label>
-   <select id="mainmodel" class="form-select form-select-lg mb-3" name="mainmodel" aria-label=".form-select-lg example">
-     <option value='N' selected>Choose MG Model</option>
-     <option value="MG5">New MG5 MY2022</option>
-     <option value="MGVSHEV">NEW MG VS HEV</option>
-     <option value="MGZS">MG ZS 2020</option>
-     <option value="MGETD">MG EXTENDER(2021)</option>
-     <option value="MGHSPHEV">MG HS PHEV</option>
-     <option value="MGHS">MG HS </option>
-   </select>
-   
-   <div class="d-grid gap-1">
-       <button type="submit" class="btn btn-success">เข้าสู่ระบบ</button>
-   </div>
-</form>
-                     
+   <div class="list-group">
+    <label class="list-group-item">
+      <input class="form-check-input me-1" type="radio" value="MG5">
+      New MG5 MY2022
+    </label>
+    <label class="list-group-item">
+      <input class="form-check-input me-1" type="radio" value="MGVSHEV">
+      NEW MG VS HEV
+    </label>
+    <label class="list-group-item">
+      <input class="form-check-input me-1" type="radio" value="MGZS">
+      MG ZS 2020
+    </label>
+    <label class="list-group-item">
+      <input class="form-check-input me-1" type="radio" value="MGETD">
+      MG EXTENDER
+    </label>
+    <label class="list-group-item">
+      <input class="form-check-input me-1" type="radio" value="MGHSPHEV">
+      MG HS PHEV
+    </label>
+    <label class="list-group-item">
+      <input class="form-check-input me-1" type="radio" value="MGHS">
+      MG HS
+    </label>
+    
+  </div>
 
+  <div class="d-grid gap-1">
+    <button type="submit" class="btn btn-warning">ดำเนินการต่อ</button>
+  </div>
+
+</form>
+                  
 {% endblock %}
 
+
+  
+   
+   
 

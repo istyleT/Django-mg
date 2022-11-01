@@ -17,6 +17,9 @@ def static_js (request):
     return render(request, 'static-js.html')
 #################################################################################
 
+def loginform(request):
+    return render(request, 'login.html')
+
 def firstpage(request):
     return render(request, 'index.html')
 
@@ -108,32 +111,17 @@ def collectdata(request):
     # เก็บข้อมูลการ login จาก user 
     username = str(request.POST.get('username'))
     password = str(request.POST.get('password'))
-    mainmodel = str(request.POST.get('mainmodel'))
+    userbranch = str(request.POST.get('userbranch'))
     #ส่งข้อมูลออก
     request.session['username'] = username
-    request.session['mainmodel'] = mainmodel
     # เอาข้อมูลที่เก็บได้ไปเช็ค
     user = authenticate(request, username=username, password=password)
     # ถ้ามี เข้า condition render หน้าต่อไป 
     if user is not None:
-        # Log a user in
-        login(request, user)
-        if mainmodel == "MG5" :
-                        return render(request, 'Model_A.html')
-        elif mainmodel == "MGVSHEV" :
-                            return render(request, 'Model_B.html')
-        elif mainmodel == "MGZS" :
-                            return render(request, 'Model_C.html')
-        elif mainmodel == "MGETD" :
-                            return render(request, 'Model_D.html')
-        elif mainmodel == "MGHSPHEV" :
-                            return render(request, 'Model_E.html')
-        elif mainmodel == "MGHS" :
-                        return render(request, 'Model_F.html')
+         return render(request,'index.html')
     # ถ้าไม่มี สั่ง render หน้าเดิม
     else:
-        
-        return render(request,'index.html')
+        return render(request,'login.html')
     
 
 def showprice(request): 

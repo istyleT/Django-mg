@@ -552,7 +552,9 @@
 
 <script>
   function tagproductmargin() {
-     document.getElementById('productmargin').innerHTML = '<h6>ทดสอบ</h6>';
+     let tagproductmargin = document.getElementsByName('productmargin').value;
+     console.log(tagproductmargin)
+     document.getElementById('productmargin').innerHTML = tagproductmargin ;
 };
 </script>
 {% endblock %}

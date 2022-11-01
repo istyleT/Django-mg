@@ -63,5 +63,5 @@ document.getElementById('Acc_1').onchange = function(){
 }
 
 document.getElementsByName('productmargin').onchange = function(){
-     document.getElementById('productmargin').innerHTML = 'ทดสอบ';
+     document.getElementById('productmargin').innerHTML = '<div>ทดสอบ</div>';
 };

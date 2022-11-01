@@ -57,9 +57,7 @@ function resetdown(){
 
 
 
-function tagproductmargin(){
-     document.getElementById('productmargin').innerHTML = '<h6>ทดสอบ</h6>';
-};
+
      
 
 document.getElementById('Acc_1').onchange = function(){

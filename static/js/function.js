@@ -56,12 +56,17 @@ function resetdown(){
 }
 
 
+
+function tagproductmargin(){
+     document.getElementById('productmargin').innerHTML = '<h6>ทดสอบ</h6>';
+};
+     
+
 document.getElementById('Acc_1').onchange = function(){
      let name_acc_1 = document.getElementById('name_acc_1');
      let txt_acc_1 = name_acc_1.innerHTML;
      console.log(txt_acc_1);
 }
 
-document.getElementsByName('productmargin').onchange = function(){
-     document.getElementById('productmargin').innerHTML = '<div>ทดสอบ</div>';
-};
+
+

@@ -286,8 +286,9 @@ def branceadd (request):
     #+min_acc_8+min_acc_9+min_acc_10+min_acc_11+min_acc_12+min_acc_13+min_acc_14+min_acc_15
     #+min_acc_16+min_acc_17+min_acc_18+min_acc_19+min_acc_20)
      
-    min_acc = min_acc_1[0] 
+    min_acc = int(min_acc_1[0])
     min_acc_name = min_acc_1[1]
+    #การสร้าง arry
 
 
     #ส่งข้อมูลออก

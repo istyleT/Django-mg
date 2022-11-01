@@ -40,7 +40,7 @@
                           </h2>
                           <div id="flush-collapseF" class="accordion-collapse collapse" aria-labelledby="flush-headingF" data-bs-parent="#accordionFlushExample">
                                             <div class="input-group" style="margin-top: 1vh;">
-                                                                <input name="productmargin" type="number" class="form-control" placeholder="-" onchange="tagproductmargin()">
+                                                                <input name="productmargin"  id="tagproductmargin" type="number" class="form-control" placeholder="-" onchange="tagproductmargin()">
                                                                 <span class="input-group-text">บาท</span>
                                             </div>
                           </div>
@@ -552,9 +552,9 @@
 
 <script>
   function tagproductmargin() {
-     let tagproductmargin = document.getElementsByName('productmargin').value;
+     const tagproductmargin = document.getElementsById('tagproductmargin').value;
      console.log(tagproductmargin)
-     document.getElementById('productmargin').innerHTML = {tagproductmargin} ;
+     document.getElementById('productmargin').innerHTML = tagproductmargin ;
 };
 </script>
 {% endblock %}

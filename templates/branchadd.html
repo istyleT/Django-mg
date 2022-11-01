@@ -335,7 +335,7 @@
                         <select name="min_acc_2" class="form-select" id="inputGroupSelect02">
                           <option value=0 selected>กรุณาเลือก</option>
                           {% for i in mainacc %}
-                          <option value={{i.acc_price}}>{{i.acc_name}}  <br> ราคา : {{i.acc_price}} บาท</option>
+                          <option value=[{{i.acc_price}},{{i.acc_name}}]>{{i.acc_name}}  <br> ราคา : {{i.acc_price}} บาท</option>
                           {% endfor %}
                         </select>
                        </div>

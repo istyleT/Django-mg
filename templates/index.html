@@ -7,7 +7,7 @@
 
 
 {% block content %}
-<strong class="text-center" style="margin: 1vh 0vh; "><div id="error"  role="alert" ></div></strong>
+
 
 <form id="frm-mainmodel" action="mainmodel" method="POST"> 
    {% csrf_token %}
@@ -41,8 +41,8 @@
     
    </div>
 
-  <div  style="margin-top: 3vh; width: 80vw;"  class="d-grid gap-1">
-    <button type="submit" class="btn btn-success">ดำเนินการต่อ</button>
+  <div  style="margin-top: 3vh; width: 60vw;"  class="d-grid gap-1">
+    <button type="submit" class="btn btn-success"><strong>ดำเนินการต่อ</strong></button>
   </div>
 
 </form>

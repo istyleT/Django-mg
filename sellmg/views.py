@@ -430,7 +430,7 @@ def branceadd (request):
             'total_margin':'{:,.0f}'.format(total_margin),
     }
   
-    return render(request, 'showdatafinance.html', data,nameacc)
+    return render(request, 'showdatafinance.html', data)
 
 
 def branchcash (request):

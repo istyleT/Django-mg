@@ -274,7 +274,7 @@ def branceadd (request):
         for i in find_acc_1 :
             min_acc_1 = int(i.acc_price)
             text_acc_1 = str(i.acc_name)
-    min_acc_2_code = int(request.POST.get('min_acc_2_code'))
+    min_acc_2_code =str(request.POST.get('min_acc_2_code'))
     if min_acc_2_code == 'N':
         min_acc_2 = 0
         text_acc_2 = '-'
@@ -283,7 +283,7 @@ def branceadd (request):
         for i in find_acc_2 :
             min_acc_2 = int(i.acc_price)
             text_acc_2 = str(i.acc_name)
-    min_acc_3_code = int(request.POST.get('min_acc_3_code'))
+    min_acc_3_code = str(request.POST.get('min_acc_3_code'))
     if min_acc_3_code == 'N':
         min_acc_3 = 0
         text_acc_3 = '-'
@@ -292,7 +292,7 @@ def branceadd (request):
         for i in find_acc_1 :
             min_acc_3 = int(i.acc_price)
             text_acc_3 = str(i.acc_name)
-    min_acc_4_code = int(request.POST.get('min_acc_4_code'))
+    min_acc_4_code = str(request.POST.get('min_acc_4_code'))
     if min_acc_4_code == 'N':
         min_acc_4 = 0
         text_acc_4 = '-'
@@ -301,7 +301,7 @@ def branceadd (request):
         for i in find_acc_4 :
             min_acc_4 = int(i.acc_price)
             text_acc_4 = str(i.acc_name)
-    min_acc_5_code = int(request.POST.get('min_acc_5_code'))
+    min_acc_5_code = str(request.POST.get('min_acc_5_code'))
     if min_acc_5_code == 'N':
         min_acc_5 = 0
         text_acc_5 = '-'
@@ -310,7 +310,7 @@ def branceadd (request):
         for i in find_acc_5 :
             min_acc_5 = int(i.acc_price)
             text_acc_5 = str(i.acc_name)
-    min_acc_6_code = int(request.POST.get('min_acc_6_code'))
+    min_acc_6_code = str(request.POST.get('min_acc_6_code'))
     if min_acc_6_code == 'N':
         min_acc_6 = 0
         text_acc_6 = '-'
@@ -319,7 +319,7 @@ def branceadd (request):
         for i in find_acc_6 :
             min_acc_6 = int(i.acc_price)
             text_acc_6 = str(i.acc_name)
-    min_acc_7_code = int(request.POST.get('min_acc_7_code'))
+    min_acc_7_code = str(request.POST.get('min_acc_7_code'))
     if min_acc_7_code == 'N':
         min_acc_7 = 0
         text_acc_7 = '-'
@@ -328,7 +328,7 @@ def branceadd (request):
         for i in find_acc_7 :
             min_acc_7 = int(i.acc_price)
             text_acc_7 = str(i.acc_name)
-    min_acc_8_code = int(request.POST.get('min_acc_8_code'))
+    min_acc_8_code = str(request.POST.get('min_acc_8_code'))
     if min_acc_8_code == 'N':
         min_acc_8 = 0
         text_acc_8 = '-'
@@ -337,7 +337,7 @@ def branceadd (request):
         for i in find_acc_8 :
             min_acc_8 = int(i.acc_price)
             text_acc_8 = str(i.acc_name)
-    min_acc_9_code = int(request.POST.get('min_acc_9_code'))
+    min_acc_9_code = str(request.POST.get('min_acc_9_code'))
     if min_acc_9_code == 'N':
         min_acc_9 = 0
         text_acc_9 = '-'
@@ -346,7 +346,7 @@ def branceadd (request):
         for i in find_acc_9 :
             min_acc_9 = int(i.acc_price)
             text_acc_9 = str(i.acc_name)
-    min_acc_10_code = int(request.POST.get('min_acc_10_code'))
+    min_acc_10_code = str(request.POST.get('min_acc_10_code'))
     if min_acc_10_code == 'N':
         min_acc_10 = 0
         text_acc_10 = '-'
@@ -355,7 +355,7 @@ def branceadd (request):
         for i in find_acc_10 :
             min_acc_10 = int(i.acc_price)
             text_acc_10 = str(i.acc_name)
-    min_acc_11_code = int(request.POST.get('min_acc_11_code'))
+    min_acc_11_code = str(request.POST.get('min_acc_11_code'))
     if min_acc_11_code == 'N':
         min_acc_11 = 0
         text_acc_11 = '-'
@@ -364,7 +364,7 @@ def branceadd (request):
         for i in find_acc_11 :
             min_acc_11 = int(i.acc_price)
             text_acc_11 = str(i.acc_name)
-    min_acc_12_code = int(request.POST.get('min_acc_12_code'))
+    min_acc_12_code = str(request.POST.get('min_acc_12_code'))
     if min_acc_12_code == 'N':
         min_acc_12 = 0
         text_acc_12 = '-'
@@ -373,7 +373,7 @@ def branceadd (request):
         for i in find_acc_12 :
             min_acc_12 = int(i.acc_price)
             text_acc_12 = str(i.acc_name)
-    min_acc_13_code = int(request.POST.get('min_acc_13_code'))
+    min_acc_13_code = str(request.POST.get('min_acc_13_code'))
     if min_acc_13_code == 'N':
         min_acc_13 = 0
         text_acc_13 = '-'
@@ -382,7 +382,7 @@ def branceadd (request):
         for i in find_acc_13 :
             min_acc_13 = int(i.acc_price)
             text_acc_13 = str(i.acc_name)
-    min_acc_14_code = int(request.POST.get('min_acc_14_code'))
+    min_acc_14_code = str(request.POST.get('min_acc_14_code'))
     if min_acc_14_code == 'N':
         min_acc_14 = 0
         text_acc_14 = '-'
@@ -391,7 +391,7 @@ def branceadd (request):
         for i in find_acc_14 :
             min_acc_14 = int(i.acc_price)
             text_acc_14 = str(i.acc_name)
-    min_acc_15_code = int(request.POST.get('min_acc_15_code'))
+    min_acc_15_code = str(request.POST.get('min_acc_15_code'))
     if min_acc_15_code == 'N':
         min_acc_15 = 0
         text_acc_15 = '-'
@@ -400,7 +400,7 @@ def branceadd (request):
         for i in find_acc_15 :
             min_acc_15 = int(i.acc_price)
             text_acc_15 = str(i.acc_name)
-    min_acc_16_code = int(request.POST.get('min_acc_16_code'))
+    min_acc_16_code = str(request.POST.get('min_acc_16_code'))
     if min_acc_16_code == 'N':
         min_acc_16 = 0
         text_acc_16 = '-'
@@ -409,7 +409,7 @@ def branceadd (request):
         for i in find_acc_16 :
             min_acc_16 = int(i.acc_price)
             text_acc_16 = str(i.acc_name)
-    min_acc_17_code = int(request.POST.get('min_acc_17_code'))
+    min_acc_17_code = str(request.POST.get('min_acc_17_code'))
     if min_acc_17_code == 'N':
         min_acc_17 = 0
         text_acc_17 = '-'
@@ -418,7 +418,7 @@ def branceadd (request):
         for i in find_acc_17 :
             min_acc_17 = int(i.acc_price)
             text_acc_17 = str(i.acc_name)
-    min_acc_18_code = int(request.POST.get('min_acc_18_code'))
+    min_acc_18_code = str(request.POST.get('min_acc_18_code'))
     if min_acc_18_code == 'N':
         min_acc_18 = 0
         text_acc_18 = '-'
@@ -427,7 +427,7 @@ def branceadd (request):
         for i in find_acc_18 :
             min_acc_18 = int(i.acc_price)
             text_acc_18 = str(i.acc_name)
-    min_acc_19_code = int(request.POST.get('min_acc_19_code'))
+    min_acc_19_code = str(request.POST.get('min_acc_19_code'))
     if min_acc_19_code == 'N':
         min_acc_19 = 0
         text_acc_19 = '-'
@@ -436,7 +436,7 @@ def branceadd (request):
         for i in find_acc_19 :
             min_acc_19 = int(i.acc_price)
             text_acc_19 = str(i.acc_name)
-    min_acc_20_code = int(request.POST.get('min_acc_20_code'))
+    min_acc_20_code = str(request.POST.get('min_acc_20_code'))
     if min_acc_20_code == 'N':
         min_acc_20 = 0
         text_acc_20 = '-'

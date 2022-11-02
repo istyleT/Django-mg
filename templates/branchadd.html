@@ -341,10 +341,10 @@
                       <!--รายการอุปกรณ์ตกเเต่ง----->
                       
                       <div class="input-group mb-3" style="margin-top: 1vh;">
-                        <select name="min_acc_1" class="form-select" id="Acc_1">
+                        <select name="min_acc_1" class="form-select" id="Acc_1" onchange="accNameCollected()">
                           <option value=0 selected>กรุณาเลือก</option>
                           {% for i in mainacc %}
-                          <option value={"price" : 1000, "name" : 'text'}><div id="name_acc_1">hello world</div> <br> ราคา : {{i.acc_price}} บาท</option>
+                          <option value={{i.acc_price}}><div id="name_acc_1">hello world</div> <br> ราคา : {{i.acc_price}} บาท</option>
                           {% endfor %}
                         </select>
                        </div>
@@ -568,7 +568,11 @@
 
 
 <script>
-
+/* collect name acc */
+function accNameCollected(){
+  const acc_name_01 = document.getElementById('name_acc_1').innerHTML;
+  console.log(acc_name_01);
+}
 
 function tagPDMG() {
   const tagproductmargin = document.getElementById('idproductmargin').value;

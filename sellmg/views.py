@@ -124,6 +124,7 @@ def collectdata(request):
 
 def findsubmodel(request):
     mainmodel = str(request.POST.get('mainmodel'))
+    request.session['mainmodel'] = mainmodel
     if mainmodel == "MG5":
        return render(request ,'Model_A.html')
     elif mainmodel == "MGVSHEV" :

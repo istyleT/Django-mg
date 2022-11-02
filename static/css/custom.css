@@ -5,7 +5,7 @@
                     font-weight: bolder;
                     font-size: 24px;
                     position: relative;
-                    left: 40vw;
+                    left: 20vw;
 
 }
 
@@ -13,6 +13,3 @@
                     margin-top: 1vh;
 }
 
-#frm-mainmodel button {
-                    align-self: center;
-}

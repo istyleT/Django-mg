@@ -223,7 +223,7 @@
                           <h2 class="accordion-header" id="flush-headingOne">
                             <button class="accordion-button collapsed text-primary" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
                               <h5>
-                                <strong>อัตราดอกเบี้ย/เงื่อนไขดอกเบี้ย</strong>
+                                <strong>อัตราดอกเบี้ย/เงื่อนไข</strong>
                                 <strong align="right" id="gen_inter"></strong>
                                 <strong align="right" id="condition_finance"></strong>
                               </h5>
@@ -239,7 +239,7 @@
                                          <div class="input-group mb-3" style="margin-top: 1vh;">
                                           <label class="input-group-text" for="inputGroupSelect01">เงื่อนไขดอกเบี้ย</label>
                                           <select name="condition_finance" class="form-select" id="idcondition_finance" onchange="tagCDTFN()">
-                                            <option value='END' selected=>Ending</option>
+                                            <option value='END' selected>Ending</option>
                                             <option value='BEGIN'>Beginning</option>
                                           </select>
                                         </div>
@@ -251,16 +251,19 @@
                         <div class="accordion-item">
                           <h2 class="accordion-header" id="flush-headingThree">
                             <button class="accordion-button collapsed text-success" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-                              <h5><strong>Com ไฟเเนนซ์</strong></h5>
-                              <span id="com_fi"></span>
+                              <h5>
+                                <strong>Com ไฟเเนนซ์</strong>
+                                <strong align="right" id="gen_inter"></strong>
+                                <strong align="right" id="condition_finance"></strong>
+                              </h5>
+                            
                             </button>
                           </h2>
                           <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
                                          <div class="input-group mb-3" style="margin-top: 1vh;">
-                                                             <label class="input-group-text" for="inputGroupSelect01">% Com ไฟเเนนซ์</label>
-                                                             <select name="com_fi_percent" class="form-select" id="inputGroupSelect01">
-                                                               <option value=0 selected>-</option>
-                                                               <option value=0>0%</option>
+                                                             <label class="input-group-text" for="idcom_fi_percent">% Com ไฟเเนนซ์</label>
+                                                             <select name="com_fi_percent" class="form-select" id="idcom_fi_percent" onchange="tagCFPC()">
+                                                               <option value=0 selected>0%</option>
                                                                <option value=4>4%</option>
                                                                <option value=8>8%</option>
                                                                <option value=10>10%</option>
@@ -270,8 +273,8 @@
                                                              </select>
                                          </div>
                                          <div class="input-group mb-3" style="margin-top: 1vh;">
-                                                             <label class="input-group-text" for="inputGroupSelect01">จำนวนปี</label>
-                                                             <select name="com_fi_month" class="form-select" id="inputGroupSelect01">
+                                                             <label class="input-group-text" for="idcom_fi_month">จำนวนปี</label>
+                                                             <select name="com_fi_month" class="form-select" id="idcom_fi_month" onchange="tagCFM()">
                                                                <option value=0 selected>-</option>
                                                                <option value=12>1 ปี</option>
                                                                <option value=24>2 ปี</option>
@@ -696,31 +699,46 @@ function tagGIT() {
   }
   
 };
+function tagCDTFN() {
+  const tagcondition_finance = document.getElementById('idcondition_finance').value;
+  document.getElementById('condition_finance').innerHTML =  "/"+(tagcondition_finance); 
+  
+};
+function tagCFPC() {
+  const tagcom_fi_percent = document.getElementById('idcom_fi_percent').value;
+  document.getElementById('com_fi_percent').innerHTML =  "="+" "+(tagcom_fi_percent.toString())+"%"; 
+  
+};
+function tagCFM() {
+  const tagcom_fi_month = document.getElementById('idcom_fi_month').value;
+  document.getElementById('com_fi_month').innerHTML =  "/"+(tagcom_fi_month.toString())+" "+"ปี"; 
+  
+};
 function tagGCPN() {
   const taggen_company = document.getElementById('idgen_company').value;
   if (taggen_company == 'K'){
-    document.getElementById('gen_company').innerHTML =  "ลีสซิ่งกสิกรไทย" ;
+    document.getElementById('gen_company').innerHTML =  "="+" "+"ลีสซิ่งกสิกรไทย" ;
   }
   else if (taggen_company == 'TTB'){
-    document.getElementById('gen_company').innerHTML =  "ทหารไทยธนชาต" ;
+    document.getElementById('gen_company').innerHTML =  "="+" "+"ทหารไทยธนชาต" ;
   }
   else if (taggen_company == 'AY'){
-    document.getElementById('gen_company').innerHTML =  "กรุงศรีออโต้" ;
+    document.getElementById('gen_company').innerHTML =  "="+" "+"กรุงศรีออโต้" ;
   }
   else if (taggen_company == 'ICBC'){
-    document.getElementById('gen_company').innerHTML =  "ICBC" ;
+    document.getElementById('gen_company').innerHTML =  "="+" "+"ICBC" ;
   }
   else if (taggen_company == 'KPP'){
-    document.getElementById('gen_company').innerHTML =  "เกียรตินาคิน" ;
+    document.getElementById('gen_company').innerHTML =  "="+" "+"เกียรตินาคิน" ;
   }
   else if (taggen_company == 'TISCO'){
-    document.getElementById('gen_company').innerHTML =  "TISCO" ;
+    document.getElementById('gen_company').innerHTML =  "="+" "+"TISCO" ;
   }
   else if (taggen_company == 'SCB'){
-    document.getElementById('gen_company').innerHTML =  "ไทยพาณิชย์" ;
+    document.getElementById('gen_company').innerHTML =  "="+" "+"ไทยพาณิชย์" ;
   }
   else if (taggen_company == 'CITY'){
-    document.getElementById('gen_company').innerHTML =  "Cityleasing" ;
+    document.getElementById('gen_company').innerHTML =  "="+" "+"Cityleasing" ;
   }
   else {
     document.getElementById('gen_company').innerHTML =  "";

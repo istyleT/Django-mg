@@ -131,8 +131,11 @@
                         <div class="accordion-item ">
                           <h2 class="accordion-header" id="flush-headingSix">
                             <button class="accordion-button collapsed text-primary " type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSix" aria-expanded="false" aria-controls="flush-collapseSix">
-                              <h5><strong>เงินดาวน์</strong></h5>
-                              <span id="gen_down"></span>
+                              <h5>
+                                <strong>เงินดาวน์</strong>
+                                <strong align="right" id="gen_down"></strong>
+                              </h5>
+              
                             </button>
                           </h2>
                           <div id="flush-collapseSix" class="accordion-collapse collapse" aria-labelledby="flush-headingSix" data-bs-parent="#accordionFlushExample">
@@ -143,7 +146,7 @@
                         
                             <div class="input-group mb-3 "  style="margin-top: 1vh;">
                               <div style="width:30vw ;">
-                                <span class="form-control text-center" style="display: none;" id="show_down_percent" ></span><input name="gen_down" id="gen_down_percent" type="number" style="display: block;" class="form-control text-center"  placeholder="%ดาวน์">
+                                <span class="form-control text-center" style="display: none;" id="show_down_percent" ></span><input name="gen_down" id="gen_down_percent" onchange="tagGDPC()" type="number" style="display: block;" class="form-control text-center"  placeholder="%ดาวน์">
                               </div>
                                 <button type="button" class="btn-success" onclick="caldown()"> = </button>
                                 <span class="form-control text-center" style="display: none;" id="show_down_bath" ></span><input id="gen_down_bath" type="number" style="display: block;"  class="form-control text-center" placeholder="เงินดาวน์ (บาท)" >
@@ -163,14 +166,17 @@
                      <div class="accordion-item">
                       <h2 class="accordion-header" id="flush-headingC">
                         <button class="accordion-button collapsed text-danger" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseC" aria-expanded="false" aria-controls="flush-collapseC">
-                          <h5><strong>ซับเงินดาวน์</strong></h5>
-                          <span id="min_subdown"></span>
+                          <h5>
+                            <strong>ซับเงินดาวน์</strong>
+                            <strong align="right" id="min_subdown"></strong>
+                          </h5>
+                          
                         </button>
                       </h2>
                       <div id="flush-collapseC" class="accordion-collapse collapse" aria-labelledby="flush-headingC" data-bs-parent="#accordionFlushExample">
     
                                         <div class="input-group" style="margin-top: 1vh;">
-                                                            <input name="min_subdown" type="number" class="form-control" placeholder="-" >
+                                                            <input name="min_subdown" id="idmin_subdown" onchange="tagMSD()" type="number" class="form-control" placeholder="-" >
                                                             <span class="input-group-text">บาท</span>
                                         </div>
                                         <li class="list-group-item">
@@ -189,14 +195,17 @@
                         <div class="accordion-item">
                           <h2 class="accordion-header" id="flush-headingSeven">
                             <button class="accordion-button collapsed text-primary" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSeven" aria-expanded="false" aria-controls="flush-collapseSeven">
-                              <h5><strong>จำนวนงวด</strong></h5>
-                              <span id="gen_month"></span>
+                              <h5>
+                                <strong>จำนวนงวด</strong>
+                                <strong align="right" id="gen_month"></strong>
+                              </h5>
+                              
                             </button>
                           </h2>
                           <div id="flush-collapseSeven" class="accordion-collapse collapse" aria-labelledby="flush-headingSeven" data-bs-parent="#accordionFlushExample">
                             <div class="input-group mb-3" style="margin-top: 1vh;">
                               <label class="input-group-text" for="inputGroupSelect01">จำนวนปี</label>
-                              <select name="gen_month" class="form-select" id="inputGroupSelect01">
+                              <select name="gen_month" id="idgen_month" onchange="tagGM()" class="form-select" id="inputGroupSelect01">
                                 <option value=12 selected>กรุณาเลือก</option>
                                 <option value=12>1 ปี</option>
                                 <option value=24>2 ปี</option>
@@ -213,19 +222,23 @@
                         <div class="accordion-item">
                           <h2 class="accordion-header" id="flush-headingOne">
                             <button class="accordion-button collapsed text-primary" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                              <h5><strong>อัตราดอกเบี้ย/เงื่อนไขดอกเบี้ย</strong></h5>
-                              <span id="gen_inter"></span>
+                              <h5>
+                                <strong>อัตราดอกเบี้ย/เงื่อนไขดอกเบี้ย</strong>
+                                <strong align="right" id="gen_inter"></strong>
+                                <strong align="right" id="condition_finance"></strong>
+                              </h5>
+                              
                             </button>
                           </h2>
                           <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                                          <div class="input-group" style="margin-top: 1vh;">
-                                                             <input name="gen_inter"  class="form-control" placeholder="-">
+                                                             <input name="gen_inter" id="idgen_inter" onchange="tagGIT()" class="form-control" placeholder="-">
                                                              <span class="input-group-text">%</span>
                                          </div>
 
                                          <div class="input-group mb-3" style="margin-top: 1vh;">
                                           <label class="input-group-text" for="inputGroupSelect01">เงื่อนไขดอกเบี้ย</label>
-                                          <select name="condition_finance" class="form-select" id="inputGroupSelect01">
+                                          <select name="condition_finance" class="form-select" id="idcondition_finance" onchange="tagCDTFN()">
                                             <option value='END' selected=>Ending</option>
                                             <option value='BEGIN'>Beginning</option>
                                           </select>
@@ -276,13 +289,16 @@
                     <div class="accordion-item">
                       <h2 class="accordion-header" id="flush-headingE">
                         <button class="accordion-button collapsed text-danger" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseE" aria-expanded="false" aria-controls="flush-collapseE">
-                          <h5><strong>ซับดอกเบี้ย</strong></h5>
-                          <span id="min_inter"></span>
+                          <h5>
+                            <strong>ซับดอกเบี้ย</strong>
+                            <strong align="right" id="min_inter"></strong>
+                          </h5>
+                          
                         </button>
                       </h2>
                       <div id="flush-collapseE" class="accordion-collapse collapse" aria-labelledby="flush-headingE" data-bs-parent="#accordionFlushExample">
                                         <div class="input-group" style="margin-top: 1vh;">
-                                                            <input name="min_inter" type="number" class="form-control" placeholder="-">
+                                                            <input name="min_inter" id="idmin_inter" onchange="tagMIT()" type="number" class="form-control" placeholder="-">
                                                             <span class="input-group-text">บาท</span>
                                         </div>
                       </div>
@@ -513,13 +529,16 @@
                       <div class="accordion-item">
                         <h2 class="accordion-header" id="flush-headingTen">
                           <button class="accordion-button collapsed text-primary" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTen" aria-expanded="false" aria-controls="flush-collapseTen">
-                            <h5><strong>เงินจอง</strong></h5>
-                            <span id="gen_prepay"></span>
+                            <h5>
+                              <strong>เงินจอง</strong>
+                              <strong align="right" id="gen_prepay"></strong>
+                            </h5>
+                      
                           </button>
                         </h2>
                         <div id="flush-collapseTen" class="accordion-collapse collapse" aria-labelledby="flush-headingTen" data-bs-parent="#accordionFlushExample">
                                        <div class="input-group" style="margin-top: 1vh;">
-                                                           <input name="gen_prepay" type="number" class="form-control" placeholder="-">
+                                                           <input name="gen_prepay" id="idgen_prepay" onchange="tagGPP()" type="number" class="form-control" placeholder="-">
                                                            <span class="input-group-text">บาท</span>
                                        </div>
 
@@ -593,6 +612,34 @@ function tagAKB() {
 function tagMPS() {
   const tagmin_prosub = document.getElementById('idmin_prosub').value;
   document.getElementById('min_prosub').innerHTML =  tagmin_prosub.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') ; 
+};
+function tagGDPC() {
+  const taggen_down_percent = document.getElementById('gen_down_percent').value;
+  document.getElementById('gen_down').innerHTML =  taggen_down_percent.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') ; 
+};
+function tagMSD() {
+  const tagmin_subdown = document.getElementById('idmin_subdown').value;
+  document.getElementById('min_subdown').innerHTML =  tagmin_subdown.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') ; 
+};
+function tagGM() {
+  const taggen_month = document.getElementById('idgen_month').value;
+  document.getElementById('gen_month').innerHTML =  taggen_month.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') ; 
+};
+function tagGPP() {
+  const taggen_prepay = document.getElementById('idgen_prepay').value;
+  document.getElementById('gen_prepay').innerHTML =  taggen_prepay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') ; 
+};
+function tagMIT() {
+  const tagmin_inter = document.getElementById('idmin_inter').value;
+  document.getElementById('min_inter').innerHTML =  tagmin_inter.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') ; 
+};
+function tagGIT() {
+  const taggen_inter = document.getElementById('idgen_inter').value;
+  document.getElementById('gen_inter').innerHTML =  taggen_inter.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') ; 
+};
+function tagCDTFN() {
+  const tagcondition_finance = document.getElementById('idcondition_finance').value;
+  document.getElementById('condition_finance').innerHTML =  tagcondition_finance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') ; 
 };
 
 

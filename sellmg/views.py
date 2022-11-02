@@ -20,14 +20,11 @@ def static_js (request):
 def loginform(request):
     return render(request, 'login.html')
 
-def firstpage(request):
-    return render(request, 'index.html')
-
 # ฟังก์ชัน logout 
 def log_user_out(request):
     # Log user out
     logout(request)
-    return redirect(firstpage)
+    return redirect(loginform)
 
 
 ##################### ฟังก์ชันฝั่งadmin #####################

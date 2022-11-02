@@ -264,7 +264,11 @@ def branceadd (request):
    
     min_inter = int(request.POST.get('min_inter')or 0)
     # เก็บค่าอุปกรณ์ตกเเต่ง
-    min_acc_1 = int(request.POST.get('min_acc_1')or 0)
+    min_acc_1_code = int(request.POST.get('min_acc_1_code')or 0)
+    find_acc_1 = Accmgs.objects.filter(Q(acc_code = min_acc_1_code)).values_list('acc_name','acc_price', named=True)
+    for i in find_acc_1 :
+        min_acc_1 = int(i.acc_price)
+        text_acc_1 = str(i.acc_name)
     min_acc_2 = int(request.POST.get('min_acc_2')or 0)
     min_acc_3 = int(request.POST.get('min_acc_3')or 0)
     min_acc_4 = int(request.POST.get('min_acc_4')or 0)

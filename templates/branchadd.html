@@ -206,7 +206,7 @@
                             <div class="input-group mb-3" style="margin-top: 1vh;">
                               <label class="input-group-text" for="inputGroupSelect01">จำนวนปี</label>
                               <select name="gen_month" id="idgen_month" onchange="tagGM()" class="form-select" id="inputGroupSelect01">
-                                <option value=12 selected>กรุณาเลือก</option>
+                                <option value=1 selected>กรุณาเลือก</option>
                                 <option value=12>1 ปี</option>
                                 <option value=24>2 ปี</option>
                                 <option value=36>3 ปี</option>
@@ -604,43 +604,97 @@ function tagPDMG() {
 };
 function tagMRD() {
   const tagmin_reduce = document.getElementById('idmin_reduce').value;
-  document.getElementById('min_reduce').innerHTML = tagmin_reduce.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') ; 
+  if (tagmin_reduce === "") {
+    document.getElementById('min_reduce').innerHTML = "";
+  }
+  else {
+    document.getElementById('min_reduce').innerHTML = "="+" "+(tagmin_reduce.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','))+" "+'บาท' ; 
+  }
+  
 };
 function tagAEQ() {
   const tagadd_eq = document.getElementById('idadd_eq').value;
-  document.getElementById('add_eq').innerHTML = tagadd_eq.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') ; 
+  if (tagadd_eq === ""){
+    document.getElementById('add_eq').innerHTML = "";
+  }
+  else {
+    document.getElementById('add_eq').innerHTML = "="+" "+(tagadd_eq.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','))+" "+'บาท' ; 
+  }
+  
 };
 function tagAKB() {
   const tagadd_kickback = document.getElementById('idadd_kickback').value;
-  document.getElementById('add_kickback').innerHTML = tagadd_kickback.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') ; 
+  if (tagadd_kickback === ""){
+    document.getElementById('add_kickback').innerHTML = "";
+  }
+  else {
+    document.getElementById('add_kickback').innerHTML = "="+" "+(tagadd_kickback.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','))+" "+'บาท'; 
+  }
+  
 };
 function tagMPS() {
   const tagmin_prosub = document.getElementById('idmin_prosub').value;
-  document.getElementById('min_prosub').innerHTML =  tagmin_prosub.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') ; 
+  if (tagmin_prosub === ""){
+    document.getElementById('min_prosub').innerHTML = "";
+  }
+  else {
+    document.getElementById('min_prosub').innerHTML =  "="+" "+(tagmin_prosub.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','))+" "+'บาท'; 
+  }
+  
 };
 function tagGDPC() {
   const taggen_down_percent = document.getElementById('gen_down_percent').value;
-  document.getElementById('gen_down').innerHTML =  taggen_down_percent.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') ; 
+  if (taggen_down_percent === ""){
+    document.getElementById('gen_down').innerHTML = "";
+  }
+  else {
+    document.getElementById('gen_down').innerHTML =  "="+" "+(taggen_down_percent.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','))+"%";
+  }
+   
 };
 function tagMSD() {
   const tagmin_subdown = document.getElementById('idmin_subdown').value;
-  document.getElementById('min_subdown').innerHTML =  tagmin_subdown.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') ; 
+  if (tagmin_subdown === ""){
+    document.getElementById('min_subdown').innerHTML = "";
+  }
+  else {
+    document.getElementById('min_subdown').innerHTML =  "="+" "+(tagmin_subdown.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','))+" "+'บาท';
+  }
+   
 };
 function tagGM() {
   const taggen_month = document.getElementById('idgen_month').value;
-  document.getElementById('gen_month').innerHTML =  taggen_month.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') ; 
+  document.getElementById('gen_month').innerHTML =  "="+" "+(taggen_month.toString())+" "+'งวด'  ; 
 };
 function tagGPP() {
   const taggen_prepay = document.getElementById('idgen_prepay').value;
-  document.getElementById('gen_prepay').innerHTML =  taggen_prepay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') ; 
+  if (taggen_prepay === ""){
+    document.getElementById('gen_prepay').innerHTML = "";
+  }
+  else {
+    document.getElementById('gen_prepay').innerHTML =  "="+" "+(taggen_prepay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','))+" "+'บาท';
+  }
+   
 };
 function tagMIT() {
   const tagmin_inter = document.getElementById('idmin_inter').value;
-  document.getElementById('min_inter').innerHTML =  tagmin_inter.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') ; 
+  if (tagmin_inter === ""){
+    document.getElementById('min_inter').innerHTML = "";
+  }
+  else {
+    document.getElementById('min_inter').innerHTML =  "="+" "+(tagmin_inter.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','))+" "+'บาท';
+  }
+   
 };
 function tagGIT() {
   const taggen_inter = document.getElementById('idgen_inter').value;
-  document.getElementById('gen_inter').innerHTML =  taggen_inter.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') ; 
+  if (taggen_inter === ""){
+    document.getElementById('gen_inter').innerHTML = "";
+  }
+  else {
+    document.getElementById('gen_inter').innerHTML =  "="+" "+(taggen_inter.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','))+"%"; 
+  }
+  
 };
 function tagGCPN() {
   const taggen_company = document.getElementById('idgen_company').value;
@@ -669,7 +723,7 @@ function tagGCPN() {
     document.getElementById('gen_company').innerHTML =  "Cityleasing" ;
   }
   else {
-    pass;
+    document.getElementById('gen_company').innerHTML =  "";
   }
    
 };

@@ -185,14 +185,14 @@ def PaymentRegis(request):
     request.session['regiscost'] = regiscost
     # query หา acc ตามเงื่อนไข ถ้าเป็น VS ใช้ของ ZS
     if mainmodel == 'MGVSHEV' :
-        mainacc = Accmgs.objects.filter(Q(acc_model = 'MGZS') | Q(acc_model = 'ALL')).values_list('acc_code', 'acc_name','acc_price','acc_type', named=True)
+        mainacc = Accmgs.objects.filter(Q(acc_model = 'MGZS') | Q(acc_model = 'ALL')).values_list('id', 'acc_code', 'acc_name','acc_price','acc_type', named=True)
         if paytype == 'cash':
              return render(request, 'branchcash.html',{'regiscost':'{:,}'.format(regiscost),'mainacc':mainacc,'productprice':productprice})
     
         elif paytype == 'finance' :
             return render(request, 'branchadd.html',{'submodel': submodel,'regiscost':'{:,}'.format(regiscost),'text_productprice':'{:,}'.format(text_productprice),'mainacc':mainacc,'productprice':productprice,'mainmodel': mainmodel})
     elif mainmodel == 'MGHSPHEV' :
-        mainacc = Accmgs.objects.filter(Q(acc_model = 'MGHS') | Q(acc_model = 'ALL')).values_list('acc_code', 'acc_name','acc_price','acc_type', named=True)
+        mainacc = Accmgs.objects.filter(Q(acc_model = 'MGHS') | Q(acc_model = 'ALL')).values_list('id', 'acc_code', 'acc_name','acc_price','acc_type', named=True)
         if paytype == 'cash':
              return render(request, 'branchcash.html',{'regiscost':'{:,}'.format(regiscost),'mainacc':mainacc,'productprice':productprice})
     
@@ -200,7 +200,7 @@ def PaymentRegis(request):
             return render(request, 'branchadd.html',{'submodel': submodel,'regiscost':'{:,}'.format(regiscost),'text_productprice':'{:,}'.format(text_productprice),'mainacc':mainacc,'productprice':productprice,'mainmodel': mainmodel})
 
     else :
-        mainacc = Accmgs.objects.filter(Q(acc_model = mainmodel) | Q(acc_model = 'ALL')).values_list('acc_code', 'acc_name','acc_price','acc_type', named=True)
+        mainacc = Accmgs.objects.filter(Q(acc_model = mainmodel) | Q(acc_model = 'ALL')).values_list('id', 'acc_code', 'acc_name','acc_price','acc_type', named=True)
 
         if paytype == 'cash':
              return render(request, 'branchcash.html',{'regiscost':'{:,}'.format(regiscost),'mainacc':mainacc,'productprice':productprice})
@@ -269,7 +269,7 @@ def branceadd (request):
         min_acc_1 = 0
         text_acc_1 = '-'
     else:
-        find_acc_1 = Accmgs.objects.filter(Q(acc_code = min_acc_1_code)).values_list('acc_name','acc_price', named=True)
+        find_acc_1 = Accmgs.objects.filter(Q(id = min_acc_1_code)).values_list('acc_name','acc_price', named=True)
         for i in find_acc_1 :
             min_acc_1 = int(i.acc_price)
             text_acc_1 = str(i.acc_name)

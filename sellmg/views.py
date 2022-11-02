@@ -34,7 +34,7 @@ def pageaddcolor(request):
     if username == 'istyletoon':
        return render(request,'addcolor.html')
     else :
-       return render(request,'index.html')
+       return render(request,'login.html')
 
 @login_required(login_url='/firstdata')   
 def pageaddregiscost(request):
@@ -42,7 +42,7 @@ def pageaddregiscost(request):
     if username == 'istyletoon':
        return render(request,'addregiscost.html')
     else:
-       return render(request,'index.html')
+       return render(request,'login.html')
 
 @login_required(login_url='/firstdata')       
 def pageaddproduct(request):
@@ -50,7 +50,7 @@ def pageaddproduct(request):
     if username == 'istyletoon':
        return render(request,'addproduct.html')
     else:
-       return render(request,'index.html')
+       return render(request,'login.html')
 
 @login_required(login_url='/firstdata')      
 def pageaddacc(request):
@@ -58,7 +58,7 @@ def pageaddacc(request):
     if username == 'istyletoon':
        return render(request,'addacc.html')
     else:
-       return render(request,'index.html')
+       return render(request,'login.html')
        
 def addcolor(request):
     # สร้างตัวเเปรมาเก็บข้อมูลจากหน้าปัจจุบัน

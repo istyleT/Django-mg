@@ -117,6 +117,8 @@ def collectdata(request):
     user = authenticate(request, username=username, password=password)
     # ถ้ามี เข้า condition render หน้าต่อไป 
     if user is not None:
+        # Log a user in
+         login(request, user)
          return render(request,'index.html')
     # ถ้าไม่มี สั่ง render หน้าเดิม
     else:

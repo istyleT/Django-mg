@@ -122,6 +122,7 @@ def collectdata(request):
     else:
         return render(request,'login.html')
 
+@login_required(login_url='/firstdata') 
 def findsubmodel(request):
     mainmodel = str(request.POST.get('mainmodel'))
     request.session['mainmodel'] = mainmodel
@@ -138,6 +139,7 @@ def findsubmodel(request):
     elif mainmodel == "MGHS" :
         return render(request ,'Model_F.html')
 
+@login_required(login_url='/firstdata') 
 def showprice(request): 
     
     # สร้างตัวเเปรมาเก็บข้อมูลจากหน้าปัจจุบัน    
@@ -155,7 +157,7 @@ def showprice(request):
     
     return render(request, 'showprice.html',{"productprice": '{:,}'.format(productprice), "submodel": submodel, "productcolor": productcolor})
    
-
+@login_required(login_url='/firstdata') 
 def PaymentRegis(request):
     #สร้างตัวเเปรการเก็บของข้อมูลรุ่นจากข้อมูลที่ส่งมาก่อนหน้า ใช้ request.session
     submodel = request.session.get('submodel')
@@ -208,7 +210,7 @@ def PaymentRegis(request):
         elif paytype == 'finance' :
             return render(request, 'branchadd.html',{'submodel': submodel,'regiscost':'{:,}'.format(regiscost),'text_productprice':'{:,}'.format(text_productprice),'mainacc':mainacc,'productprice':productprice,'mainmodel': mainmodel})
 
- 
+@login_required(login_url='/firstdata') 
 def branceadd (request):
     
     #สร้างตัวเเปรการเก็บของข้อมูลรุ่นจากข้อมูลที่ส่งมาก่อนหน้า ใช้ request.session
@@ -604,7 +606,7 @@ def branceadd (request):
   
     return render(request, 'showdatafinance.html', data)
 
-
+@login_required(login_url='/firstdata') 
 def branchcash (request):
     #สร้างตัวเเปรการเก็บของข้อมูลรุ่นจากข้อมูลที่ส่งมาก่อนหน้า ใช้ request.session
     regiscost = int(request.session.get('regiscost'))
@@ -688,7 +690,7 @@ def branchcash (request):
    
     return render(request, 'showdatacash.html', data)
 
-
+@login_required(login_url='/firstdata') 
 def showdata(request):
    ############## test การเก็บข้อมูล ##########
    

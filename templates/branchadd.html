@@ -594,6 +594,7 @@
 
 function tagPDMG() {
   const tagproductmargin = document.getElementById('idproductmargin').value;
+  console.log(tagproductmargin);
   document.getElementById('productmargin').innerHTML = "="+" "+(tagproductmargin.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')) +" "+'บาท' ; 
 };
 function tagMRD() {

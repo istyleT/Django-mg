@@ -594,7 +594,7 @@
 
 function tagPDMG() {
   const tagproductmargin = document.getElementById('idproductmargin').value;
-  document.getElementById('productmargin').innerHTML = tagproductmargin.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',' +" "+'บาท') ; 
+  document.getElementById('productmargin').innerHTML = "="+" "+(tagproductmargin.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')) +" "+'บาท' ; 
 };
 function tagMRD() {
   const tagmin_reduce = document.getElementById('idmin_reduce').value;

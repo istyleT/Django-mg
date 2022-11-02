@@ -341,10 +341,10 @@
                       <!--รายการอุปกรณ์ตกเเต่ง----->
                       
                       <div class="input-group mb-3" style="margin-top: 1vh;">
-                        <select name="min_acc_1" class="form-select" id="Acc_1" onchange="accNameCollected()">
+                        <select name="min_acc_1" class="form-select"  onchange="accNameCollected()">
                           <option value=0 selected>กรุณาเลือก</option>
                           {% for i in mainacc %}
-                          <option value={{i.acc_price}}><div id="name_acc_1">{{i.acc_name}}</div> <br> ราคา : {{i.acc_price}} บาท</option>
+                          <option value={{i.acc_price}}><div id="Acc_1">{{i.acc_name}}</div> <br> ราคา : {{i.acc_price}} บาท</option>
                           {% endfor %}
                         </select>
                        </div>

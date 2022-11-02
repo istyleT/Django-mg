@@ -123,8 +123,19 @@ def collectdata(request):
         return render(request,'login.html')
 
 def findsubmodel(request):
-    # เก็บค่าเบบ raido
-    return render(request)
+    mainmodel = str(request.POST.get('mainmodel'))
+    if mainmodel == "MG5":
+       return render(request ,'Model_A.html')
+    elif mainmodel == "MGVSHEV" :
+        return render(request ,'Model_B.html')
+    elif mainmodel == "MGZS" :
+        return render(request ,'Model_C.html')
+    elif mainmodel == "MGETD" :
+        return render(request ,'Model_D.html')
+    elif mainmodel == "MGHSPHEV" :
+        return render(request ,'Model_E.html')
+    elif mainmodel == "MGHS" :
+        return render(request ,'Model_F.html')
 
 def showprice(request): 
     

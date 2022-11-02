@@ -551,14 +551,17 @@
                       <div class="accordion-item">
                         <h2 class="accordion-header" id="flush-headingNine">
                           <button class="accordion-button collapsed text-primary" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseNine" aria-expanded="false" aria-controls="flush-collapseNine">
-                            <h5><strong>บริษัทไฟเเนนซ์</strong></h5>
-                            <span id="gen_company"></span>
+                            <h5>
+                              <strong>บริษัทไฟเเนนซ์</strong>
+                              <strong align="right" id="gen_company"></strong>
+                            </h5>
+                            
                           </button>
                         </h2>
                         <div id="flush-collapseNine" class="accordion-collapse collapse" aria-labelledby="flush-headingNine" data-bs-parent="#accordionFlushExample">
                           <div class="input-group mb-3" style="margin-top: 1vh;">
                             <label class="input-group-text" for="inputGroupSelect01">ไฟเเนนซ์</label>
-                            <select name="gen_company" class="form-select" id="inputGroupSelect02">
+                            <select name="gen_company" id="idgen_company" onchange="tagGCPN()" class="form-select" >
                               <option value="" selected>กรุณาเลือก</option>
                               <option value='K'>ลีสซิ่งกสิกรไทย</option>
                               <option value='TTB'>ทหารไทยธนชาต</option>
@@ -587,11 +590,7 @@
 
 
 <script>
-/* collect name acc */
-/*function accNameCollected(){
-  const acc_name_01 = document.getElementById('Acc_1').innerHTML;
-  console.log(acc_name_01);
-}*/
+
 
 function tagPDMG() {
   const tagproductmargin = document.getElementById('idproductmargin').value;
@@ -636,6 +635,37 @@ function tagMIT() {
 function tagGIT() {
   const taggen_inter = document.getElementById('idgen_inter').value;
   document.getElementById('gen_inter').innerHTML =  taggen_inter.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') ; 
+};
+function tagGCPN() {
+  const taggen_company = document.getElementById('idgen_company').value;
+  if (taggen_company == 'K'){
+    document.getElementById('gen_company').innerHTML =  "ลีสซิ่งกสิกรไทย" ;
+  }
+  else if (taggen_company == 'TTB'){
+    document.getElementById('gen_company').innerHTML =  "ทหารไทยธนชาต" ;
+  }
+  else if (taggen_company == 'AY'){
+    document.getElementById('gen_company').innerHTML =  "กรุงศรีออโต้" ;
+  }
+  else if (taggen_company == 'ICBC'){
+    document.getElementById('gen_company').innerHTML =  "ICBC" ;
+  }
+  else if (taggen_company == 'KPP'){
+    document.getElementById('gen_company').innerHTML =  "เกียรตินาคิน" ;
+  }
+  else if (taggen_company == 'TISCO'){
+    document.getElementById('gen_company').innerHTML =  "TISCO" ;
+  }
+  else if (taggen_company == 'SCB'){
+    document.getElementById('gen_company').innerHTML =  "ไทยพาณิชย์" ;
+  }
+  else if (taggen_company == 'CITY'){
+    document.getElementById('gen_company').innerHTML =  "Cityleasing" ;
+  }
+  else {
+    pass;
+  }
+   
 };
 
 

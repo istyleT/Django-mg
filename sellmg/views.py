@@ -1,4 +1,3 @@
-from array import array
 from django.shortcuts import render, redirect ;
 from django.contrib.auth import authenticate, login, logout;
 from sellmg.models import Product ;
@@ -17,6 +16,7 @@ def static_js (request):
     return render(request, 'static-js.html')
 #################################################################################
 
+################ฟังก์ขันลงชื่อเช้า-ออก#############################
 def loginform(request):
     return render(request, 'login.html')
 
@@ -25,7 +25,7 @@ def log_user_out(request):
     # Log user out
     logout(request)
     return redirect(loginform)
-
+#############################################################
 
 ##################### ฟังก์ชันฝั่งadmin #####################
 @login_required(login_url='/firstdata')
@@ -107,7 +107,7 @@ def collectdata(request):
     # เก็บข้อมูลการ login จาก user 
     username = str(request.POST.get('username'))
     password = str(request.POST.get('password'))
-    userbranch = str(request.POST.get('userbranch'))
+    
     #ส่งข้อมูลออก
     request.session['username'] = username
     # เอาข้อมูลที่เก็บได้ไปเช็ค
@@ -262,8 +262,8 @@ def branceadd (request):
     else:
         statusvatdown = "1" #เเถม
     
-   
-    min_inter = int(request.POST.get('min_inter')or 0)
+    min_inter = 0
+    #min_inter = int(request.POST.get('min_inter')or 0)
     gen_remark = str(request.POST.get('gen_remark')or "-")
 
     # เก็บค่าอุปกรณ์ตกเเต่ง
@@ -510,6 +510,8 @@ def branceadd (request):
     exit_cost_down_vat = int(min_subdown*0.07) #pass
     #ยอดจัด
     cost_finance = int((productprice-min_reduce+add_eq)-cost_down) #pass
+    #ราคารถสุทธิ
+    net_productprice = int(productprice-min_reduce+add_eq)
     #ดอกเบี้ยทั้งหมด
     total_inter = int(((cost_finance*(gen_inter/100))*(gen_month/12))-min_inter) #edit
     #ค่างวดปกติ
@@ -557,6 +559,8 @@ def branceadd (request):
     net_total_payment = (month_payment*gen_month)+total_exit+gen_prepay-red_frame
 
     #ส่งข้อมูลออก
+
+    request.session['net_productprice'] = net_productprice
     request.session['cost_down'] = cost_down
     request.session['exit_cost_down'] = exit_cost_down
     request.session['exit_cost_down_vat'] = exit_cost_down_vat
@@ -583,6 +587,7 @@ def branceadd (request):
             'total_gift':'{:,}'.format(total_gift), #-รวมการของบังคับ
             'min_subdown':'{:,}'.format(min_subdown), # 
             'min_inter':'{:,}'.format(min_inter),
+            'net_productprice':'{:,}'.format(net_productprice),
             'productmargin':'{:,}'.format(productmargin),
             'exit_cost_down':'{:,}'.format(exit_cost_down),
             'red_frame':'{:,}'.format(red_frame),
@@ -709,6 +714,7 @@ def showdata(request):
    paytype = str(request.session.get('paytype'))
    #รายละเอียดการซื้อรถยนต์
    productprice = int(request.session.get('productprice'))
+   net_productprice = int(request.session.get('net_productprice'))
    add_eq = int(request.session.get('add_eq'))
    min_reduce = int(request.session.get('min_reduce'))
    net_produceprice = int(productprice + add_eq - min_reduce) #ราคารถสุทธิ
@@ -806,6 +812,7 @@ def showdata(request):
       'min_frame':min_frame, 
       'min_polish':min_polish, 
       'total_gift':'{:,.0f}'.format(total_gift),
+      'net_productprice':'{:,.0f}'.format(net_productprice),
       'text_acc_1':text_acc_1,  
       'text_acc_2':text_acc_2,  
       'text_acc_3':text_acc_3,  

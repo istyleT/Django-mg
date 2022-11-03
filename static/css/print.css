@@ -1,5 +1,15 @@
 html body {
-                    margin: 5px;
+                    margin: 0px;
+}
+
+@page {
+                  size: A4;
+                  margin: 0;
+}
+
+#printPDF {
+                    display: none;
+                    visibility: none;
 }
 #onepage {
                     display: flex;

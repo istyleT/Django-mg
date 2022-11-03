@@ -4,10 +4,10 @@ function caldown() {
      const gen_down_percent = document.getElementById('gen_down_percent').value | 0 ;   //pass      
      const gen_down_bath = document.getElementById('gen_down_bath').value | 0 ; //pass 
      const min_reduce = document.getElementById('idmin_reduce').value | 0; //pass 
-    
+     const add_eq = document.getElementById('idadd_eq').value | 0;
      const productprice = document.getElementById('productprice').innerHTML ; //pass 
      //สร้างค่าตัวเเปรเริ่มต้น
-     let net_productprice = productprice-min_reduce ; //pass
+     let net_productprice = productprice-min_reduce+add_eq ; //pass
      //เริ่มคำนวณค่า
      if (gen_down_percent != 0 && gen_down_bath == 0) {
                    const down_bath = net_productprice*(gen_down_percent/100)

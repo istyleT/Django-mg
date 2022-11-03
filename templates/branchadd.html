@@ -253,8 +253,8 @@
                             <button class="accordion-button collapsed text-success" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
                               <h5>
                                 <strong>Com ไฟเเนนซ์</strong>
-                                <strong align="right" id="gen_inter"></strong>
-                                <strong align="right" id="condition_finance"></strong>
+                                <strong align="right" id="com_fi_percent"></strong>
+                                <strong align="right" id="com_fi_month"></strong>
                               </h5>
                             
                             </button>
@@ -701,7 +701,7 @@ function tagGIT() {
 };
 function tagCDTFN() {
   const tagcondition_finance = document.getElementById('idcondition_finance').value;
-  document.getElementById('condition_finance').innerHTML =  "/"+(tagcondition_finance); 
+  document.getElementById('condition_finance').innerHTML =  "/"+" "+(tagcondition_finance); 
   
 };
 function tagCFPC() {
@@ -711,7 +711,7 @@ function tagCFPC() {
 };
 function tagCFM() {
   const tagcom_fi_month = document.getElementById('idcom_fi_month').value;
-  document.getElementById('com_fi_month').innerHTML =  "/"+(tagcom_fi_month.toString())+" "+"ปี"; 
+  document.getElementById('com_fi_month').innerHTML =  "/"+" "+(tagcom_fi_month.toString())+" "+"เดือน"; 
   
 };
 function tagGCPN() {

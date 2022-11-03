@@ -264,6 +264,7 @@ def branceadd (request):
     
    
     min_inter = int(request.POST.get('min_inter')or 0)
+    gen_remark = str(request.POST.get('gen_remark')or "-")
 
     # เก็บค่าอุปกรณ์ตกเเต่ง
     min_acc_1_code = str(request.POST.get('min_acc_1_code'))
@@ -497,6 +498,7 @@ def branceadd (request):
     request.session['min_subdown'] = min_subdown
     request.session['min_inter'] = min_inter
     request.session['min_acc'] = min_acc
+    request.session['gen_remark'] = gen_remark
 
     #------------คำนวณค่า--------------
     
@@ -762,13 +764,15 @@ def showdata(request):
    text_acc_18 = str(request.session.get('text_acc_18'))
    text_acc_19 = str(request.session.get('text_acc_19'))
    text_acc_20 = str(request.session.get('text_acc_20'))
-   
+   # หมายเหตุ
+   gen_remark = str(request.session.get('gen_remark'))
    
 
    # รวมข้อมูลเพื่อส่งไปหน้าใบเสนอราคา
    details = {
       'now':now, #ข้อมูลทั่วไป
       'submodel':submodel,
+      'gen_remark':gen_remark,
       'bodycolor':bodycolor,
       'mgbranch':mgbranch,
       'registype':registype,

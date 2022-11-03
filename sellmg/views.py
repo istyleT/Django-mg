@@ -268,6 +268,9 @@ def branceadd (request):
     gen_remark = str(request.POST.get('gen_remark')or "-")
 
     # เก็บค่าอุปกรณ์ตกเเต่ง
+    text_acc_card = str(request.POST.get('text_acc_card')or "-")
+    min_acc_card = int(request.POST.get('min_acc_card')or 0)
+
     min_acc_1_code = str(request.POST.get('min_acc_1_code'))
     if min_acc_1_code == 'N':
         min_acc_1 = 0
@@ -449,12 +452,13 @@ def branceadd (request):
             min_acc_20 = int(i.acc_price)
             text_acc_20 = str(i.acc_name)
 
-    min_acc = int(min_acc_1+min_acc_2+min_acc_3+min_acc_4+min_acc_5+min_acc_6+min_acc_7
+    min_acc = int(min_acc_card+min_acc_1+min_acc_2+min_acc_3+min_acc_4+min_acc_5+min_acc_6+min_acc_7
     +min_acc_8+min_acc_9+min_acc_10+min_acc_11+min_acc_12+min_acc_13+min_acc_14+min_acc_15
     +min_acc_16+min_acc_17+min_acc_18+min_acc_19+min_acc_20)
      
   
     #ส่งชื่ออุปกรณ์ตกเเต่ง
+    request.session['text_acc_card'] = text_acc_card
     request.session['text_acc_1'] = text_acc_1
     request.session['text_acc_2'] = text_acc_2
     request.session['text_acc_3'] = text_acc_3
@@ -748,6 +752,7 @@ def showdata(request):
        total_gift = int(min_acc+min_pdi+min_frame+min_polish+min_regis)
       
    #ชื่ออุปกรณ์ตกเเต่ง
+   text_acc_card = str(request.session.get('text_acc_card'))
    text_acc_1 = str(request.session.get('text_acc_1'))
    text_acc_2 = str(request.session.get('text_acc_2'))
    text_acc_3 = str(request.session.get('text_acc_3'))
@@ -810,6 +815,7 @@ def showdata(request):
       'min_frame':min_frame, 
       'min_polish':min_polish, 
       'total_gift':'{:,.0f}'.format(total_gift),
+      'text_acc_card':text_acc_card,  
       'text_acc_1':text_acc_1,  
       'text_acc_2':text_acc_2,  
       'text_acc_3':text_acc_3,  

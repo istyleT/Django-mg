@@ -320,6 +320,9 @@
                       <tr>
                         <td>
                           <ul >
+                            {% if text_acc_card != "-" %}
+                            <li class="nameacc">{{text_acc_card}}</li>
+                            {% endif %}
                             {% if text_acc_1 != "-" %}
                             <li class="nameacc">{{text_acc_1}}</li>
                             {% endif %}

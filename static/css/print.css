@@ -6,8 +6,10 @@ html body {
 @page {
                   size: A4;
                   margin-top: 2vh;
+                  margin-left: 2vw;
+                  margin-bottom: 0px;
                   width: 80%;
-                  height: 80%;
+                  height: 100%;
 }
 
 #printPDF {

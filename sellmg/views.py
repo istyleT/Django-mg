@@ -290,7 +290,7 @@ def branceadd (request):
         text_acc_3 = '-'
     else:
         find_acc_3 = Accmgs.objects.filter(Q(id = min_acc_3_code)).values_list('acc_name','acc_price', named=True)
-        for i in find_acc_1 :
+        for i in find_acc_3 :
             min_acc_3 = int(i.acc_price)
             text_acc_3 = str(i.acc_name)
     min_acc_4_code = str(request.POST.get('min_acc_4_code'))

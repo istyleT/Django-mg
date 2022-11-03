@@ -409,20 +409,20 @@
                   <!----------ข้อมูลการติดต่อ----------->
                   <table  class="table table-sm">
                     <tbody>
-                      {{% if sell_name != "-" and sell_phone != "-" %}}
+                      {% if sell_name != "-" and sell_phone != "-" %}
                       <tr>
                         <th colspan="2" class="text-success">ผู้เสนอราคา</th>
                       </tr>
                       <tr>
                         <td>คุณ {{sell_name}} โทร.{{sell_phone}}</td>
                       </tr>
-                      {{% endif %}}
-                      {{% if customer_name != "-" and customer_phone != "-" %}}
+                      {% endif %}
+                      {% if customer_name != "-" and customer_phone != "-" %}
                       <tr>
                         <th colspan="2" class="text-success">ลูกค้า</th>
                         <td>คุณ {{customer_name}} โทร.{{customer_phone}}</td>
                       </tr>
-                      {{% endif %}}
+                      {% endif %}
                     </tbody>
                   </table>
 

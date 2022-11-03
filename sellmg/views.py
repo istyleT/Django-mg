@@ -867,44 +867,82 @@ def branchcash (request):
     request.session['text_acc_20'] = text_acc_20
 
    #------------คำนวณค่า--------------
-    
-    
-    #รวมรายการบังคับ
-    fix_cost = int(min_regis + min_pdi + min_frame + min_polish) #pass
-
+     #รวมรายการของเเถมอุปกรณ์ตกเเต่ง
+    total_gift = int(min_regis + min_pdi + min_frame + min_polish + min_acc) #pass
     #รวมการใช้ส่วนลด
-    total_minmargin = min_reduce + min_acc + fix_cost
-    #ส่วนลดสุทธิ
-    total_margin = float(productmargin- total_minmargin) #pass
+    total_minmargin = min_reduce + total_gift 
+
+    #ส่วนลดคงเหลือ
+    total_margin = float(productmargin - total_minmargin) #pass
     #ราคารถสุทธิ
     net_productprice = productprice-min_reduce
-
+    
     #ค่าใช้จ่ายวันออกรถ
     if min_regis == 0 :
         total_exit = int((productprice-min_reduce)+red_frame- gen_prepay+regiscost)
     else : 
         total_exit = int((productprice-min_reduce)+red_frame- gen_prepay)
     
+    #ค่าใช้จ่ายทั้งหมด
+    net_total_payment = productprice-total_minmargin
 
 
+    # set ค่าเป็น 0 เพราะซื้อเงินสด
+    add_eq = '-'
+    cost_down = '-'
+    cost_finance = '-'
+    add_kickback = '-'
+    min_prosub = '-'
+    min_subdown = '-'
+    min_inter = '-'
+    exit_cost_down = '-'
+    exit_cost_down_vat = '-'
+    total_addmargin = '-'
+    total_com_finance = '-'
+    month_payment = '-'
+    gen_down = '-'
+    gen_month = '-'
+    gen_inter = '-'
+    condition_finance   = '-'
+    total_inter = '-'
+    statusvatdown = "1"
 
     #รวบรวมข้อมูลเพื่อส่ง
     data = {'regiscost':'{:,}'.format(regiscost), #ค่าจดทะเบียน
+            'add_eq':'{:,}'.format(add_eq), #+บวกหัวอุปกรณ์
+            'cost_down':'{:,}'.format(cost_down), 
+            'cost_finance':'{:,}'.format(cost_finance), #ยอดจัดไฟเเนนซ์
             'productprice':'{:,}'.format(productprice), #ราคาขาย
             'gen_prepay':'{:,}'.format(gen_prepay), #เงินจอง
+            'add_kickback':'{:,}'.format(add_kickback), #+ ค่า kickback
+            'min_prosub':'{:,}'.format(min_prosub), #-ค่า โปร subsidy
             'min_reduce':'{:,}'.format(min_reduce), #-ลดราคาขาย
-            'fix_cost':'{:,}'.format(fix_cost), #-รวมการของบังคับ
-            'min_acc':'{:,}'.format(min_acc), 
-            'red_frame':'{:,}'.format(red_frame), 
-            'total_minmargin':'{:,.0f}'.format(total_minmargin), 
-            'productmargin':'{:,.0f}'.format(productmargin), 
-            'net_productprice':'{:,.0f}'.format(net_productprice),
-            'total_exit':'{:,.0f}'.format(total_exit),
-            'total_margin':'{:,.0f}'.format(total_margin)
-
+            'total_gift':'{:,}'.format(total_gift), #-รวมการของบังคับ
+            'min_subdown':'{:,}'.format(min_subdown), # 
+            'min_inter':'{:,}'.format(min_inter),
+            'productmargin':'{:,}'.format(productmargin),
+            'exit_cost_down':'{:,}'.format(exit_cost_down),
+            'red_frame':'{:,}'.format(red_frame),
+            'total_exit':'{:,}'.format(total_exit),
+            'net_total_payment':'{:,}'.format(net_total_payment),
+            'min_regis':'{:,}'.format(min_regis),
+            'exit_cost_down_vat':'{:,}'.format(exit_cost_down_vat),
+            'gen_down':gen_down,
+            'gen_month':gen_month,
+            'gen_inter':gen_inter,
+            'statusvatdown':statusvatdown,
+            'min_acc':'{:,}'.format(min_acc),
+            'condition_finance':condition_finance,
+            'cost_finance':'{:,}'.format(cost_finance),
+            'total_inter' :'{:,}'.format(total_inter),
+            'month_payment':'{:,.0f}'.format(month_payment),
+            'total_com_finance':'{:,.2f}'.format(total_com_finance),
+            'total_addmargin':'{:,.0f}'.format(total_addmargin),
+            'total_minmargin':'{:,.0f}'.format(total_minmargin),
+            'total_margin':'{:,.0f}'.format(total_margin),
     }
    
-    return render(request, 'showdatacash.html', data)
+    return render(request, 'showdatafinance.html', data)
 
 @login_required(login_url='/firstdata') 
 def showdata(request):

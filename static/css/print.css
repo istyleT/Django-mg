@@ -20,6 +20,9 @@ html body {
 
 table {
                     font-size: 14px;
-                    margin-top: 1px;
+                    margin-top: 0px;
 }
 
+.nameacc {
+                    font-size: 14px;
+}

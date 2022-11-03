@@ -510,8 +510,7 @@ def branceadd (request):
     exit_cost_down_vat = int(min_subdown*0.07) #pass
     #ยอดจัด
     cost_finance = int((productprice-min_reduce+add_eq)-cost_down) #pass
-    #ราคารถสุทธิ
-    net_productprice = int(productprice-min_reduce+add_eq)
+    
     #ดอกเบี้ยทั้งหมด
     total_inter = int(((cost_finance*(gen_inter/100))*(gen_month/12))-min_inter) #edit
     #ค่างวดปกติ
@@ -560,7 +559,7 @@ def branceadd (request):
 
     #ส่งข้อมูลออก
 
-    request.session['net_productprice'] = net_productprice
+   
     request.session['cost_down'] = cost_down
     request.session['exit_cost_down'] = exit_cost_down
     request.session['exit_cost_down_vat'] = exit_cost_down_vat
@@ -587,7 +586,6 @@ def branceadd (request):
             'total_gift':'{:,}'.format(total_gift), #-รวมการของบังคับ
             'min_subdown':'{:,}'.format(min_subdown), # 
             'min_inter':'{:,}'.format(min_inter),
-            'net_productprice':'{:,}'.format(net_productprice),
             'productmargin':'{:,}'.format(productmargin),
             'exit_cost_down':'{:,}'.format(exit_cost_down),
             'red_frame':'{:,}'.format(red_frame),
@@ -714,7 +712,6 @@ def showdata(request):
    paytype = str(request.session.get('paytype'))
    #รายละเอียดการซื้อรถยนต์
    productprice = int(request.session.get('productprice'))
-   net_productprice = int(request.session.get('net_productprice'))
    add_eq = int(request.session.get('add_eq'))
    min_reduce = int(request.session.get('min_reduce'))
    net_produceprice = int(productprice + add_eq - min_reduce) #ราคารถสุทธิ
@@ -812,7 +809,6 @@ def showdata(request):
       'min_frame':min_frame, 
       'min_polish':min_polish, 
       'total_gift':'{:,.0f}'.format(total_gift),
-      'net_productprice':'{:,.0f}'.format(net_productprice),
       'text_acc_1':text_acc_1,  
       'text_acc_2':text_acc_2,  
       'text_acc_3':text_acc_3,  

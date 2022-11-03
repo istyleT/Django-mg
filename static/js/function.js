@@ -3,7 +3,8 @@ function caldown() {
      // เก็บค่าเตรียมคำนวณ
      const gen_down_percent = document.getElementById('gen_down_percent').value | 0 ;   //pass      
      const gen_down_bath = document.getElementById('gen_down_bath').value | 0 ; //pass 
-     const min_reduce = document.getElementById('min_reduce').value | 0; //pass 
+     const min_reduce = document.getElementById('idmin_reduce').value | 0; //pass 
+    
      const productprice = document.getElementById('productprice').innerHTML ; //pass 
      //สร้างค่าตัวเเปรเริ่มต้น
      let net_productprice = productprice-min_reduce ; //pass

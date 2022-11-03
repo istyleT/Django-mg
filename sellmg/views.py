@@ -701,11 +701,12 @@ def branchcash (request):
 
 @login_required(login_url='/firstdata') 
 def showdata(request):
-   ############## test การเก็บข้อมูล ##########
+   # เก็บข้อมูลหน้าตัวเอง
+   sell_name= str(request.POST.get('sell_name')or '-')
+   sell_phone= str(request.POST.get('sell_phone')or '-')
+   customer_name= str(request.POST.get('customer_name')or '-')
+   customer_phone= str(request.POST.get('customer_phone')or '-')
    
-
-
-
    from datetime import datetime
    now = datetime.today() #วันที่
    
@@ -836,6 +837,10 @@ def showdata(request):
       'text_acc_18':text_acc_18,  
       'text_acc_19':text_acc_19,  
       'text_acc_20':text_acc_20,  
+      'sell_name':sell_name,  
+      'sell_phone':sell_phone,  
+      'customer_name':customer_name,  
+      'customer_phone':customer_phone,  
       
        
 

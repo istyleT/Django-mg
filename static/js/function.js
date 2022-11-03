@@ -14,7 +14,7 @@ function caldown() {
                    console.log(down_bath) ;
                    document.getElementById('show_down_bath').style.display = "block" ; 
                    document.getElementById('gen_down_bath').style.display = "none" ; 
-                   document.getElementById('show_down_bath').innerHTML = down_bath.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+' '+'บาท' ; 
+                   document.getElementById('show_down_bath').innerHTML = down_bath.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+' '+'บาท' ; 
                    document.getElementById('downerror').style.display = "none";
         }
 

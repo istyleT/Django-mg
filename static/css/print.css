@@ -16,6 +16,9 @@ html body {
                     display: none;
                     visibility: none;
 }
+
+
+
 #onepage {
                     display: flex;
                    
@@ -29,4 +32,9 @@ table {
 
 .nameacc {
                     font-size: 14px;
+}
+
+@page textarea { 
+                    max-width: 40vw;
+
 }

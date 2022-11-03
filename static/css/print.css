@@ -4,7 +4,7 @@ html body {
 
 @page {
                   size: A4;
-                  margin-top: 1vh;
+                  margin-top: 2vh;
 }
 
 #printPDF {
@@ -16,11 +16,9 @@ html body {
                    
 }
 
-.container {
-                   padding-right: 0px;
-}
+
 table {
-                    font-size: 16px;
+                    font-size: 18px;
                     margin-top: 1px;
 }
 

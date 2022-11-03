@@ -232,7 +232,8 @@ def branceadd (request):
     add_kickback = int(request.POST.get('add_kickback')or 0)
     com_fi_percent = int(request.POST.get('com_fi_percent'))
     com_fi_month = int(request.POST.get('com_fi_month'))
-    min_prosub = int(request.POST.get('min_prosub')or 0)
+    #min_prosub = int(request.POST.get('min_prosub')or 0)
+    min_prosub = 0
     min_reduce = int(request.POST.get('min_reduce')or 0)
     condition_finance = str(request.POST.get('condition_finance'))
     min_regis = str(request.POST.get('min_regis','N'))

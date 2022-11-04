@@ -933,7 +933,6 @@ def branchcash (request):
             'statusvatdown':statusvatdown,
             'min_acc':'{:,}'.format(min_acc),
             'condition_finance':condition_finance,
-            'cost_finance':'{:,}'.format(cost_finance),
             'total_inter' :total_inter,
             'month_payment':month_payment,
             'total_com_finance':total_com_finance,

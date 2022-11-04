@@ -116,12 +116,20 @@
     </h2>
     <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
       <div class="accordion-body">
-
+        {% if paytye == 'cash' %}
         <li class="list-group-item">
           <label >
-             <strong>เงินดาวน์ </strong> : <strong class="text-muted">{{exit_cost_down}}</strong> บาท
+             <strong>ราคารถสุทธิ</strong> : <strong class="text-muted">{{net_productprice}}</strong> บาท
           </label>
         </li>
+        {% endif %}
+        {% if paytye == 'finance' %}
+        <li class="list-group-item">
+          <label >
+             <strong>เงินดาวน์</strong> : <strong class="text-muted">{{exit_cost_down}}</strong> บาท
+          </label>
+        </li>
+        {% endif %}
         {% if statusvatdown == "0"  %} 
         <li class="list-group-item">
           <label >

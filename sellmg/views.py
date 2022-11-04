@@ -215,6 +215,7 @@ def branceadd (request):
     #สร้างตัวเเปรการเก็บของข้อมูลรุ่นจากข้อมูลที่ส่งมาก่อนหน้า ใช้ request.session
     regiscost = int(request.session.get('regiscost'))
     productprice = int(request.session.get('productprice'))
+    paytype = str(request.session.get('paytype'))
     #productmargin  = int(request.session.get('productmargin'))
     
 
@@ -599,6 +600,7 @@ def branceadd (request):
             'min_regis':'{:,}'.format(min_regis),
             'exit_cost_down_vat':'{:,}'.format(exit_cost_down_vat),
             'gen_down':gen_down,
+            'paytype':paytype,
             'gen_month':gen_month,
             'gen_inter':gen_inter,
             'statusvatdown':statusvatdown,
@@ -620,6 +622,7 @@ def branchcash (request):
     #สร้างตัวเเปรการเก็บของข้อมูลรุ่นจากข้อมูลที่ส่งมาก่อนหน้า ใช้ request.session
     regiscost = int(request.session.get('regiscost'))
     productprice = int(request.session.get('productprice'))
+    paytype = str(request.session.get('paytype'))
     #productmargin  = int(request.session.get('productmargin'))
     
     #กำหนดค่าคงที่
@@ -875,7 +878,7 @@ def branchcash (request):
     #ส่วนลดคงเหลือ
     total_margin = float(productmargin - total_minmargin) #pass
     #ราคารถสุทธิ
-    net_productprice = productprice-min_reduce
+    net_productprice = int(productprice-min_reduce)
     
     #ค่าใช้จ่ายวันออกรถ
     if min_regis == 0 :
@@ -888,29 +891,30 @@ def branchcash (request):
 
 
     # set ค่าเป็น 0 เพราะซื้อเงินสด
-    add_eq = '-'
-    cost_down = '-'
-    cost_finance = '-'
-    add_kickback = '-'
-    min_prosub = '-'
-    min_subdown = '-'
-    min_inter = '-'
-    exit_cost_down = '-'
-    exit_cost_down_vat = '-'
-    total_addmargin = '-'
-    total_com_finance = '-'
-    month_payment = '-'
-    gen_down = '-'
-    gen_month = '-'
-    gen_inter = '-'
+    add_eq = '0'
+    cost_down = '0'
+    cost_finance = '0'
+    add_kickback = '0'
+    min_prosub = '0'
+    min_subdown = '0'
+    min_inter = '0'
+    exit_cost_down = '0'
+    exit_cost_down_vat = '0'
+    total_addmargin = '0'
+    total_com_finance = '0'
+    month_payment = '0'
+    gen_down = '0'
+    gen_month = '0'
+    gen_inter = '0'
     condition_finance   = '-'
-    total_inter = '-'
+    total_inter = '0'
     statusvatdown = "1"
 
     #รวบรวมข้อมูลเพื่อส่ง
     data = {'regiscost':'{:,}'.format(regiscost), #ค่าจดทะเบียน
             'add_eq':add_eq, #+บวกหัวอุปกรณ์
             'cost_down':cost_down, 
+            'paytype':paytype, 
             'cost_finance':cost_finance, #ยอดจัดไฟเเนนซ์
             'productprice':'{:,}'.format(productprice), #ราคาขาย
             'gen_prepay':'{:,}'.format(gen_prepay), #เงินจอง
@@ -923,6 +927,7 @@ def branchcash (request):
             'productmargin':'{:,}'.format(productmargin),
             'exit_cost_down':exit_cost_down,
             'red_frame':'{:,}'.format(red_frame),
+            'net_productprice':'{:,}'.format(net_productprice),
             'total_exit':'{:,}'.format(total_exit),
             'net_total_payment':'{:,}'.format(net_total_payment),
             'min_regis':'{:,}'.format(min_regis),

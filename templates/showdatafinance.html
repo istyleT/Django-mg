@@ -116,14 +116,14 @@
     </h2>
     <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
       <div class="accordion-body">
-        {% if paytye == 'cash' %}
+        {% if paytype == 'cash' %}
         <li class="list-group-item">
           <label >
              <strong>ราคารถสุทธิ</strong> : <strong class="text-muted">{{net_productprice}}</strong> บาท
           </label>
         </li>
         {% endif %}
-        {% if paytye == 'finance' %}
+        {% if paytype == 'finance' %}
         <li class="list-group-item">
           <label >
              <strong>เงินดาวน์</strong> : <strong class="text-muted">{{exit_cost_down}}</strong> บาท

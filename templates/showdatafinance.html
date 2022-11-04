@@ -91,11 +91,13 @@
              <strong>ซับเงินดาวน์</strong> : <strong class="text-danger">-{{min_subdown}}</strong> บาท
           </label>
         </li>  
+        {% if statusvatdown == "1" %}
         <li class="list-group-item">
           <label >
              <strong>Vat ซับดาวน์ 7%</strong> : <strong class="text-danger">-{{exit_cost_down_vat}}</strong> บาท
           </label>
         </li>  
+        {% endif %}
         <li class="list-group-item">
           <label >
              <strong>ซับดอกเบี้ย</strong> : <strong class="text-danger">-{{min_inter}}</strong> บาท
@@ -114,7 +116,7 @@
       {% if paytype == 'finance' %}
         <strong class="text-muted">ค่าใช้จ่ายวันออกรถ : {{total_exit}} บาท</strong>
       {% endif %}
-      
+
       {% if paytype == 'cash' %}
         <strong class="text-muted">ค่าใช้จ่ายวันออกรถ : {{total_exit_cash}} บาท</strong>
       {% endif %}

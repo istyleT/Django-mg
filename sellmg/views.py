@@ -667,6 +667,10 @@ def branchcash (request):
     request.session['gen_prepay'] = gen_prepay
     request.session['gen_remark'] = gen_remark
     request.session['red_frame'] = red_frame
+    request.session['min_regis'] = min_regis
+    request.session['min_pdi'] = min_pdi
+    request.session['min_frame'] = min_frame
+    request.session['min_polish'] = min_polish
 
 
 

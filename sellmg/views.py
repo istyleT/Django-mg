@@ -944,7 +944,7 @@ def branchcash (request):
             'exit_cost_down':exit_cost_down,
             'red_frame':'{:,}'.format(red_frame),
             'net_productprice':'{:,}'.format(net_productprice),
-            'total_exit':'{:,}'.format(total_exit),
+            'total_exit':'{:,}'.format(total_exit_cash),
             'net_total_payment':'{:,}'.format(net_total_payment),
             'min_regis':'{:,}'.format(min_regis),
             'exit_cost_down_vat':exit_cost_down_vat,

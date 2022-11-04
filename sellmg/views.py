@@ -188,14 +188,14 @@ def PaymentRegis(request):
     if mainmodel == 'MGVSHEV' :
         mainacc = Accmgs.objects.filter(Q(acc_model = 'MGZS') | Q(acc_model = 'ALL')).values_list('id', 'acc_code', 'acc_name','acc_price','acc_type', named=True)
         if paytype == 'cash':
-             return render(request, 'branchcash.html',{'regiscost':'{:,}'.format(regiscost),'mainacc':mainacc,'productprice':productprice})
+             return render(request, 'branchcash.html',{'submodel': submodel,'regiscost':'{:,}'.format(regiscost),'text_productprice':'{:,}'.format(text_productprice),'mainacc':mainacc,})
     
         elif paytype == 'finance' :
             return render(request, 'branchadd.html',{'submodel': submodel,'regiscost':'{:,}'.format(regiscost),'text_productprice':'{:,}'.format(text_productprice),'mainacc':mainacc,'productprice':productprice,'mainmodel': mainmodel})
     elif mainmodel == 'MGHSPHEV' :
         mainacc = Accmgs.objects.filter(Q(acc_model = 'MGHS') | Q(acc_model = 'ALL')).values_list('id', 'acc_code', 'acc_name','acc_price','acc_type', named=True)
         if paytype == 'cash':
-             return render(request, 'branchcash.html',{'regiscost':'{:,}'.format(regiscost),'mainacc':mainacc,'productprice':productprice})
+             return render(request, 'branchcash.html',{'submodel': submodel,'regiscost':'{:,}'.format(regiscost),'text_productprice':'{:,}'.format(text_productprice),'mainacc':mainacc,})
     
         elif paytype == 'finance' :
             return render(request, 'branchadd.html',{'submodel': submodel,'regiscost':'{:,}'.format(regiscost),'text_productprice':'{:,}'.format(text_productprice),'mainacc':mainacc,'productprice':productprice,'mainmodel': mainmodel})
@@ -918,7 +918,7 @@ def branchcash (request):
             'min_prosub':min_prosub, #-ค่า โปร subsidy
             'min_reduce':'{:,}'.format(min_reduce), #-ลดราคาขาย
             'total_gift':'{:,}'.format(total_gift), #-รวมการของบังคับ
-            'min_subdown':'{:,}'.format(min_subdown), # 
+            'min_subdown':min_subdown, # 
             'min_inter':min_inter,
             'productmargin':'{:,}'.format(productmargin),
             'exit_cost_down':exit_cost_down,

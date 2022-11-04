@@ -866,6 +866,7 @@ def branchcash (request):
 
 
    #ส่งชื่ออุปกรณ์ตกเเต่ง
+    request.session['min_acc'] = min_acc
     request.session['text_acc_card'] = text_acc_card
     request.session['text_acc_1'] = text_acc_1
     request.session['text_acc_2'] = text_acc_2
@@ -891,6 +892,7 @@ def branchcash (request):
    #------------คำนวณค่า--------------
      #รวมรายการของเเถมอุปกรณ์ตกเเต่ง
     total_gift = int(min_regis + min_pdi + min_frame + min_polish + min_acc) #pass
+    request.session['total_gift'] = total_gift
     #รวมการใช้ส่วนลด
     total_minmargin = min_reduce + total_gift 
 
@@ -898,7 +900,6 @@ def branchcash (request):
     total_margin = float(productmargin - total_minmargin) #pass
     #ราคารถสุทธิ
     net_productprice = int(productprice-min_reduce)
-
     request.session['net_productprice'] = net_productprice
     #ค่าใช้จ่ายวันออกรถ
     if min_regis == 0 :

@@ -655,6 +655,14 @@ def branchcash (request):
     else: 
        min_polish = 500
 
+    # ส่งข้อมูลออก
+    request.session['min_reduce'] = min_reduce
+    request.session['paytype'] = paytype
+    request.session['gen_prepay'] = gen_prepay
+    request.session['gen_remark'] = gen_remark
+
+
+
         # เก็บค่าอุปกรณ์ตกเเต่ง
     text_acc_card = str(request.POST.get('text_acc_card')or "-")
     min_acc_card = int(request.POST.get('min_acc_card')or 0)
@@ -879,12 +887,17 @@ def branchcash (request):
     total_margin = float(productmargin - total_minmargin) #pass
     #ราคารถสุทธิ
     net_productprice = int(productprice-min_reduce)
-    
+
+    request.session['net_productprice'] = net_productprice
     #ค่าใช้จ่ายวันออกรถ
     if min_regis == 0 :
-        total_exit = int((productprice-min_reduce)+red_frame- gen_prepay+regiscost)
+        total_exit_cash = int((productprice-min_reduce)+red_frame- gen_prepay+regiscost)
     else : 
-        total_exit = int((productprice-min_reduce)+red_frame- gen_prepay)
+        total_exit_cash = int((productprice-min_reduce)+red_frame- gen_prepay)
+
+
+    request.session['total_exit_cash'] = total_exit_cash
+
     
     #ค่าใช้จ่ายทั้งหมด
     net_total_payment = productprice-total_minmargin
@@ -894,6 +907,7 @@ def branchcash (request):
     add_eq = '0'
     cost_down = '0'
     cost_finance = '0'
+    request.session['cost_finance'] = cost_finance
     add_kickback = '0'
     min_prosub = '0'
     min_subdown = '0'
@@ -903,8 +917,10 @@ def branchcash (request):
     total_addmargin = '0'
     total_com_finance = '0'
     month_payment = '0'
+    request.session['month_payment'] = month_payment
     gen_down = '0'
     gen_month = '0'
+    request.session['gen_month'] = gen_month
     gen_inter = '0'
     condition_finance   = '-'
     total_inter = '0'
@@ -987,6 +1003,7 @@ def showdata(request):
    red_frame = int(request.session.get('red_frame'))
    gen_prepay = int(request.session.get('gen_prepay'))
    total_exit = int(request.session.get('total_exit'))
+   total_exit_cash = int(request.session.get('total_exit_cash'))
    min_regis = int(request.session.get('min_regis'))
    regiscost = int(request.session.get('regiscost'))
    statusvatdown = str(request.session.get('statusvatdown')) # 1 = เเถม
@@ -1044,6 +1061,7 @@ def showdata(request):
       'productprice':'{:,.0f}'.format(productprice), 
       'min_prosub':'{:,.0f}'.format(min_prosub), 
       'exit_cost_down':'{:,.0f}'.format(exit_cost_down), 
+      'total_exit_cash':'{:,.0f}'.format(total_exit_cash), 
       'cost_down':'{:,.0f}'.format(cost_down), 
       'red_frame':'{:,.0f}'.format(red_frame), 
       'total_exit':'{:,.0f}'.format(total_exit), 
@@ -1060,36 +1078,36 @@ def showdata(request):
       'gen_inter':'{:,.2f}'.format(gen_inter), 
       'statusvatdown':statusvatdown, 
       'exit_cost_down_vat':'{:,.0f}'.format(exit_cost_down_vat), 
-      'min_acc':'{:,.0f}'.format(min_acc), 
-      'min_pdi':min_pdi, 
-      'min_frame':min_frame, 
-      'min_polish':min_polish, 
+      'min_acc':'{:,.0f}'.format(min_acc), #pass
+      'min_pdi':min_pdi, #pass
+      'min_frame':min_frame, #pass
+      'min_polish':min_polish, #pass
       'total_gift':'{:,.0f}'.format(total_gift),
-      'text_acc_card':text_acc_card,  
-      'text_acc_1':text_acc_1,  
-      'text_acc_2':text_acc_2,  
-      'text_acc_3':text_acc_3,  
-      'text_acc_4':text_acc_4,  
-      'text_acc_5':text_acc_5,  
-      'text_acc_6':text_acc_6,  
-      'text_acc_7':text_acc_7,  
-      'text_acc_8':text_acc_8,  
-      'text_acc_9':text_acc_9,  
-      'text_acc_10':text_acc_10,  
-      'text_acc_11':text_acc_11,  
-      'text_acc_12':text_acc_12,  
-      'text_acc_13':text_acc_13,  
-      'text_acc_14':text_acc_14,  
-      'text_acc_15':text_acc_15,  
-      'text_acc_16':text_acc_16,  
-      'text_acc_17':text_acc_17,  
-      'text_acc_18':text_acc_18,  
-      'text_acc_19':text_acc_19,  
-      'text_acc_20':text_acc_20,  
-      'sell_name':sell_name,  
-      'sell_phone':sell_phone,  
-      'customer_name':customer_name,  
-      'customer_phone':customer_phone,  
+      'text_acc_card':text_acc_card,  #pass
+      'text_acc_1':text_acc_1,  #pass
+      'text_acc_2':text_acc_2,  #pass
+      'text_acc_3':text_acc_3,  #pass
+      'text_acc_4':text_acc_4,  #pass
+      'text_acc_5':text_acc_5,  #pass
+      'text_acc_6':text_acc_6,  #pass
+      'text_acc_7':text_acc_7,  #pass
+      'text_acc_8':text_acc_8,  #pass
+      'text_acc_9':text_acc_9,  #pass
+      'text_acc_10':text_acc_10,  #pass
+      'text_acc_11':text_acc_11,  #pass
+      'text_acc_12':text_acc_12,  #pass
+      'text_acc_13':text_acc_13,  #pass
+      'text_acc_14':text_acc_14,  #pass
+      'text_acc_15':text_acc_15,  #pass
+      'text_acc_16':text_acc_16,  #pass
+      'text_acc_17':text_acc_17,  #pass
+      'text_acc_18':text_acc_18,  #pass
+      'text_acc_19':text_acc_19,  #pass
+      'text_acc_20':text_acc_20,  #pass
+      'sell_name':sell_name,  #pass
+      'sell_phone':sell_phone,  #pass
+      'customer_name':customer_name,  #pass
+      'customer_phone':customer_phone,  #pass
       
        
 

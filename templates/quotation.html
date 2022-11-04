@@ -159,6 +159,7 @@
                          <td>{{month_payment}} บาท</td>
  
                        </tr>
+                       {% if paytype == 'finance' %}
                        <tr>
                          <th scope="row">เงื่อนไขดอกเบี้ย :</th>
                          {% if condition_finance == 'END' %}
@@ -188,7 +189,7 @@
                          {% endif %}
  
                        </tr>
-                       
+                        {% endif %}
                      </tbody>
                    </table>
 
@@ -199,13 +200,14 @@
                       </tr>
                     </thead>
                     <tbody>
+                    {% if paytype == 'finance' %}
                       {% if statusvatdown == '1' %}
                       <tr>
                         <th scope="row">Vat Sub ดาวน์ 7% :</th>
                         <td>{{exit_cost_down_vat}} บาท</td>
                       </tr>
                       {% endif %}
-
+                    {% endif %}
                       {% if min_regis != '0' %}
                       <tr>
                         <th scope="row">ค่าจดทะเบียน :</th>
@@ -262,8 +264,8 @@
                          <th scope="row">เงินดาวน์ :</th>
                          <td>{{exit_cost_down}} บาท</td>
                          {% elif paytype == 'cash' %}
-                         <th scope="row">ราคารถยนต์ :</th>
-                         <td>{{productprice}} บาท</td>
+                         <th scope="row">ราคารถยนต์สุทธิ :</th>
+                         <td>{{net_productprice}} บาท</td>
                          {% endif %}
                        </tr>
                        <tr>
@@ -304,7 +306,11 @@
                        </tr>
                        <tr>
                          <th scope="row">รวมค่าใช้จ่ายวันออกรถ :</th>
-                         <td>{{total_exit}} บาท</td>
+                         {% if paytype == 'finance' %}
+                          <td>{{total_exit}} บาท</td>
+                         {% elif paytype == 'cash' %}
+                          <td>{{total_exit_cash}} บาท</td>
+                         {% endif %}
                        </tr>
                      </tbody>
                    </table>

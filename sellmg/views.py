@@ -905,26 +905,41 @@ def branchcash (request):
 
     # set ค่าเป็น 0 เพราะซื้อเงินสด
     add_eq = '0'
+    request.session['add_eq'] = add_eq
     cost_down = '0'
+    request.session['cost_down'] = cost_down
     cost_finance = '0'
     request.session['cost_finance'] = cost_finance
     add_kickback = '0'
+    request.session['add_kickback'] = add_kickback
     min_prosub = '0'
+    request.session['min_prosub'] = min_prosub
     min_subdown = '0'
+    request.session['min_subdown'] = min_subdown
     min_inter = '0'
+    request.session['min_inter'] = min_inter
     exit_cost_down = '0'
+    request.session['exit_cost_down'] = exit_cost_down
     exit_cost_down_vat = '0'
+    request.session['exit_cost_down_vat'] = exit_cost_down_vat
     total_addmargin = '0'
+    request.session['total_addmargin'] = total_addmargin
     total_com_finance = '0'
+    request.session['total_com_finance'] = total_com_finance
     month_payment = '0'
     request.session['month_payment'] = month_payment
     gen_down = '0'
+    request.session['gen_down'] = gen_down
     gen_month = '0'
     request.session['gen_month'] = gen_month
     gen_inter = '0'
+    request.session['gen_inter'] = gen_inter
     condition_finance   = '-'
+    request.session['condition_finance'] = condition_finance
     total_inter = '0'
+    request.session['total_inter'] = total_inter
     statusvatdown = "1"
+    request.session['statusvatdown'] = statusvatdown
 
     #รวบรวมข้อมูลเพื่อส่ง
     data = {'regiscost':'{:,}'.format(regiscost), #ค่าจดทะเบียน

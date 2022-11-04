@@ -221,6 +221,7 @@ def branceadd (request):
 
     #กำหนดค่าคงที่
     red_frame = int(3000) #ค่าป้ายเเดง
+    total_exit_cash = '0'
 
     #เก็บข้อมูลหน้าตัวเอง
     productmargin = int(request.POST.get('productmargin')or 0)
@@ -563,6 +564,10 @@ def branceadd (request):
       #ค่าใช้จ่ายทั้งหมดที่ลูกค้าต้องจ่าย
     net_total_payment = (month_payment*gen_month)+exit_cost_down
 
+    
+
+
+
     #ส่งข้อมูลออก
 
    
@@ -577,6 +582,7 @@ def branceadd (request):
     request.session['total_minmargin'] = total_minmargin
     request.session['total_margin'] = total_margin
     request.session['total_exit'] = total_exit
+    request.session['total_exit_cash'] = total_exit_cash
   
 
 
@@ -941,6 +947,9 @@ def branchcash (request):
     request.session['total_inter'] = total_inter
     statusvatdown = "1"
     request.session['statusvatdown'] = statusvatdown
+    total_exit = '0'
+    request.session['total_exit'] = total_exit
+
 
     #รวบรวมข้อมูลเพื่อส่ง
     data = {'regiscost':'{:,}'.format(regiscost), #ค่าจดทะเบียน

@@ -909,24 +909,24 @@ def branchcash (request):
 
     #รวบรวมข้อมูลเพื่อส่ง
     data = {'regiscost':'{:,}'.format(regiscost), #ค่าจดทะเบียน
-            'add_eq':'{:,}'.format(add_eq), #+บวกหัวอุปกรณ์
-            'cost_down':'{:,}'.format(cost_down), 
-            'cost_finance':'{:,}'.format(cost_finance), #ยอดจัดไฟเเนนซ์
+            'add_eq':add_eq, #+บวกหัวอุปกรณ์
+            'cost_down':cost_down, 
+            'cost_finance':cost_finance, #ยอดจัดไฟเเนนซ์
             'productprice':'{:,}'.format(productprice), #ราคาขาย
             'gen_prepay':'{:,}'.format(gen_prepay), #เงินจอง
-            'add_kickback':'{:,}'.format(add_kickback), #+ ค่า kickback
-            'min_prosub':'{:,}'.format(min_prosub), #-ค่า โปร subsidy
+            'add_kickback':add_kickback, #+ ค่า kickback
+            'min_prosub':min_prosub, #-ค่า โปร subsidy
             'min_reduce':'{:,}'.format(min_reduce), #-ลดราคาขาย
             'total_gift':'{:,}'.format(total_gift), #-รวมการของบังคับ
             'min_subdown':'{:,}'.format(min_subdown), # 
-            'min_inter':'{:,}'.format(min_inter),
+            'min_inter':min_inter,
             'productmargin':'{:,}'.format(productmargin),
-            'exit_cost_down':'{:,}'.format(exit_cost_down),
+            'exit_cost_down':exit_cost_down,
             'red_frame':'{:,}'.format(red_frame),
             'total_exit':'{:,}'.format(total_exit),
             'net_total_payment':'{:,}'.format(net_total_payment),
             'min_regis':'{:,}'.format(min_regis),
-            'exit_cost_down_vat':'{:,}'.format(exit_cost_down_vat),
+            'exit_cost_down_vat':exit_cost_down_vat,
             'gen_down':gen_down,
             'gen_month':gen_month,
             'gen_inter':gen_inter,
@@ -934,10 +934,10 @@ def branchcash (request):
             'min_acc':'{:,}'.format(min_acc),
             'condition_finance':condition_finance,
             'cost_finance':'{:,}'.format(cost_finance),
-            'total_inter' :'{:,}'.format(total_inter),
-            'month_payment':'{:,.0f}'.format(month_payment),
-            'total_com_finance':'{:,.2f}'.format(total_com_finance),
-            'total_addmargin':'{:,.0f}'.format(total_addmargin),
+            'total_inter' :total_inter,
+            'month_payment':month_payment,
+            'total_com_finance':total_com_finance,
+            'total_addmargin':total_addmargin,
             'total_minmargin':'{:,.0f}'.format(total_minmargin),
             'total_margin':'{:,.0f}'.format(total_margin),
     }

@@ -503,6 +503,7 @@ def branceadd (request):
     request.session['min_subdown'] = min_subdown
     request.session['min_acc'] = min_acc
     request.session['gen_remark'] = gen_remark
+    request.session['min_prosub'] = min_prosub
 
     #------------คำนวณค่า--------------
     

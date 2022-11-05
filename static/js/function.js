@@ -70,15 +70,15 @@ function sumSubsidy() {
     const gen_inter = Number(document.getElementById('idgen_inter').value || 0); // type float
     const min_prosub = Number(document.getElementById('idmin_prosub').value || 0);
     const min_inter = Number(document.getElementById('idmin_inter').value || gen_inter);
-    const showtotalsubsidy = document.getElementById('showtotalsubsidy');
+
     /* คำนวนค่าที่ต้องการ */
     let net_productprice = productprice -min_reduce +add_eq ;
     const cost_finance = net_productprice * (1-(gen_down_percent/100)) ;
     let subsidy_inter = cost_finance * (gen_month/12) * ((gen_inter/100)-(min_inter/100));
-    let total_subsidy = min_prosub + subsidy_inter;
-    showtotalsubsidy.style.display = 'block';
-    document.getElementById('showtotalsubsidy').innerHTML = (total_subsidy.toString(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',')) + ' ' + 'บาท';
-    document.getElementById('total_subsidy').innerHTML = '=' + ' ' + (total_subsidy.toString(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',')) + ' ' + 'บาท' ;
+    let total_subsidy = parseInt(min_prosub + subsidy_inter);
+    document.getElementById('showtotalsubsidy').style.display = 'block';
+    document.getElementById('showtotalsubsidy').innerHTML = (total_subsidy.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')) + ' ' + 'บาท';
+    document.getElementById('total_subsidy').innerHTML = '=' + ' ' + (total_subsidy.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')) + ' ' + 'บาท' ;
     console.log('--------')
     console.log('โปรซับ ='+ min_prosub)
     console.log('ดอกเบี้ยเสนอลูกค้า ='+ min_inter + '%')

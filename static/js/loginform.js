@@ -1,6 +1,5 @@
 const username = document.getElementById("username");
 const password = document.getElementById("password");
-const userbranch = document.getElementById("userbranch");
 const formlogin = document.getElementById("formlogin");
 const errormessage = document.getElementById("error");
 
@@ -13,10 +12,6 @@ formlogin.addEventListener("submit", (e)=> {
                     if (password.value === "" || password.value == null ){
                         box.push('กรุณากรอกรหัสผ่าน')  
                     } 
-                    if (userbranch.value === "-" ){
-                        box.push('เลือกสาขา')  
-                    } 
-                    
                     if (box.length > 0) {
                                         e.preventDefault(); 
                                         console.log('error')

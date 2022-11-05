@@ -234,8 +234,8 @@ def branceadd (request):
     add_kickback = int(request.POST.get('add_kickback')or 0)
     com_fi_percent = int(request.POST.get('com_fi_percent'))
     com_fi_month = int(request.POST.get('com_fi_month'))
-    #min_prosub = int(request.POST.get('min_prosub')or 0)
-    min_prosub = 0
+    min_prosub = int(request.POST.get('min_prosub')or 0) 
+    min_inter = float(request.POST.get('min_inter')or gen_inter)
     min_reduce = int(request.POST.get('min_reduce')or 0)
     condition_finance = str(request.POST.get('condition_finance'))
     min_regis = str(request.POST.get('min_regis','N'))
@@ -265,8 +265,7 @@ def branceadd (request):
     else:
         statusvatdown = "1" #เเถม
     
-    min_inter = 0
-    #min_inter = int(request.POST.get('min_inter')or 0)
+   
     gen_remark = str(request.POST.get('gen_remark')or "-")
 
     # เก็บค่าอุปกรณ์ตกเเต่ง
@@ -496,14 +495,12 @@ def branceadd (request):
     request.session['add_kickback'] = add_kickback
     request.session['com_fi_percent'] = com_fi_percent
     request.session['com_fi_monthl'] = com_fi_month
-    request.session['min_prosub'] = min_prosub
     request.session['min_reduce'] = min_reduce
     request.session['min_regis'] = min_regis
     request.session['min_pdi'] = min_pdi
     request.session['min_frame'] = min_frame
     request.session['min_polish'] = min_polish
     request.session['min_subdown'] = min_subdown
-    request.session['min_inter'] = min_inter
     request.session['min_acc'] = min_acc
     request.session['gen_remark'] = gen_remark
 
@@ -518,22 +515,32 @@ def branceadd (request):
     #ยอดจัด
     cost_finance = int((productprice-min_reduce+add_eq)-cost_down) #pass
     
+    #subsidy_inter
+    subsidy_inter = int(cost_finance * (gen_month/12) * ((gen_inter/100)-(min_inter/100)))
+
     #ดอกเบี้ยทั้งหมด
-    total_inter = int(((cost_finance*(gen_inter/100))*(gen_month/12))-min_inter) #edit
+    total_inter = int(((cost_finance*(gen_inter/100))*(gen_month/12))-subsidy_inter) #edit
     #ค่างวดปกติ
-    month_payment = int(math.ceil((((cost_finance*(gen_inter/100)*(gen_month/12))-min_inter)+cost_finance)/gen_month)) #pass
+    month_payment = int(math.ceil((((cost_finance*(gen_inter/100)*(gen_month/12))-subsidy_inter)+cost_finance)/gen_month)) #pass
     #com-finance
     total_com_finance = float(((cost_finance)*(gen_inter/100)*(com_fi_percent/100)*(com_fi_month/12))/1.07) #pass
     #ส่วนเพิ่มส่วนลด
     total_addmargin = float(add_eq + add_kickback + total_com_finance) #edit
     #รวมรายการของเเถมอุปกรณ์ตกเเต่ง
     total_gift = int(min_regis + min_pdi + min_frame + min_polish + min_acc) #pass
+
+    
+    #รวมการ Subsidy
+    sumsubsidy = int(min_prosub + subsidy_inter)
+    
+    
     #ส่วนลดส่วนลด
 
     if statusvatdown == "1" : #เเถม vatsubdown
-         total_minmargin = float(min_prosub + min_reduce + min_regis + min_pdi + min_frame + min_polish + min_subdown + min_inter+ min_acc + exit_cost_down_vat)
+         total_minmargin = float(sumsubsidy + min_reduce + min_regis + min_pdi + min_frame + min_polish + min_subdown + min_acc + exit_cost_down_vat)
     elif statusvatdown == "0": # ไม่เเถม
-         total_minmargin = float(min_prosub + min_reduce + min_regis + min_pdi + min_frame + min_polish + min_subdown + min_inter+ min_acc)
+         total_minmargin = float(sumsubsidy + min_reduce + min_regis + min_pdi + min_frame + min_polish + min_subdown + min_acc)
+
     #ส่วนลดสุทธิ
     total_margin = float(productmargin + total_addmargin - total_minmargin) #pass
     
@@ -583,6 +590,8 @@ def branceadd (request):
     request.session['total_margin'] = total_margin
     request.session['total_exit'] = total_exit
     request.session['total_exit_cash'] = total_exit_cash
+    request.session['subsidy_inter'] = subsidy_inter
+    request.session['sumsubsidy'] = sumsubsidy
   
 
 
@@ -597,7 +606,8 @@ def branceadd (request):
             'min_reduce':'{:,}'.format(min_reduce), #-ลดราคาขาย
             'total_gift':'{:,}'.format(total_gift), #-รวมการของบังคับ
             'min_subdown':'{:,}'.format(min_subdown), # 
-            'min_inter':'{:,}'.format(min_inter),
+            'subsidy_inter':'{:,}'.format(subsidy_inter),
+            'sumsubsidy':'{:,}'.format(sumsubsidy),
             'productmargin':'{:,}'.format(productmargin),
             'exit_cost_down':'{:,}'.format(exit_cost_down),
             'red_frame':'{:,}'.format(red_frame),
@@ -965,7 +975,6 @@ def branchcash (request):
             'productprice':'{:,}'.format(productprice), #ราคาขาย
             'gen_prepay':'{:,}'.format(gen_prepay), #เงินจอง
             'add_kickback':add_kickback, #+ ค่า kickback
-            'min_prosub':min_prosub, #-ค่า โปร subsidy
             'min_reduce':'{:,}'.format(min_reduce), #-ลดราคาขาย
             'total_gift':'{:,}'.format(total_gift), #-รวมการของบังคับ
             'min_subdown':min_subdown, # 
@@ -1025,7 +1034,7 @@ def showdata(request):
    add_kickback = int(request.session.get('add_kickback'))
    gen_inter = float(request.session.get('gen_inter'))
    min_prosub = int(request.session.get('min_prosub'))
-   min_inter = int(request.session.get('min_inter'))
+   subsidy_inter = int(request.session.get('subsidy_inter'))
    month_payment = int(request.session.get('month_payment'))
    condition_finance = str(request.session.get('condition_finance'))
    gen_company = str(request.session.get('gen_company'))
@@ -1089,7 +1098,6 @@ def showdata(request):
       'min_regis':'{:,.0f}'.format(min_regis), 
       'regiscost':'{:,.0f}'.format(regiscost), 
       'productprice':'{:,.0f}'.format(productprice), 
-      'min_prosub':'{:,.0f}'.format(min_prosub), 
       'exit_cost_down':'{:,.0f}'.format(exit_cost_down), 
       'total_exit_cash':'{:,.0f}'.format(total_exit_cash), 
       'cost_down':'{:,.0f}'.format(cost_down), 
@@ -1104,7 +1112,7 @@ def showdata(request):
       'add_kickback':'{:,.0f}'.format(add_kickback), 
       'cost_finance':'{:,}'.format(cost_finance), 
       'month_payment':'{:,}'.format(month_payment), 
-      'min_inter':'{:,.0f}'.format(min_inter), 
+      'subsidy_inter':'{:,.0f}'.format(subsidy_inter), 
       'gen_inter':'{:,.2f}'.format(gen_inter), 
       'statusvatdown':statusvatdown, 
       'exit_cost_down_vat':'{:,.0f}'.format(exit_cost_down_vat), 

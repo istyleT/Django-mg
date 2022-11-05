@@ -521,9 +521,9 @@ def branceadd (request):
     subsidy_inter = int(((cost_finance * (gen_month/12) * ((gen_inter/100)-(min_inter/100)))/1.07)*1.03)
 
     #ดอกเบี้ยทั้งหมด
-    total_inter = int(((cost_finance*(gen_inter/100))*(gen_month/12))-subsidy_inter) #edit
+    total_inter = int(((cost_finance*(min_inter/100))*(gen_month/12))) #edit
     #ค่างวดปกติ
-    month_payment = int(math.ceil((((cost_finance*(gen_inter/100)*(gen_month/12))-subsidy_inter)+cost_finance)/gen_month)) #pass
+    month_payment = int(math.ceil((((cost_finance*(min_inter/100)*(gen_month/12)))+cost_finance)/gen_month)) #pass
     #com-finance
     total_com_finance = float(((cost_finance)*(gen_inter/100)*(com_fi_percent/100)*(com_fi_month/12))/1.07) #pass
     #ส่วนเพิ่มส่วนลด

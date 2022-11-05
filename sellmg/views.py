@@ -1103,6 +1103,7 @@ def showdata(request):
       'cost_down':'{:,.0f}'.format(cost_down), 
       'red_frame':'{:,.0f}'.format(red_frame), 
       'total_exit':'{:,.0f}'.format(total_exit), 
+      'min_prosub':'{:,.0f}'.format(min_prosub), 
       'net_produceprice':'{:,.0f}'.format(net_produceprice), 
       'gen_down':'{:,.0f}'.format(gen_down), 
       'add_eq':'{:,.0f}'.format(add_eq), 

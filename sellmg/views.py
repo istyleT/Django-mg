@@ -504,6 +504,7 @@ def branceadd (request):
     request.session['min_acc'] = min_acc
     request.session['gen_remark'] = gen_remark
     request.session['min_prosub'] = min_prosub
+    request.session['min_inter'] = min_inter
 
     #------------คำนวณค่า--------------
     
@@ -1035,7 +1036,7 @@ def showdata(request):
    add_kickback = int(request.session.get('add_kickback'))
    gen_inter = float(request.session.get('gen_inter'))
    min_prosub = int(request.session.get('min_prosub'))
-   subsidy_inter = int(request.session.get('subsidy_inter'))
+   min_inter = int(request.session.get('min_inter'))
    month_payment = int(request.session.get('month_payment'))
    condition_finance = str(request.session.get('condition_finance'))
    gen_company = str(request.session.get('gen_company'))
@@ -1114,7 +1115,7 @@ def showdata(request):
       'add_kickback':'{:,.0f}'.format(add_kickback), 
       'cost_finance':'{:,}'.format(cost_finance), 
       'month_payment':'{:,}'.format(month_payment), 
-      'subsidy_inter':'{:,.0f}'.format(subsidy_inter), 
+      'min_inter':'{:,.0f}'.format(min_inter), 
       'gen_inter':'{:,.2f}'.format(gen_inter), 
       'statusvatdown':statusvatdown, 
       'exit_cost_down_vat':'{:,.0f}'.format(exit_cost_down_vat), 

@@ -980,7 +980,6 @@ def branchcash (request):
             'min_reduce':'{:,}'.format(min_reduce), #-ลดราคาขาย
             'total_gift':'{:,}'.format(total_gift), #-รวมการของบังคับ
             'min_subdown':min_subdown, # 
-            'min_inter':min_inter,
             'productmargin':'{:,}'.format(productmargin),
             'exit_cost_down':exit_cost_down,
             'red_frame':'{:,}'.format(red_frame),
@@ -1036,7 +1035,7 @@ def showdata(request):
    add_kickback = int(request.session.get('add_kickback'))
    gen_inter = float(request.session.get('gen_inter'))
    min_prosub = int(request.session.get('min_prosub'))
-   min_inter = int(request.session.get('min_inter'))
+   min_inter = float(request.session.get('min_inter'))
    month_payment = int(request.session.get('month_payment'))
    condition_finance = str(request.session.get('condition_finance'))
    gen_company = str(request.session.get('gen_company'))
@@ -1115,7 +1114,7 @@ def showdata(request):
       'add_kickback':'{:,.0f}'.format(add_kickback), 
       'cost_finance':'{:,}'.format(cost_finance), 
       'month_payment':'{:,}'.format(month_payment), 
-      'min_inter':'{:,.0f}'.format(min_inter), 
+      'min_inter':'{:,.2f}'.format(min_inter), 
       'gen_inter':'{:,.2f}'.format(gen_inter), 
       'statusvatdown':statusvatdown, 
       'exit_cost_down_vat':'{:,.0f}'.format(exit_cost_down_vat), 

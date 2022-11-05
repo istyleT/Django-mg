@@ -78,6 +78,7 @@ function sumSubsidy() {
     let total_subsidy = parseInt(min_prosub + subsidy_inter).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     showtotalsubsidy.style.display = 'block';
     document.getElementById('showtotalsubsidy').innerHTML = total_subsidy + ' ' + 'บาท';
+    document.getElementById('total_subsidy').innerHTML = '=' + ' ' + (total_subsidy.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')) + ' ' + 'บาท' ;
     console.log('--------')
     console.log('โปรซับ ='+ min_prosub)
     console.log('ดอกเบี้ยเสนอลูกค้า ='+ min_inter + '%')

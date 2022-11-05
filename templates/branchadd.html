@@ -667,6 +667,7 @@ function tagMRD() {
   else {
     document.getElementById('min_reduce').innerHTML = "="+" "+(tagmin_reduce.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','))+" "+'บาท' ; 
   }
+  totalgeninter()
   
 };
 function tagAEQ() {
@@ -677,6 +678,7 @@ function tagAEQ() {
   else {
     document.getElementById('add_eq').innerHTML = "="+" "+(tagadd_eq.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','))+" "+'บาท' ; 
   }
+  totalgeninter()
   
 };
 function tagAKB() {
@@ -707,6 +709,7 @@ function tagGDPC() {
   else {
     document.getElementById('gen_down').innerHTML =  "="+" "+(taggen_down_percent.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','))+"%";
   }
+  totalgeninter()
    
 };
 function tagMSD() {
@@ -722,6 +725,7 @@ function tagMSD() {
 function tagGM() {
   const taggen_month = document.getElementById('idgen_month').value;
   document.getElementById('gen_month').innerHTML =  "="+" "+(taggen_month.toString())+" "+'งวด'  ; 
+  totalgeninter()
 };
 function tagGPP() {
   const taggen_prepay = document.getElementById('idgen_prepay').value;
@@ -741,6 +745,7 @@ function tagMIT() {
   else {
     document.getElementById('min_inter').innerHTML =  "="+" "+(tagmin_inter.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','))+" "+'บาท';
   }
+  totalgeninter()
    
 };
 function tagGIT() {

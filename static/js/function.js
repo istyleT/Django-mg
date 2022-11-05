@@ -57,43 +57,7 @@ function resetdown(){
 };
 
 
-/**********************************function คำนวณดอกเบี้ย******************************************/
 
-function  totalgeninter() {
-     /* เก็บค่าตัวเเปร */
-     const productprice = Number(document.getElementById('productprice').innerHTML) ; //type int 
-     const min_reduce = Number(document.getElementById('idmin_reduce').value || 0); // type int
-     const add_eq = Number(document.getElementById('idadd_eq').value || 0);  // type int
-     const gen_down_percent = Number(document.getElementById('gen_down_percent').value || 0); //type float 
-     const gen_month = Number(document.getElementById('idgen_month').value || 0) ; // type int 
-     const gen_inter = Number(document.getElementById('idgen_inter').value || 0) ; // type float
-
-
-     console.log('ราคารถ ='+ productprice)
-     console.log(typeof(productprice))
-     console.log('ส่วนลดจากราคา ='+ min_reduce)
-     console.log(typeof(min_reduce))
-     console.log('บวกหัวค่าอุปกรณ์ ='+ add_eq)
-     console.log(typeof(add_eq))
-     console.log('% เงินดาวน์ =' + gen_down_percent + '%')
-     console.log(typeof(gen_down_percent))
-     console.log('จำนวนงวด =' + gen_month)
-     console.log(typeof(gen_month))
-     console.log('% ดอกเบี้ย =' + gen_inter + '%')
-     console.log(typeof(gen_inter))
-     
-     /* คำนวนค่าที่ต้องการ */
-     let net_productprice = productprice - min_reduce + add_eq ;
-     const cost_finance = net_productprice * (1-(gen_down_percent/100)) ;
-     let total_inter_ture =  cost_finance * (gen_inter/100) * (gen_month /12);
-     console.log('ราคารถสุทธิ =' + net_productprice)
-     console.log('ยอดจัดไฟเเนนซ์ =' + cost_finance)
-     console.log('ดอกเบี้ยทั้งหมด =' + total_inter_ture)
-     console.log('------------------------------------')
-     return total_inter_ture ;
-
-};
-/**********************************************************************************************************/
 
 /**********************************************function คำนวณค่า subsidy ทั้งหมด************************************************************/
 function sumSubsidy() {

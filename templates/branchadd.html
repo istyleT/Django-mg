@@ -640,7 +640,7 @@ function  totalgeninter() {
      /* คำนวนค่าที่ต้องการ */
      let net_productprice = productprice - min_reduce + add_eq ;
      const cost_finance = net_productprice * (1-(gen_down_percent/100)) ;
-     let total_inter_ture =  cost_finance * (gen_inter/100) * (gen_month /12);
+     let total_inter_ture =  parseInt(cost_finance * (gen_inter/100) * (gen_month /12));
      console.log('ราคารถสุทธิ =' + net_productprice)
      console.log('ยอดจัดไฟเเนนซ์ =' + cost_finance)
      console.log('ดอกเบี้ยทั้งหมด =' + total_inter_ture)

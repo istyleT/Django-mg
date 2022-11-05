@@ -518,7 +518,7 @@ def branceadd (request):
     cost_finance = int((productprice-min_reduce+add_eq)-cost_down) #pass
     
     #subsidy_inter
-    subsidy_inter = int(cost_finance * (gen_month/12) * ((gen_inter/100)-(min_inter/100)))
+    subsidy_inter = int(((cost_finance * (gen_month/12) * ((gen_inter/100)-(min_inter/100)))/1.07)*1.03)
 
     #ดอกเบี้ยทั้งหมด
     total_inter = int(((cost_finance*(gen_inter/100))*(gen_month/12))-subsidy_inter) #edit
@@ -1080,7 +1080,6 @@ def showdata(request):
    text_acc_18 = str(request.session.get('text_acc_18'))
    text_acc_19 = str(request.session.get('text_acc_19'))
    text_acc_20 = str(request.session.get('text_acc_20'))
-   # หมายเหตุ
    gen_remark = str(request.session.get('gen_remark'))
    
 

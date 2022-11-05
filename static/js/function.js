@@ -32,7 +32,7 @@ function caldown() {
      }
     
                     
-}
+};
 
 
 function resetdown(){
@@ -54,7 +54,8 @@ function resetdown(){
      b.value = "" ;
      d.value = "" ;
 
-}
+};
+
 
 
 

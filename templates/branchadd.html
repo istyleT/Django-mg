@@ -227,6 +227,8 @@
                                             <option value='BEGIN'>Beginning</option>
                                           </select>
                                         </div>
+
+                                        <div class="alert alert-primary" id="show_inter_true" style="display: none;  margin-top: 1vh;"></div>
               
                           </div>
                      
@@ -620,7 +622,7 @@ function  totalgeninter() {
      const gen_down_percent = Number(document.getElementById('gen_down_percent').value || 0); //type float 
      const gen_month = Number(document.getElementById('idgen_month').value || 0) ; // type int 
      const gen_inter = Number(document.getElementById('idgen_inter').value || 0) ; // type float
-
+     
 
      console.log('ราคารถ ='+ productprice)
      console.log(typeof(productprice))
@@ -643,6 +645,9 @@ function  totalgeninter() {
      console.log('ยอดจัดไฟเเนนซ์ =' + cost_finance)
      console.log('ดอกเบี้ยทั้งหมด =' + total_inter_ture)
      console.log('------------------------------------')
+     document.getElementById('show_inter_true').style.display = 'block';
+     document.getElementById('show_inter_true').innerHTML = total_inter_ture.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + ' ' + 'บาท';
+     
      return total_inter_ture ;
 
 };

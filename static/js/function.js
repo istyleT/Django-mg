@@ -79,7 +79,6 @@ function sumSubsidy() {
     showtotalsubsidy.style.display = 'block';
     document.getElementById('showtotalsubsidy').innerHTML = total_subsidy + ' ' + 'บาท';
     console.log('--------')
-    console.log(min_inter)
     console.log('โปรซับ ='+ min_prosub)
     console.log('ดอกเบี้ยเสนอลูกค้า ='+ min_inter + '%')
     console.log('ซับดอกลูกค้า ='+ subsidy_inter)

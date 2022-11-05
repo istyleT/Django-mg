@@ -745,7 +745,7 @@ function tagMIT() {
   else {
     document.getElementById('min_inter').innerHTML =  "="+" "+(tagmin_inter.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','))+" "+'บาท';
   }
-  totalgeninter()
+  
    
 };
 function tagGIT() {
@@ -756,6 +756,7 @@ function tagGIT() {
   else {
     document.getElementById('gen_inter').innerHTML =  "="+" "+(taggen_inter.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','))+"%"; 
   }
+  totalgeninter()
   
 };
 function tagCDTFN() {

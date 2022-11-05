@@ -109,26 +109,7 @@
                                          </div>
                           </div>
                         </div>
-                         <!-----------โปรโมชั่น Subsidy-------------->
-                         <!--<div class="accordion-item">
-                          <h2 class="accordion-header" id="flush-headingX">
-                            <button class="accordion-button collapsed text-danger" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseX" aria-expanded="false" aria-controls="flush-collapseX">
-                              <h5>
-                                <strong>โปรโมชั่น Subsidy</strong>
-                                <strong align="right" id="min_prosub"></strong>
-                              </h5>
-                    
-                            </button>
-                          </h2>
-                          <div id="flush-collapseX" class="accordion-collapse collapse" aria-labelledby="flush-headingX" data-bs-parent="#accordionFlushExample">
-                                            <div class="input-group" style="margin-top: 1vh;">
-                                                                <input name="min_prosub" id="idmin_prosub" type="number" class="form-control" placeholder="-" onchange="tagMPS()">
-                                                                <span class="input-group-text">บาท</span>
-                                            </div>
-                          </div>
-                        </div>
-
-                         -->
+                         
                          
                         <!--------------------------เงินดาว์น------------------->
                         <div class="accordion-item ">
@@ -250,6 +231,38 @@
                           </div>
                      
                         </div>
+                         <!----------Subsidy------------->
+                   
+                      <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingI">
+                          <button class="accordion-button collapsed text-danger" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseI" aria-expanded="false" aria-controls="flush-collapseI">
+                            <h5>
+                              <strong>Subsidy</strong>
+                              <strong align="right" id="total_subsidy"></strong>
+                            </h5>
+                          </button>
+                        </h2>
+                        <div id="flush-collapseI" class="accordion-collapse collapse" aria-labelledby="flush-headingI" data-bs-parent="#accordionFlushExample">
+                                          
+                                          <div class="input-group" style="margin-top: 1vh;">
+                                                              <input name="min_prosub" id="idmin_prosub"  type="number" class="form-control" placeholder="โปรซับดอก">
+                                                              <span class="input-group-text">บาท</span>
+                                          </div>
+                                          <div class="input-group mb-3" style="margin-top: 1vh;">
+                                                              <input name="min_inter" id="idmin_inter" type="number" class="form-control" placeholder="ดอกเบี้ยเสนอลูกค้า" aria-label="">
+                                                              <span class="input-group-text">%</span>
+                                          </div>
+  
+                                          <div  class="alert alert-danger" id="showtotalsubsidy" style="display: none; text-align: center;"></div>
+  
+                                          <div align="center" style="margin-top: 2vh; ">
+                                               <button type="button" style="width: 50vw; margin-bottom: 1vh;" class="btn btn-outline-danger" onclick="sumSubsidy()"><strong>รวมค่า Subsidy</strong></button>
+                                          </div>
+  
+                        </div>
+                       </div>
+                       
+
                         <!--------Com ไฟเเนนซ์---------->
                         <div class="accordion-item">
                           <h2 class="accordion-header" id="flush-headingThree">

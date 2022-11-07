@@ -59,7 +59,7 @@
                          {% endif %}
                        </tr>
                        <tr>
-                         <th scope="row">ประเภทจดทะเบียนภาษี :</th>
+                         <th scope="row">จดทะเบียนภาษี :</th>
                          {% if registype == 'person' %}
                          <td>บุคคล</td>
                          {% elif registype == 'company' %} 
@@ -461,6 +461,7 @@
       document.getElementById("printPDF").style.display = "none";
       document.getElementById("printPDF").style.visibility = "none";
       document.getElementById("onepage").style.display = "flex";
+      window.save();
       window.print();
          
      }

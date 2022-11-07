@@ -8,7 +8,7 @@
                     <meta name="viewport" content="width=device-width, initial-scale=1.0">
                     <title>Quotation Page</title>
                     <link rel="stylesheet"  href="{% static 'bootstrap/css/bootstrap.min.css' %}">
-                    <link rel="stylesheet" href="{% static 'css/print.css' %}">
+                    <link rel="stylesheet" href="{% static 'css/print.css' %}" media="print">
                     {% block style  %} {% endblock %}
 
              <!--
@@ -456,13 +456,12 @@
 
 <script>
      function printFunction() {
-      document.getElementById("printdonshow").style.display = "none";
-      document.getElementById("printdonshow").style.visibility = "none";
-      document.getElementById("printPDF").style.display = "none";
-      document.getElementById("printPDF").style.visibility = "none";
-      document.getElementById("onepage").style.display = "flex";
-      window.save();
-      window.print();
+          document.getElementById("printdonshow").style.display = "none";
+          document.getElementById("printdonshow").style.visibility = "none";
+          document.getElementById("printPDF").style.display = "none";
+          document.getElementById("printPDF").style.visibility = "none";
+          document.getElementById("onepage").style.display = "flex";
+          window.print();
          
      }
 

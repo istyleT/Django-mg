@@ -12,10 +12,10 @@ html body {
                   height: 100%;
 }
 
-#printPDF {
+/*#printPDF {
                     display: none;
                     visibility: none;
-}
+}*/
 
 #addremark {
                     margin-left: 3vw;

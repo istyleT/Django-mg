@@ -8,7 +8,7 @@
                     <meta name="viewport" content="width=device-width, initial-scale=1.0">
                     <title>Quotation Page</title>
                     <link rel="stylesheet"  href="{% static 'bootstrap/css/bootstrap.min.css' %}">
-                    <link rel="stylesheet" href="{% static 'css/print.css' %}" media="print">
+                    <link rel="stylesheet" href="{% static 'css/print.css' %}">
                     {% block style  %} {% endblock %}
 
              <!--
@@ -449,25 +449,19 @@
 <span id="addremark" style="margin-left: 2.5vw; font-size: 12px;">หมายเหตุ : เงื่อนไขเป็นไปตามที่บริษัทกำหนด</span>
 
 <div class="d-grid gap-1" style="margin: 1vh 14vw;">
-  <button id="printPDF" onclick="window.print()" class="btn btn-danger"><strong>Print / Save PDF</strong></button>
+  <button id="printPDF" onclick="printFunction()" class="btn btn-danger"><strong>Print / Save PDF</strong></button>
 </div>
 
-<!--
-<script>
-  document.getElementById('dl-png').onclick = function(){
-    const screenshot = document.getElementById('onepage');
-    html2canvas(screenshot).then((canvas)=>{
-        const base64image = canvas.toDataURL('img/png');
-        var anchor = document.createElement('a');
-        anchor.setAttribute('href', base64image);
-        anchor.setAttribute('download', 'summary.png');
-        anchor.click();
-        anchor.remove();
-    });
-  };
-</script>
--->
 
+
+<script>
+     function printFunction() {
+         window.print();
+         document.getElementById("printPDF").style.display = "none";
+     }
+
+
+</script>
 
 
 </body>

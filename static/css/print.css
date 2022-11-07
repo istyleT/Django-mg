@@ -12,21 +12,20 @@ html body {
                   height: 100%;
 }
 
-/*#printPDF {
+#printPDF {
                     display: none;
                     visibility: none;
-}*/
+}
 
 #addremark {
                     margin-left: 3vw;
                     font-size: 12px;
 }
 
-/*#onepage {
+#onepage {
                     display: flex;
                    
-}*/
-
+}
 
 table {
                     font-size: 14px;

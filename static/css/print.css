@@ -5,7 +5,7 @@ html body {
 
 @page {
                   size: A4;
-                  margin-top: 2vh;
+                  margin-top: 1vh;
                   margin-left: 3vw;
                   margin-bottom: 0px;
                   width: 100%;
@@ -28,11 +28,11 @@ html body {
 }
 
 table {
-                    font-size: 14px;
+                    font-size: 12px;
                     margin-top: 0px;
 }
 
 .nameacc {
-                    font-size: 14px;
+                    font-size: 12px;
 }
 

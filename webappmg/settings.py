@@ -27,9 +27,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['djwebappmg-version1.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['djwebappmg-version1.herokuapp.com']
 
 
 LOGIN_URL = "auth/login"

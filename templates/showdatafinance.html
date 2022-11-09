@@ -217,23 +217,58 @@
  
 </div>
 
+<!----------alert box ----------->
+<div  id="error-box" class="alert alert-danger" role="alert" style="display: none; text-align: center; margin: 1vh 0vw;">
+  <strong>กรุณากรอกข้อมูลให้ครบถ้วน</strong>
+</div>
+<!--------------------------------->
 <form method="POST" action="showdata"> 
   {% csrf_token %}
   <div class="input-group mb-3" style="margin-top: 2vh ;">
-    <input name="sell_name" type="text" class="form-control" placeholder="ชื่อผู้เสนอราคา" aria-label="">
+    <div style="width: 39vw; text-align: center; border-radius: 10px; border: 1px solid green; margin-right: 5px; " class="bg-success.bg-gradient">
+      <strong>ผู้เสนอราคา : {{firstname}}</strong>
+    </div>
     <span class="input-group-text">โทร</span>
-    <input name="sell_phone" type="text" class="form-control" placeholder="เบอร์ติดต่อ" aria-label="">
+    <input  id="idsell_phone" name="sell_phone" type="text" class="form-control" placeholder="เบอร์ติดต่อ" aria-label="">
   </div>
   <div class="input-group mb-3" >
-    <input name="customer_name" type="text" class="form-control" placeholder="ชื่อลูกค้า" aria-label="">
+    <input id="idcustomer_name" name="customer_name" type="text" class="form-control" placeholder="ชื่อลูกค้า" aria-label="">
     <span class="input-group-text">โทร</span>
-    <input name="customer_phone" type="text" class="form-control" placeholder="เบอร์ติดต่อ" aria-label="">
+    <input id="idcustomer_phone" name="customer_phone" type="text" class="form-control" placeholder="เบอร์ติดต่อ" aria-label="">
   </div>
 
   <div class="d-grid gap-1" style="margin: 2vh 0vh;">
-    <button  type="submit" class="btn btn-success" >ใบสรุปรายการ</button>
+    <button id="checkdatauser" type="submit" class="btn btn-success" >ใบสรุปรายการ</button>
   </div>
 </form>
+
+
+
+<script>
+
+/****************function checkdatauser************************/
+  const checkdatauser = document.getElementById("checkdatauser")
+  checkdatauser.addEventListener("click", function(e) {
+     const sell_phone = document.getElementById('idsell_phone');
+     const customer_name = document.getElementById('idcustomer_name');
+     const customer_phone = document.getElementById('idcustomer_phone');
+     if (sell_phone.value  == "" || sell_phone.value == null){
+          e.preventDefault();
+          document.getElementById('error-box').style.display = 'block';
+     }
+     if (customer_name.value == "" || customer_name.value == null){
+          e.preventDefault();
+          document.getElementById('error-box').style.display = 'block';
+     }
+     if (customer_phone.value == "" || customer_phone.value == null){
+          e.preventDefault();
+          document.getElementById('error-box').style.display = 'block';
+     }
+    
+});
+/*******************************************************************/
+  
+</script>
   
 
 {% endblock %}

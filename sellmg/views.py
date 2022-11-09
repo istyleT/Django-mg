@@ -6,6 +6,7 @@ from sellmg.models import Accmgs ;
 from sellmg.models import Colorsubmodels ;
 from django.db.models import Q ;
 from django.contrib.auth.decorators import login_required ;
+from django.contrib.auth.models import User
 import math
 
 #########################นำ css / java static มาใช้งาน ##########################
@@ -107,16 +108,24 @@ def collectdata(request):
     # เก็บข้อมูลการ login จาก user 
     username = str(request.POST.get('username'))
     password = str(request.POST.get('password'))
-    
+
+    # เอาข้อมูลที่เก็บได้ไปเช็คมามีไหม
+    user = authenticate(request, username=username, password=password)
+    # query เอา firstname  จาก table auth_user
+    firstname_set = User.objects.filter(username = username).values_list('first_name',named=True)
+    # for เอาข้อมูลจาก Queryset
+    for i in firstname_set :
+        firstname =  str(i.first_name)
     #ส่งข้อมูลออก
     request.session['username'] = username
-    # เอาข้อมูลที่เก็บได้ไปเช็ค
-    user = authenticate(request, username=username, password=password)
+    request.session['firstname'] = firstname
+    
+
     # ถ้ามี เข้า condition render หน้าต่อไป 
     if user is not None:
         # Log a user in
          login(request, user)
-         return render(request,'index.html')
+         return render(request,'index.html', {"firstname":firstname, "firstname_set":firstname_set})
     # ถ้าไม่มี สั่ง render หน้าเดิม
     else:
         return render(request,'login.html')
@@ -217,7 +226,7 @@ def branceadd (request):
     productprice = int(request.session.get('productprice'))
     paytype = str(request.session.get('paytype'))
     #productmargin  = int(request.session.get('productmargin'))
-    
+    firstname = str(request.session.get('firstname'))
 
     #กำหนดค่าคงที่
     red_frame = int(3000) #ค่าป้ายเเดง
@@ -621,6 +630,7 @@ def branceadd (request):
             'paytype':paytype,
             'gen_month':gen_month,
             'gen_inter':gen_inter,
+            'firstname':firstname,
             'statusvatdown':statusvatdown,
             'min_acc':'{:,}'.format(min_acc),
             'condition_finance':condition_finance,
@@ -642,7 +652,7 @@ def branchcash (request):
     productprice = int(request.session.get('productprice'))
     paytype = str(request.session.get('paytype'))
     #productmargin  = int(request.session.get('productmargin'))
-    
+    firstname = str(request.session.get('firstname'))
     #กำหนดค่าคงที่
     red_frame = int(3000) #ค่าป้ายเเดง
 
@@ -989,6 +999,7 @@ def branchcash (request):
             'min_regis':'{:,}'.format(min_regis),
             'exit_cost_down_vat':exit_cost_down_vat,
             'gen_down':gen_down,
+            'firstname':firstname,
             'gen_month':gen_month,
             'gen_inter':gen_inter,
             'statusvatdown':statusvatdown,
@@ -1007,14 +1018,15 @@ def branchcash (request):
 @login_required(login_url='/firstdata') 
 def showdata(request):
    # เก็บข้อมูลหน้าตัวเอง
-   sell_name= str(request.POST.get('sell_name')or '-')
    sell_phone= str(request.POST.get('sell_phone')or '-')
    customer_name= str(request.POST.get('customer_name')or '-')
    customer_phone= str(request.POST.get('customer_phone')or '-')
    
    from datetime import datetime
    now = datetime.today() #วันที่
-   
+
+   #เก็บข้อมูล user
+   firstname = str(request.session.get('firstname'))
    #ข้อมูลทั่วไป
    submodel = str(request.session.get('submodel'))
    bodycolor = str(request.session.get('bodycolor'))
@@ -1143,10 +1155,10 @@ def showdata(request):
       'text_acc_18':text_acc_18,  #pass
       'text_acc_19':text_acc_19,  #pass
       'text_acc_20':text_acc_20,  #pass
-      'sell_name':sell_name,  #pass
       'sell_phone':sell_phone,  #pass
       'customer_name':customer_name,  #pass
       'customer_phone':customer_phone,  #pass
+      'firstname':firstname,  #pass
       
        
 
@@ -1154,31 +1166,4 @@ def showdata(request):
    return render(request, 'quotation.html', details)
 
 ##############################################################################
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

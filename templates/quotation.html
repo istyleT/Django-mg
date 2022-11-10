@@ -41,13 +41,14 @@
          
   
 </head>
-<body>
 
-  
+
+
+
+<body>
 
 
 <div id="savePDF">
-
 
   <header class="header">
     <h3 align="center" >ใบเสนอราคา</h3>
@@ -491,11 +492,11 @@
      function saveToPdf() {
        var element = document.getElementById('savePDF');
        var opt = {
-         margin:       [0,0,0,0],
+         margin:       [0,0,0,1],
          filename:     'quotation.pdf',
          image:        { type: 'jpeg', quality: 0.98 },
-         html2canvas:  { scale: 2 },
-         jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+         html2canvas:  { scale: 1 },
+         jsPDF:        { unit: 'cm', format: 'letter' }
        };
        
        // New Promise-based usage:

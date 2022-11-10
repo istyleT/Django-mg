@@ -224,10 +224,10 @@
 <!--------------------------------->
 <form method="POST" action="showdata"> 
   {% csrf_token %}
-  <div class="input-group mb-3" style="margin-top: 2vh ;">
-    <div style="width: 39vw; text-align: center; border-radius: 10px; border: 1px solid green; margin-right: 5px; " class="bg-success.bg-gradient">
-      <strong>ผู้เสนอราคา : {{firstname}}</strong>
-    </div>
+  <div class="input-group mb-3" style="margin-top: 1vh ;">
+    <div style="width: 39vw; text-align: center; border-radius: 10px; border: 1px solid green; margin-right: 5px; ">
+      <strong style="position: relative; top: 15%; ">ผู้เสนอราคา : {{firstname}}</strong>
+    </div >
     <span class="input-group-text">โทร</span>
     <input  id="idsell_phone" name="sell_phone" type="text" class="form-control" placeholder="เบอร์ติดต่อ" aria-label="">
   </div>

@@ -496,6 +496,7 @@
 
 <script>
      function saveToPdf() {
+      html2pdf = new HTML2PDF('P', 'A4', 'en', true, 'UTF-8', array(0, 0, 0, 0));
       const element = document.getElementById('savePDF');
       html2pdf().from(element).save();
  

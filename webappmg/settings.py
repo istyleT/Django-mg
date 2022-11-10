@@ -107,7 +107,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 django_on_heroku.settings(locals())
 
-
 ## Build paths inside the project like this: BASE_DIR / 'subdir'.
 ## Quick-start development settings - unsuitable for production
 ## See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/

@@ -11,6 +11,25 @@
        {% block script %}
        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
        {% endblock %}
+
+    <script>
+        function saveToPdf() {
+          var element = document.getElementById('savePDF');
+          var opt = {
+            margin:       [0,0,0,1],
+            filename:     'quotation.pdf',
+            html2canvas:  { scale: 1 },
+            jsPDF:        { unit: 'cm', format: 'letter' }
+          };
+          
+          // New Promise-based usage:
+          html2pdf().set(opt).from(element).save();
+          
+          // Old monolithic-style usage:
+          html2pdf(element, opt);
+           
+        };
+   </script>
             
   <style>
   html body {
@@ -45,13 +64,13 @@
 
 
 
-<body>
+<body onload="saveToPdf()">
 
 
 <div id="savePDF">
 
   <header class="header">
-    <h3 align="center" >ใบเสนอราคา</h3>
+    <h4 align="center" >ใบเสนอราคา</h4>
   </header>
 
 <div id="onepage">
@@ -475,37 +494,21 @@
  </div>
 </div>
 
-<span id="addremark" style="margin-left: 2.5vw; font-size: 12px;">หมายเหตุ : เงื่อนไขเป็นไปตามที่บริษัทกำหนด</span>
+  <span id="addremark" style="margin-left: 2.5vw; font-size: 12px;">หมายเหตุ : เงื่อนไขเป็นไปตามที่บริษัทกำหนด</span>
 
 </div>
 
 
 
-
-<div class="d-grid gap-1" style="margin: 1vh 14vw;" id="printdonshow">
+<!--<div class="d-grid gap-1" style="margin: 1vh 14vw;" id="printdonshow">
   <button onclick="saveToPdf()" class="btn btn-danger"><strong>Download PDF</strong></button>
 </div>
+-->
 
 
 
-<script>
-     function saveToPdf() {
-       var element = document.getElementById('savePDF');
-       var opt = {
-         margin:       [0,0,0,1],
-         filename:     'quotation.pdf',
-         html2canvas:  { scale: 1 },
-         jsPDF:        { unit: 'cm', format: 'letter' }
-       };
-       
-       // New Promise-based usage:
-       html2pdf().set(opt).from(element).save();
-       
-       // Old monolithic-style usage:
-       html2pdf(element, opt);
-        
-     };
-</script>
+
+
 
 
 

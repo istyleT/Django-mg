@@ -2,25 +2,63 @@
 <html lang="en">
 <head>
   {% load static %}
-                    <meta charset="UTF-8">
-                    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                    <title>Quotation Page</title>
-                    <link rel="stylesheet"  href="{% static 'bootstrap/css/bootstrap.min.css' %}">
-                    <link rel="stylesheet" href="{% static 'css/print.css' %}" media="print">
-                    {% block style  %} {% endblock %}
-
-             <!--
-                <script  src="{% static 'js/html2canvas.min.js' %}" defer></script>
-                    {% block script %} {% endblock %}
-             -->
-                    
-                    
+       <meta charset="UTF-8">
+       <meta http-equiv="X-UA-Compatible" content="IE=edge">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <title>Quotation Page</title>
+       <link rel="stylesheet"  href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+       <link rel="stylesheet" href="{% static 'css/print.css' %}">
+       {% block style  %} {% endblock %}
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+      
+            
+  <style>
+      html body {
+                      margin: 1vh 4vw;
+                     
+  }
+  
+  /*@page {
+                    size: A4;
+                    margin-top: 2vh;
+                    margin-left: 3vw;
+                    margin-bottom: 0px;
+                    width: 100%;
+                    height: 100%;
+  }*/
+  
+  
+  #addremark {
+                      margin-left: 2vw;
+                      font-size: 14px;
+  }
+  
+  #onepage {
+                      display: flex;
+                     
+  }
+  
+  table {
+                      font-size: 14px;
+                      margin-top: 0px;
+  }
+  
+  .nameacc {
+                      font-size: 14px;
+  }
+    </style>
    
-
+         
+  
 </head>
 <body>
+
   
+
+
+<div id="savePDF">
+
+
   <header class="header">
     <h3 align="center" >ใบเสนอราคา</h3>
   </header>
@@ -445,28 +483,28 @@
  
  </div>
 </div>
+
 <span id="addremark" style="margin-left: 2.5vw; font-size: 12px;">หมายเหตุ : เงื่อนไขเป็นไปตามที่บริษัทกำหนด</span>
 
-<div class="d-grid gap-1" style="margin: 1vh 14vw;" id="printdonshow">
-  <button id="printPDF" onclick="window.print()" class="btn btn-danger"><strong>Print / Save PDF</strong></button>
 </div>
 
 
-<!--
+
+
+<div class="d-grid gap-1" style="margin: 1vh 14vw;" id="printdonshow">
+  <button onclick="saveToPdf()" class="btn btn-danger"><strong>Download PDF</strong></button>
+</div>
+
+
+
 <script>
-     function printFunction() {
-          document.getElementById("printdonshow").style.display = "none";
-          document.getElementById("printdonshow").style.visibility = "none";
-          document.getElementById("printPDF").style.display = "none";
-          document.getElementById("printPDF").style.visibility = "none";
-          document.getElementById("onepage").style.display = "flex";
-          window.print();
-         
-     }
-
-
+     function saveToPdf() {
+      const element = document.getElementById('savePDF');
+      html2pdf().from(element).save();
+ 
+     };
 </script>
--->
+
 
 
 

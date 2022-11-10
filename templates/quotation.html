@@ -17,14 +17,7 @@
                       margin:0;
                      
   }
-  
-  @page {
-    size: A4;
-    margin: 0;
-  }
-  
-  
-  
+    
   #addremark {
                       margin-left: 1vw;
                       font-size: 10px;
@@ -496,13 +489,21 @@
 
 <script>
      function saveToPdf() {
-      
-      const element = document.getElementById('savePDF');
-      html2pdf().from(element, {
-        margin: [0,0,0,0],
-        filename: 'quotations.pdf'
-      }).save();
- 
+       var element = document.getElementById('savePDF');
+       var opt = {
+         margin:       1,
+         filename:     'quotation.pdf',
+         image:        { type: 'jpeg', quality: 0.98 },
+         html2canvas:  { scale: 2 },
+         jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+       };
+       
+       // New Promise-based usage:
+       html2pdf().set(opt).from(element).save();
+       
+       // Old monolithic-style usage:
+       html2pdf(element, opt);
+        
      };
 </script>
 

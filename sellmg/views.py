@@ -111,24 +111,23 @@ def collectdata(request):
 
     # เอาข้อมูลที่เก็บได้ไปเช็คมามีไหม
     user = authenticate(request, username=username, password=password)
-    # query เอา firstname  จาก table auth_user
-    firstname_set = User.objects.filter(username = username).values_list('first_name',named=True)
-    # for เอาข้อมูลจาก Queryset
-    for i in firstname_set :
-        firstname =  str(i.first_name)
-    #ส่งข้อมูลออก
-    request.session['username'] = username
-    request.session['firstname'] = firstname
     
-
     # ถ้ามี เข้า condition render หน้าต่อไป 
     if user is not None:
         # Log a user in
          login(request, user)
-         return render(request,'index.html', {"firstname":firstname, "firstname_set":firstname_set})
+         # query เอา firstname  จาก table auth_user
+         firstname_set = User.objects.filter(username = username).values_list('first_name',named=True)
+         # for เอาข้อมูลจาก Queryset
+         for i in firstname_set :
+             firstname =  str(i.first_name)
+         #ส่งข้อมูลออก
+         request.session['firstname'] = firstname
+         return render(request,'index.html')
     # ถ้าไม่มี สั่ง render หน้าเดิม
     else:
-        return render(request,'login.html')
+        status_login = 'False'
+        return render(request,'login.html',{"status_login":status_login})
 
 @login_required(login_url='/firstdata') 
 def findsubmodel(request):
@@ -222,11 +221,12 @@ def PaymentRegis(request):
 def branceadd (request):
     
     #สร้างตัวเเปรการเก็บของข้อมูลรุ่นจากข้อมูลที่ส่งมาก่อนหน้า ใช้ request.session
+    firstname = str(request.session.get('firstname'))
     regiscost = int(request.session.get('regiscost'))
     productprice = int(request.session.get('productprice'))
     paytype = str(request.session.get('paytype'))
     #productmargin  = int(request.session.get('productmargin'))
-    firstname = str(request.session.get('firstname'))
+    
 
     #กำหนดค่าคงที่
     red_frame = int(3000) #ค่าป้ายเเดง
@@ -606,7 +606,8 @@ def branceadd (request):
   
 
 
-    data = {'regiscost':'{:,}'.format(regiscost), #ค่าจดทะเบียน
+    data = {'firstname':firstname,
+            'regiscost':'{:,}'.format(regiscost), #ค่าจดทะเบียน
             'add_eq':'{:,}'.format(add_eq), #+บวกหัวอุปกรณ์
             'cost_down':'{:,}'.format(cost_down), 
             'cost_finance':'{:,}'.format(cost_finance), #ยอดจัดไฟเเนนซ์
@@ -630,7 +631,6 @@ def branceadd (request):
             'paytype':paytype,
             'gen_month':gen_month,
             'gen_inter':gen_inter,
-            'firstname':firstname,
             'statusvatdown':statusvatdown,
             'min_acc':'{:,}'.format(min_acc),
             'condition_finance':condition_finance,
@@ -648,11 +648,12 @@ def branceadd (request):
 @login_required(login_url='/firstdata') 
 def branchcash (request):
     #สร้างตัวเเปรการเก็บของข้อมูลรุ่นจากข้อมูลที่ส่งมาก่อนหน้า ใช้ request.session
+    firstname = str(request.session.get('firstname'))
     regiscost = int(request.session.get('regiscost'))
     productprice = int(request.session.get('productprice'))
     paytype = str(request.session.get('paytype'))
     #productmargin  = int(request.session.get('productmargin'))
-    firstname = str(request.session.get('firstname'))
+    
     #กำหนดค่าคงที่
     red_frame = int(3000) #ค่าป้ายเเดง
 
@@ -979,7 +980,8 @@ def branchcash (request):
 
 
     #รวบรวมข้อมูลเพื่อส่ง
-    data = {'regiscost':'{:,}'.format(regiscost), #ค่าจดทะเบียน
+    data = {'firstname':firstname,
+            'regiscost':'{:,}'.format(regiscost), #ค่าจดทะเบียน
             'add_eq':add_eq, #+บวกหัวอุปกรณ์
             'cost_down':cost_down, 
             'paytype':paytype, 
@@ -999,7 +1001,6 @@ def branchcash (request):
             'min_regis':'{:,}'.format(min_regis),
             'exit_cost_down_vat':exit_cost_down_vat,
             'gen_down':gen_down,
-            'firstname':firstname,
             'gen_month':gen_month,
             'gen_inter':gen_inter,
             'statusvatdown':statusvatdown,

@@ -13,6 +13,10 @@
 
 <strong class="text-center" style="margin: 1vh 0vh; "><div id="error"  role="alert" ></div></strong>
 
+<div id="relogin" style="display: none; text-align: center;" class="alert alert-danger" role="alert">
+   <strong>Username หรือ Password ไม่ถูกต้อง</strong> 
+ </div>
+
 <form id="formlogin" action="firstdata" method="POST"> 
    {% csrf_token %}
    <div class="mb-3">
@@ -27,9 +31,17 @@
 
                
    
-   <div class="d-grid gap-1" style="margin-top: 2vh;">
+   <div class="d-grid gap-1" style="margin-top: 3vh;">
        <button type="submit" class="btn btn-success">เข้าสู่ระบบ</button>
    </div>
 </form>
-                     
+<!--------------------ส่วนทำงานเบื้องหลัง-------------------->       
+<p id="status_login" style="display: none;">{{status_login}}</p>
+<script>
+   const status_login = String(document.getElementById('status_login').innerHTML) ;
+   console.log(status_login);
+   if (status_login === "False"){
+       document.getElementById('relogin').style.display = "block" ;
+   };
+</script>
 {% endblock %}

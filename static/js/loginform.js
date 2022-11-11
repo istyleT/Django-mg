@@ -16,7 +16,7 @@ formlogin.addEventListener("submit", (e)=> {
                                         e.preventDefault(); 
                                         console.log('error')
                                         errormessage.innerHTML = box.join(',');
-                                        document.getElementById("error").className = 'alert alert-danger'; 
+                                        document.getElementById("error").className = 'alert alert-warning'; 
                     }         
 });
 

@@ -36,10 +36,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'sellmg',
-    
-    
+    'crispy_forms',
+    'crispy_bootstrap5',
+      
 ]
-
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
@@ -106,10 +108,11 @@ STATICFILES_DIRS =[os.path.join(BASE_DIR, 'static')]
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressManifestStaticFilesStorage'
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR , 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 django_on_heroku.settings(locals())
-
 
 
 
@@ -148,9 +151,13 @@ django_on_heroku.settings(locals())
 #    'django.contrib.messages',
 #    'django.contrib.staticfiles',
 #    'sellmg',
-#    
-#    
+#    'crispy_forms',
+#    'crispy_bootstrap5',
 #]
+#
+#CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+#
+#CRISPY_TEMPLATE_PACK = "bootstrap5"
 #
 #MIDDLEWARE = [
 #    'django.middleware.security.SecurityMiddleware',
@@ -213,6 +220,9 @@ django_on_heroku.settings(locals())
 #
 #STATIC_URL = '/static/'
 #STATICFILES_DIRS =[os.path.join(BASE_DIR, 'static')]
-#STATIC_ROOT = BASE_DIR / 'staticfiles'
+#STATIC_ROOT = os.path.join(BASE_DIR , 'staticfiles')
+#
+#MEDIA_URL = '/media/'
+#MEDIA_ROOT = os.path.join(BASE_DIR , 'media')
 #
 #DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

@@ -1,0 +1,40 @@
+{% extends 'layout.html' %}
+
+{% block style %}
+<style>
+  .table {
+    text-align : center;
+    margin-top : 1vh;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<!----เเสดงข้อมูลที่ส่งเข้ามา---->
+{% if data.count > 0 %}
+<table class="table table-hover ">
+    <thead class="text-success">
+       <tr>
+         <th>Date</th>
+         <th>Username</th>
+         <th>Model</th>
+         <th>Quotation</th>
+        <tr> 
+    </thead>
+    <tbody>
+        {% for i in data %}
+        <tr>
+            <td>{{i.date}}</td>
+            <td>{{i.username}}</td>
+            <td>{{i.mainmodel}}</td>
+            <td>
+                <a href={{i.filepdf.url}}>View</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+<!--------------------------------->
+
+{% endblock %}

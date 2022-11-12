@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from sellmg import views #นำเข้า view จาก app ย่อย
+from django.conf import settings
+from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('static-css',views.static_css), #นำเข้า static css มาใช้ใน webappmg
@@ -29,6 +31,8 @@ urlpatterns = [
     path('branchcash',views.branchcash),
     path('showdata',views.showdata),
     path('logout', views.log_user_out),
+    path('uploadpage',views.uploadpage),
+    path('upload',views.upload),
     #path ของส่วน admin
     path('pageaddcolor', views.pageaddcolor),
     path('addcolor', views.addcolor),
@@ -40,3 +44,5 @@ urlpatterns = [
     path('addproduct', views.addproduct),
     
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

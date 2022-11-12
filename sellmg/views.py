@@ -4,10 +4,13 @@ from sellmg.models import Product ;
 from sellmg.models import Regiscosts ;
 from sellmg.models import Accmgs ;
 from sellmg.models import Colorsubmodels ;
+from sellmg.models import QuotationsForm ;
+from sellmg.models import Quotations ;
 from django.db.models import Q ;
 from django.contrib.auth.decorators import login_required ;
 from django.contrib.auth.models import User
 import math
+
 
 #########################นำ css / java static มาใช้งาน ##########################
 def static_css (request):
@@ -104,7 +107,21 @@ def addacc(request):
 
 
 ##########################ฟังก์ชั่นฝั่ง user ################################
+def uploadpage(request):
+    form = QuotationsForm()
+    return render(request,'uploadpage.html',{'form':form})
+
+def upload(request):
+    if request.method == "POST":
+       form = QuotationsForm(request.POST , request.FILES)
+       if form.is_valid() and request.FILES is not None:
+          form.save()
+          form = QuotationsForm()
+    data = Quotations.objects.order_by('-id') # เรียงตาม id เเบบย้อนกลับ
+    return render(request,'filedata.html',{'data': data})
+
 def collectdata(request): 
+    
     # เก็บข้อมูลการ login จาก user 
     username = str(request.POST.get('username'))
     password = str(request.POST.get('password'))
@@ -1168,3 +1185,4 @@ def showdata(request):
 
 ##############################################################################
 
+ 

@@ -1,0 +1,49 @@
+{% extends 'layout.html' %}
+
+{% block style %}
+<style>
+  .frm-box {
+    margin: 1vh 1vh 1vw 1vw;
+  }
+  #btn-upload { 
+    margin  : 1vh 1vw;
+  }
+
+
+</style>
+{% endblock %}
+
+{% block content %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+
+
+{% if not form.is_valid %}
+<form method="post" enctype="multipart/form-data" id="frm-upload" action="upload">
+    {% csrf_token %} 
+    <div class="frm-box">
+        {{form | crispy}}
+    </div>
+    <div id="btn-upload" class="d-grid gap-1">
+       <button type="submit" class="btn btn-outline-info"><strong>Upload</strong></button>
+    </div>
+</form>
+{% endif %}
+
+
+
+
+{% endblock %}
+
+
+<!--
+      <form method="post" enctype="multipart/form-data">
+ 
+<h4 style="text-align: center; margin: 6vh 1vw;"><strong>Upload ใบเสนอราคา</strong></h4>
+   <div class="input-group mb-3">
+       <input type="file" class="form-control" id="inputGroupFile02">
+       <label class="input-group-text" for="inputGroupFile02">Upload</label>
+   </div>
+</form>              
+-->
+

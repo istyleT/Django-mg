@@ -1,5 +1,6 @@
 from django.db import models
 from django import forms
+
 # ตารางเพื่อตั้งค่า รุ่นหลัก รุ่นย่อย ราคา ส่วนลด ค่าจดทะเทียน
 class Product(models.Model) :
                     mainmodel = models.CharField(max_length=25)
@@ -37,3 +38,31 @@ class Colorsubmodels(models.Model):
       
       def __str__(self):
              return f'{self.submodel} | {self.color}'
+
+#เก็บข้อมูลหน้า filepdf ที่ upload เข้ามา
+class Quotations(models.Model):
+      date = models.DateField(auto_now_add=True)
+      username = models.CharField(max_length=20)
+      mainmodel = models.CharField(
+            max_length=15,
+            choices=[('MG5','MG 5'),('MGVSHEV','MG VS HEV'),('MGZS','MG ZS'),('MGEDT','MG EXTENDER'),
+            ('MGHSPHEV','MG HS PHEV'),('MGHS','MG HS')],
+            default='MG5'
+            )
+      filepdf = models.FileField(upload_to='upload/')
+      def __str__(self):
+             return f'{self.date} | {self.username} | {self.mainmodel} | {self.filepdf}'
+
+#form ที่เอาไว้เก็บข้อมูลจาก class quotation
+class QuotationsForm (forms.ModelForm):
+      class Meta :
+            model = Quotations
+            fields = '__all__'
+            labels = {
+                  'mainmodel': 'รุ่นรถ MG' ,
+                  'filepdf': 'ไฟล์ PDF',
+                  'username': 'ผู้เสนอราคา'}
+            widgets = {'filepdf': forms.FileInput(attrs={'type':'file'}),
+            'Model': forms.Select()}
+            exclude = []
+            

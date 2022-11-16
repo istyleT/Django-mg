@@ -16,7 +16,7 @@
     
     <form  action="queryprice"  method="POST" id="formsubmode" >  <!---->
       {% csrf_token %}
-        <label for="formGroupExampleInput2" class="col-sm-3 col-form-label col-form-label-lg">เลือกรุ่นย่อย</label>
+        <label for="formGroupExampleInput2" class="col-sm-3 col-form-label col-form-label-lg">เลือกเกรด</label>
         <select class="form-select form-select-lg mb-3" name="submodel" id="submodelid" aria-label=".form-select-lg example"> <!---->
           <option value="-" selected>Choose Model Grade</option>
           <option value="MGHS1.5TX2022">MG HS 1.5T X 2022</option>
@@ -26,7 +26,7 @@
           </select>
 
         <div style="margin-top: 2vh;" class="d-grid gap-1">
-            <button type="submit" class="btn btn-info">สอบถาม ราคา เเละ ส่วนลด</button>
+            <button type="submit" class="btn btn-info">สอบถามราคา</button>
         </div>
     </form>
  

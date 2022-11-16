@@ -648,7 +648,7 @@ function  totalgeninter() {
      console.log('ดอกเบี้ยทั้งหมด =' + total_inter_ture)
      console.log('------------------------------------')
      document.getElementById('show_inter_true').style.display = 'block';
-     document.getElementById('show_inter_true').innerHTML = 'ดอกเบี้ยทั้งหมด' + (total_inter_ture.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')) + ' ' + 'บาท';
+     document.getElementById('show_inter_true').innerHTML = 'ดอกเบี้ยทั้งหมด' + '=' + ' ' + (total_inter_ture.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')) + ' ' + 'บาท';
      
      return total_inter_ture ;
 

@@ -211,14 +211,14 @@ def PaymentRegis(request):
     request.session['regiscost'] = regiscost
     # query หา acc ตามเงื่อนไข ถ้าเป็น VS ใช้ของ ZS
     if mainmodel == 'MGVSHEV' :
-        mainacc = Accmgs.objects.filter(Q(acc_model = 'MGZS') | Q(acc_model = 'ALL')).values_list('id', 'acc_code', 'acc_name','acc_price','acc_type', named=True).order_by('acc_name')
+        mainacc = Accmgs.objects.filter(Q(acc_model = 'MGZS') | Q(acc_model = 'ALL')).values_list('id', 'acc_code', 'acc_name','acc_price','acc_type', named=True).order_by('acc_code')
         if paytype == 'cash':
              return render(request, 'branchcash.html',{'submodel': submodel,'regiscost':'{:,}'.format(regiscost),'text_productprice':'{:,}'.format(text_productprice),'mainacc':mainacc,})
     
         elif paytype == 'finance' :
             return render(request, 'branchadd.html',{'submodel': submodel,'regiscost':'{:,}'.format(regiscost),'text_productprice':'{:,}'.format(text_productprice),'mainacc':mainacc,'productprice':productprice,'mainmodel': mainmodel})
     elif mainmodel == 'MGHSPHEV' :
-        mainacc = Accmgs.objects.filter(Q(acc_model = 'MGHS') | Q(acc_model = 'ALL')).values_list('id', 'acc_code', 'acc_name','acc_price','acc_type', named=True).order_by('acc_name')
+        mainacc = Accmgs.objects.filter(Q(acc_model = 'MGHS') | Q(acc_model = 'ALL')).values_list('id', 'acc_code', 'acc_name','acc_price','acc_type', named=True).order_by('acc_code')
         if paytype == 'cash':
              return render(request, 'branchcash.html',{'submodel': submodel,'regiscost':'{:,}'.format(regiscost),'text_productprice':'{:,}'.format(text_productprice),'mainacc':mainacc,})
     
@@ -226,7 +226,7 @@ def PaymentRegis(request):
             return render(request, 'branchadd.html',{'submodel': submodel,'regiscost':'{:,}'.format(regiscost),'text_productprice':'{:,}'.format(text_productprice),'mainacc':mainacc,'productprice':productprice,'mainmodel': mainmodel})
 
     else :
-        mainacc = Accmgs.objects.filter(Q(acc_model = mainmodel) | Q(acc_model = 'ALL')).values_list('id', 'acc_code', 'acc_name','acc_price','acc_type', named=True).order_by('acc_name')
+        mainacc = Accmgs.objects.filter(Q(acc_model = mainmodel) | Q(acc_model = 'ALL')).values_list('id', 'acc_code', 'acc_name','acc_price','acc_type', named=True).order_by('acc_code')
 
         if paytype == 'cash':
              return render(request, 'branchcash.html',{'submodel': submodel,'regiscost':'{:,}'.format(regiscost),'text_productprice':'{:,}'.format(text_productprice),'mainacc':mainacc,})
@@ -297,6 +297,14 @@ def branceadd (request):
     # เก็บค่าอุปกรณ์ตกเเต่ง
     text_acc_card = str(request.POST.get('text_acc_card')or "-")
     min_acc_card = int(request.POST.get('min_acc_card')or 0)
+    text_acc_card_1 = str(request.POST.get('text_acc_card_1')or "-")
+    min_acc_card_1 = int(request.POST.get('min_acc_card_1')or 0)
+    text_acc_card_2 = str(request.POST.get('text_acc_card_2')or "-")
+    min_acc_card_2 = int(request.POST.get('min_acc_card_2')or 0)
+    text_acc_card_3 = str(request.POST.get('text_acc_card_3')or "-")
+    min_acc_card_3 = int(request.POST.get('min_acc_card_3')or 0)
+    text_acc_card_4 = str(request.POST.get('text_acc_card_4')or "-")
+    min_acc_card_4 = int(request.POST.get('min_acc_card_4')or 0)
 
     min_acc_1_code = str(request.POST.get('min_acc_1_code'))
     if min_acc_1_code == 'N':
@@ -433,59 +441,18 @@ def branceadd (request):
         for i in find_acc_15 :
             min_acc_15 = int(i.acc_price)
             text_acc_15 = str(i.acc_name)
-    min_acc_16_code = str(request.POST.get('min_acc_16_code'))
-    if min_acc_16_code == 'N':
-        min_acc_16 = 0
-        text_acc_16 = '-'
-    else:
-        find_acc_16 = Accmgs.objects.filter(Q(id = min_acc_16_code)).values_list('acc_name','acc_price', named=True)
-        for i in find_acc_16 :
-            min_acc_16 = int(i.acc_price)
-            text_acc_16 = str(i.acc_name)
-    min_acc_17_code = str(request.POST.get('min_acc_17_code'))
-    if min_acc_17_code == 'N':
-        min_acc_17 = 0
-        text_acc_17 = '-'
-    else:
-        find_acc_17 = Accmgs.objects.filter(Q(id = min_acc_17_code)).values_list('acc_name','acc_price', named=True)
-        for i in find_acc_17 :
-            min_acc_17 = int(i.acc_price)
-            text_acc_17 = str(i.acc_name)
-    min_acc_18_code = str(request.POST.get('min_acc_18_code'))
-    if min_acc_18_code == 'N':
-        min_acc_18 = 0
-        text_acc_18 = '-'
-    else:
-        find_acc_18 = Accmgs.objects.filter(Q(id = min_acc_18_code)).values_list('acc_name','acc_price', named=True)
-        for i in find_acc_18 :
-            min_acc_18 = int(i.acc_price)
-            text_acc_18 = str(i.acc_name)
-    min_acc_19_code = str(request.POST.get('min_acc_19_code'))
-    if min_acc_19_code == 'N':
-        min_acc_19 = 0
-        text_acc_19 = '-'
-    else:
-        find_acc_19 = Accmgs.objects.filter(Q(id = min_acc_19_code)).values_list('acc_name','acc_price', named=True)
-        for i in find_acc_19 :
-            min_acc_19 = int(i.acc_price)
-            text_acc_19 = str(i.acc_name)
-    min_acc_20_code = str(request.POST.get('min_acc_20_code'))
-    if min_acc_20_code == 'N':
-        min_acc_20 = 0
-        text_acc_20 = '-'
-    else:
-        find_acc_20 = Accmgs.objects.filter(Q(id = min_acc_20_code)).values_list('acc_name','acc_price', named=True)
-        for i in find_acc_20 :
-            min_acc_20 = int(i.acc_price)
-            text_acc_20 = str(i.acc_name)
 
-    min_acc = int(min_acc_card+min_acc_1+min_acc_2+min_acc_3+min_acc_4+min_acc_5+min_acc_6+min_acc_7
-    +min_acc_8+min_acc_9+min_acc_10+min_acc_11+min_acc_12+min_acc_13+min_acc_14+min_acc_15
-    +min_acc_16+min_acc_17+min_acc_18+min_acc_19+min_acc_20)
+
+    min_acc = int(min_acc_card+min_acc_card_1+min_acc_card_2+min_acc_card_3+min_acc_card_4+min_acc_1+min_acc_2+min_acc_3+min_acc_4+min_acc_5+min_acc_6+min_acc_7
+    +min_acc_8+min_acc_9+min_acc_10+min_acc_11+min_acc_12+min_acc_13+min_acc_14+min_acc_15)
      
   
     #ส่งชื่ออุปกรณ์ตกเเต่ง
     request.session['text_acc_card'] = text_acc_card
+    request.session['text_acc_card_1'] = text_acc_card_1
+    request.session['text_acc_card_2'] = text_acc_card_2
+    request.session['text_acc_card_3'] = text_acc_card_3
+    request.session['text_acc_card_4'] = text_acc_card_4
     request.session['text_acc_1'] = text_acc_1
     request.session['text_acc_2'] = text_acc_2
     request.session['text_acc_3'] = text_acc_3
@@ -501,11 +468,7 @@ def branceadd (request):
     request.session['text_acc_13'] = text_acc_13
     request.session['text_acc_14'] = text_acc_14
     request.session['text_acc_15'] = text_acc_15
-    request.session['text_acc_16'] = text_acc_16
-    request.session['text_acc_17'] = text_acc_17
-    request.session['text_acc_18'] = text_acc_18
-    request.session['text_acc_19'] = text_acc_19
-    request.session['text_acc_20'] = text_acc_20
+
     
 
 
@@ -717,6 +680,14 @@ def branchcash (request):
         # เก็บค่าอุปกรณ์ตกเเต่ง
     text_acc_card = str(request.POST.get('text_acc_card')or "-")
     min_acc_card = int(request.POST.get('min_acc_card')or 0)
+    text_acc_card_1 = str(request.POST.get('text_acc_card_1')or "-")
+    min_acc_card_1 = int(request.POST.get('min_acc_card_1')or 0)
+    text_acc_card_2 = str(request.POST.get('text_acc_card_2')or "-")
+    min_acc_card_2 = int(request.POST.get('min_acc_card_2')or 0)
+    text_acc_card_3 = str(request.POST.get('text_acc_card_3')or "-")
+    min_acc_card_3 = int(request.POST.get('min_acc_card_3')or 0)
+    text_acc_card_4 = str(request.POST.get('text_acc_card_4')or "-")
+    min_acc_card_4 = int(request.POST.get('min_acc_card_4')or 0)
 
     min_acc_1_code = str(request.POST.get('min_acc_1_code'))
     if min_acc_1_code == 'N':
@@ -853,61 +824,18 @@ def branchcash (request):
         for i in find_acc_15 :
             min_acc_15 = int(i.acc_price)
             text_acc_15 = str(i.acc_name)
-    min_acc_16_code = str(request.POST.get('min_acc_16_code'))
-    if min_acc_16_code == 'N':
-        min_acc_16 = 0
-        text_acc_16 = '-'
-    else:
-        find_acc_16 = Accmgs.objects.filter(Q(id = min_acc_16_code)).values_list('acc_name','acc_price', named=True)
-        for i in find_acc_16 :
-            min_acc_16 = int(i.acc_price)
-            text_acc_16 = str(i.acc_name)
-    min_acc_17_code = str(request.POST.get('min_acc_17_code'))
-    if min_acc_17_code == 'N':
-        min_acc_17 = 0
-        text_acc_17 = '-'
-    else:
-        find_acc_17 = Accmgs.objects.filter(Q(id = min_acc_17_code)).values_list('acc_name','acc_price', named=True)
-        for i in find_acc_17 :
-            min_acc_17 = int(i.acc_price)
-            text_acc_17 = str(i.acc_name)
-    min_acc_18_code = str(request.POST.get('min_acc_18_code'))
-    if min_acc_18_code == 'N':
-        min_acc_18 = 0
-        text_acc_18 = '-'
-    else:
-        find_acc_18 = Accmgs.objects.filter(Q(id = min_acc_18_code)).values_list('acc_name','acc_price', named=True)
-        for i in find_acc_18 :
-            min_acc_18 = int(i.acc_price)
-            text_acc_18 = str(i.acc_name)
-    min_acc_19_code = str(request.POST.get('min_acc_19_code'))
-    if min_acc_19_code == 'N':
-        min_acc_19 = 0
-        text_acc_19 = '-'
-    else:
-        find_acc_19 = Accmgs.objects.filter(Q(id = min_acc_19_code)).values_list('acc_name','acc_price', named=True)
-        for i in find_acc_19 :
-            min_acc_19 = int(i.acc_price)
-            text_acc_19 = str(i.acc_name)
-    min_acc_20_code = str(request.POST.get('min_acc_20_code'))
-    if min_acc_20_code == 'N':
-        min_acc_20 = 0
-        text_acc_20 = '-'
-    else:
-        find_acc_20 = Accmgs.objects.filter(Q(id = min_acc_20_code)).values_list('acc_name','acc_price', named=True)
-        for i in find_acc_20 :
-            min_acc_20 = int(i.acc_price)
-            text_acc_20 = str(i.acc_name)
-
-    min_acc = int(min_acc_card+min_acc_1+min_acc_2+min_acc_3+min_acc_4+min_acc_5+min_acc_6+min_acc_7
-    +min_acc_8+min_acc_9+min_acc_10+min_acc_11+min_acc_12+min_acc_13+min_acc_14+min_acc_15
-    +min_acc_16+min_acc_17+min_acc_18+min_acc_19+min_acc_20)
-   
 
 
-   #ส่งชื่ออุปกรณ์ตกเเต่ง
-    request.session['min_acc'] = min_acc
+    min_acc = int(min_acc_card+min_acc_card_1+min_acc_card_2+min_acc_card_3+min_acc_card_4+min_acc_1+min_acc_2+min_acc_3+min_acc_4+min_acc_5+min_acc_6+min_acc_7
+    +min_acc_8+min_acc_9+min_acc_10+min_acc_11+min_acc_12+min_acc_13+min_acc_14+min_acc_15)
+     
+  
+    #ส่งชื่ออุปกรณ์ตกเเต่ง
     request.session['text_acc_card'] = text_acc_card
+    request.session['text_acc_card_1'] = text_acc_card_1
+    request.session['text_acc_card_2'] = text_acc_card_2
+    request.session['text_acc_card_3'] = text_acc_card_3
+    request.session['text_acc_card_4'] = text_acc_card_4
     request.session['text_acc_1'] = text_acc_1
     request.session['text_acc_2'] = text_acc_2
     request.session['text_acc_3'] = text_acc_3
@@ -923,11 +851,6 @@ def branchcash (request):
     request.session['text_acc_13'] = text_acc_13
     request.session['text_acc_14'] = text_acc_14
     request.session['text_acc_15'] = text_acc_15
-    request.session['text_acc_16'] = text_acc_16
-    request.session['text_acc_17'] = text_acc_17
-    request.session['text_acc_18'] = text_acc_18
-    request.session['text_acc_19'] = text_acc_19
-    request.session['text_acc_20'] = text_acc_20
 
    #------------คำนวณค่า--------------
      #รวมรายการของเเถมอุปกรณ์ตกเเต่ง
@@ -1090,6 +1013,10 @@ def showdata(request):
       
    #ชื่ออุปกรณ์ตกเเต่ง
    text_acc_card = str(request.session.get('text_acc_card'))
+   text_acc_card_1 = str(request.session.get('text_acc_card_1'))
+   text_acc_card_2 = str(request.session.get('text_acc_card_2'))
+   text_acc_card_3 = str(request.session.get('text_acc_card_3'))
+   text_acc_card_4 = str(request.session.get('text_acc_card_4'))
    text_acc_1 = str(request.session.get('text_acc_1'))
    text_acc_2 = str(request.session.get('text_acc_2'))
    text_acc_3 = str(request.session.get('text_acc_3'))
@@ -1105,11 +1032,7 @@ def showdata(request):
    text_acc_13 = str(request.session.get('text_acc_13'))
    text_acc_14 = str(request.session.get('text_acc_14'))
    text_acc_15 = str(request.session.get('text_acc_15'))
-   text_acc_16 = str(request.session.get('text_acc_16'))
-   text_acc_17 = str(request.session.get('text_acc_17'))
-   text_acc_18 = str(request.session.get('text_acc_18'))
-   text_acc_19 = str(request.session.get('text_acc_19'))
-   text_acc_20 = str(request.session.get('text_acc_20'))
+
    gen_remark = str(request.session.get('gen_remark'))
    
 
@@ -1153,6 +1076,10 @@ def showdata(request):
       'min_polish':min_polish, #pass
       'total_gift':'{:,.0f}'.format(total_gift),
       'text_acc_card':text_acc_card,  #pass
+      'text_acc_card_1':text_acc_card_1,  #pass
+      'text_acc_card_2':text_acc_card_2,  #pass
+      'text_acc_card_3':text_acc_card_3,  #pass
+      'text_acc_card_4':text_acc_card_4,  #pass
       'text_acc_1':text_acc_1,  #pass
       'text_acc_2':text_acc_2,  #pass
       'text_acc_3':text_acc_3,  #pass
@@ -1168,11 +1095,6 @@ def showdata(request):
       'text_acc_13':text_acc_13,  #pass
       'text_acc_14':text_acc_14,  #pass
       'text_acc_15':text_acc_15,  #pass
-      'text_acc_16':text_acc_16,  #pass
-      'text_acc_17':text_acc_17,  #pass
-      'text_acc_18':text_acc_18,  #pass
-      'text_acc_19':text_acc_19,  #pass
-      'text_acc_20':text_acc_20,  #pass
       'sell_phone':sell_phone,  #pass
       'customer_name':customer_name,  #pass
       'customer_phone':customer_phone,  #pass

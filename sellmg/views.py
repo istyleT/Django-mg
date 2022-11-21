@@ -120,6 +120,9 @@ def upload(request):
     data = Quotations.objects.order_by('-id') # เรียงตาม id เเบบย้อนกลับ
     return render(request,'filedata.html',{'data': data})
 
+def dataclientpage(request):
+    return render(request,'dataclient.html')
+
 def collectdata(request): 
     
     # เก็บข้อมูลการ login จาก user 

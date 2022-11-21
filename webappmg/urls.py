@@ -33,6 +33,8 @@ urlpatterns = [
     path('logout', views.log_user_out),
     path('uploadpage',views.uploadpage),
     path('upload',views.upload),
+    path('dataclientpage',views.dataclientpage),
+   
     #path ของส่วน admin
     path('pageaddcolor', views.pageaddcolor),
     path('addcolor', views.addcolor),

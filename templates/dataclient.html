@@ -6,8 +6,162 @@
 
 <form method="post" action="">
    {% csrf_token %}  
-                   
+   <!--mainmodel-->    
+   <div class="input-group mb-3" style="margin-top: 1vh; ">
+      <label class="input-group-text btn-danger " for="inputGroupSelect01"><strong>รุ่นรถ MG</strong></label>
+      <select class="form-select text-center"  id="choosemainmodel" name="mainmodel" onchange="appendpic()">
+        <option value="-" selected >กรุณาเลือกรุ่น</option>
+        <option value="MG5">NEW MG5 MY2022</option>
+        <option value="MGVSHEV">NEW MG VS HEV</option>
+        <option value="MGZS">MG ZS 2020</option>
+        <option value="MGETD">MG EXTENDER</option>
+        <option value="MGHSPHEV">MG HS PHEV</option>
+        <option value="MGHS">MG HS</option>
+      </select>
+    </div>          
+   <!--colors-->              
+   <!--name customer-->   
+   <div class="input-group input-group-mb" style="margin-top: 1vh;">
+      <span class="input-group-text btn-success" id="inputGroup-sizing-lg"><strong>ชื่อลูกค้า</strong></span>
+      <input type="text" class="form-control text-center" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" placeholder="กรุณากรอกชื่อลูกค้า" >
+    </div>          
+   <!--tel--> 
+   <div class="input-group input-group-md" style="margin-top: 1vh;">
+      <span class="input-group-text btn-primary" id="inputGroup-sizing-lg"><strong>การติดต่อ</strong></span>
+      <input type="text" class="form-control text-center" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" placeholder="เบอร์โทรศัพท์ / Id Line / E-mail">
+    </div>               
+   <!--source-->
+ 
+   <div style="margin-top: 2vh; border:2px solid rgb(159, 88, 94); border-radius: 30px">
+      <h5 align="center"><strong>ช่องทาง</strong></h5>
+      <div style="display: flex; justify-content: center;">
+         <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="chanels" id="radiochanels1" value="Walk-in" checked>
+            <label class="form-check-label" for="radiochanels1"><strong>Walk in</strong></label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="chanels" id="radiochanels2" value="Online">
+            <label class="form-check-label" for="radiochanels2"><strong>Online</strong></label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="chanels" id="radiochanels3" value="Event-booth">
+            <label class="form-check-label" for="radiochanels3"><strong>ออกบูธ</strong></label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="chanels" id="radiochanels4" value="Advice">
+            <label class="form-check-label" for="radiochanels4"><strong>ลูกค้าเเนะนำ</strong></label>
+          </div>       
+      </div>
+   </div>   
+ 
+   <!--status-->  
+   <div class="input-group mb-3" style="margin-top: 2vh;">
+      <label class="input-group-text btn-warning" for="inputGroupSelect01"><strong>สถานะ</strong></label>
+      <select class="form-select text-center" id="inputGroupSelect01">
+        <option value="1" selected>PP : ลูกค้ามุ่งหวัง</option>
+        <option value="2">BK : ลูกค้าจอง</option>
+        <option value="3">DV : ลูกค้าส่งมอบ</option>
+        <option value="3">TD : ทดลองขับ</option>
+        <option value="3">F : ถอนจอง</option>
+      </select>
+    </div>                 
 </form>
+<!--picture zone-->
+
+<div align="center" id="carshadow" style="margin-top: 8vh">
+   <img  src="{% static 'picture/carshadow.png' %}" class="img-fluid" alt="..."/>
+</div>
+<div align="center" id="picmg5" style="display: none;">
+   <img  src="{% static 'picture/Newmg5.png' %}" class="img-fluid" alt="..."/>
+</div>
+<div align="center" id="picmgvshev" style="display: none;">
+   <img  src="{% static 'picture/Newmgvshev.png' %}" class="img-fluid" alt="..."/>
+</div>
+<div align="center" id="picmgzs" style="display: none;">
+   <img  src="{% static 'picture/Newmgzs.png' %}" class="img-fluid" alt="..."/>
+</div>
+<div align="center" id="picmgetd" style="display: none;">
+   <img  src="{% static 'picture/Newmgextendergc.png' %}" class="img-fluid" alt="..."/>
+</div>
+<div align="center" id="picmghsphev" style="display: none;">
+   <img  src="{% static 'picture/Newmghs.png' %}" class="img-fluid" alt="..."/>
+</div>
+<div align="center" id="picmghs" style="margin-top: 8vh; display: none;">
+   <img  src="{% static 'picture/Mghs.png' %}" class="img-fluid" alt="..."/>
+</div>
+
+<script>
+   function appendpic() {
+      const carshadow = document.getElementById('carshadow');
+      const picmg5 = document.getElementById('picmg5');
+      const picmgvshev =document.getElementById('picmgvshev');
+      const picmgzs = document.getElementById('picmgzs');
+      const picmgetd = document.getElementById('picmgetd');
+      const picmghsphev = document.getElementById('picmghsphev');
+      const picmghs = document.getElementById('picmghs');
+      const choosemainmodel = document.getElementById('choosemainmodel').value;
+      switch (choosemainmodel){
+         case "MG5" : picmg5.style.display = "block";
+                      picmgvshev.style.display = "none";
+                      picmgzs.style.display = "none";
+                      picmgetd.style.display = "none";
+                      picmghsphev.style.display = "none";
+                      picmghs.style.display = "none";
+                      carshadow.style.display = "none";
+         break
+         case "MGVSHEV" : picmgvshev.style.display = "block"; 
+                          picmg5.style.display = "none";
+                          picmgzs.style.display = "none";
+                          picmgetd.style.display = "none";
+                          picmghsphev.style.display = "none";
+                          picmghs.style.display = "none";
+                          carshadow.style.display = "none";
+         break
+         case "MGZS" : picmgzs.style.display = "block";
+                       picmgvshev.style.display = "none";
+                       picmg5.style.display = "none";
+                       picmgetd.style.display = "none";
+                       picmghsphev.style.display = "none";
+                       picmghs.style.display = "none"; 
+                       carshadow.style.display = "none";
+         break
+         case "MGETD" : picmgetd.style.display = "block";
+                        picmgvshev.style.display = "none";
+                        picmgzs.style.display = "none";
+                        picmg5.style.display = "none";
+                        picmghsphev.style.display = "none";
+                        picmghs.style.display = "none"; 
+                        carshadow.style.display = "none";
+         break
+         case "MGHSPHEV" : picmghsphev.style.display = "block";
+                           picmgvshev.style.display = "none";
+                           picmgzs.style.display = "none";
+                           picmgetd.style.display = "none";
+                           picmg5.style.display = "none";
+                           picmghs.style.display = "none"; 
+                           carshadow.style.display = "none";
+         break
+         case "MGHS" : picmghs.style.display = "block";
+                       picmgvshev.style.display = "none";
+                       picmgzs.style.display = "none";
+                       picmgetd.style.display = "none";
+                       picmghsphev.style.display = "none";
+                       picmg5.style.display = "none"; 
+                       carshadow.style.display = "none";
+         break
+         default : carshadow.style.display = "block";
+                   picmgvshev.style.display = "none";
+                   picmgzs.style.display = "none";
+                   picmgetd.style.display = "none";
+                   picmghsphev.style.display = "none";
+                   picmg5.style.display = "none"; 
+                   picmghs.style.display = "none";
+         /*case "-" : picmg5.style.display = "block"; break*/
+      }
+      return
+   }
+</script>
 
 
 {% endblock %}
+

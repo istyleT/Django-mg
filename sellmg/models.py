@@ -1,5 +1,10 @@
 from django.db import models
 from django import forms
+from django.contrib.auth.models import User
+
+class Employee(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    telephone = models.CharField(max_length=12)
 
 # ตารางเพื่อตั้งค่า รุ่นหลัก รุ่นย่อย ราคา ส่วนลด ค่าจดทะเทียน
 class Product(models.Model) :

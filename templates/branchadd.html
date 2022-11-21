@@ -362,7 +362,7 @@
                         <input type="text" name="text_acc_card" class="form-control" placeholder="รายการของเเถม" aria-label="">
                         <span class="input-group-text">ราคา</span>
                         <input type="number" name="min_acc_card" class="form-control" placeholder="ราคา" aria-label="">
-                        <button align="center" type="button" class="btn btn-sm" style="padding: 0px;"  onclick= "document.getElementById('hide1').style.display = 'block';">
+                        <button align="center" type="button" class="btn btn-sm" style="padding: 0px;"  onclick= "document.getElementById('hide1').style.display = 'block'; this.style.display = 'none';">
                           <img   src="{% static 'picture/addicon.png' %}"  alt="..." width="40" height="40"/>
                         </button>
                       </div>
@@ -373,7 +373,7 @@
                           <input type="text" name="text_acc_card_1" class="form-control" placeholder="รายการของเเถม" aria-label="">
                           <span class="input-group-text">ราคา</span>
                           <input type="number" name="min_acc_card_1" class="form-control" placeholder="ราคา" aria-label="">
-                          <button align="center" type="button" class="btn btn-sm" style="padding: 0px;"  onclick= "document.getElementById('hide2').style.display = 'block';" >
+                          <button align="center" type="button" class="btn btn-sm" style="padding: 0px;"  onclick= "document.getElementById('hide2').style.display = 'block'; this.style.display = 'none';" >
                             <img   src="{% static 'picture/addicon.png' %}"  alt="..." width="40" height="40"/>
                           </button>
                         </div>
@@ -384,7 +384,7 @@
                         <input type="text" name="text_acc_card_2" class="form-control" placeholder="รายการของเเถม" aria-label="">
                         <span class="input-group-text">ราคา</span>
                         <input type="number" name="min_acc_card_2" class="form-control" placeholder="ราคา" aria-label="">
-                        <button align="center" type="button" class="btn btn-sm" style="padding: 0px;"  onclick= "document.getElementById('hide3').style.display = 'block';">
+                        <button align="center" type="button" class="btn btn-sm" style="padding: 0px;"  onclick= "document.getElementById('hide3').style.display = 'block'; this.style.display = 'none';">
                           <img   src="{% static 'picture/addicon.png' %}"  alt="..." width="40" height="40"/>
                         </button>
                       </div>
@@ -395,7 +395,7 @@
                         <input type="text" name="text_acc_card_3" class="form-control" placeholder="รายการของเเถม" aria-label="">
                         <span class="input-group-text">ราคา</span>
                         <input type="number" name="min_acc_card_3" class="form-control" placeholder="ราคา" aria-label="">
-                        <button align="center" type="button" class="btn btn-sm" style="padding: 0px;"  onclick= "document.getElementById('hide4').style.display = 'block';">
+                        <button align="center" type="button" class="btn btn-sm" style="padding: 0px;"  onclick= "document.getElementById('hide4').style.display = 'block'; this.style.display = 'none';">
                           <img   src="{% static 'picture/addicon.png' %}"  alt="..." width="40" height="40"/>
                         </button>
                       </div>
@@ -415,7 +415,7 @@
                           <option value={{i.id}}>{{i.acc_name}} <br> ราคา : {{i.acc_price}} บาท</option>
                           {% endfor %}
                         </select>
-                        <button align="center" type="button" class="btn btn-sm" style="padding: 0px;" onclick= "document.getElementById('seek1').style.display = 'block';">
+                        <button align="center" type="button" class="btn btn-sm" style="padding: 0px;" onclick= "document.getElementById('seek1').style.display = 'block'; this.style.display = 'none';">
                           <img   src="{% static 'picture/addicon.png' %}"  alt="..." width="40" height="40"/>
                         </button>
                        </div>
@@ -430,7 +430,7 @@
                           <option value={{i.id}}>{{i.acc_name}}  <br> ราคา : {{i.acc_price}} บาท</option>
                           {% endfor %}
                         </select>
-                        <button align="center" type="button" class="btn btn-sm" style="padding: 0px;" onclick= "document.getElementById('seek2').style.display = 'block';">
+                        <button align="center" type="button" class="btn btn-sm" style="padding: 0px;" onclick= "document.getElementById('seek2').style.display = 'block'; this.style.display = 'none';">
                           <img   src="{% static 'picture/addicon.png' %}"  alt="..." width="40" height="40"/>
                         </button>
                        </div>
@@ -443,7 +443,7 @@
                           <option value={{i.id}}>{{i.acc_name}}  <br> ราคา : {{i.acc_price}} บาท</option>
                           {% endfor %}
                         </select>
-                        <button align="center" type="button" class="btn btn-sm" style="padding: 0px;" onclick= "document.getElementById('seek3').style.display = 'block';">
+                        <button align="center" type="button" class="btn btn-sm" style="padding: 0px;" onclick= "document.getElementById('seek3').style.display = 'block'; this.style.display = 'none';">
                           <img   src="{% static 'picture/addicon.png' %}"  alt="..." width="40" height="40"/>
                         </button>
                        </div>
@@ -456,7 +456,7 @@
                           <option value={{i.id}}>{{i.acc_name}}  <br> ราคา : {{i.acc_price}} บาท</option>
                           {% endfor %}
                         </select>
-                        <button align="center" type="button" class="btn btn-sm" style="padding: 0px;" onclick= "document.getElementById('seek4').style.display = 'block';">
+                        <button align="center" type="button" class="btn btn-sm" style="padding: 0px;" onclick= "document.getElementById('seek4').style.display = 'block'; this.style.display = 'none';">
                           <img   src="{% static 'picture/addicon.png' %}"  alt="..." width="40" height="40"/>
                         </button>
                        </div>
@@ -469,7 +469,7 @@
                           <option value={{i.id}}>{{i.acc_name}}  <br> ราคา : {{i.acc_price}} บาท</option>
                           {% endfor %}
                         </select>
-                        <button align="center" type="button" class="btn btn-sm" style="padding: 0px;" onclick= "document.getElementById('seek5').style.display = 'block';">
+                        <button align="center" type="button" class="btn btn-sm" style="padding: 0px;" onclick= "document.getElementById('seek5').style.display = 'block'; this.style.display = 'none';">
                           <img   src="{% static 'picture/addicon.png' %}"  alt="..." width="40" height="40"/>
                         </button>
                        </div>
@@ -482,7 +482,7 @@
                           <option value={{i.id}}>{{i.acc_name}}  <br> ราคา : {{i.acc_price}} บาท</option>
                           {% endfor %}
                         </select>
-                        <button align="center" type="button" class="btn btn-sm" style="padding: 0px;" onclick= "document.getElementById('seek6').style.display = 'block';">
+                        <button align="center" type="button" class="btn btn-sm" style="padding: 0px;" onclick= "document.getElementById('seek6').style.display = 'block'; this.style.display = 'none';">
                           <img   src="{% static 'picture/addicon.png' %}"  alt="..." width="40" height="40"/>
                         </button>
                        </div>
@@ -495,7 +495,7 @@
                           <option value={{i.id}}>{{i.acc_name}}  <br> ราคา : {{i.acc_price}} บาท</option>
                           {% endfor %}
                         </select>
-                        <button align="center" type="button" class="btn btn-sm" style="padding: 0px;" onclick= "document.getElementById('seek7').style.display = 'block';">
+                        <button align="center" type="button" class="btn btn-sm" style="padding: 0px;" onclick= "document.getElementById('seek7').style.display = 'block'; this.style.display = 'none';">
                           <img   src="{% static 'picture/addicon.png' %}"  alt="..." width="40" height="40"/>
                         </button>
                        </div>
@@ -508,7 +508,7 @@
                           <option value={{i.id}}>{{i.acc_name}}  <br> ราคา : {{i.acc_price}} บาท</option>
                           {% endfor %}
                         </select>
-                        <button align="center" type="button" class="btn btn-sm" style="padding: 0px;" onclick= "document.getElementById('seek8').style.display = 'block';">
+                        <button align="center" type="button" class="btn btn-sm" style="padding: 0px;" onclick= "document.getElementById('seek8').style.display = 'block'; this.style.display = 'none';">
                           <img   src="{% static 'picture/addicon.png' %}"  alt="..." width="40" height="40"/>
                         </button>
                        </div>
@@ -521,7 +521,7 @@
                           <option value={{i.id}}>{{i.acc_name}}  <br> ราคา : {{i.acc_price}} บาท</option>
                           {% endfor %}
                         </select>
-                        <button align="center" type="button" class="btn btn-sm" style="padding: 0px;" onclick= "document.getElementById('seek9').style.display = 'block';">
+                        <button align="center" type="button" class="btn btn-sm" style="padding: 0px;" onclick= "document.getElementById('seek9').style.display = 'block'; this.style.display = 'none';">
                           <img   src="{% static 'picture/addicon.png' %}"  alt="..." width="40" height="40"/>
                         </button>
                        </div>
@@ -534,7 +534,7 @@
                           <option value={{i.id}}>{{i.acc_name}}  <br> ราคา : {{i.acc_price}} บาท</option>
                           {% endfor %}
                         </select>
-                        <button align="center" type="button" class="btn btn-sm" style="padding: 0px;" onclick= "document.getElementById('seek10').style.display = 'block';">
+                        <button align="center" type="button" class="btn btn-sm" style="padding: 0px;" onclick= "document.getElementById('seek10').style.display = 'block'; this.style.display = 'none';">
                           <img   src="{% static 'picture/addicon.png' %}"  alt="..." width="40" height="40"/>
                         </button>
                        </div>
@@ -547,7 +547,7 @@
                           <option value={{i.id}}>{{i.acc_name}}  <br> ราคา : {{i.acc_price}} บาท</option>
                           {% endfor %}
                         </select>
-                        <button align="center" type="button" class="btn btn-sm" style="padding: 0px;" onclick= "document.getElementById('seek11').style.display = 'block';">
+                        <button align="center" type="button" class="btn btn-sm" style="padding: 0px;" onclick= "document.getElementById('seek11').style.display = 'block'; this.style.display = 'none';">
                           <img   src="{% static 'picture/addicon.png' %}"  alt="..." width="40" height="40"/>
                         </button>
                        </div>
@@ -560,7 +560,7 @@
                           <option value={{i.id}}>{{i.acc_name}}  <br> ราคา : {{i.acc_price}} บาท</option>
                           {% endfor %}
                         </select>
-                        <button align="center" type="button" class="btn btn-sm" style="padding: 0px;" onclick= "document.getElementById('seek12').style.display = 'block';">
+                        <button align="center" type="button" class="btn btn-sm" style="padding: 0px;" onclick= "document.getElementById('seek12').style.display = 'block'; this.style.display = 'none';">
                           <img   src="{% static 'picture/addicon.png' %}"  alt="..." width="40" height="40"/>
                         </button>
                        </div>
@@ -573,7 +573,7 @@
                           <option value={{i.id}}>{{i.acc_name}}  <br> ราคา : {{i.acc_price}} บาท</option>
                           {% endfor %}
                         </select>
-                        <button align="center" type="button" class="btn btn-sm" style="padding: 0px;" onclick= "document.getElementById('seek13').style.display = 'block';">
+                        <button align="center" type="button" class="btn btn-sm" style="padding: 0px;" onclick= "document.getElementById('seek13').style.display = 'block'; this.style.display = 'none';">
                           <img   src="{% static 'picture/addicon.png' %}"  alt="..." width="40" height="40"/>
                         </button>
                        </div>
@@ -586,7 +586,7 @@
                           <option value={{i.id}}>{{i.acc_name}}  <br> ราคา : {{i.acc_price}} บาท</option>
                           {% endfor %}
                         </select>
-                        <button align="center" type="button" class="btn btn-sm" style="padding: 0px;" onclick= "document.getElementById('seek14').style.display = 'block';">
+                        <button align="center" type="button" class="btn btn-sm" style="padding: 0px;" onclick= "document.getElementById('seek14').style.display = 'block'; this.style.display = 'none';">
                           <img   src="{% static 'picture/addicon.png' %}"  alt="..." width="40" height="40"/>
                         </button>
                        </div>

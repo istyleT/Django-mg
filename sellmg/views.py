@@ -6,6 +6,7 @@ from sellmg.models import Accmgs ;
 from sellmg.models import Colorsubmodels ;
 from sellmg.models import QuotationsForm ;
 from sellmg.models import Quotations ;
+from sellmg.models import HTRcustomer ;
 from django.db.models import Q ;
 from django.contrib.auth.decorators import login_required ;
 from django.contrib.auth.models import User
@@ -120,8 +121,6 @@ def upload(request):
     data = Quotations.objects.order_by('-id') # เรียงตาม id เเบบย้อนกลับ
     return render(request,'filedata.html',{'data': data})
 
-def dataclientpage(request):
-    return render(request,'dataclient.html')
 
 def collectdata(request): 
     
@@ -143,16 +142,30 @@ def collectdata(request):
              firstname =  str(i.first_name)
          #ส่งข้อมูลออก
          request.session['firstname'] = firstname
-         return render(request,'index.html')
+         return render(request,'dataclient.html')
     # ถ้าไม่มี สั่ง render หน้าเดิม
     else:
         status_login = 'False'
         return render(request,'login.html',{"status_login":status_login})
 
+
+    
 @login_required(login_url='/firstdata') 
-def findsubmodel(request):
+def dataclient(request):
+    #เก็บข้อมูล username
+    firstname = str(request.session.get('firstname'))
+    # เก็บข้อมูลหน้าตัวเอง
     mainmodel = str(request.POST.get('mainmodel'))
+    customername = str(request.POST.get('customername'))
+    contactcustomer = str(request.POST.get('contactcustomer') or '-')
+    chanelcustomer = str(request.POST.get('chanelcustomer'))
+    statuscustomer = str(request.POST.get('statuscustomer'))
+    #ส่งข้อมูลออก
     request.session['mainmodel'] = mainmodel
+    request.session['customername'] = customername
+    request.session['contactcustomer'] = contactcustomer
+    # เก็บข้อมลูเข้า database
+    HTRcustomer.objects.create(firstname = firstname, mainmodel = mainmodel, customername = customername, contactcustomer= contactcustomer, chanelcustomer = chanelcustomer, statuscustomer = statuscustomer)
     if mainmodel == "MG5":
        return render(request ,'Model_A.html')
     elif mainmodel == "MGVSHEV" :

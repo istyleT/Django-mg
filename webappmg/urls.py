@@ -23,8 +23,7 @@ urlpatterns = [
     path('static-css',views.static_css), #นำเข้า static css มาใช้ใน webappmg
     path('static-js',views.static_js), #นำเข้า static js มาใช้ใน webappmg
     path('',views.loginform),
-    path('firstdata',views.collectdata), 
-    path('mainmodel',views.findsubmodel), 
+    path('firstdata',views.collectdata),  
     path('queryprice',views.showprice),
     path('Payment',views.PaymentRegis),
     path('branchadd',views.branceadd),
@@ -33,7 +32,7 @@ urlpatterns = [
     path('logout', views.log_user_out),
     path('uploadpage',views.uploadpage),
     path('upload',views.upload),
-    path('dataclientpage',views.dataclientpage),
+    path('dataclient',views.dataclient),
    
     #path ของส่วน admin
     path('pageaddcolor', views.pageaddcolor),

@@ -71,3 +71,17 @@ class QuotationsForm (forms.ModelForm):
             'Model': forms.Select()}
             exclude = []
             
+
+# เก็บข้อมูลลูกค้า HTR 
+class HTRcustomer(models.Model):
+      date = models.DateTimeField(auto_now_add=True)
+      firstname = models.CharField(max_length=30)
+      mainmodel = models.CharField(max_length=25)
+      customername = models.CharField(max_length=50)
+      contactcustomer = models.CharField(max_length=50)
+      chanelcustomer = models.CharField(max_length=10)
+      statuscustomer = models.CharField(max_length=10)
+
+      def __str__(self):
+            return f'{self.date} | {self.firstname} | {self.mainmodel} | {self.customername | self.contactcustomer} | {self.chanelcustomer} | {self.statuscustomer}'
+      

@@ -1,0 +1,192 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block style %}
+<style>
+  .card {
+   border: 3px solid black;
+   border-radius: 35px;
+   box-shadow: 8px 8px 5px Gainsboro;
+   margin-top : 2vh;
+  }
+  .card-image {
+    padding : 0px;
+    width : 10vw;
+  }
+  .img-fluid {
+    position : relative;
+    right : 30%;
+    padding : 2px;
+    height : 80px;
+    border-radius :50%;
+    border : 1px solid black;
+  }
+  .card-body {
+    display: flex;
+    justify-content: center;
+   }
+  #content-box1 {
+    width : 30vw;
+    padding : 0px;
+    display: flex; 
+    flex-direction:column;
+  }
+  #content-box2 {
+    width : 30vw;
+    padding : 0px;
+    display: flex; 
+    flex-direction:column;
+  }
+  #frm-edit {
+    width : 100%;
+    padding : 20px;
+    border : 3px solid black;
+    border-radius: 30px;
+    box-shadow: 10px 10px 5px Gainsboro;
+    margin : 2vh 0vw;
+  }
+  .status-box {
+    padding : 10px;
+    margin : 2vh 0vw;
+    border : 2px solid rgb(128, 0, 255);
+    border-radius: 25px;
+    text-align : center;
+  } 
+  .form-check-label {
+    padding : 1px;
+    border-radius: 5px;
+  }
+  .form-check-inline {
+    margin-top : 8px;
+  }
+  #text-status {
+    position : relative;
+    font-size: 35px;
+    top : 15%;
+    
+  }
+
+</style>
+{% endblock %}
+{% block script %}
+<script>
+  function changestyle() {
+    const choosemainmodel = String(document.getElementById('productmodel').innerHTML) ;  
+    const choosestatus = String(document.getElementById('statuscustomer').innerHTML) ;
+    const cardimage = document.getElementById('card-image');  
+    const colorcard = document.getElementById('color-card');
+    const btnstatus= document.getElementById('btn-status');
+    switch (choosemainmodel){
+       case "MG5" : cardimage.src = "{% static 'picture/Newmg5.png' %}";break
+       case "MGVSHEV" : cardimage.src = "{% static 'picture/Newmgvshev.png' %}";break
+       case "MGZS" : cardimage.src = "{% static 'picture/Newmgzs.png' %}";break
+       case "MGETD" : cardimage.src = "{% static 'picture/Newmgextendergc.png' %}"; break
+       case "MGHSPHEV" : cardimage.src = "{% static 'picture/Newmghs.png' %}"; break
+       case "MGHS" : cardimage.src = "{% static 'picture/Newmghs.png' %}";break 
+       }
+    switch (choosestatus){
+      case "PP" : btnstatus.className = "text-primary";
+                  colorcard.style.border = "3px solid rgb(0, 128, 255)";
+                  cardimage.style.border = "1px solid rgb(0, 128, 255)";
+                  break
+      case "BK" : btnstatus.className = "text-warning";
+                  colorcard.style.border = "3px solid rgb(255, 198, 26)";
+                  cardimage.style.border = "1px solid rgb(255, 198, 26)";
+                  break
+      case "DV" : btnstatus.className = "text-success";
+                  colorcard.style.border = "3px solid rgb(26, 255, 26)";
+                  cardimage.style.border = "1px solid rgb(26, 255, 26)";
+                  break
+      case "TD" : btnstatus.className = "text-dark";
+                  colorcard.style.border = "3px solid black";
+                  cardimage.style.border = "1px solid black";
+                  break
+      case "F" : btnstatus.className = "text-danger";
+                 colorcard.style.border = "3px solid rgb(255, 26, 83)";
+                 cardimage.style.border = "1px solid rgb(255, 26, 83)";
+                  break
+    }
+    return (choosemainmodel)
+  };              
+</script>
+{% endblock %}
+{% block content %}
+<div onclick= "changestyle()">
+<!--ส่วนเเสดงข้อมูลเดิม-->
+{% for i in datacustomeredit %} 
+  <p id="productmodel" style="display: none;" >{{i.mainmodel}}</p> <!----สร้างเพื่อให้ javascript เก็บค่า--> 
+  <p id="statuscustomer" style="display: none;" >{{i.statuscustomer}}</p> <!----สร้างเพื่อให้ javascript เก็บค่า--> 
+          <div  class="card" id="color-card" >
+            <div class="card-body">
+              <div class="card-image">
+                <img  id="card-image" src="{% static 'picture/iconcustomer.png' %}" class="img-fluid" alt="..."  >
+              </div>
+              <div id="content-box1" >
+                <span>วันที่ : {{i.date}}</span>
+                <span>ผู้ใช้งาน : {{i.firstname}}</span>
+                <span>รุ่นรถ : {{i.mainmodel}}/{{i.chanelcustomer}}</span>
+              </div>
+              <div id="content-box2" > 
+                <span>ชื่อลูกค้า : {{i.customername}}</span>
+                <span>ติดต่อ : {{i.contactcustomer}}</span>
+                <span>หมายเหตุ : {{i.remark}}</span>
+              </div>
+              <div id="btn-status" class ="" >
+                  <strong id="text-status" >{{i.statuscustomer}}</strong>
+              </div>
+            </div>
+          </div>
+   
+ {% endfor %}
+<!--form เเก้ข้อมูลใหม่-->
+
+{% if not form.is_valid %}
+<form method="post" id="frm-edit" action="updatedatacustomer" >
+    {% csrf_token %} 
+   <div class="input-group input-group-mb" style="margin-top: 1vh;">
+      <span class="input-group-text btn-success" id="inputGroup-sizing-lg"><strong>ชื่อลูกค้า</strong></span>
+      <input type="text" name="customername-edit" class="form-control text-center" id="namecustomer" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" placeholder="ข้อมูลที่ต้องการเเก้ไข" onchange="checkdataclient()" >
+   </div>          
+   <div class="input-group input-group-md" style="margin-top: 1vh;">
+      <span class="input-group-text btn-primary" id="inputGroup-sizing-lg"><strong>การติดต่อ</strong></span>
+      <input type="text" name="contactcustomer-edit" class="form-control text-center" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" placeholder="ข้อมูลที่ต้องการเเก้ไข">
+    </div> 
+    <div class="status-box">
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="statuscustomer-edit" id="radiochanels1" value="PP" checked>
+                      <label class="form-check-label " style="border: 2px solid rgb(0, 128, 255);" for="radiochanels1"><strong>PP : ลูกค้ามุ่งหวัง</strong></label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="statuscustomer-edit" id="radiochanels2" value="BK">
+                      <label class="form-check-label" style="border: 2px solid rgb(255, 198, 26);" for="radiochanels2"><strong>BK : ลูกค้าจอง</strong></label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="statuscustomer-edit" id="radiochanels3" value="DV">
+                      <label class="form-check-label" style="border: 2px solid rgb(26, 255, 26);" for="radiochanels3"><strong>DV : ลูกค้าส่งมอบ</strong></label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="statuscustomer-edit" id="radiochanels4" value="TD">
+                      <label class="form-check-label" style="border: 2px solid black;" for="radiochanels4"><strong>TD : ทดลองขับ</strong></label>
+                    </div>                     
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="statuscustomer-edit" id="radiochanels5" value="F">
+                      <label class="form-check-label " style="border: 2px solid rgb(255, 26, 83);" for="radiochanels5"><strong>F : ล้มเหลว</strong></label>
+                    </div>                     
+      
+    </div> 
+    
+   <div class="input-group input-group-md" style="margin-top: 1vh;">
+     <span class="input-group-text btn-warning" id="inputGroup-sizing-lg"><strong>หมายเหตุ</strong></span>
+     <input type="text" name="customer-remark" class="form-control text-center" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" placeholder="เพิ่มหมายเหตุ">
+   </div>
+
+    <div  class="d-grid gap-1" style="margin-top: 2vh;">
+       <button type="submit" class="btn btn-dark"><strong>Update</strong></button>
+    </div>
+</form>
+{% endif %}
+
+</div>
+
+
+
+{% endblock %}

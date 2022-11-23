@@ -1,0 +1,111 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+
+{% block script %}
+   <script type="text/javascript" src="{% static 'js/statuscustomer.js' %}" defer></script>
+{%  endblock %}
+
+{% block style %}
+<style>
+  .card {
+    border: 3px solid black;
+    border-radius: 35px;
+    box-shadow: 8px 8px 5px Gainsboro;
+    margin-top : 0vh;
+   }
+  .card-image {
+    padding : 0px;
+    width : 10vw;
+  }
+  .img-fluid {
+    position : relative;
+    right : 10%;
+    padding : 2px;
+    height : 80px;
+    border-radius :50%;
+    border : 1px solid black;
+  }
+  .card-body {
+    display: flex;
+    justify-content: center;
+   }
+  #content-box1 {
+    width : 30vw;
+    padding : 0px;
+    display: flex; 
+    flex-direction:column;
+  }
+  #content-box2 {
+    width : 30vw;
+    padding : 0px;
+    display: flex; 
+    flex-direction:column;
+  }
+ #btn-status{
+  height : 100%;
+ }
+ #text-status {
+  font-size: 25px;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<table class="table table-borderless">
+   <!--<thead>
+     <tr>
+       <th colspan="2">
+          <div class="input-group mb-3">
+            <label class="input-group-text" for="inputGroupSelect01">เรียงตาม</label>
+            <select class="form-select" id="inputGroupSelect01">
+              <option selected>วันที่</option>
+              <option value="1">รุ่น</option>
+              <option value="2">ช่องทาง</option>
+              <option value="3">สถานะ</option>
+            </select>
+          </div>
+       </th>
+     </tr>
+   </thead>-->
+  {% if datacustomer.count > 0 %}
+
+   <tbody>
+<!--ส่วนข้อมูล-->
+ {% for i in datacustomer %}
+     <tr >
+       <td>
+          <div  class="card" id="color-card">
+            <div class="card-body">
+              <div class="card-image">
+                <img onclick="changepic()" id="card-image" src="{% static 'picture/iconcustomer.png' %}" class="img-fluid" alt="...">
+              </div>
+              <div id="content-box1" >
+                <span>วันที่ : {{i.date}}</span>
+                <span>ผู้ใช้งาน : {{i.firstname}}</span>
+                <span>รุ่นรถ : {{i.mainmodel}}/{{i.chanelcustomer}}</span>
+              </div>
+              <div id="content-box2" > 
+                <span>ชื่อลูกค้า : {{i.customername}}</span>
+                <span>ติดต่อ : {{i.contactcustomer}}</span>
+                <span>หมายเหตุ : {{i.remark}}</span>
+              </div>
+              <form action="editcard" method="POST">
+                {% csrf_token %}
+                <button name="idcard" value={{i.id}} id="btn-status" type="submit" class ="btn btn-dark" >
+                  <strong id="text-status">{{i.statuscustomer}}</strong>
+                </button>
+              </form>
+            </div>
+          </div>
+       </td>
+     </tr>
+  
+ {% endfor %}
+
+
+   </tbody>
+</table>
+{% endif %}
+
+{% endblock %}

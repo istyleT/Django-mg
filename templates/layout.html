@@ -11,6 +11,12 @@
 
                     <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"> </script>
                     {% block script %} {% endblock %}
+                    
+                    <style>
+                      .dropdown-item:hover {
+                        background-color: rgb(0, 119, 179); 
+                      }
+                    </style>
 
          
 </head>
@@ -25,7 +31,12 @@
                         </div>
                         {% if user.is_authenticated %}
                         <div>
-                          <a href="/uploadpage"  class="btn btn-outline-info">Upload</a>
+                          <button class="btn btn-outline-info dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"><strong>Staff</strong></button>
+                            <ul class=" bg-dark dropdown-menu dropdown-menu-end" style="border: 3px solid rgb(0, 136, 204); border-radius: 10px;">
+                              <li><a class="dropdown-item text-white text-center" href="/statuscustomer"><strong>ข้อมูลลูกค้า</strong></a></li>
+                              <li><a class="dropdown-item text-white text-center" href="/uploadpage"><strong>อัพโหลดไฟล์</strong></a></li>
+                              <li><a class="dropdown-item text-white text-center" href="/uploadpage"><strong>ดูใบเสนอราคา</strong></a></li>
+                            </ul>
                           <a href="/logout"  class="btn btn-outline-warning">Logout</a>
                         </div>
                         {% endif %}

@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect ;
+from django.shortcuts import render, redirect , reverse;
 from django.contrib.auth import authenticate, login, logout;
 from sellmg.models import Product ;
 from sellmg.models import Regiscosts ;
@@ -148,8 +148,15 @@ def collectdata(request):
         status_login = 'False'
         return render(request,'login.html',{"status_login":status_login})
 
-
-    
+@login_required(login_url='/firstdata') 
+def statuscustomer(request):
+    #เก็บข้อมูลทำเงื่อนไข
+    firstname = str(request.session.get('firstname'))    
+    #เชื่อมต่อ database ค้นข้อมูลตามเงื่อนไข
+    datacustomer = HTRcustomer.objects.filter( firstname=firstname).values_list('id', 'date','firstname','mainmodel','customername','contactcustomer','chanelcustomer','statuscustomer','remark' , named=True).order_by('-id')
+    # สั่งเเสดงหน้า UI พร้อมส่งข้อมูล         
+    return render(request,'statuscustomer.html',{'datacustomer':datacustomer})
+ 
 @login_required(login_url='/firstdata') 
 def dataclient(request):
     #เก็บข้อมูล username
@@ -178,6 +185,39 @@ def dataclient(request):
         return render(request ,'Model_E.html')
     elif mainmodel == "MGHS" :
         return render(request ,'Model_F.html')
+
+@login_required(login_url='/firstdata') 
+def editcard(request):
+    # เก็บข้อมูลหน้าตัวเอง
+    idcard = request.POST.get('idcard') 
+    # ส่งข้อมูลออก
+    request.session['idcard'] = idcard
+    # หาข้อมูล card เพื่อไปเเสดง
+    datacustomeredit = HTRcustomer.objects.filter( id=idcard).values_list('date','firstname','mainmodel','customername','contactcustomer','chanelcustomer','statuscustomer','remark' , named=True)
+    
+    return render(request, 'editcard.html', {'datacustomeredit':datacustomeredit})
+
+@login_required(login_url='/firstdata') 
+def updatedatacustomer(request):
+                        
+    if request.method == "POST":
+        idcard = request.session.get('idcard')
+        # เก็บข้อมูลหน้าตัวเอง
+        customernameedit = request.POST.get('customername-edit')     
+        contactcustomeredit = request.POST.get('contactcustomer-edit')     
+        statuscustomeredit = request.POST.get('statuscustomer-edit')     
+        customerremark = request.POST.get('customer-remark') 
+        # update ข้อมูล
+        if  customernameedit != "":
+                                HTRcustomer.objects.filter(id= idcard).update(customername = customernameedit)
+        if  contactcustomeredit != "":
+                                HTRcustomer.objects.filter(id= idcard).update(contactcustomer = contactcustomeredit)
+        if  customerremark != "":
+                                HTRcustomer.objects.filter(id= idcard).update(remark = customerremark)
+
+        HTRcustomer.objects.filter(id= idcard).update(statuscustomer = statuscustomeredit)
+                             
+    return  redirect('/statuscustomer')
 
 @login_required(login_url='/firstdata') 
 def showprice(request): 

@@ -33,6 +33,9 @@ urlpatterns = [
     path('uploadpage',views.uploadpage),
     path('upload',views.upload),
     path('dataclient',views.dataclient),
+    path('statuscustomer',views.statuscustomer),
+    path('editcard',views.editcard),
+    path('updatedatacustomer',views.updatedatacustomer),
    
     #path ของส่วน admin
     path('pageaddcolor', views.pageaddcolor),

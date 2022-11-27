@@ -79,8 +79,8 @@ class HTRcustomer(models.Model):
       mainmodel = models.CharField(max_length=25)
       customername = models.CharField(max_length=50) #เเก้ได้
       contactcustomer = models.CharField(max_length=50) #เเก้ได้
-      chanelcustomer = models.CharField(max_length=10) 
-      statuscustomer = models.CharField(max_length=10) #เเก้ได้
+      chanelcustomer = models.CharField(max_length=30) 
+      statuscustomer = models.CharField(max_length=30) #เเก้ได้
       remark = models.CharField(max_length=100, default='-') #เเก้ได้
       def __str__(self):
          return f'{self.date} | {self.firstname} | {self.mainmodel} | {self.customername | self.contactcustomer} | {self.chanelcustomer} | {self.statuscustomer}'

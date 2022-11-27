@@ -3,6 +3,22 @@
 
 {% block style %}
 <link rel="stylesheet" href="{% static 'css/branchadd.css' %}" >
+<style>
+  .accordion-button{
+    border-left: 2px solid gray;
+    border-right: 2px solid gray;
+  }
+  .input-group {
+    padding: 1vh 2vw;
+    margin-bottom: 0px !important;
+    margin-top: 0px !important;
+  }
+
+  .table {
+    border : none
+    text-align : center;
+  }
+</style>
 {% endblock %}
 
 {% block script %}
@@ -13,15 +29,13 @@
 {% block content %}
 
 <p id="productprice" style="display: none;" >{{productprice}}</p> <!----สร้างเพื่อให้ javascript เก็บค่า-->
-
-<table class="table">
-  <tr>
-    <th><h5>รุ่นรถ :</h5></th>
-    <td><strong>{{submodel}}</strong></td>
-    <th><h5>ราคา :</h5></th>
-    <td><strong>{{text_productprice}}</strong> บาท</td>
-  </tr>
-</table>
+<div  class="frm-body bg-white">
+   <table class="table" style="border-radius : 20px;" >
+     <tr>
+       <th><h5><strong> รุ่นรถ : {{submodel}}  </strong></h5></th>
+       <th><h5><strong> ราคา : {{text_productprice}} บาท </strong></h5></th>
+     </tr>
+   </table>
 
 
 <form method="POST" action="branchadd">
@@ -33,7 +47,7 @@
 
                          <div class="accordion-item">
                           <h2 class="accordion-header" id="flush-headingF">
-                            <button class="accordion-button collapsed text-primary" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseF" aria-expanded="false" aria-controls="flush-collapseF">
+                            <button style="border-left: 2px solid gray; border-right: 2px solid gray; border-top: 2px solid gray; border-top-left-radius: 25px; border-top-right-radius: 25px;" class="accordion-button collapsed text-primary" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseF" aria-expanded="false" aria-controls="flush-collapseF">
                           
                                 <h5>
                                   <strong>ส่วนลดตามรุ่น</strong>
@@ -42,8 +56,8 @@
                       
                             </button>
                           </h2>
-                          <div id="flush-collapseF" class="accordion-collapse collapse" aria-labelledby="flush-headingF" data-bs-parent="#accordionFlushExample">
-                                            <div class="input-group" style="margin-top: 1vh;">
+                          <div id="flush-collapseF"  class="accordion-collapse collapse" aria-labelledby="flush-headingF" data-bs-parent="#accordionFlushExample">
+                                            <div class="input-group"  >
                                                                 <input name="productmargin"  id="idproductmargin" type="number" class="form-control" placeholder="-" onchange="tagPDMG()">
                                                                 <span class="input-group-text">บาท</span>
                                             </div>
@@ -57,7 +71,7 @@
 
                          <div class="accordion-item">
                           <h2 class="accordion-header" id="flush-headingA">
-                            <button class="accordion-button collapsed text-danger" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseA" aria-expanded="false" aria-controls="flush-collapseA">
+                            <button  class="accordion-button collapsed text-danger"  type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseA" aria-expanded="false" aria-controls="flush-collapseA">
                               <h5>
                                 <strong>ส่วนลดจากราคาขาย*</strong>
                                 <strong align="right" id="min_reduce"></strong>
@@ -66,7 +80,7 @@
                             </button>
                           </h2>
                           <div id="flush-collapseA" class="accordion-collapse collapse" aria-labelledby="flush-headingA" data-bs-parent="#accordionFlushExample">
-                                            <div class="input-group" style="margin-top: 1vh;">
+                                            <div class="input-group" >
                                                                 <input name="min_reduce" id="idmin_reduce" type="number" class="form-control" placeholder="-" onchange="tagMRD()">
                                                                 <span class="input-group-text">บาท</span>
                                             </div>
@@ -85,7 +99,7 @@
                             </button>
                           </h2>
                           <div id="flush-collapseFive" class="accordion-collapse collapse" aria-labelledby="flush-headingFive" data-bs-parent="#accordionFlushExample">
-                                         <div class="input-group" style="margin-top: 1vh;">
+                                         <div class="input-group" >
                                                              <input name="add_eq" id="idadd_eq" type="number" class="form-control" placeholder="-" onchange="tagAEQ()">
                                                              <span class="input-group-text">บาท</span>
                                          </div>
@@ -103,7 +117,7 @@
                             </button>
                           </h2>
                           <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
-                                         <div class="input-group" style="margin-top: 1vh;">
+                                         <div class="input-group" >
                                                              <input name="add_kickback" id="idadd_kickback" type="number" class="form-control" placeholder="-" onchange="tagAKB()">
                                                              <span class="input-group-text">บาท</span>
                                          </div>
@@ -124,22 +138,22 @@
                           </h2>
                           <div id="flush-collapseSix" class="accordion-collapse collapse" aria-labelledby="flush-headingSix" data-bs-parent="#accordionFlushExample">
                                
-                            <div style="margin-top: 1vh;" class="alert alert-secondary " >
+                            <div class="alert alert-secondary " style="padding: 1vh 2vw; margin-bottom: 0px;" >
                               <span>หมายเหตุ : เงินดาวน์อาจเปลี่ยนเเปลง ถ้ามีการเปลี่ยนการใช้ส่วนลดจากราคาขายหรือบวกหัวค่าอุปกรณ์</span>
                             </div>
                         
-                            <div class="input-group mb-3 "  style="margin-top: 1vh;">
-                              <div style="width:30vw ;">
+                            <div style="margin: 0px;" class="input-group mb-3" >
+                              <div style="width:20vw ;">
                                 <span class="form-control text-center" style="display: none;" id="show_down_percent" ></span><input name="gen_down" id="gen_down_percent" onchange="tagGDPC()" type="number" style="display: block;" class="form-control text-center"  placeholder="%ดาวน์">
                               </div>
                                 <button type="button" class="btn-success" onclick="caldown()"> = </button>
                                 <span class="form-control text-center" style="display: none;" id="show_down_bath" ></span><input id="gen_down_bath" type="number" style="display: block;"  class="form-control text-center" placeholder="เงินดาวน์ (บาท)" >
                               </div>
-                              <div align="center" style="margin-top: 2vh;">
-                                <button type="button" style="width: 50vw; margin-bottom: 1vh;" class="btn btn-outline-primary" onclick="resetdown()"><strong>Reset</strong></button>
+                              <div align="center" style="margin-top: 0vh;">
+                                <button type="button" style="width: 30vw; margin-bottom: 1vh; font-size: 120% " class="btn btn-outline-primary" onclick="resetdown()"><strong>Reset</strong></button>
                               </div>
                               
-                              <div id="downerror" class="alert alert-danger text-center"  style="display: none;">
+                              <div id="downerror" class="alert alert-danger text-center"  style="display: none; margin-bottom: 0px;">
                                 <h5></h5><strong>กรุณาเลือกกรอกช่องใดช่องหนึ่ง</strong>
                               </div>
                         
@@ -159,7 +173,7 @@
                       </h2>
                       <div id="flush-collapseC" class="accordion-collapse collapse" aria-labelledby="flush-headingC" data-bs-parent="#accordionFlushExample">
     
-                                        <div class="input-group" style="margin-top: 1vh;">
+                                        <div class="input-group" >
                                                             <input name="min_subdown" id="idmin_subdown" onchange="tagMSD()" type="number" class="form-control" placeholder="-" >
                                                             <span class="input-group-text">บาท</span>
                                         </div>
@@ -180,7 +194,7 @@
                             </button>
                           </h2>
                           <div id="flush-collapseSeven" class="accordion-collapse collapse" aria-labelledby="flush-headingSeven" data-bs-parent="#accordionFlushExample">
-                            <div class="input-group mb-3" style="margin-top: 1vh;">
+                            <div class="input-group mb-3" >
                               <label class="input-group-text" for="inputGroupSelect01">จำนวนปี</label>
                               <select name="gen_month" id="idgen_month" onchange="tagGM()" class="form-select" id="inputGroupSelect01">
                                 <option value=1 selected>กรุณาเลือก</option>
@@ -209,12 +223,12 @@
                             </button>
                           </h2>
                           <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                                         <div class="input-group" style="margin-top: 1vh;">
+                                         <div class="input-group" >
                                                              <input name="gen_inter" id="idgen_inter" onchange="tagGIT()" class="form-control" placeholder="-">
                                                              <span class="input-group-text">%</span>
                                          </div>
 
-                                         <div class="input-group mb-3" style="margin-top: 1vh;">
+                                         <div class="input-group mb-3" >
                                           <label class="input-group-text" for="inputGroupSelect01">เงื่อนไขดอกเบี้ย</label>
                                           <select name="condition_finance" class="form-select" id="idcondition_finance" onchange="tagCDTFN()">
                                             <option value='END' selected>Ending</option>
@@ -240,19 +254,19 @@
                         </h2>
                         <div id="flush-collapseI" class="accordion-collapse collapse" aria-labelledby="flush-headingI" data-bs-parent="#accordionFlushExample">
                                           
-                                          <div class="input-group" style="margin-top: 1vh;">
+                                          <div class="input-group" >
                                                               <input name="min_prosub" id="idmin_prosub"  type="number" class="form-control" placeholder="โปรซับดอก">
                                                               <span class="input-group-text">บาท</span>
                                           </div>
-                                          <div class="input-group" style="margin-top: 1vh;">
+                                          <div class="input-group" >
                                                               <input name="min_inter"  id="idmin_inter"  class="form-control" placeholder="ดอกเบี้ยเสนอลูกค้า">
                                                               <span class="input-group-text">%</span>
                                           </div>
   
-                                          <div  class="alert alert-danger" id="showtotalsubsidy" style="display: none; text-align: center; text-align: center; margin-top: 1vh;"></div>
+                                          <div  class="alert alert-danger" id="showtotalsubsidy" style="display: none; text-align: center; text-align: center; margin: 1vh 0vw;"></div>
   
-                                          <div align="center" style="margin-top: 2vh; "> 
-                                               <button type="button" style="width: 50vw; margin-bottom: 1vh;" class="btn btn-outline-danger" onclick="sumSubsidy()"><strong>รวมค่า Subsidy</strong></button>
+                                          <div align="center" style="margin-top: 0vh; "> 
+                                               <button type="button" style="width: 30vw; margin-bottom: 1vh; font-size: 100%" class="btn btn-outline-danger" onclick="sumSubsidy()"><strong>รวมค่า Subsidy</strong></button>
                                           </div>
   
                         </div>
@@ -320,9 +334,9 @@
                             </label>
                           </div>
                        </li> 
-                       <li class="list-group-item">
+                       <li class="list-group-item" style="border-bottom-right-radius: 15px; border-bottom-left-radius: 15px;">
                         <div class="form-check" style="display: flex; ">
-                          <input style="margin-right: 10px;" value="Y" name="min_subdown_vat" class="form-check-input" type="checkbox"  checked >
+                          <input style="margin-right: 10px; " value="Y" name="min_subdown_vat" class="form-check-input" type="checkbox"  checked >
                           <label class="form-check-label" for="flexCheckDefault">
                             Vat ซับดาวน์ 7% 
                           </label>
@@ -359,9 +373,9 @@
 
                      
                       <div class="input-group mb-3" style="margin-top: 1vh;">
-                        <input type="text" name="text_acc_card" class="form-control" placeholder="รายการของเเถม" aria-label="">
+                        <input type="text" style="width:30vw"  name="text_acc_card" class="form-control" placeholder="รายการของเเถม" aria-label="">
                         <span class="input-group-text">ราคา</span>
-                        <input type="number" name="min_acc_card" class="form-control" placeholder="ราคา" aria-label="">
+                        <input type="number" name="min_acc_card" class="form-control text-center" placeholder="ราคา" aria-label="">
                         <button align="center" type="button" class="btn btn-sm" style="padding: 0px;"  onclick= "document.getElementById('hide1').style.display = 'block'; this.style.display = 'none';">
                           <img   src="{% static 'picture/addicon.png' %}"  alt="..." width="40" height="40"/>
                         </button>
@@ -370,9 +384,9 @@
                       <!--ส่วน display none-->
                       <div id="hide1" style="display: none;">
                         <div class="input-group mb-3" style="margin-top: 1vh;">
-                          <input type="text" name="text_acc_card_1" class="form-control" placeholder="รายการของเเถม" aria-label="">
+                          <input type="text" style="width:30vw" name="text_acc_card_1" class="form-control" placeholder="รายการของเเถม" aria-label="">
                           <span class="input-group-text">ราคา</span>
-                          <input type="number" name="min_acc_card_1" class="form-control" placeholder="ราคา" aria-label="">
+                          <input type="number" name="min_acc_card_1" class="form-control text-center" placeholder="ราคา" aria-label="">
                           <button align="center" type="button" class="btn btn-sm" style="padding: 0px;"  onclick= "document.getElementById('hide2').style.display = 'block'; this.style.display = 'none';" >
                             <img   src="{% static 'picture/addicon.png' %}"  alt="..." width="40" height="40"/>
                           </button>
@@ -381,9 +395,9 @@
                      
                     <div id="hide2" style="display : none;">
                       <div class="input-group mb-3" style="margin-top: 1vh; ">
-                        <input type="text" name="text_acc_card_2" class="form-control" placeholder="รายการของเเถม" aria-label="">
+                        <input type="text" style="width:30vw"  name="text_acc_card_2" class="form-control" placeholder="รายการของเเถม" aria-label="">
                         <span class="input-group-text">ราคา</span>
-                        <input type="number" name="min_acc_card_2" class="form-control" placeholder="ราคา" aria-label="">
+                        <input type="number" name="min_acc_card_2" class="form-control text-center" placeholder="ราคา" aria-label="">
                         <button align="center" type="button" class="btn btn-sm" style="padding: 0px;"  onclick= "document.getElementById('hide3').style.display = 'block'; this.style.display = 'none';">
                           <img   src="{% static 'picture/addicon.png' %}"  alt="..." width="40" height="40"/>
                         </button>
@@ -392,19 +406,75 @@
 
                     <div id="hide3" style="display : none;">
                       <div class="input-group mb-3" style="margin-top: 1vh; ">
-                        <input type="text" name="text_acc_card_3" class="form-control" placeholder="รายการของเเถม" aria-label="">
+                        <input type="text" style="width:30vw" name="text_acc_card_3" class="form-control" placeholder="รายการของเเถม" aria-label="">
                         <span class="input-group-text">ราคา</span>
-                        <input type="number" name="min_acc_card_3" class="form-control" placeholder="ราคา" aria-label="">
+                        <input type="number" name="min_acc_card_3" class="form-control text-center" placeholder="ราคา" aria-label="">
                         <button align="center" type="button" class="btn btn-sm" style="padding: 0px;"  onclick= "document.getElementById('hide4').style.display = 'block'; this.style.display = 'none';">
                           <img   src="{% static 'picture/addicon.png' %}"  alt="..." width="40" height="40"/>
                         </button>
                       </div>
                       </div>
-                      <div id="hide4" style="display : none;">
+
+                    <div id="hide4" style="display : none;">
                       <div class="input-group mb-3" style="margin-top: 1vh; ">
-                        <input type="text" name="text_acc_card_4" class="form-control" placeholder="รายการของเเถม" aria-label="">
+                        <input type="text" style="width:30vw" name="text_acc_card_4" class="form-control" placeholder="รายการของเเถม" aria-label="">
                         <span class="input-group-text">ราคา</span>
-                        <input type="number" name="min_acc_card_4" class="form-control" placeholder="ราคา" aria-label="">
+                        <input type="number" name="min_acc_card_4" class="form-control text-center" placeholder="ราคา" aria-label="">
+                        <button align="center" type="button" class="btn btn-sm" style="padding: 0px;"  onclick= "document.getElementById('hide5').style.display = 'block'; this.style.display = 'none';">
+                          <img   src="{% static 'picture/addicon.png' %}"  alt="..." width="40" height="40"/>
+                        </button>
+                      </div>
+                      </div>
+
+                    <div id="hide5" style="display : none;">
+                      <div class="input-group mb-3" style="margin-top: 1vh; ">
+                        <input type="text" style="width:30vw" name="text_acc_card_5" class="form-control" placeholder="รายการของเเถม" aria-label="">
+                        <span class="input-group-text">ราคา</span>
+                        <input type="number" name="min_acc_card_5" class="form-control text-center" placeholder="ราคา" aria-label="">
+                        <button align="center" type="button" class="btn btn-sm" style="padding: 0px;"  onclick= "document.getElementById('hide6').style.display = 'block'; this.style.display = 'none';">
+                          <img   src="{% static 'picture/addicon.png' %}"  alt="..." width="40" height="40"/>
+                        </button>
+                      </div>
+                      </div>
+
+                    <div id="hide6" style="display : none;">
+                      <div class="input-group mb-3" style="margin-top: 1vh; ">
+                        <input type="text" style="width:30vw" name="text_acc_card_6" class="form-control" placeholder="รายการของเเถม" aria-label="">
+                        <span class="input-group-text">ราคา</span>
+                        <input type="number" name="min_acc_card_6" class="form-control text-center" placeholder="ราคา" aria-label="">
+                        <button align="center" type="button" class="btn btn-sm" style="padding: 0px;"  onclick= "document.getElementById('hide7').style.display = 'block'; this.style.display = 'none';">
+                          <img   src="{% static 'picture/addicon.png' %}"  alt="..." width="40" height="40"/>
+                        </button>
+                      </div>
+                      </div>
+
+                    <div id="hide7" style="display : none;">
+                      <div class="input-group mb-3" style="margin-top: 1vh; ">
+                        <input type="text" style="width:30vw" name="text_acc_card_7" class="form-control" placeholder="รายการของเเถม" aria-label="">
+                        <span class="input-group-text">ราคา</span>
+                        <input type="number" name="min_acc_card_7" class="form-control text-center" placeholder="ราคา" aria-label="">
+                        <button align="center" type="button" class="btn btn-sm" style="padding: 0px;"  onclick= "document.getElementById('hide8').style.display = 'block'; this.style.display = 'none';">
+                          <img   src="{% static 'picture/addicon.png' %}"  alt="..." width="40" height="40"/>
+                        </button>
+                      </div>
+                      </div>
+
+                    <div id="hide8" style="display : none;">
+                      <div class="input-group mb-3" style="margin-top: 1vh; ">
+                        <input type="text" style="width:30vw" name="text_acc_card_8" class="form-control" placeholder="รายการของเเถม" aria-label="">
+                        <span class="input-group-text">ราคา</span>
+                        <input type="number" name="min_acc_card_8" class="form-control text-center" placeholder="ราคา" aria-label="">
+                        <button align="center" type="button" class="btn btn-sm" style="padding: 0px;"  onclick= "document.getElementById('hide9').style.display = 'block'; this.style.display = 'none';">
+                          <img   src="{% static 'picture/addicon.png' %}"  alt="..." width="40" height="40"/>
+                        </button>
+                      </div>
+                      </div>
+
+                      <div id="hide9" style="display : none;">
+                      <div class="input-group mb-3" style="margin-top: 1vh; ">
+                        <input type="text" style="width:30vw" name="text_acc_card_9" class="form-control" placeholder="รายการของเเถม" aria-label="">
+                        <span class="input-group-text">ราคา</span>
+                        <input type="number" name="min_acc_card_9" class="form-control text-center" placeholder="ราคา" aria-label="">
                       </div>
                       </div>
                       <!---->
@@ -619,7 +689,7 @@
                           </button>
                         </h2>
                         <div id="flush-collapseTen" class="accordion-collapse collapse" aria-labelledby="flush-headingTen" data-bs-parent="#accordionFlushExample">
-                                       <div class="input-group" style="margin-top: 1vh;">
+                                       <div class="input-group" >
                                                            <input name="gen_prepay" id="idgen_prepay" onchange="tagGPP()" type="number" class="form-control" placeholder="-">
                                                            <span class="input-group-text">บาท</span>
                                        </div>
@@ -641,9 +711,9 @@
                           </button>
                         </h2>
                         <div id="flush-collapseNine" class="accordion-collapse collapse" aria-labelledby="flush-headingNine" data-bs-parent="#accordionFlushExample">
-                          <div class="input-group mb-3" style="margin-top: 1vh;">
+                          <div class="input-group mb-3">
                             <label class="input-group-text" for="inputGroupSelect01">ไฟเเนนซ์</label>
-                            <select name="gen_company" id="idgen_company" onchange="tagGCPN()" class="form-select" >
+                            <select  name="gen_company" id="idgen_company" onchange="tagGCPN()" class="form-select" >
                               <option value="" selected>กรุณาเลือก</option>
                               <option value='K'>ลีสซิ่งกสิกรไทย</option>
                               <option value='TTB'>ทหารไทยธนชาต</option>
@@ -659,8 +729,14 @@
                       </div>
                     <!--------หมายเหตุ ------------>
                     <div class="accordion-item">
+                      <div id="flush-collapseG" class="accordion-collapse collapse" aria-labelledby="flush-headingG" data-bs-parent="#accordionFlushExample">
+                        <div class="input-group" >
+                                            <textarea name="gen_remark"  id="idgen_remark" type="text" class="form-control"  rows="1" ></textarea>
+                                            
+                        </div>
+                      </div>
                       <h2 class="accordion-header" id="flush-headingG">
-                        <button class="accordion-button collapsed text-primary" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseG" aria-expanded="false" aria-controls="flush-collapseG">
+                        <button style="border-left: 2px solid gray; border-right: 2px solid gray; border-bottom: 2px solid gray; border-bottom-right-radius: 25px; border-bottom-left-radius: 25px;" class="accordion-button collapsed text-primary" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseG" aria-expanded="false" aria-controls="flush-collapseG">
                       
                             <h5>
                               <strong>หมายเหตุ</strong>
@@ -668,25 +744,33 @@
                   
                         </button>
                       </h2>
-                      <div id="flush-collapseG" class="accordion-collapse collapse" aria-labelledby="flush-headingG" data-bs-parent="#accordionFlushExample">
-                                        <div class="input-group" style="margin-top: 1vh;">
-                                                            <textarea name="gen_remark"  id="idgen_remark" type="text" class="form-control"  rows="1" ></textarea>
-                                                            
-                                        </div>
-                       </div>
+                      
                      </div>
 
 
         </div>
 
 
-                        <div style="margin: 2vh 0vh;" class="d-grid gap-1">
-                                  <button type="submit" class="btn btn-warning"><strong>ดำเนินการต่อ</strong></button>
-                        </div>
+        <div  align="center" style="display : flex; justify-content: center; margin-top: 2vh;">
+          <button type="submit" style="display: flex;
+          justify-content: center;
+          padding : 0px 3vw;
+          width : 35%;
+          height : 50px;
+          font-size : 26px;
+          border-radius : 20px;
+          border : 4px solid white ;
+          outline-style: solid;
+          outline-color: #9933ff;
+          outline-width: thick;
+          background:#9933ff;">
+            <strong class="text-light" style="height: 100%;">Continue</strong>
+          </button> 
+         <div>
 </form>
 
 
-
+</div>
 
 
 <script>

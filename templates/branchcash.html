@@ -3,19 +3,33 @@
 
 {% block style %}
 <link rel="stylesheet" href="{% static 'css/branchcash.css' %}" >
+<style>
+  .accordion-button{
+    border-left: 2px solid gray;
+    border-right: 2px solid gray;
+  }
+  .input-group {
+    padding: 1vh 2vw;
+    margin-bottom: 0px !important;
+    margin-top: 0px !important;
+  }
+
+  .table {
+    border : none
+    text-align : center;
+  }
+</style>
 {% endblock %}
 
 {% block content %}
+<div  class="frm-body bg-white">
 
-
-<table class="table">
-  <tr>
-    <th><h5>รุ่นรถ :</h5></th>
-    <td><strong>{{submodel}}</strong></td>
-    <th><h5>ราคา :</h5></th>
-    <td><strong>{{text_productprice}}</strong> บาท</td>
-  </tr>
-</table>
+  <table class="table" style="border-radius : 20px;" >
+    <tr>
+      <th><h5><strong> รุ่นรถ : {{submodel}}  </strong></h5></th>
+      <th><h5><strong> ราคา : {{text_productprice}} บาท </strong></h5></th>
+    </tr>
+  </table>
 
 
 <form method="POST" action="branchcash">
@@ -26,7 +40,7 @@
 
      <div class="accordion-item">
       <h2 class="accordion-header" id="flush-headingF">
-        <button class="accordion-button collapsed text-primary" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseF" aria-expanded="false" aria-controls="flush-collapseF">
+        <button style="border-left: 2px solid gray; border-right: 2px solid gray; border-top: 2px solid gray; border-top-left-radius: 25px; border-top-right-radius: 25px;" class="accordion-button collapsed text-primary" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseF" aria-expanded="false" aria-controls="flush-collapseF">
       
             <h5>
               <strong>ส่วนลดตามรุ่น</strong>
@@ -35,8 +49,8 @@
   
         </button>
       </h2>
-      <div id="flush-collapseF" class="accordion-collapse collapse" aria-labelledby="flush-headingF" data-bs-parent="#accordionFlushExample">
-                        <div class="input-group" style="margin-top: 1vh;">
+      <div id="flush-collapseF"  class="accordion-collapse collapse" aria-labelledby="flush-headingF" data-bs-parent="#accordionFlushExample">
+                        <div class="input-group"  >
                                             <input name="productmargin"  id="idproductmargin" type="number" class="form-control" placeholder="-" onchange="tagPDMG()">
                                             <span class="input-group-text">บาท</span>
                         </div>
@@ -77,7 +91,7 @@
       </h2>
       <div id="flush-collapseD" class="accordion-collapse collapse" aria-labelledby="flush-headingD" data-bs-parent="#accordionFlushExample">
        
-        <li class="list-group-item">
+        <li class="list-group-item" style="border-bottom-right-radius: 15px; border-bottom-left-radius: 15px;">
           <div class="form-check">
             <input name="min_regis" class="form-check-input" type="checkbox"  checked >
             <label class="form-check-label" for="flexCheckDefault">
@@ -85,7 +99,9 @@
             </label>
           </div>
        </li> 
-       <li class="list-group-item">
+      
+       <!--display none-->
+       <li class="list-group-item" style="display:none">
           <div class="form-check">
             <input name="min_pdi" class="form-check-input" type="checkbox" value=500   checked>
             <label class="form-check-label" for="flexCheckDefault">
@@ -93,7 +109,7 @@
             </label>
           </div>
        </li> 
-       <li class="list-group-item">
+       <li class="list-group-item"  style="display:none">
           <div class="form-check">
             <input name="min_frame" class="form-check-input" type="checkbox" value=130   checked>
             <label class="form-check-label" for="flexCheckDefault">
@@ -101,7 +117,7 @@
             </label>
           </div>
        </li> 
-       <li class="list-group-item">
+       <li class="list-group-item"  style="display:none">
           <div class="form-check">
             <input name="min_polish" class="form-check-input" type="checkbox" value=500  checked>
             <label class="form-check-label" for="flexCheckDefault">
@@ -109,16 +125,115 @@
             </label>
           </div>
        </li> 
-      
+      <!---->
 
 
-      <!--รายการอุปกรณ์ตกเเต่ง----->
       <div class="input-group mb-3" style="margin-top: 1vh;">
-        <input type="text" name="text_acc_card" class="form-control" placeholder="รายการของเเถม" aria-label="">
+        <input type="text" style="width:30vw"  name="text_acc_card" class="form-control" placeholder="รายการของเเถม" aria-label="">
         <span class="input-group-text">ราคา</span>
-        <input type="number" name="min_acc_card" class="form-control" placeholder="ราคา" aria-label="">
+        <input type="number" name="min_acc_card" class="form-control text-center" placeholder="ราคา" aria-label="">
+        <button align="center" type="button" class="btn btn-sm" style="padding: 0px;"  onclick= "document.getElementById('hide1').style.display = 'block'; this.style.display = 'none';">
+          <img   src="{% static 'picture/addicon.png' %}"  alt="..." width="40" height="40"/>
+        </button>
       </div>
       
+      <!--ส่วน display none-->
+      <div id="hide1" style="display: none;">
+        <div class="input-group mb-3" style="margin-top: 1vh;">
+          <input type="text" style="width:30vw" name="text_acc_card_1" class="form-control" placeholder="รายการของเเถม" aria-label="">
+          <span class="input-group-text">ราคา</span>
+          <input type="number" name="min_acc_card_1" class="form-control text-center" placeholder="ราคา" aria-label="">
+          <button align="center" type="button" class="btn btn-sm" style="padding: 0px;"  onclick= "document.getElementById('hide2').style.display = 'block'; this.style.display = 'none';" >
+            <img   src="{% static 'picture/addicon.png' %}"  alt="..." width="40" height="40"/>
+          </button>
+        </div>
+      </div>
+     
+    <div id="hide2" style="display : none;">
+      <div class="input-group mb-3" style="margin-top: 1vh; ">
+        <input type="text" style="width:30vw"  name="text_acc_card_2" class="form-control" placeholder="รายการของเเถม" aria-label="">
+        <span class="input-group-text">ราคา</span>
+        <input type="number" name="min_acc_card_2" class="form-control text-center" placeholder="ราคา" aria-label="">
+        <button align="center" type="button" class="btn btn-sm" style="padding: 0px;"  onclick= "document.getElementById('hide3').style.display = 'block'; this.style.display = 'none';">
+          <img   src="{% static 'picture/addicon.png' %}"  alt="..." width="40" height="40"/>
+        </button>
+      </div>
+    </div>
+
+    <div id="hide3" style="display : none;">
+      <div class="input-group mb-3" style="margin-top: 1vh; ">
+        <input type="text" style="width:30vw" name="text_acc_card_3" class="form-control" placeholder="รายการของเเถม" aria-label="">
+        <span class="input-group-text">ราคา</span>
+        <input type="number" name="min_acc_card_3" class="form-control text-center" placeholder="ราคา" aria-label="">
+        <button align="center" type="button" class="btn btn-sm" style="padding: 0px;"  onclick= "document.getElementById('hide4').style.display = 'block'; this.style.display = 'none';">
+          <img   src="{% static 'picture/addicon.png' %}"  alt="..." width="40" height="40"/>
+        </button>
+      </div>
+      </div>
+
+    <div id="hide4" style="display : none;">
+      <div class="input-group mb-3" style="margin-top: 1vh; ">
+        <input type="text" style="width:30vw" name="text_acc_card_4" class="form-control" placeholder="รายการของเเถม" aria-label="">
+        <span class="input-group-text">ราคา</span>
+        <input type="number" name="min_acc_card_4" class="form-control text-center" placeholder="ราคา" aria-label="">
+        <button align="center" type="button" class="btn btn-sm" style="padding: 0px;"  onclick= "document.getElementById('hide5').style.display = 'block'; this.style.display = 'none';">
+          <img   src="{% static 'picture/addicon.png' %}"  alt="..." width="40" height="40"/>
+        </button>
+      </div>
+      </div>
+
+    <div id="hide5" style="display : none;">
+      <div class="input-group mb-3" style="margin-top: 1vh; ">
+        <input type="text" style="width:30vw" name="text_acc_card_5" class="form-control" placeholder="รายการของเเถม" aria-label="">
+        <span class="input-group-text">ราคา</span>
+        <input type="number" name="min_acc_card_5" class="form-control text-center" placeholder="ราคา" aria-label="">
+        <button align="center" type="button" class="btn btn-sm" style="padding: 0px;"  onclick= "document.getElementById('hide6').style.display = 'block'; this.style.display = 'none';">
+          <img   src="{% static 'picture/addicon.png' %}"  alt="..." width="40" height="40"/>
+        </button>
+      </div>
+      </div>
+
+    <div id="hide6" style="display : none;">
+      <div class="input-group mb-3" style="margin-top: 1vh; ">
+        <input type="text" style="width:30vw" name="text_acc_card_6" class="form-control" placeholder="รายการของเเถม" aria-label="">
+        <span class="input-group-text">ราคา</span>
+        <input type="number" name="min_acc_card_6" class="form-control text-center" placeholder="ราคา" aria-label="">
+        <button align="center" type="button" class="btn btn-sm" style="padding: 0px;"  onclick= "document.getElementById('hide7').style.display = 'block'; this.style.display = 'none';">
+          <img   src="{% static 'picture/addicon.png' %}"  alt="..." width="40" height="40"/>
+        </button>
+      </div>
+      </div>
+
+    <div id="hide7" style="display : none;">
+      <div class="input-group mb-3" style="margin-top: 1vh; ">
+        <input type="text" style="width:30vw" name="text_acc_card_7" class="form-control" placeholder="รายการของเเถม" aria-label="">
+        <span class="input-group-text">ราคา</span>
+        <input type="number" name="min_acc_card_7" class="form-control text-center" placeholder="ราคา" aria-label="">
+        <button align="center" type="button" class="btn btn-sm" style="padding: 0px;"  onclick= "document.getElementById('hide8').style.display = 'block'; this.style.display = 'none';">
+          <img   src="{% static 'picture/addicon.png' %}"  alt="..." width="40" height="40"/>
+        </button>
+      </div>
+      </div>
+
+    <div id="hide8" style="display : none;">
+      <div class="input-group mb-3" style="margin-top: 1vh; ">
+        <input type="text" style="width:30vw" name="text_acc_card_8" class="form-control" placeholder="รายการของเเถม" aria-label="">
+        <span class="input-group-text">ราคา</span>
+        <input type="number" name="min_acc_card_8" class="form-control text-center" placeholder="ราคา" aria-label="">
+        <button align="center" type="button" class="btn btn-sm" style="padding: 0px;"  onclick= "document.getElementById('hide9').style.display = 'block'; this.style.display = 'none';">
+          <img   src="{% static 'picture/addicon.png' %}"  alt="..." width="40" height="40"/>
+        </button>
+      </div>
+      </div>
+
+      <div id="hide9" style="display : none;">
+      <div class="input-group mb-3" style="margin-top: 1vh; ">
+        <input type="text" style="width:30vw" name="text_acc_card_9" class="form-control" placeholder="รายการของเเถม" aria-label="">
+        <span class="input-group-text">ราคา</span>
+        <input type="number" name="min_acc_card_9" class="form-control text-center" placeholder="ราคา" aria-label="">
+      </div>
+      </div>
+      <!---->
       <div class="input-group mb-3" style="margin-top: 1vh;">
         <select name="min_acc_1_code" class="form-select" >
           <option value='N' selected>กรุณาเลือก</option>
@@ -126,164 +241,194 @@
           <option value={{i.id}}>{{i.acc_name}} <br> ราคา : {{i.acc_price}} บาท</option>
           {% endfor %}
         </select>
+        <button align="center" type="button" class="btn btn-sm" style="padding: 0px;" onclick= "document.getElementById('seek1').style.display = 'block'; this.style.display = 'none';">
+          <img   src="{% static 'picture/addicon.png' %}"  alt="..." width="40" height="40"/>
+        </button>
        </div>
-      <div class="input-group mb-3" style="margin-top: 1vh;">
+       
+
+      <!--ส่วน display none-->
+      <div id="seek1" style="display : none;">
+      <div class="input-group mb-3" style="margin-top: 1vh; ">
         <select name="min_acc_2_code" class="form-select" >
           <option value='N' selected>กรุณาเลือก</option>
           {% for i in mainacc %}
           <option value={{i.id}}>{{i.acc_name}}  <br> ราคา : {{i.acc_price}} บาท</option>
           {% endfor %}
         </select>
+        <button align="center" type="button" class="btn btn-sm" style="padding: 0px;" onclick= "document.getElementById('seek2').style.display = 'block'; this.style.display = 'none';">
+          <img   src="{% static 'picture/addicon.png' %}"  alt="..." width="40" height="40"/>
+        </button>
        </div>
-      <div class="input-group mb-3" style="margin-top: 1vh;">
+       </div>
+       <div id="seek2" style="display : none;">
+      <div class="input-group mb-3" style="margin-top: 1vh; ">
         <select name="min_acc_3_code" class="form-select" >
           <option value='N' selected>กรุณาเลือก</option>
           {% for i in mainacc %}
           <option value={{i.id}}>{{i.acc_name}}  <br> ราคา : {{i.acc_price}} บาท</option>
           {% endfor %}
         </select>
+        <button align="center" type="button" class="btn btn-sm" style="padding: 0px;" onclick= "document.getElementById('seek3').style.display = 'block'; this.style.display = 'none';">
+          <img   src="{% static 'picture/addicon.png' %}"  alt="..." width="40" height="40"/>
+        </button>
        </div>
-      <div class="input-group mb-3" style="margin-top: 1vh;">
+       </div>
+      <div id="seek3" style="display : none;">
+      <div class="input-group mb-3" style="margin-top: 1vh; ">
         <select name="min_acc_4_code" class="form-select" >
           <option value='N' selected>กรุณาเลือก</option>
           {% for i in mainacc %}
           <option value={{i.id}}>{{i.acc_name}}  <br> ราคา : {{i.acc_price}} บาท</option>
           {% endfor %}
         </select>
+        <button align="center" type="button" class="btn btn-sm" style="padding: 0px;" onclick= "document.getElementById('seek4').style.display = 'block'; this.style.display = 'none';">
+          <img   src="{% static 'picture/addicon.png' %}"  alt="..." width="40" height="40"/>
+        </button>
        </div>
-      <div class="input-group mb-3" style="margin-top: 1vh;">
+       </div>
+      <div id="seek4" style="display : none;">
+      <div class="input-group mb-3" style="margin-top: 1vh; ">
         <select name="min_acc_5_code" class="form-select" >
           <option value='N' selected>กรุณาเลือก</option>
           {% for i in mainacc %}
           <option value={{i.id}}>{{i.acc_name}}  <br> ราคา : {{i.acc_price}} บาท</option>
           {% endfor %}
         </select>
+        <button align="center" type="button" class="btn btn-sm" style="padding: 0px;" onclick= "document.getElementById('seek5').style.display = 'block'; this.style.display = 'none';">
+          <img   src="{% static 'picture/addicon.png' %}"  alt="..." width="40" height="40"/>
+        </button>
        </div>
-      <div class="input-group mb-3" style="margin-top: 1vh;">
+       </div>
+       <div id="seek5" style="display : none;">
+      <div class="input-group mb-3" style="margin-top: 1vh; ">
         <select name="min_acc_6_code" class="form-select" >
           <option value='N' selected>กรุณาเลือก</option>
           {% for i in mainacc %}
           <option value={{i.id}}>{{i.acc_name}}  <br> ราคา : {{i.acc_price}} บาท</option>
           {% endfor %}
         </select>
+        <button align="center" type="button" class="btn btn-sm" style="padding: 0px;" onclick= "document.getElementById('seek6').style.display = 'block'; this.style.display = 'none';">
+          <img   src="{% static 'picture/addicon.png' %}"  alt="..." width="40" height="40"/>
+        </button>
        </div>
-      <div class="input-group mb-3" style="margin-top: 1vh;">
+       </div>
+       <div id="seek6" style="display : none;">
+      <div class="input-group mb-3" style="margin-top: 1vh; ">
         <select name="min_acc_7_code" class="form-select" >
           <option value='N' selected>กรุณาเลือก</option>
           {% for i in mainacc %}
           <option value={{i.id}}>{{i.acc_name}}  <br> ราคา : {{i.acc_price}} บาท</option>
           {% endfor %}
         </select>
+        <button align="center" type="button" class="btn btn-sm" style="padding: 0px;" onclick= "document.getElementById('seek7').style.display = 'block'; this.style.display = 'none';">
+          <img   src="{% static 'picture/addicon.png' %}"  alt="..." width="40" height="40"/>
+        </button>
        </div>
-      <div class="input-group mb-3" style="margin-top: 1vh;">
+       </div>
+       <div id="seek7" style="display : none;">
+      <div class="input-group mb-3" style="margin-top: 1vh; ">
         <select name="min_acc_8_code" class="form-select" >
           <option value='N' selected>กรุณาเลือก</option>
           {% for i in mainacc %}
           <option value={{i.id}}>{{i.acc_name}}  <br> ราคา : {{i.acc_price}} บาท</option>
           {% endfor %}
         </select>
+        <button align="center" type="button" class="btn btn-sm" style="padding: 0px;" onclick= "document.getElementById('seek8').style.display = 'block'; this.style.display = 'none';">
+          <img   src="{% static 'picture/addicon.png' %}"  alt="..." width="40" height="40"/>
+        </button>
        </div>
-      <div class="input-group mb-3" style="margin-top: 1vh;">
+       </div>
+       <div id="seek8" style="display : none;">
+      <div class="input-group mb-3" style="margin-top: 1vh; ">
         <select name="min_acc_9_code" class="form-select" >
           <option value='N' selected>กรุณาเลือก</option>
           {% for i in mainacc %}
           <option value={{i.id}}>{{i.acc_name}}  <br> ราคา : {{i.acc_price}} บาท</option>
           {% endfor %}
         </select>
+        <button align="center" type="button" class="btn btn-sm" style="padding: 0px;" onclick= "document.getElementById('seek9').style.display = 'block'; this.style.display = 'none';">
+          <img   src="{% static 'picture/addicon.png' %}"  alt="..." width="40" height="40"/>
+        </button>
        </div>
-      <div class="input-group mb-3" style="margin-top: 1vh;">
+       </div>
+       <div id="seek9" style="display : none;">
+      <div class="input-group mb-3" style="margin-top: 1vh; ">
         <select name="min_acc_10_code" class="form-select" >
           <option value='N' selected>กรุณาเลือก</option>
           {% for i in mainacc %}
           <option value={{i.id}}>{{i.acc_name}}  <br> ราคา : {{i.acc_price}} บาท</option>
           {% endfor %}
         </select>
+        <button align="center" type="button" class="btn btn-sm" style="padding: 0px;" onclick= "document.getElementById('seek10').style.display = 'block'; this.style.display = 'none';">
+          <img   src="{% static 'picture/addicon.png' %}"  alt="..." width="40" height="40"/>
+        </button>
        </div>
-      <div class="input-group mb-3" style="margin-top: 1vh;">
+       </div>
+       <div id="seek10" style="display : none;">
+      <div class="input-group mb-3" style="margin-top: 1vh; ">
         <select name="min_acc_11_code" class="form-select" >
           <option value='N' selected>กรุณาเลือก</option>
           {% for i in mainacc %}
           <option value={{i.id}}>{{i.acc_name}}  <br> ราคา : {{i.acc_price}} บาท</option>
           {% endfor %}
         </select>
+        <button align="center" type="button" class="btn btn-sm" style="padding: 0px;" onclick= "document.getElementById('seek11').style.display = 'block'; this.style.display = 'none';">
+          <img   src="{% static 'picture/addicon.png' %}"  alt="..." width="40" height="40"/>
+        </button>
        </div>
-      <div class="input-group mb-3" style="margin-top: 1vh;">
+       </div>
+       <div id="seek11" style="display : none;">
+      <div class="input-group mb-3" style="margin-top: 1vh; ">
         <select name="min_acc_12_code" class="form-select" >
           <option value='N' selected>กรุณาเลือก</option>
           {% for i in mainacc %}
           <option value={{i.id}}>{{i.acc_name}}  <br> ราคา : {{i.acc_price}} บาท</option>
           {% endfor %}
         </select>
+        <button align="center" type="button" class="btn btn-sm" style="padding: 0px;" onclick= "document.getElementById('seek12').style.display = 'block'; this.style.display = 'none';">
+          <img   src="{% static 'picture/addicon.png' %}"  alt="..." width="40" height="40"/>
+        </button>
        </div>
-      <div class="input-group mb-3" style="margin-top: 1vh;">
+       </div>
+       <div id="seek12" style="display : none;">
+      <div class="input-group mb-3" style="margin-top: 1vh; ">
         <select name="min_acc_13_code" class="form-select" >
           <option value='N' selected>กรุณาเลือก</option>
           {% for i in mainacc %}
           <option value={{i.id}}>{{i.acc_name}}  <br> ราคา : {{i.acc_price}} บาท</option>
           {% endfor %}
         </select>
+        <button align="center" type="button" class="btn btn-sm" style="padding: 0px;" onclick= "document.getElementById('seek13').style.display = 'block'; this.style.display = 'none';">
+          <img   src="{% static 'picture/addicon.png' %}"  alt="..." width="40" height="40"/>
+        </button>
        </div>
-      <div class="input-group mb-3" style="margin-top: 1vh;">
+       </div>
+       <div id="seek13" style="display : none;">
+      <div class="input-group mb-3" style="margin-top: 1vh; ">
         <select name="min_acc_14_code" class="form-select" >
           <option value='N' selected>กรุณาเลือก</option>
           {% for i in mainacc %}
           <option value={{i.id}}>{{i.acc_name}}  <br> ราคา : {{i.acc_price}} บาท</option>
           {% endfor %}
         </select>
+        <button align="center" type="button" class="btn btn-sm" style="padding: 0px;" onclick= "document.getElementById('seek14').style.display = 'block'; this.style.display = 'none';">
+          <img   src="{% static 'picture/addicon.png' %}"  alt="..." width="40" height="40"/>
+        </button>
        </div>
-      <div class="input-group mb-3" style="margin-top: 1vh;">
+       </div>
+       <div id="seek14" style="display : none;">
+      <div class="input-group mb-3" style="margin-top: 1vh; ">
         <select name="min_acc_15_code" class="form-select" >
           <option value='N' selected>กรุณาเลือก</option>
           {% for i in mainacc %}
           <option value={{i.id}}>{{i.acc_name}}  <br> ราคา : {{i.acc_price}} บาท</option>
           {% endfor %}
         </select>
+        
        </div>
-      <div class="input-group mb-3" style="margin-top: 1vh;">
-        <select name="min_acc_16_code" class="form-select" >
-          <option value='N' selected>กรุณาเลือก</option>
-          {% for i in mainacc %}
-          <option value={{i.id}}>{{i.acc_name}}  <br> ราคา : {{i.acc_price}} บาท</option>
-          {% endfor %}
-        </select>
        </div>
-      <div class="input-group mb-3" style="margin-top: 1vh;">
-        <select name="min_acc_17_code" class="form-select" >
-          <option value='N' selected>กรุณาเลือก</option>
-          {% for i in mainacc %}
-          <option value={{i.id}}>{{i.acc_name}}  <br> ราคา : {{i.acc_price}} บาท</option>
-          {% endfor %}
-        </select>
-       </div>
-      <div class="input-group mb-3" style="margin-top: 1vh;">
-        <select name="min_acc_18_code" class="form-select" >
-          <option value='N' selected>กรุณาเลือก</option>
-          {% for i in mainacc %}
-          <option value={{i.id}}>{{i.acc_name}}  <br> ราคา : {{i.acc_price}} บาท</option>
-          {% endfor %}
-        </select>
-       </div>
-      <div class="input-group mb-3" style="margin-top: 1vh;">
-        <select name="min_acc_19_code" class="form-select" >
-          <option value='N' selected>กรุณาเลือก</option>
-          {% for i in mainacc %}
-          <option value={{i.id}}>{{i.acc_name}}  <br> ราคา : {{i.acc_price}} บาท</option>
-          {% endfor %}
-        </select>
-       </div>
-      <div class="input-group mb-3" style="margin-top: 1vh;">
-        <select name="min_acc_20_code" class="form-select" >
-          <option value='N' selected>กรุณาเลือก</option>
-          {% for i in mainacc %}
-          <option value={{i.id}}>{{i.acc_name}}  <br> ราคา : {{i.acc_price}} บาท</option>
-          {% endfor %}
-        </select>
-       </div>
-       
-    
-       
-      
-      
+      <!---->
                  
     </div>
     </div>
@@ -313,8 +458,14 @@
 
       <!--------หมายเหตุ ------------>
       <div class="accordion-item">
+        <div id="flush-collapseG" class="accordion-collapse collapse" aria-labelledby="flush-headingG" data-bs-parent="#accordionFlushExample">
+          <div class="input-group" >
+                              <textarea name="gen_remark"  id="idgen_remark" type="text" class="form-control"  rows="1" ></textarea>
+                              
+          </div>
+        </div>
         <h2 class="accordion-header" id="flush-headingG">
-          <button class="accordion-button collapsed text-primary" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseG" aria-expanded="false" aria-controls="flush-collapseG">
+          <button style="border-left: 2px solid gray; border-right: 2px solid gray; border-bottom: 2px solid gray; border-bottom-right-radius: 25px; border-bottom-left-radius: 25px;" class="accordion-button collapsed text-primary" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseG" aria-expanded="false" aria-controls="flush-collapseG">
         
               <h5>
                 <strong>หมายเหตุ</strong>
@@ -322,12 +473,7 @@
     
           </button>
         </h2>
-        <div id="flush-collapseG" class="accordion-collapse collapse" aria-labelledby="flush-headingG" data-bs-parent="#accordionFlushExample">
-                          <div class="input-group" style="margin-top: 1vh;">
-                                              <textarea name="gen_remark"  id="idgen_remark" type="text" class="form-control"  rows="1" ></textarea>
-                                              
-                          </div>
-         </div>
+        
        </div>
 
 
@@ -335,12 +481,25 @@
 </div>
  
 
-<div style="margin: 2vh 0vh;" class="d-grid gap-1">
-  <button type="submit" class="btn btn-warning"><strong>ดำเนินการต่อ</strong></button>
+<div  align="center" style="display : flex; justify-content: center; margin-top: 2vh;">
+  <button type="submit" style="display: flex;
+  justify-content: center;
+  padding : 0px 3vw;
+  width : 35%;
+  height : 50px;
+  font-size : 26px;
+  border-radius : 20px;
+  border : 4px solid white ;
+  outline-style: solid;
+  outline-color: #9933ff;
+  outline-width: thick;
+  background:#9933ff;">
+    <strong class="text-light" style="height: 100%;">Continue</strong>
+  </button> 
 </div>
 
 </form>
-
+</div>
 
 <script>
   function tagPDMG() {

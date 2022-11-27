@@ -5,7 +5,7 @@
   .card {
    border: 3px solid black;
    border-radius: 35px;
-   box-shadow: 8px 8px 5px Gainsboro;
+   box-shadow: 10px 10px 5px #666699;
    margin-top : 2vh;
   }
   .card-image {
@@ -36,14 +36,7 @@
     display: flex; 
     flex-direction:column;
   }
-  #frm-edit {
-    width : 100%;
-    padding : 20px;
-    border : 3px solid black;
-    border-radius: 30px;
-    box-shadow: 10px 10px 5px Gainsboro;
-    margin : 2vh 0vw;
-  }
+  
   .status-box {
     padding : 10px;
     margin : 2vh 0vw;
@@ -85,32 +78,34 @@
        }
     switch (choosestatus){
       case "PP" : btnstatus.className = "text-primary";
-                  colorcard.style.border = "3px solid rgb(0, 128, 255)";
+                  colorcard.style.border = "4px solid rgb(0, 128, 255)";
                   cardimage.style.border = "1px solid rgb(0, 128, 255)";
                   break
       case "BK" : btnstatus.className = "text-warning";
-                  colorcard.style.border = "3px solid rgb(255, 198, 26)";
+                  colorcard.style.border = "4px solid rgb(255, 198, 26)";
                   cardimage.style.border = "1px solid rgb(255, 198, 26)";
                   break
       case "DV" : btnstatus.className = "text-success";
-                  colorcard.style.border = "3px solid rgb(26, 255, 26)";
+                  colorcard.style.border = "4px solid rgb(26, 255, 26)";
                   cardimage.style.border = "1px solid rgb(26, 255, 26)";
                   break
       case "TD" : btnstatus.className = "text-dark";
-                  colorcard.style.border = "3px solid black";
+                  colorcard.style.border = "4px solid black";
                   cardimage.style.border = "1px solid black";
                   break
       case "F" : btnstatus.className = "text-danger";
-                 colorcard.style.border = "3px solid rgb(255, 26, 83)";
+                 colorcard.style.border = "4px solid rgb(255, 26, 83)";
                  cardimage.style.border = "1px solid rgb(255, 26, 83)";
                   break
     }
     return (choosemainmodel)
-  };              
+  };    
+  
+  window.addEventListener("load", changestyle);
 </script>
 {% endblock %}
 {% block content %}
-<div onclick= "changestyle()">
+
 <!--ส่วนเเสดงข้อมูลเดิม-->
 {% for i in datacustomeredit %} 
   <p id="productmodel" style="display: none;" >{{i.mainmodel}}</p> <!----สร้างเพื่อให้ javascript เก็บค่า--> 
@@ -138,9 +133,10 @@
    
  {% endfor %}
 <!--form เเก้ข้อมูลใหม่-->
-
+<div  class="frm-body bg-white" style="margin-top: 2vh">
 {% if not form.is_valid %}
-<form method="post" id="frm-edit" action="updatedatacustomer" >
+
+<form method="post"  action="updatedatacustomer" >
     {% csrf_token %} 
    <div class="input-group input-group-mb" style="margin-top: 1vh;">
       <span class="input-group-text btn-success" id="inputGroup-sizing-lg"><strong>ชื่อลูกค้า</strong></span>
@@ -179,13 +175,27 @@
      <input type="text" name="customer-remark" class="form-control text-center" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" placeholder="เพิ่มหมายเหตุ">
    </div>
 
-    <div  class="d-grid gap-1" style="margin-top: 2vh;">
-       <button type="submit" class="btn btn-dark"><strong>Update</strong></button>
-    </div>
+   <div  align="center" style="display : flex; justify-content: center; margin-top: 2vh;">
+    <button  type="submit" style="display: flex;
+    justify-content: center;
+    padding : 0px 3vw;
+    width : 25%;
+    height : 40px;
+    font-size : 20px;
+    border-radius : 20px;
+    border : 4px solid white ;
+    outline-style: solid;
+    outline-color: black;
+    outline-width: thick;
+    background: black;">
+      <strong class="text-light" style="height: 100%;">Update</strong>
+    </button> 
+   <div>
 </form>
+</div>
 {% endif %}
 
-</div>
+
 
 
 

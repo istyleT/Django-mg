@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-
+<div class="frm-body bg-white">
 
 <form method="POST"  action="dataclient" >
 {% csrf_token %}  
@@ -32,9 +32,9 @@
     </div>               
    <!--source-->
  
-   <div style="margin-top: 2vh; border:2px solid RebeccaPurple; border-radius: 30px">
-      <h5 align="center"><strong>ช่องทาง</strong></h5>
-      <div style="display: flex; justify-content: center;">
+   <div style="margin-top: 2vh; border:2px solid RebeccaPurple; border-radius: 30px; padding: 1vh 0vw">
+      
+      <div style="display: flex; justify-content: space-around; font-size: 18px;">
          <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" name="chanelcustomer" id="radiochanels1" value="Walk-in" checked>
             <label class="form-check-label" for="radiochanels1"><strong>Walk in</strong></label>
@@ -65,12 +65,26 @@
         <option value="F">F : Fail</option>
       </select>
     </div>
-
-    <div align="center" id="btn-dataclient" style="margin-top: 2vh; display: none;">
-      <button type="submit " class="btn" style=" width: 20vw; border: 3px solid black; border-radius:30px;"><strong>OK</strong></button>
-    </div>
-      
     
+    
+   <div align="center" id="btn-dataclient" style="display: none; display : flex; justify-content: center; margin-top: 2vh;">
+      <button  type="submit" style="display: flex;
+      justify-content: center;
+      padding : 0px 3vw;
+      width : 35%;
+      height : 50px;
+      font-size : 26px;
+      border-radius : 20px;
+      border : 4px solid white ;
+      outline-style: solid;
+      outline-color: #9933ff;
+      outline-width: thick;
+      background: #9933ff;">
+        <strong class="text-light"  style="height: 100%;">Continue</strong>
+      </button> 
+   </div>
+   
+
 </form>
 <!--picture zone-->
 
@@ -92,10 +106,10 @@
 <div align="center" id="picmghsphev" style="display: none;">
    <img  src="{% static 'picture/Newmghs.png' %}" class="img-fluid" alt="..."/>
 </div>
-<div align="center" id="picmghs" style="margin-top: 8vh; display: none;">
-   <img  src="{% static 'picture/Mghs.png' %}" class="img-fluid" alt="..."/>
+<div align="center" id="picmghs" style="display: none;">
+   <img  src="{% static 'picture/Newmghs.png' %}" class="img-fluid" alt="..."/>
 </div>
-
+</div>
 <script>
 
    function appendpic() {
@@ -180,7 +194,8 @@
       }
       return ;
    }
-
+   
+   window.addEventListener("load", checkdataclient);
 </script>
 
 

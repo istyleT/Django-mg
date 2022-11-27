@@ -1,18 +1,33 @@
 {% extends 'layout.html' %}
+{% load static %}
+{% block style %}
+<style>
+  .accordion-button{
+    border-left: 2px solid gray;
+    border-right: 2px solid gray;
+  }
+  .list-group-item{
+    border-left: 2px solid gray;
+    border-right: 2px solid gray;
+  }
+
+</style>
+{% endblock %}
 {% block content %}
-<div style="margin-top:1vh;" class="accordion" id="accordionPanelsStayOpenExample">
-<!----------->
+<div  class="frm-body bg-white">
+<div style="margin-top:1vh;" class="accordion accordion-flush" id="accordionPanelsStayOpenExample">
+<!-------->
  
  <div class="accordion-item">
-  <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-    <button class="accordion-button " type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+  <div class="accordion-header" id="panelsStayOpen-headingOne">
+    <button style="border-left: 2px solid gray; border-right: 2px solid gray; border-top: 2px solid gray; border-top-left-radius: 25px; border-top-right-radius: 25px;" class="accordion-button " type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
       <strong class="text-primary">ส่วนลดคงเหลือ : ({{total_margin}}) บาท</strong>
     </button>
-  </h2>
+  </div>
   <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne">
     <div class="accordion-body">
 
-      <li class="list-group-item">
+      <li class="list-group-item" style="border-top: 2px solid gray; border-top-left-radius: 15px; border-top-right-radius: 15px;">
         <label >
            <strong>ส่วนลดตามรุ่น</strong> : <strong class="text-dark">{{productmargin}}</strong> บาท
         </label>
@@ -22,7 +37,7 @@
            <strong>ส่วนเพิ่มส่วนลด</strong> : <strong class="text-success">{{total_addmargin}}</strong> บาท
         </label>
       </li> 
-      <li class="list-group-item">
+      <li class="list-group-item" style="border-bottom: 2px solid gray; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px;">
         <label >
            <strong>การใช้ส่วนลด</strong> : <strong class="text-danger">{{total_minmargin}}</strong> บาท
         </label>
@@ -41,7 +56,7 @@
     <div id="panelsStayOpen-collapseA" class="accordion-collapse collapse " aria-labelledby="panelsStayOpen-headingA">
       <div class="accordion-body">
 
-        <li class="list-group-item">
+        <li class="list-group-item" style="border-top: 2px solid gray; border-top-left-radius: 15px; border-top-right-radius: 15px;">
             <label >
                <strong>บวกหัวค่าอุปกรณ์</strong> : <strong class="text-success">+{{add_eq}}</strong> บาท
             </label>
@@ -51,7 +66,7 @@
                <strong>Kickback</strong> : <strong class="text-success">+{{add_kickback}}</strong> บาท
             </label>
        </li> 
-        <li class="list-group-item">
+        <li class="list-group-item" style="border-bottom: 2px solid gray; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px;">
             <label >
                <strong>Com ไฟเเนนซ์</strong> : <strong class="text-success">+{{total_com_finance}}</strong> บาท
             </label>
@@ -71,7 +86,7 @@
     <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
       <div class="accordion-body">
 
-        <li class="list-group-item">
+        <li class="list-group-item" style="border-top: 2px solid gray; border-top-left-radius: 15px; border-top-right-radius: 15px;">
           <label >
              <strong>โปรโมชั่น Subsidy</strong> : <strong class="text-danger">-{{min_prosub}}</strong> บาท
           </label>
@@ -98,7 +113,7 @@
           </label>
         </li>  
         {% endif %}
-        <li class="list-group-item">
+        <li class="list-group-item" style="border-bottom: 2px solid gray; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px;">
           <label >
              <strong>ซับดอกเบี้ย</strong> : <strong class="text-danger">-{{subsidy_inter}}</strong> บาท
           </label>
@@ -114,25 +129,25 @@
     <h2 class="accordion-header" id="panelsStayOpen-headingThree">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
       {% if paytype == 'finance' %}
-        <strong class="text-muted">ค่าใช้จ่ายวันออกรถ : {{total_exit}} บาท</strong>
+        <strong class="text-dark">ค่าใช้จ่ายวันออกรถ : {{total_exit}} บาท</strong>
       {% endif %}
 
       {% if paytype == 'cash' %}
-        <strong class="text-muted">ค่าใช้จ่ายวันออกรถ : {{total_exit_cash}} บาท</strong>
+        <strong class="text-dark">ค่าใช้จ่ายวันออกรถ : {{total_exit_cash}} บาท</strong>
       {% endif %}
       </button>
     </h2>
     <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
       <div class="accordion-body">
         {% if paytype == 'cash' %}
-        <li class="list-group-item">
+        <li class="list-group-item" style="border-top: 2px solid gray; border-top-left-radius: 15px; border-top-right-radius: 15px;">
           <label >
              <strong>ราคารถสุทธิ</strong> : <strong class="text-muted">{{net_productprice}}</strong> บาท
           </label>
         </li>
         {% endif %}
         {% if paytype == 'finance' %}
-        <li class="list-group-item">
+        <li class="list-group-item" style="border-top: 2px solid gray; border-top-left-radius: 15px; border-top-right-radius: 15px;" >
           <label >
              <strong>เงินดาวน์</strong> : <strong class="text-muted">{{exit_cost_down}}</strong> บาท
           </label>
@@ -174,7 +189,7 @@
           </label>
         </li> 
         {% endif %}
-        <li class="list-group-item">
+        <li class="list-group-item" style="border-bottom: 2px solid gray; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px;">
           <label >
              <strong>หักเงินจอง</strong> : <strong class="text-muted">-{{gen_prepay}}</strong> บาท
           </label>
@@ -184,91 +199,91 @@
     </div>
   </div>
   <!---------------------------->
+
+<!-------------->
+<div class="accordion-item">
+  <h2 class="accordion-header" id="panelsStayOpen-headingFive">
+    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFive" aria-expanded="false" aria-controls="panelsStayOpen-collapseFive">
+      <strong class="text-warning">รายละเอียดเพิ่มเติม</strong>
+    </button>
+  </h2>
+  <div id="panelsStayOpen-collapseFive" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFive">
+    <div class="accordion-body">
+
+      <li class="list-group-item" style="border-top: 2px solid gray; border-top-left-radius: 15px; border-top-right-radius: 15px;">
+        <label >
+           <strong>ค่างวด/เดือน</strong> : <strong class="text-dark">{{month_payment}}</strong> บาท
+        </label>
+      </li> 
+      <li class="list-group-item">
+        <label >
+           <strong>ดอกเบี้ยทั้งหมด</strong> : <strong class="text-dark">{{total_inter}}</strong> บาท
+        </label>
+      </li> 
+      <li class="list-group-item" style="border-bottom: 2px solid gray; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px;">
+        <label >
+           <strong>ค่าใช้จ่ายทั้งหมด</strong> : <strong class="text-dark">{{net_total_payment}}</strong> บาท
+        </label>
+      </li> 
+      
+
+    </div>
+  </div>
+</div>
+
+
+  <!---------------------------->
   <div class="accordion-item">
-    <h2 class="accordion-header" id="panelsStayOpen-headingX">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseX" aria-expanded="false" aria-controls="panelsStayOpen-collapseX">
-        <strong class="text-dark">รายละเอียดเพิ่มเติม</strong>
-      </button>
-    </h2>
+
     <div id="panelsStayOpen-collapseX" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingX">
-      <div class="accordion-body">
+      <div class="accordion-body" style="border-top: 1px solid black">
 
-        <li class="list-group-item">
+        <li class="list-group-item" style="border-top: 2px solid gray; border-top-left-radius: 15px; border-top-right-radius: 15px;">
           <label >
-             <strong>ค่างวด/เดือน</strong> : <strong class="text-dark">{{month_payment}}</strong> บาท
+             <strong>ผู้เสนอราคา</strong> : <strong class="text-dark">{{firstname}} / {{sellphone}}</strong>
           </label>
         </li> 
-        <li class="list-group-item">
+        <li class="list-group-item" style="border-bottom: 2px solid gray; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px;">
           <label >
-             <strong>ดอกเบี้ยทั้งหมด</strong> : <strong class="text-dark">{{total_inter}}</strong> บาท
+             <strong>ลูกค้า</strong> : <strong class="text-dark">{{customername}} / {{contactcustomer}}</strong> 
           </label>
         </li> 
-        <li class="list-group-item">
-          <label >
-             <strong>ค่าใช้จ่ายทั้งหมด</strong> : <strong class="text-dark">{{net_total_payment}}</strong> บาท
-          </label>
-        </li> 
-        
-
+         
       </div>
     </div>
+    <h2 class="accordion-header" id="panelsStayOpen-headingX">
+      <button style="border-left: 2px solid gray; border-right: 2px solid gray; border-bottom: 2px solid gray; border-bottom-right-radius: 25px; border-bottom-left-radius: 25px;" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseX" aria-expanded="false" aria-controls="panelsStayOpen-collapseX">
+        <strong class="text-muted">ข้อมูลการติดต่อ</strong>
+      </button>
+    </h2>
+    
   </div>
 
  
+
 </div>
 
-<!----------alert box ----------->
-<div  id="error-box" class="alert alert-danger" role="alert" style="display: none; text-align: center; margin: 1vh 0vw;">
-  <strong>กรุณากรอกข้อมูลให้ครบถ้วน</strong>
-</div>
-<!--------------------------------->
 <form method="POST" action="showdata"> 
   {% csrf_token %}
-  <div class="input-group mb-3" style="margin-top: 1vh ;">
-    <div style="width: 39vw; text-align: center; border-radius: 10px; border: 1px solid green; margin-right: 5px; ">
-      <strong style="position: relative; top: 15%; ">ผู้เสนอราคา : {{firstname}}</strong>
-    </div >
-    <span class="input-group-text">โทร</span>
-    <input  id="idsell_phone" name="sell_phone" type="text" class="form-control" placeholder="เบอร์ติดต่อ" aria-label="">
-  </div>
-  <div class="input-group mb-3" >
-    <input id="idcustomer_name" name="customer_name" type="text" class="form-control" placeholder="ชื่อลูกค้า" aria-label="">
-    <span class="input-group-text">โทร</span>
-    <input id="idcustomer_phone" name="customer_phone" type="text" class="form-control" placeholder="เบอร์ติดต่อ" aria-label="">
-  </div>
-
-  <div class="d-grid gap-1" style="margin: 2vh 0vh;">
-    <button id="checkdatauser" type="submit" class="btn btn-success" >Download ใบเสนอราคา</button>
-  </div>
+<div  align="center" style="display : flex; justify-content: center; margin-top: 2vh;">
+  <button type="submit" style="display: flex;
+  justify-content: center;
+  padding : 0px 3vw;
+  width : 35%;
+  height : 45px;
+  font-size : 22px;
+  border-radius : 20px;
+  border : 4px solid white ;
+  outline-style: solid;
+  outline-color: #00ff99;
+  outline-width: thick;
+  background: #00ff99;">
+    <strong  style="height: 100%;">Download</strong>
+  </button> 
+ <div>
+</div>
 </form>
 
 
-
-<script>
-
-/****************function checkdatauser************************/
-  const checkdatauser = document.getElementById("checkdatauser")
-  checkdatauser.addEventListener("click", function(e) {
-     const sell_phone = document.getElementById('idsell_phone');
-     const customer_name = document.getElementById('idcustomer_name');
-     const customer_phone = document.getElementById('idcustomer_phone');
-     if (sell_phone.value  == "" || sell_phone.value == null){
-          e.preventDefault();
-          document.getElementById('error-box').style.display = 'block';
-     }
-     if (customer_name.value == "" || customer_name.value == null){
-          e.preventDefault();
-          document.getElementById('error-box').style.display = 'block';
-     }
-     if (customer_phone.value == "" || customer_phone.value == null){
-          e.preventDefault();
-          document.getElementById('error-box').style.display = 'block';
-     }
-    
-});
-/*******************************************************************/
-  
-</script>
-  
 
 {% endblock %}

@@ -136,12 +136,14 @@ def collectdata(request):
         # Log a user in
          login(request, user)
          # query เอา firstname  จาก table auth_user
-         firstname_set = User.objects.filter(username = username).values_list('first_name',named=True)
+         firstname_set = User.objects.filter(username = username).values_list('first_name','last_name',named=True)
          # for เอาข้อมูลจาก Queryset
          for i in firstname_set :
              firstname =  str(i.first_name)
+             sellphone =  str(i.last_name)
          #ส่งข้อมูลออก
          request.session['firstname'] = firstname
+         request.session['sellphone'] = sellphone
          return render(request,'dataclient.html')
     # ถ้าไม่มี สั่ง render หน้าเดิม
     else:
@@ -295,9 +297,12 @@ def branceadd (request):
     
     #สร้างตัวเเปรการเก็บของข้อมูลรุ่นจากข้อมูลที่ส่งมาก่อนหน้า ใช้ request.session
     firstname = str(request.session.get('firstname'))
+    sellphone = str(request.session.get('sellphone'))
     regiscost = int(request.session.get('regiscost'))
     productprice = int(request.session.get('productprice'))
     paytype = str(request.session.get('paytype'))
+    customername = str(request.session.get('customername'))
+    contactcustomer = str(request.session.get('contactcustomer'))
     #productmargin  = int(request.session.get('productmargin'))
     
 
@@ -351,6 +356,7 @@ def branceadd (request):
     gen_remark = str(request.POST.get('gen_remark')or "-")
 
     # เก็บค่าอุปกรณ์ตกเเต่ง
+    # เก็บค่าอุปกรณ์ตกเเต่ง
     text_acc_card = str(request.POST.get('text_acc_card')or "-")
     min_acc_card = int(request.POST.get('min_acc_card')or 0)
     text_acc_card_1 = str(request.POST.get('text_acc_card_1')or "-")
@@ -361,7 +367,16 @@ def branceadd (request):
     min_acc_card_3 = int(request.POST.get('min_acc_card_3')or 0)
     text_acc_card_4 = str(request.POST.get('text_acc_card_4')or "-")
     min_acc_card_4 = int(request.POST.get('min_acc_card_4')or 0)
-
+    text_acc_card_5 = str(request.POST.get('text_acc_card_5')or "-")
+    min_acc_card_5 = int(request.POST.get('min_acc_card_5')or 0)
+    text_acc_card_6 = str(request.POST.get('text_acc_card_6')or "-")
+    min_acc_card_6 = int(request.POST.get('min_acc_card_6')or 0)
+    text_acc_card_7 = str(request.POST.get('text_acc_card_7')or "-")
+    min_acc_card_7 = int(request.POST.get('min_acc_card_7')or 0)
+    text_acc_card_8 = str(request.POST.get('text_acc_card_8')or "-")
+    min_acc_card_8 = int(request.POST.get('min_acc_card_8')or 0)
+    text_acc_card_9 = str(request.POST.get('text_acc_card_9')or "-")
+    min_acc_card_9 = int(request.POST.get('min_acc_card_9')or 0)
     min_acc_1_code = str(request.POST.get('min_acc_1_code'))
     if min_acc_1_code == 'N':
         min_acc_1 = 0
@@ -500,7 +515,7 @@ def branceadd (request):
 
 
     min_acc = int(min_acc_card+min_acc_card_1+min_acc_card_2+min_acc_card_3+min_acc_card_4+min_acc_1+min_acc_2+min_acc_3+min_acc_4+min_acc_5+min_acc_6+min_acc_7
-    +min_acc_8+min_acc_9+min_acc_10+min_acc_11+min_acc_12+min_acc_13+min_acc_14+min_acc_15)
+    +min_acc_8+min_acc_9+min_acc_10+min_acc_11+min_acc_12+min_acc_13+min_acc_14+min_acc_15+min_acc_card_5+min_acc_card_6+min_acc_card_7+min_acc_card_8+min_acc_card_9)
      
   
     #ส่งชื่ออุปกรณ์ตกเเต่ง
@@ -509,6 +524,11 @@ def branceadd (request):
     request.session['text_acc_card_2'] = text_acc_card_2
     request.session['text_acc_card_3'] = text_acc_card_3
     request.session['text_acc_card_4'] = text_acc_card_4
+    request.session['text_acc_card_5'] = text_acc_card_5
+    request.session['text_acc_card_6'] = text_acc_card_6
+    request.session['text_acc_card_7'] = text_acc_card_7
+    request.session['text_acc_card_8'] = text_acc_card_8
+    request.session['text_acc_card_9'] = text_acc_card_9
     request.session['text_acc_1'] = text_acc_1
     request.session['text_acc_2'] = text_acc_2
     request.session['text_acc_3'] = text_acc_3
@@ -643,6 +663,9 @@ def branceadd (request):
 
 
     data = {'firstname':firstname,
+            'customername':customername,
+            'sellphone':sellphone,
+            'contactcustomer':contactcustomer,
             'regiscost':'{:,}'.format(regiscost), #ค่าจดทะเบียน
             'add_eq':'{:,}'.format(add_eq), #+บวกหัวอุปกรณ์
             'cost_down':'{:,}'.format(cost_down), 
@@ -685,9 +708,12 @@ def branceadd (request):
 def branchcash (request):
     #สร้างตัวเเปรการเก็บของข้อมูลรุ่นจากข้อมูลที่ส่งมาก่อนหน้า ใช้ request.session
     firstname = str(request.session.get('firstname'))
+    sellphone = str(request.session.get('sellphone'))
     regiscost = int(request.session.get('regiscost'))
     productprice = int(request.session.get('productprice'))
     paytype = str(request.session.get('paytype'))
+    customername = str(request.session.get('customername'))
+    contactcustomer = str(request.session.get('contactcustomer'))
     #productmargin  = int(request.session.get('productmargin'))
     
     #กำหนดค่าคงที่
@@ -733,7 +759,7 @@ def branchcash (request):
 
 
 
-        # เก็บค่าอุปกรณ์ตกเเต่ง
+    # เก็บค่าอุปกรณ์ตกเเต่ง
     text_acc_card = str(request.POST.get('text_acc_card')or "-")
     min_acc_card = int(request.POST.get('min_acc_card')or 0)
     text_acc_card_1 = str(request.POST.get('text_acc_card_1')or "-")
@@ -744,6 +770,16 @@ def branchcash (request):
     min_acc_card_3 = int(request.POST.get('min_acc_card_3')or 0)
     text_acc_card_4 = str(request.POST.get('text_acc_card_4')or "-")
     min_acc_card_4 = int(request.POST.get('min_acc_card_4')or 0)
+    text_acc_card_5 = str(request.POST.get('text_acc_card_5')or "-")
+    min_acc_card_5 = int(request.POST.get('min_acc_card_5')or 0)
+    text_acc_card_6 = str(request.POST.get('text_acc_card_6')or "-")
+    min_acc_card_6 = int(request.POST.get('min_acc_card_6')or 0)
+    text_acc_card_7 = str(request.POST.get('text_acc_card_7')or "-")
+    min_acc_card_7 = int(request.POST.get('min_acc_card_7')or 0)
+    text_acc_card_8 = str(request.POST.get('text_acc_card_8')or "-")
+    min_acc_card_8 = int(request.POST.get('min_acc_card_8')or 0)
+    text_acc_card_9 = str(request.POST.get('text_acc_card_9')or "-")
+    min_acc_card_9 = int(request.POST.get('min_acc_card_9')or 0)
 
     min_acc_1_code = str(request.POST.get('min_acc_1_code'))
     if min_acc_1_code == 'N':
@@ -883,7 +919,7 @@ def branchcash (request):
 
 
     min_acc = int(min_acc_card+min_acc_card_1+min_acc_card_2+min_acc_card_3+min_acc_card_4+min_acc_1+min_acc_2+min_acc_3+min_acc_4+min_acc_5+min_acc_6+min_acc_7
-    +min_acc_8+min_acc_9+min_acc_10+min_acc_11+min_acc_12+min_acc_13+min_acc_14+min_acc_15)
+    +min_acc_8+min_acc_9+min_acc_10+min_acc_11+min_acc_12+min_acc_13+min_acc_14+min_acc_15+min_acc_card_5+min_acc_card_6+min_acc_card_7+min_acc_card_8+min_acc_card_9)
      
   
     #ส่งชื่ออุปกรณ์ตกเเต่ง
@@ -892,6 +928,11 @@ def branchcash (request):
     request.session['text_acc_card_2'] = text_acc_card_2
     request.session['text_acc_card_3'] = text_acc_card_3
     request.session['text_acc_card_4'] = text_acc_card_4
+    request.session['text_acc_card_5'] = text_acc_card_5
+    request.session['text_acc_card_6'] = text_acc_card_6
+    request.session['text_acc_card_7'] = text_acc_card_7
+    request.session['text_acc_card_8'] = text_acc_card_8
+    request.session['text_acc_card_9'] = text_acc_card_9
     request.session['text_acc_1'] = text_acc_1
     request.session['text_acc_2'] = text_acc_2
     request.session['text_acc_3'] = text_acc_3
@@ -977,6 +1018,9 @@ def branchcash (request):
 
     #รวบรวมข้อมูลเพื่อส่ง
     data = {'firstname':firstname,
+            'customername':customername,
+            'sellphone':sellphone,
+            'contactcustomer':contactcustomer,
             'regiscost':'{:,}'.format(regiscost), #ค่าจดทะเบียน
             'add_eq':add_eq, #+บวกหัวอุปกรณ์
             'cost_down':cost_down, 
@@ -1014,16 +1058,15 @@ def branchcash (request):
 
 @login_required(login_url='/firstdata') 
 def showdata(request):
-   # เก็บข้อมูลหน้าตัวเอง
-   sell_phone= str(request.POST.get('sell_phone')or '-')
-   customer_name= str(request.POST.get('customer_name')or '-')
-   customer_phone= str(request.POST.get('customer_phone')or '-')
-   
+
    from datetime import datetime
    now = datetime.today() #วันที่
 
    #เก็บข้อมูล user
    firstname = str(request.session.get('firstname'))
+   sellphone = str(request.session.get('sellphone'))
+   customername = str(request.session.get('customername'))
+   contactcustomer = str(request.session.get('contactcustomer'))
    #ข้อมูลทั่วไป
    submodel = str(request.session.get('submodel'))
    bodycolor = str(request.session.get('bodycolor'))
@@ -1073,6 +1116,11 @@ def showdata(request):
    text_acc_card_2 = str(request.session.get('text_acc_card_2'))
    text_acc_card_3 = str(request.session.get('text_acc_card_3'))
    text_acc_card_4 = str(request.session.get('text_acc_card_4'))
+   text_acc_card_5 = str(request.session.get('text_acc_card_5'))
+   text_acc_card_6 = str(request.session.get('text_acc_card_6'))
+   text_acc_card_7 = str(request.session.get('text_acc_card_7'))
+   text_acc_card_8 = str(request.session.get('text_acc_card_8'))
+   text_acc_card_9 = str(request.session.get('text_acc_card_9'))
    text_acc_1 = str(request.session.get('text_acc_1'))
    text_acc_2 = str(request.session.get('text_acc_2'))
    text_acc_3 = str(request.session.get('text_acc_3'))
@@ -1136,6 +1184,11 @@ def showdata(request):
       'text_acc_card_2':text_acc_card_2,  #pass
       'text_acc_card_3':text_acc_card_3,  #pass
       'text_acc_card_4':text_acc_card_4,  #pass
+      'text_acc_card_5':text_acc_card_5,  #pass
+      'text_acc_card_6':text_acc_card_6,  #pass
+      'text_acc_card_7':text_acc_card_7,  #pass
+      'text_acc_card_8':text_acc_card_8,  #pass
+      'text_acc_card_9':text_acc_card_9,  #pass
       'text_acc_1':text_acc_1,  #pass
       'text_acc_2':text_acc_2,  #pass
       'text_acc_3':text_acc_3,  #pass
@@ -1151,10 +1204,10 @@ def showdata(request):
       'text_acc_13':text_acc_13,  #pass
       'text_acc_14':text_acc_14,  #pass
       'text_acc_15':text_acc_15,  #pass
-      'sell_phone':sell_phone,  #pass
-      'customer_name':customer_name,  #pass
-      'customer_phone':customer_phone,  #pass
+      'customername':customername,  #pass
+      'contactcustomer':contactcustomer,  #pass
       'firstname':firstname,  #pass
+      'sellphone':sellphone,  #pass
       
        
 

@@ -404,6 +404,21 @@
                             {% if text_acc_card_4 != "-" %}
                             <li class="nameacc">{{text_acc_card_4}}</li>
                             {% endif %}
+                            {% if text_acc_card_5 != "-" %}
+                            <li class="nameacc">{{text_acc_card_5}}</li>
+                            {% endif %}
+                            {% if text_acc_card_6 != "-" %}
+                            <li class="nameacc">{{text_acc_card_6}}</li>
+                            {% endif %}
+                            {% if text_acc_card_7 != "-" %}
+                            <li class="nameacc">{{text_acc_card_7}}</li>
+                            {% endif %}
+                            {% if text_acc_card_8 != "-" %}
+                            <li class="nameacc">{{text_acc_card_8}}</li>
+                            {% endif %}
+                            {% if text_acc_card_9 != "-" %}
+                            <li class="nameacc">{{text_acc_card_9}}</li>
+                            {% endif %}
                             {% if text_acc_1 != "-" %}
                             <li class="nameacc">{{text_acc_1}}</li>
                             {% endif %}
@@ -481,17 +496,12 @@
                       </tr>
                     </thead>
                     <tbody>
-                      {% if sell_name != "-" and sell_phone != "-" %}
                          <tr>
-                           <td>ผู้เสนอ: คุณ {{firstname}} /{{sell_phone}}</td>
+                           <td>ผู้เสนอ: คุณ {{firstname}} / {{sellphone}}</td>
                          </tr>
-                      {% endif %}
-
-                      {% if customer_name != "-" and customer_phone != "-" %}
                           <tr>
-                            <td>ลูกค้า: คุณ {{customer_name}} /{{customer_phone}}</td>
+                            <td>ลูกค้า: คุณ {{customername}} /{{contactcustomer}}</td>
                           </tr>
-                      {% endif %}
                       <tr>
                         <td>-</td>
                       </tr>
@@ -507,10 +517,23 @@
 </div>
 
 
-<div class="d-grid gap-1" style="margin: 1vh 14vw;">
-  <a  href="uploadpage" class="btn btn-info"><strong>Upload ใบเสนอราคา</strong></a>
-</div>
-
+<div  align="center" style="display : flex; justify-content: center; margin-top: 3vh;">
+  <a href="uploadpage" style="display: flex;
+  text-decoration : none;
+  justify-content: center;
+  padding : 0px 3vw;
+  width : 30%;
+  height : 45px;
+  font-size : 24px;
+  border-radius : 20px;
+  border : 4px solid white ;
+  outline-style: solid;
+  outline-color: #3399ff;
+  outline-width: thick;
+  background: #3399ff;">
+    <strong class="text-light"  style="height: 100%;">Upload</strong>
+  </a> 
+ <div>
 
 </body>
 </html>

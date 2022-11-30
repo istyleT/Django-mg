@@ -1,35 +1,54 @@
 {% extends 'adminadddata.html' %}
+{% load static %}
+
+{% block style %}
+ <link rel="stylesheet"  href="{% static '/css/mainwallperper.css' %}"">
+{% endblock %}
+
+
 {% block content %}
+<div class="frm-body bg-white">
+
 <form method="POST" action="addacc">
 {% csrf_token %}
-<div class="container">
-                   
-                    <div class="mb-3">
-                                        <label for="exampleFormControlInput1" class="form-label">ACC CODE</label>
-                                        <input type="text" class="form-control" name="acc_code"  placeholder="Acc code">
-                    </div>
-                    <div class="mb-3">
-                                        <label for="exampleFormControlInput1" class="form-label">ACC NAME</label>
-                                        <input type="text" class="form-control" name="acc_name"  placeholder="acc name">
-                    </div>
-                    <div class="mb-3">
-                                        <label for="exampleFormControlInput1" class="form-label">ACC PRICE</label>
-                                        <input type="number" class="form-control" name="acc_price"  placeholder="acc price">
-                    </div>
-                    <div class="mb-3">
-                                        <label for="exampleFormControlInput1" class="form-label">ACC TYPE</label>
-                                        <input type="text" class="form-control" name="acc_type"  placeholder="acc type">
-                    </div>
-                    <div class="mb-3">
-                                        <label for="exampleFormControlInput1" class="form-label">ACC MODEL</label>
-                                        <input type="text" class="form-control" name="acc_model"  placeholder="acc model">
-                    </div>
-                    <div class="d-grid gap-1">
-                                        <button class="btn btn-success" type="submit"><storng>Save</storng></button>
-                    </div>
 
+ <div class="mb-3">
+                     <label for="exampleFormControlInput1" class="form-label">รหัสสินค้า</label>
+                     <input type="text" class="form-control" name="acc_code"  placeholder="acc code">
+ </div>
+ <div class="mb-3">
+                     <label for="exampleFormControlInput1" class="form-label">ชื่ออุปกรณ์ตกเเต่ง</label>
+                     <input type="text" class="form-control" name="acc_name"  placeholder="acc name">
+ </div>
+ <div class="mb-3">
+                     <label for="exampleFormControlInput1" class="form-label">ราคา</label>
+                     <input type="number" class="form-control" name="acc_price"  placeholder="acc price">
+ </div>
+ <div class="mb-3">
+                     <label for="exampleFormControlInput1" class="form-label">ประเภท</label>
+                     <input type="text" class="form-control" name="acc_type"  placeholder="acc type">
+ </div>
+ <div class="mb-3">
+                     <label for="exampleFormControlInput1" class="form-label">รุ่นหลัก</label>
+                     <input type="text" class="form-control" name="acc_model"  placeholder="acc model">
+ </div>
+ <div  align="center" style="display : flex; justify-content: center; margin-top: 2vh;">
+   <button  type="submit" style="display: flex;
+   justify-content: center;
+   padding : 0px 3vw;
+   width : 25%;
+   height : 40px;
+   font-size : 20px;
+   border-radius : 20px;
+   border : 4px solid white ;
+   outline-style: solid;
+   outline-color: black;
+   outline-width: thick;
+   background: black;">
+     <strong class="text-light" style="height: 100%;">Update</strong>
+   </button> 
+ <div>
 
-</div>
 </form>
-
+</div>
 {% endblock %}

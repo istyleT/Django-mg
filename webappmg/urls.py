@@ -46,6 +46,7 @@ urlpatterns = [
     path('addacc', views.addacc),
     path('pageaddproduct', views.pageaddproduct),
     path('addproduct', views.addproduct),
+    path('dashboard', views.dashboard),
     
 ]
 if settings.DEBUG:

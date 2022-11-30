@@ -1,31 +1,41 @@
 {% extends 'adminadddata.html' %}
 {% block content %}
+<div class="frm-body bg-white">
 <form method="POST" action="addproduct">
 {% csrf_token %}
-<div class="container">
-                   
-                    <div class="mb-3">
-                                        <label for="exampleFormControlInput1" class="form-label">MAIN MODEL</label>
-                                        <input type="text" class="form-control" name="mainmodel"  placeholder="mainmodel">
-                    </div>
-                    <div class="mb-3">
-                                        <label for="exampleFormControlInput1" class="form-label">SUBMODEL</label>
-                                        <input type="text" class="form-control" name="submodel"  placeholder="submodel">
-                    </div>
-                    <div class="mb-3">
-                                        <label for="exampleFormControlInput1" class="form-label">PRICE</label>
-                                        <input type="number" class="form-control" name="price"  placeholder="price">
-                    </div>
-                    <div class="mb-3">
-                                        <label for="exampleFormControlInput1" class="form-label">MARGIN</label>
-                                        <input type="number" class="form-control" name="margin"  placeholder="margin">
-                    </div>
-                    <div class="d-grid gap-1">
-                                        <button class="btn btn-success" type="submit"><storng>Save</storng></button>
-                    </div>
+    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">ร่น</label>
+                        <input type="text" class="form-control" name="mainmodel"  placeholder="mainmodel">
+    </div>
+    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">เกรด</label>
+                        <input type="text" class="form-control" name="submodel"  placeholder="submodel">
+    </div>
+    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">ราคา</label>
+                        <input type="number" class="form-control" name="price"  placeholder="price">
+    </div>
+    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">margin</label>
+                        <input type="number" class="form-control" name="margin"  placeholder="margin">
+    </div>
+    <div  align="center" style="display : flex; justify-content: center; margin-top: 2vh;">
+      <button  type="submit" style="display: flex;
+      justify-content: center;
+      padding : 0px 3vw;
+      width : 25%;
+      height : 40px;
+      font-size : 20px;
+      border-radius : 20px;
+      border : 4px solid white ;
+      outline-style: solid;
+      outline-color: black;
+      outline-width: thick;
+      background: black;">
+        <strong class="text-light" style="height: 100%;">Update</strong>
+      </button> 
+    <div>
 
-
-</div>
 </form>
-
+</div>
 {% endblock %}

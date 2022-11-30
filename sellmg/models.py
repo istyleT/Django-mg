@@ -12,7 +12,8 @@ class Product(models.Model) :
                     submodel = models.CharField(max_length=50)
                     price = models.IntegerField()
                     margin = models.IntegerField() 
- 
+                                  
+                    
                     def __str__(self) : #เเสดงข้อมูลที่ query มาได้
                           return f'{self.mainmodel} | {self.submodel} | {self.price} |{self.margin}'
 

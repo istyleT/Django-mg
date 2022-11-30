@@ -36,7 +36,7 @@ def log_user_out(request):
 @login_required(login_url='/firstdata')
 def pageaddcolor(request):
     username = request.session.get('username')
-    if username == 'istyletoon':
+    if username == 'Toonny':
        return render(request,'addcolor.html')
     else :
        return render(request,'login.html')
@@ -44,7 +44,7 @@ def pageaddcolor(request):
 @login_required(login_url='/firstdata')   
 def pageaddregiscost(request):
     username = request.session.get('username')
-    if username == 'istyletoon':
+    if username == 'Toonny':
        return render(request,'addregiscost.html')
     else:
        return render(request,'login.html')
@@ -52,7 +52,7 @@ def pageaddregiscost(request):
 @login_required(login_url='/firstdata')       
 def pageaddproduct(request):
     username = request.session.get('username')
-    if username == 'istyletoon':
+    if username == 'Toonny':
        return render(request,'addproduct.html')
     else:
        return render(request,'login.html')
@@ -60,11 +60,22 @@ def pageaddproduct(request):
 @login_required(login_url='/firstdata')      
 def pageaddacc(request):
     username = request.session.get('username')
-    if username == 'istyletoon':
+    if username == 'Toonny':
        return render(request,'addacc.html')
     else:
        return render(request,'login.html')
-       
+
+@login_required(login_url='/firstdata')  
+def dashboard (request):
+    #เรียกหาข้อมูลจาก database ที่ต้องการดู เก็บไว้ในตัวเเปร
+    dashproduct = Product.objects.all()
+    dashregiscosts = Regiscosts.objects.all()
+    dashaccmgs = Accmgs.objects.all()
+    dashcolorsubmodels = Colorsubmodels.objects.all()
+    dashhtrcustomer = HTRcustomer.objects.all()
+    #สั่ง render เเละส่งค่าเข้าสุ่ Template                  
+    return render(request,'dashboard.html',{'dashproduct':dashproduct,'dashregiscosts':dashregiscosts,'dashaccmgs':dashaccmgs,'dashcolorsubmodels':dashcolorsubmodels, 'dashhtrcustomer':dashhtrcustomer})
+
 def addcolor(request):
     # สร้างตัวเเปรมาเก็บข้อมูลจากหน้าปัจจุบัน
     submodel_add = request.POST.get('submodel') 
@@ -121,7 +132,6 @@ def upload(request):
     data = Quotations.objects.order_by('-id') # เรียงตาม id เเบบย้อนกลับ
     return render(request,'filedata.html',{'data': data})
 
-
 def collectdata(request): 
     
     # เก็บข้อมูลการ login จาก user 
@@ -133,6 +143,8 @@ def collectdata(request):
     
     # ถ้ามี เข้า condition render หน้าต่อไป 
     if user is not None:
+        # ส่งออกเผื่อเป็น admin
+         request.session['username'] = username
         # Log a user in
          login(request, user)
          # query เอา firstname  จาก table auth_user

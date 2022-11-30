@@ -1,27 +1,37 @@
 {% extends 'adminadddata.html' %}
 {% block content %}
+<div class="frm-body bg-white">
 <form method="POST" action="addregiscost">
 {% csrf_token %}
-<div class="container">
-                   
-                    <div class="mb-3">
-                                        <label for="exampleFormControlInput1" class="form-label">REGIS CODE</label>
-                                        <input type="text" class="form-control" name="regis_code"  placeholder="regis code">
-                    </div>
-                    <div class="mb-3">
-                                        <label for="exampleFormControlInput1" class="form-label">REGIS PERSONAL</label>
-                                        <input type="number" class="form-control" name="regis_personal"  placeholder="regis personal">
-                    </div>
-                    <div class="mb-3">
-                                        <label for="exampleFormControlInput1" class="form-label">REGIS COMPANY</label>
-                                        <input type="number" class="form-control" name="regis_company"  placeholder="regis company">
-                    </div>
-                    <div class="d-grid gap-1">
-                                        <button class="btn btn-success" type="submit"><storng>Save</storng></button>
-                    </div>
+    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">รุ่น+เกรด</label>
+                        <input type="text" class="form-control" name="regis_code"  placeholder="regis code">
+    </div>
+    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">จดเเบบบุคคล</label>
+                        <input type="number" class="form-control" name="regis_personal"  placeholder="regis personal">
+    </div>
+    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">จดเเบบนิติบุคคล</label>
+                        <input type="number" class="form-control" name="regis_company"  placeholder="regis company">
+    </div>
+    <div  align="center" style="display : flex; justify-content: center; margin-top: 2vh;">
+      <button  type="submit" style="display: flex;
+      justify-content: center;
+      padding : 0px 3vw;
+      width : 25%;
+      height : 40px;
+      font-size : 20px;
+      border-radius : 20px;
+      border : 4px solid white ;
+      outline-style: solid;
+      outline-color: black;
+      outline-width: thick;
+      background: black;">
+        <strong class="text-light" style="height: 100%;">Update</strong>
+      </button> 
+    <div>
 
-
-</div>
 </form>
-
+</div>
 {% endblock %}

@@ -12,14 +12,27 @@
                     <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"> </script>
                     {% block script %} {% endblock %}
 
-         
+                    <style>
+                      body {
+                        background: linear-gradient(to bottom right, #666699 -50%, #ffffff 120%);
+                        background-repeat: no-repeat;
+                        background-attachment: fixed;
+                      }
+                      .frm-body{
+                        margin-top: 2vh;
+                        margin-bottom: 2vh;
+                        padding : 2vh 2vw;
+                        border-radius: 20px;
+                        box-shadow: 10px 10px 5px #666699;
+                      }
+                    </style>
 </head>
 
 <body>
    
    <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
    <div class="container-fluid">
-     <a class="navbar-brand" href="#"><strong>Welcome I-style T</strong></a>
+     <a class="navbar-brand" href="admin/"><strong>Welcome I-style T</strong></a>
      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
        <span class="navbar-toggler-icon"></span>
      </button>
@@ -29,17 +42,17 @@
            <a class="nav-link active" aria-current="page" href="firstdata">User login</a>
          </li>
          <li class="nav-item">
-           <a class="nav-link active" aria-current="page" href="admin/">Admin login</a>
+           <a class="nav-link active" aria-current="page" href="dashboard">Dash board</a>
          </li>
          <li class="nav-item dropdown">
            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-             Add data list
+             ทำไมเรายังไม่วาร์ป
            </a>
            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-             <li><a class="dropdown-item" href="pageaddcolor">Colors</a></li>
-             <li><a class="dropdown-item" href="pageaddacc">Accessories</a></li>
-             <li><a class="dropdown-item" href="pageaddproduct">Price & Margin</a></li>
-             <li><a class="dropdown-item" href="pageaddregiscost">Regis Cost</a></li>
+             <li><a class="dropdown-item" href="pageaddcolor">วาร์ปไป Colors</a></li>
+             <li><a class="dropdown-item" href="pageaddacc">วาร์ปไป Accessories</a></li>
+             <li><a class="dropdown-item" href="pageaddproduct">วาร์ปไป Price & Margin</a></li>
+             <li><a class="dropdown-item" href="pageaddregiscost">วาร์ปไป Regis Cost</a></li>
            </ul>
          </li>
        </ul>

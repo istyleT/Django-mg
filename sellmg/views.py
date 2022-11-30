@@ -36,7 +36,7 @@ def log_user_out(request):
 @login_required(login_url='/firstdata')
 def pageaddcolor(request):
     username = request.session.get('username')
-    if username == 'Toonny':
+    if username == 'istyletoon':
        return render(request,'addcolor.html')
     else :
        return render(request,'login.html')
@@ -44,7 +44,7 @@ def pageaddcolor(request):
 @login_required(login_url='/firstdata')   
 def pageaddregiscost(request):
     username = request.session.get('username')
-    if username == 'Toonny':
+    if username == 'istyletoon':
        return render(request,'addregiscost.html')
     else:
        return render(request,'login.html')
@@ -52,7 +52,7 @@ def pageaddregiscost(request):
 @login_required(login_url='/firstdata')       
 def pageaddproduct(request):
     username = request.session.get('username')
-    if username == 'Toonny':
+    if username == 'istyletoon':
        return render(request,'addproduct.html')
     else:
        return render(request,'login.html')
@@ -60,7 +60,7 @@ def pageaddproduct(request):
 @login_required(login_url='/firstdata')      
 def pageaddacc(request):
     username = request.session.get('username')
-    if username == 'Toonny':
+    if username == 'istyletoon':
        return render(request,'addacc.html')
     else:
        return render(request,'login.html')

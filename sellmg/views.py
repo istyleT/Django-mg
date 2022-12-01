@@ -175,6 +175,7 @@ def statuscustomer(request):
 @login_required(login_url='/firstdata') 
 def dataclient(request):
     #เก็บข้อมูล username
+    username = str(request.session.get('username'))
     firstname = str(request.session.get('firstname'))
     # เก็บข้อมูลหน้าตัวเอง
     mainmodel = str(request.POST.get('mainmodel'))
@@ -189,19 +190,21 @@ def dataclient(request):
     # เก็บข้อมลูเข้า database
     HTRcustomer.objects.create(firstname = firstname, mainmodel = mainmodel, customername = customername, contactcustomer= contactcustomer, chanelcustomer = chanelcustomer, statuscustomer = statuscustomer)
     if mainmodel == "MG5":
-       return render(request ,'Model_A.html')
+       return render(request ,'Model_A.html',{'username': username})
     elif mainmodel == "MGVSHEV" :
-        return render(request ,'Model_B.html')
+        return render(request ,'Model_B.html',{'username': username})
     elif mainmodel == "MGZS" :
-        return render(request ,'Model_C.html')
+        return render(request ,'Model_C.html',{'username': username})
     elif mainmodel == "MGETD" :
-        return render(request ,'Model_D.html')
+        return render(request ,'Model_D.html',{'username': username})
     elif mainmodel == "MGHSPHEV" :
-        return render(request ,'Model_E.html')
+        return render(request ,'Model_E.html',{'username': username})
     elif mainmodel == "MGHS" :
-        return render(request ,'Model_F.html')
+        return render(request ,'Model_F.html',{'username': username})
     elif mainmodel == "MG4" :
-        return render(request ,'Model_G.html')
+        return render(request ,'Model_G.html',{'username': username})
+    elif mainmodel == "MGEP" :
+        return render(request ,'Model_H.html',{'username': username})
 
 @login_required(login_url='/firstdata') 
 def editcard(request):

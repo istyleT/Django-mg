@@ -11,13 +11,14 @@
       <label class="input-group-text btn-danger " for="inputGroupSelect01"><strong>รุ่นรถ MG</strong></label>
       <select class="form-select text-center"  id="choosemainmodel" name="mainmodel" onchange="appendpic()">
         <option value="-" selected >กรุณาเลือกรุ่น</option>
-        <option value="MG5">NEW MG5 MY2022</option>
+        <option value="MG5">NEW MG 5 MY2022</option>
         <option value="MGVSHEV">NEW MG VS HEV</option>
         <option value="MGZS">MG ZS 2020</option>
         <option value="MGETD">MG EXTENDER</option>
         <option value="MGHSPHEV">MG HS PHEV</option>
         <option value="MGHS">MG HS</option>
-        <option value="MG4">MG4</option>
+        <option value="MG4">MG 4</option>
+        <option value="MGEP">MG EP</option>
       </select>
     </div>          
    <!--colors-->              
@@ -113,6 +114,9 @@
 <div align="center" id="picmg4" style="display: none;">
    <img  src="{% static 'picture/Mg4.png' %}" class="img-fluid" alt="..."/>
 </div>
+<div align="center" id="picmgep" style="display: none;">
+   <img  src="{% static 'picture/Mgep.png' %}" class="img-fluid" alt="..."/>
+</div>
 </div>
 <script>
 
@@ -125,6 +129,7 @@
       const picmghsphev = document.getElementById('picmghsphev');
       const picmghs = document.getElementById('picmghs');
       const picmg4 = document.getElementById('picmg4');
+      const picep = document.getElementById('picep');
       const choosemainmodel = document.getElementById('choosemainmodel').value;
       switch (choosemainmodel){
          case "MG5" : picmg5.style.display = "block";
@@ -134,6 +139,7 @@
                       picmghsphev.style.display = "none";
                       picmghs.style.display = "none";
                       picmg4.style.display = "none";
+                      picep.style.display = "none";
                       carshadow.style.display = "none";
          break
          case "MGVSHEV" : picmgvshev.style.display = "block"; 
@@ -143,6 +149,7 @@
                           picmghsphev.style.display = "none";
                           picmghs.style.display = "none";
                           picmg4.style.display = "none";
+                          picep.style.display = "none";
                           carshadow.style.display = "none";
          break
          case "MGZS" : picmgzs.style.display = "block";
@@ -152,6 +159,7 @@
                        picmghsphev.style.display = "none";
                        picmghs.style.display = "none";
                        picmg4.style.display = "none";
+                       picep.style.display = "none";
                        carshadow.style.display = "none";
          break
          case "MGETD" : picmgetd.style.display = "block";
@@ -161,6 +169,7 @@
                         picmghsphev.style.display = "none";
                         picmghs.style.display = "none";
                         picmg4.style.display = "none";
+                        picep.style.display = "none";
                         carshadow.style.display = "none";
          break
          case "MGHSPHEV" : picmghsphev.style.display = "block";
@@ -170,6 +179,7 @@
                            picmg5.style.display = "none";
                            picmghs.style.display = "none";
                            picmg4.style.display = "none";
+                           picep.style.display = "none";
                            carshadow.style.display = "none";
          break
          case "MGHS" : picmghs.style.display = "block";
@@ -179,6 +189,7 @@
                        picmghsphev.style.display = "none";
                        picmg5.style.display = "none";
                        picmg4.style.display = "none"; 
+                       picep.style.display = "none";
                        carshadow.style.display = "none";
          break
          case "MG4" : picmghs.style.display = "none";
@@ -187,7 +198,18 @@
                        picmgetd.style.display = "none";
                        picmghsphev.style.display = "none";
                        picmg5.style.display = "none";
-                       picmg4.style.display = "block"; 
+                       picmg4.style.display = "block";
+                       picep.style.display = "none"; 
+                       carshadow.style.display = "none";
+         break
+         case "MGEP" : picmghs.style.display = "none";
+                       picmgvshev.style.display = "none";
+                       picmgzs.style.display = "none";
+                       picmgetd.style.display = "none";
+                       picmghsphev.style.display = "none";
+                       picmg5.style.display = "none";
+                       picmg4.style.display = "none";
+                       picep.style.display = "block"; 
                        carshadow.style.display = "none";
          break
          default : carshadow.style.display = "block";
@@ -198,6 +220,7 @@
                    picmg5.style.display = "none"; 
                    picmg4.style.display = "none";
                    picmghs.style.display = "none";
+                   picep.style.display = "none";
          
       };
       checkdataclient();

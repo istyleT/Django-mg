@@ -143,8 +143,7 @@ def collectdata(request):
     
     # ถ้ามี เข้า condition render หน้าต่อไป 
     if user is not None:
-        # ส่งออกเผื่อเป็น admin
-         request.session['username'] = username
+        
         # Log a user in
          login(request, user)
          # query เอา firstname  จาก table auth_user
@@ -153,10 +152,12 @@ def collectdata(request):
          for i in firstname_set :
              firstname =  str(i.first_name)
              sellphone =  str(i.last_name)
+         # ส่งออกเผื่อเป็น admin
          #ส่งข้อมูลออก
+         request.session['username'] = username
          request.session['firstname'] = firstname
          request.session['sellphone'] = sellphone
-         return render(request,'dataclient.html')
+         return render(request,'dataclient.html',{'username':username})
     # ถ้าไม่มี สั่ง render หน้าเดิม
     else:
         status_login = 'False'
@@ -199,6 +200,8 @@ def dataclient(request):
         return render(request ,'Model_E.html')
     elif mainmodel == "MGHS" :
         return render(request ,'Model_F.html')
+    elif mainmodel == "MG4" :
+        return render(request ,'Model_G.html')
 
 @login_required(login_url='/firstdata') 
 def editcard(request):

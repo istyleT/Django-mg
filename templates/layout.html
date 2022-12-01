@@ -81,6 +81,9 @@
                               <li><a id="listdrop" class="dropdown-item text-white text-left" href="/statuscustomer"><strong>ข้อมูลลูกค้า</strong></a></li>
                               <li><a id="listdrop" class="dropdown-item text-white text-left" href="/uploadpage"><strong>อัพโหลดไฟล์</strong></a></li>
                               <li><a id="listdrop" class="dropdown-item text-white text-left" href="/upload"><strong>ดูใบเสนอราคา</strong></a></li>
+                              {% if username == "istyletoon" %}
+                              <li><a id="listdrop" class="dropdown-item text-white text-left" href="/dashboard"><strong>Dashboard</strong></a></li>
+                              {% endif %}                 
                             </ul>
                           <a id="a-menu" href="/logout">
                             <strong class="text-light">Logout</strong>

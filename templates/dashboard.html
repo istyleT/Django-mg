@@ -104,9 +104,12 @@
           <td>{{i.price}}</td>
           <td>{{i.margin}}</td>
           <td>
-            <a href="/pageaddproduct">
+          <form action="pageaddproduct" method="POST">
+            {% csrf_token %}
+            <button name="idproduct" value={{id.dashproduct}} >
                <img  src="{% static 'picture/pencil-100.png' %}" class="img-fluid" width="30" height="30" alt="..."/>
-            </a>
+            </button>
+          </form>
          </td>
          </tr>
       {% endfor %}
@@ -129,9 +132,12 @@
           <td>{{i.regis_personal}}</td>
           <td>{{i.regis_company}}</td>
           <td>
-            <a  href="/pageaddregiscost">
-               <img  src="{% static 'picture/pencil-100.png' %}" class="img-fluid" width="30" height="30" alt="..."/>
-            </a>
+            <form action="pageaddregiscost" method="POST">
+               {% csrf_token %}
+               <button name="idregiscost" value={{id.dashregiscosts}} >
+                  <img  src="{% static 'picture/pencil-100.png' %}" class="img-fluid" width="30" height="30" alt="..."/>
+               </button>
+             </form>
          </td>
          </tr>
       {% endfor %}
@@ -152,9 +158,12 @@
           <td>{{i.submodel}}</td>
           <td>{{i.color}}</td>
           <td>
-            <a  href="/pageaddcolor">
-               <img  src="{% static 'picture/pencil-100.png' %}" class="img-fluid" width="30" height="30" alt="..."/>
-            </a>
+            <form action="pageaddcolor" method="POST">
+               {% csrf_token %}
+               <button name="idcolor" value={{id.dashcolorsubmodels}} >
+                  <img  src="{% static 'picture/pencil-100.png' %}" class="img-fluid" width="30" height="30" alt="..."/>
+               </button>
+             </form>
          </td>
          </tr>
       {% endfor %}
@@ -169,7 +178,6 @@
             <th>Price</th>
             <th>Model</th>
             <th>Edit</th>
-            
          </tr>
       </thead>
       <tbody>
@@ -180,9 +188,12 @@
           <td>{{i.acc_price}}</td>
           <td>{{i.acc_model}}</td>
           <td>
-            <a  href="/pageaddacc">
-               <img  src="{% static 'picture/pencil-100.png' %}" class="img-fluid" width="30" height="30" alt="..."/>
-            </a>
+            <form action="pageaddacc" method="POST">
+               {% csrf_token %}
+               <button name="idacc" value={{i.id}} type="submit">
+                  <img  src="{% static 'picture/pencil-100.png' %}" class="img-fluid" width="30" height="30" alt="..."/>
+               </button>
+             </form>
          </td>
          </tr>
       {% endfor %}

@@ -37,7 +37,9 @@ def log_user_out(request):
 def pageaddcolor(request):
     username = request.session.get('username')
     if username == 'istyletoon':
-       return render(request,'addcolor.html')
+       idcolor = request.POST.get('idcolor')
+       datacolor = Product.objects.filter(id = idcolor)
+       return render(request,'addcolor.html',{'datacolor': datacolor})
     else :
        return render(request,'login.html')
 
@@ -45,7 +47,9 @@ def pageaddcolor(request):
 def pageaddregiscost(request):
     username = request.session.get('username')
     if username == 'istyletoon':
-       return render(request,'addregiscost.html')
+       idregiscost = request.POST.get('idregiscost')
+       dataregiscost = Product.objects.filter(id = idregiscost)
+       return render(request,'addregiscost.html',{'dataregiscost':dataregiscost})
     else:
        return render(request,'login.html')
 
@@ -53,7 +57,9 @@ def pageaddregiscost(request):
 def pageaddproduct(request):
     username = request.session.get('username')
     if username == 'istyletoon':
-       return render(request,'addproduct.html')
+       idproduct = request.POST.get('idproduct')
+       dataproduct = Product.objects.filter(id = idproduct)
+       return render(request,'addproduct.html',{'dataproduct':dataproduct})
     else:
        return render(request,'login.html')
 
@@ -61,18 +67,20 @@ def pageaddproduct(request):
 def pageaddacc(request):
     username = request.session.get('username')
     if username == 'istyletoon':
-       return render(request,'addacc.html')
+       idacc = request.POST.get('idacc')
+       dataacc = Accmgs.objects.filter(id = idacc)
+       return render(request,'addacc.html',{'dataacc':dataacc})
     else:
        return render(request,'login.html')
 
 @login_required(login_url='/firstdata')  
 def dashboard (request):
     #เรียกหาข้อมูลจาก database ที่ต้องการดู เก็บไว้ในตัวเเปร
-    dashproduct = Product.objects.all()
-    dashregiscosts = Regiscosts.objects.all()
-    dashaccmgs = Accmgs.objects.all()
-    dashcolorsubmodels = Colorsubmodels.objects.all()
-    dashhtrcustomer = HTRcustomer.objects.all()
+    dashproduct = Product.objects.all().order_by("mainmodel")
+    dashregiscosts = Regiscosts.objects.all().order_by("regis_code")
+    dashaccmgs = Accmgs.objects.all().order_by("acc_code")
+    dashcolorsubmodels = Colorsubmodels.objects.all().order_by("submodel")
+    dashhtrcustomer = HTRcustomer.objects.all().order_by("date")
     #สั่ง render เเละส่งค่าเข้าสุ่ Template                  
     return render(request,'dashboard.html',{'dashproduct':dashproduct,'dashregiscosts':dashregiscosts,'dashaccmgs':dashaccmgs,'dashcolorsubmodels':dashcolorsubmodels, 'dashhtrcustomer':dashhtrcustomer})
 
@@ -164,15 +172,6 @@ def collectdata(request):
         return render(request,'login.html',{"status_login":status_login})
 
 @login_required(login_url='/firstdata') 
-def statuscustomer(request):
-    #เก็บข้อมูลทำเงื่อนไข
-    firstname = str(request.session.get('firstname'))    
-    #เชื่อมต่อ database ค้นข้อมูลตามเงื่อนไข
-    datacustomer = HTRcustomer.objects.filter( firstname=firstname).values_list('id', 'date','firstname','mainmodel','customername','contactcustomer','chanelcustomer','statuscustomer','remark' , named=True).order_by('-id')
-    # สั่งเเสดงหน้า UI พร้อมส่งข้อมูล         
-    return render(request,'statuscustomer.html',{'datacustomer':datacustomer})
- 
-@login_required(login_url='/firstdata') 
 def dataclient(request):
     #เก็บข้อมูล username
     username = str(request.session.get('username'))
@@ -206,6 +205,15 @@ def dataclient(request):
     elif mainmodel == "MGEP" :
         return render(request ,'Model_H.html',{'username': username})
 
+@login_required(login_url='/firstdata') 
+def statuscustomer(request):
+    #เก็บข้อมูลทำเงื่อนไข
+    firstname = str(request.session.get('firstname'))    
+    #เชื่อมต่อ database ค้นข้อมูลตามเงื่อนไขป้องกันการเห็นข้อมูลของคนอื่น
+    datacustomer = HTRcustomer.objects.filter( firstname=firstname).values_list('id', 'date','firstname','mainmodel','customername','contactcustomer','chanelcustomer','statuscustomer','remark' , named=True).order_by('-id')
+    # สั่งเเสดงหน้า UI พร้อมส่งข้อมูล         
+    return render(request,'statuscustomer.html',{'datacustomer':datacustomer})
+ 
 @login_required(login_url='/firstdata') 
 def editcard(request):
     # เก็บข้อมูลหน้าตัวเอง

@@ -273,18 +273,13 @@ def updatedatacustomer(request):
         if doit == 'update' :
             if  customernameedit != "":
                 HTRcustomer.objects.filter(id= idcard).update(customername = customernameedit)
-                HTRcustomer.objects.filter(id= idcard).update(statuscustomer = statuscustomeredit)
             elif  contactcustomeredit != "":
                 HTRcustomer.objects.filter(id= idcard).update(contactcustomer = contactcustomeredit)
-                HTRcustomer.objects.filter(id= idcard).update(statuscustomer = statuscustomeredit)
             elif  customerremark != "":
                 HTRcustomer.objects.filter(id= idcard).update(remark = customerremark)
-                HTRcustomer.objects.filter(id= idcard).update(statuscustomer = statuscustomeredit)
+            HTRcustomer.objects.filter(id= idcard).update(statuscustomer = statuscustomeredit)
         elif doit == 'delete' :
-            HTRcustomer.objects.filter(id= idcard).delete()
-
-        
-                             
+            HTRcustomer.objects.filter(id= idcard).delete()                      
     return  redirect('/statuscustomer')
 
 @login_required(login_url='/firstdata') 

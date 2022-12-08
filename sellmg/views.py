@@ -274,10 +274,10 @@ def updatedatacustomer(request):
             if  customernameedit != "":
                 HTRcustomer.objects.filter(id= idcard).update(customername = customernameedit)
                 HTRcustomer.objects.filter(id= idcard).update(statuscustomer = statuscustomeredit)
-            if  contactcustomeredit != "":
+            elif  contactcustomeredit != "":
                 HTRcustomer.objects.filter(id= idcard).update(contactcustomer = contactcustomeredit)
                 HTRcustomer.objects.filter(id= idcard).update(statuscustomer = statuscustomeredit)
-            if  customerremark != "":
+            elif  customerremark != "":
                 HTRcustomer.objects.filter(id= idcard).update(remark = customerremark)
                 HTRcustomer.objects.filter(id= idcard).update(statuscustomer = statuscustomeredit)
         elif doit == 'delete' :

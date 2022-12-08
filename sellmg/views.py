@@ -38,7 +38,7 @@ def pageaddcolor(request):
     username = request.session.get('username')
     if username == 'istyletoon':
        idcolor = request.POST.get('idcolor')
-       datacolor = Product.objects.filter(id = idcolor)
+       datacolor = Colorsubmodels.objects.filter(id = idcolor)
        return render(request,'addcolor.html',{'datacolor': datacolor})
     else :
        return render(request,'login.html')
@@ -48,7 +48,7 @@ def pageaddregiscost(request):
     username = request.session.get('username')
     if username == 'istyletoon':
        idregiscost = request.POST.get('idregiscost')
-       dataregiscost = Product.objects.filter(id = idregiscost)
+       dataregiscost = Regiscosts.objects.filter(id = idregiscost)
        return render(request,'addregiscost.html',{'dataregiscost':dataregiscost})
     else:
        return render(request,'login.html')
@@ -80,46 +80,79 @@ def dashboard (request):
     dashregiscosts = Regiscosts.objects.all().order_by("regis_code")
     dashaccmgs = Accmgs.objects.all().order_by("acc_code")
     dashcolorsubmodels = Colorsubmodels.objects.all().order_by("submodel")
-    dashhtrcustomer = HTRcustomer.objects.all().order_by("date")
+    dashhtrcustomer = HTRcustomer.objects.all().order_by("-date")
     #สั่ง render เเละส่งค่าเข้าสุ่ Template                  
     return render(request,'dashboard.html',{'dashproduct':dashproduct,'dashregiscosts':dashregiscosts,'dashaccmgs':dashaccmgs,'dashcolorsubmodels':dashcolorsubmodels, 'dashhtrcustomer':dashhtrcustomer})
 
 def addcolor(request):
-    # สร้างตัวเเปรมาเก็บข้อมูลจากหน้าปัจจุบัน
+    #ตัวเเปรเงื่อนไข
+    doit_add = request.POST.get('doit') 
+    idcolor_add = request.POST.get('idcolor')                   
+    #ตัวเเปรทั่วไป
     submodel_add = request.POST.get('submodel') 
     color_add = request.POST.get('color') 
-    # เชื่อมต่อ database
-    Colorsubmodels.objects.create(submodel=submodel_add, color=color_add)
+    #สร้างเงื่อนไข
+    if doit_add == 'create':
+       Colorsubmodels.objects.create(submodel=submodel_add, color=color_add)
+    elif doit_add == 'update':
+       Colorsubmodels.objects.filter(id=idcolor_add).update(submodel=submodel_add, color=color_add)    
+    elif doit_add == 'delete':
+       Colorsubmodels.objects.filter(id=idcolor_add).delete() 
     return render(request, 'addcolor.html')
 
 def addregiscost(request):
+    #ตัวเเปรเงื่อนไข
+    doit_add = request.POST.get('doit') 
+    idregiscost_add = request.POST.get('idregiscost') 
     # สร้างตัวเเปรมาเก็บข้อมูลจากหน้าปัจจุบัน
     regis_code_add = request.POST.get('regis_code') 
     regis_personal_add = request.POST.get('regis_personal') 
     regis_company_add = request.POST.get('regis_company') 
-    # เชื่อมต่อ database
-    Regiscosts.objects.create(regis_code= regis_code_add, regis_personal=regis_personal_add, regis_company=regis_company_add)
+    #สร้างเงื่อนไข
+    if doit_add == 'create':
+       Regiscosts.objects.create(regis_code= regis_code_add, regis_personal=regis_personal_add, regis_company=regis_company_add)
+    elif doit_add == 'update':
+       Regiscosts.objects.filter(id=idregiscost_add).update(regis_code= regis_code_add, regis_personal=regis_personal_add, regis_company=regis_company_add)    
+    elif doit_add == 'delete':
+       Regiscosts.objects.filter(id=idregiscost_add).delete() 
+    
     return render(request, 'addregiscost.html')
 
 def addproduct(request):
-    # สร้างตัวเเปรมาเก็บข้อมูลจากหน้าปัจจุบัน
+    #ตัวเเปรเงื่อนไข
+    doit_add = request.POST.get('doit') 
+    idproduct_add = request.POST.get('idproduct') 
+    #ตัวเเปรทั่วไป
     mainmodel_add = request.POST.get('mainmodel') 
     submodel_add = request.POST.get('submodel') 
     price_add = request.POST.get('price') 
     margin_add = request.POST.get('margin') 
-    # เชื่อมต่อ database
-    Product.objects.create(mainmodel= mainmodel_add, submodel=submodel_add, price=price_add, margin=margin_add)
+    #สร้างเงื่อนไข
+    if doit_add == 'create':
+       Product.objects.create(mainmodel= mainmodel_add, submodel=submodel_add, price=price_add, margin=margin_add)
+    elif doit_add == 'update':
+       Product.objects.filter(id=idproduct_add).update(mainmodel= mainmodel_add, submodel=submodel_add, price=price_add, margin=margin_add)    
+    elif doit_add == 'delete':
+       Product.objects.filter(id=idproduct_add).delete()    
     return render(request, 'addproduct.html')
 
 def addacc(request):
-    # สร้างตัวเเปรมาเก็บข้อมูลจากหน้าปัจจุบัน
+    #ตัวเเปรเงื่อนไข
+    doit_add = request.POST.get('doit') 
+    idacc_add = request.POST.get('idacc') 
+    # general variable
     acc_code_add = request.POST.get('acc_code') 
     acc_name_add = request.POST.get('acc_name') 
     acc_price_add = request.POST.get('acc_price') 
     acc_type_add = request.POST.get('acc_type') 
     acc_model_add = request.POST.get('acc_model') 
-    # เชื่อมต่อ database
-    Accmgs.objects.create(acc_code= acc_code_add, acc_name=acc_name_add, acc_price=acc_price_add, acc_type=acc_type_add, acc_model=acc_model_add)
+    #condition
+    if doit_add == 'create':
+       Accmgs.objects.create(acc_code= acc_code_add, acc_name=acc_name_add, acc_price=acc_price_add, acc_type=acc_type_add, acc_model=acc_model_add)
+    elif doit_add == 'update':
+       Accmgs.objects.filter(id=idacc_add).update(acc_code= acc_code_add, acc_name=acc_name_add, acc_price=acc_price_add, acc_type=acc_type_add, acc_model=acc_model_add)    
+    elif doit_add == 'delete':
+       Accmgs.objects.filter(id=idacc_add).delete()    
     return render(request, 'addacc.html')
 
 ###############################################################
@@ -231,19 +264,26 @@ def updatedatacustomer(request):
     if request.method == "POST":
         idcard = request.session.get('idcard')
         # เก็บข้อมูลหน้าตัวเอง
+        doit = request.POST.get('doit')
         customernameedit = request.POST.get('customername-edit')     
         contactcustomeredit = request.POST.get('contactcustomer-edit')     
         statuscustomeredit = request.POST.get('statuscustomer-edit')     
         customerremark = request.POST.get('customer-remark') 
         # update ข้อมูล
-        if  customernameedit != "":
-                                HTRcustomer.objects.filter(id= idcard).update(customername = customernameedit)
-        if  contactcustomeredit != "":
-                                HTRcustomer.objects.filter(id= idcard).update(contactcustomer = contactcustomeredit)
-        if  customerremark != "":
-                                HTRcustomer.objects.filter(id= idcard).update(remark = customerremark)
+        if doit == 'update' :
+            if  customernameedit != "":
+                HTRcustomer.objects.filter(id= idcard).update(customername = customernameedit)
+                HTRcustomer.objects.filter(id= idcard).update(statuscustomer = statuscustomeredit)
+            if  contactcustomeredit != "":
+                HTRcustomer.objects.filter(id= idcard).update(contactcustomer = contactcustomeredit)
+                HTRcustomer.objects.filter(id= idcard).update(statuscustomer = statuscustomeredit)
+            if  customerremark != "":
+                HTRcustomer.objects.filter(id= idcard).update(remark = customerremark)
+                HTRcustomer.objects.filter(id= idcard).update(statuscustomer = statuscustomeredit)
+        elif doit == 'delete' :
+            HTRcustomer.objects.filter(id= idcard).delete()
 
-        HTRcustomer.objects.filter(id= idcard).update(statuscustomer = statuscustomeredit)
+        
                              
     return  redirect('/statuscustomer')
 

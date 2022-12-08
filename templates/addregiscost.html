@@ -1,36 +1,81 @@
 {% extends 'adminadddata.html' %}
+{% load static %}
+
+{% block style %}
+ <link rel="stylesheet"  href="{% static '/css/mainwallperper.css' %}"">
+{% endblock %}
+
 {% block content %}
 <div class="frm-body bg-white">
+  <!--ข้อมูลเก่า-->
+  <table class="table table-primary ">
+    <thead>
+      <tr>
+        <th>Model</th>
+        <th>Personal</th>
+        <th>Company</th>
+     </tr>
+    </thead>
+    <tbody>
+      {% for i in dataregiscost %}
+      <tr>
+        <td>{{i.regis_code}}</td>
+        <td>{{i.regis_personal}}</td>
+        <td>{{i.regis_company}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 <form method="POST" action="addregiscost">
 {% csrf_token %}
+{% for i in dataregiscost %}
+    <div class="mb-3" style="display:none;" >
+                        <input type="text" class="form-control" name="idregiscost" value={{i.id}}  placeholder="">
+    </div>
     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">รุ่น+เกรด</label>
-                        <input type="text" class="form-control" name="regis_code"  placeholder="regis code">
+                        <input type="text" class="form-control" value={{i.regis_code}}  name="regis_code"  placeholder="regis code">
     </div>
     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">จดเเบบบุคคล</label>
-                        <input type="number" class="form-control" name="regis_personal"  placeholder="regis personal">
+                        <input type="number" class="form-control" value={{i.regis_personal}} name="regis_personal"  placeholder="regis personal">
     </div>
     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">จดเเบบนิติบุคคล</label>
-                        <input type="number" class="form-control" name="regis_company"  placeholder="regis company">
+                        <input type="number" class="form-control" value={{i.regis_company}} name="regis_company"  placeholder="regis company">
     </div>
-    <div  align="center" style="display : flex; justify-content: center; margin-top: 2vh;">
-      <button  type="submit" style="display: flex;
-      justify-content: center;
-      padding : 0px 3vw;
-      width : 25%;
-      height : 40px;
-      font-size : 20px;
-      border-radius : 20px;
-      border : 4px solid white ;
-      outline-style: solid;
-      outline-color: black;
-      outline-width: thick;
-      background: black;">
-        <strong class="text-light" style="height: 100%;">Update</strong>
-      </button> 
-    <div>
+{% endfor %}
+<div  style="display : flex; justify-content: center ; margin-top: 2vh;">
+  <div class="form-check form-check-inline">
+    <input class="form-check-input" type="radio" name="doit" id="inlineRadio1" value="create">
+    <label class="form-check-label" for="inlineRadio1">สร้างใหม่</label>
+  </div>
+  <div class="form-check form-check-inline">
+    <input class="form-check-input" type="radio" name="doit" id="inlineRadio2" value="update" checked>
+    <label class="form-check-label" for="inlineRadio2">อัพเดทข้อมูล</label>
+  </div>
+  <div class="form-check form-check-inline">
+    <input class="form-check-input" type="radio" name="doit" id="inlineRadio3" value="delete">
+    <label class="form-check-label" for="inlineRadio3">ลบทิ้ง</label>
+  </div>
+  </div>
+
+  <div  style="display : flex; justify-content: center ; margin-top: 2vh;">
+    <button  type="submit" style="display: flex;
+    justify-content: center;
+    padding : 0px 3vw;
+    width : 25%;
+    height : 40px;
+    font-size : 20px;
+    border-radius : 20px;
+    border : 4px solid white ;
+    outline-style: solid;
+    outline-color: green;
+    outline-width: thick;
+    background: green;">
+      <strong class="text-light" style="height: 100%;">Submit</strong>
+    </button> 
+  <div>
 
 </form>
 </div>

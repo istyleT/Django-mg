@@ -34,43 +34,62 @@
 
 <form method="POST" action="addacc">
 {% csrf_token %}
-
+{% for i in dataacc %}
+<div class="mb-3" style="display:none;" >
+  <input type="text" class="form-control" name="idacc" value={{i.id}}  placeholder="">
+</div>
  <div class="mb-3">
                      <label for="exampleFormControlInput1" class="form-label">รหัสสินค้า</label>
-                     <input type="text" class="form-control" name="acc_code"  placeholder="acc code">
+                     <input type="text" class="form-control" value={{i.acc_code}} name="acc_code"  placeholder="acc code">
  </div>
  <div class="mb-3">
                      <label for="exampleFormControlInput1" class="form-label">ชื่ออุปกรณ์ตกเเต่ง</label>
-                     <input type="text" class="form-control" name="acc_name"  placeholder="acc name">
+                     <input type="text" class="form-control" value={{i.acc_name}} name="acc_name"  placeholder="acc name">
  </div>
  <div class="mb-3">
                      <label for="exampleFormControlInput1" class="form-label">ราคา</label>
-                     <input type="number" class="form-control" name="acc_price"  placeholder="acc price">
+                     <input type="number" class="form-control" value={{i.acc_price}} name="acc_price"  placeholder="acc price">
  </div>
  <div class="mb-3">
                      <label for="exampleFormControlInput1" class="form-label">ประเภท</label>
-                     <input type="text" class="form-control" name="acc_type"  placeholder="acc type">
+                     <input type="text" class="form-control" value={{i.acc_type}} name="acc_type"  placeholder="acc type">
  </div>
  <div class="mb-3">
                      <label for="exampleFormControlInput1" class="form-label">รุ่นหลัก</label>
-                     <input type="text" class="form-control" name="acc_model"  placeholder="acc model">
+                     <input type="text" class="form-control" value={{i.acc_model}} name="acc_model"  placeholder="acc model">
  </div>
- <div  align="center" style="display : flex; justify-content: center; margin-top: 2vh;">
-   <button  type="submit" style="display: flex;
-   justify-content: center;
-   padding : 0px 3vw;
-   width : 25%;
-   height : 40px;
-   font-size : 20px;
-   border-radius : 20px;
-   border : 4px solid white ;
-   outline-style: solid;
-   outline-color: black;
-   outline-width: thick;
-   background: black;">
-     <strong class="text-light" style="height: 100%;">Update</strong>
-   </button> 
- <div>
+ {% endfor %}
+ <div  style="display : flex; justify-content: center ; margin-top: 2vh;">
+  <div class="form-check form-check-inline">
+    <input class="form-check-input" type="radio" name="doit" id="inlineRadio1" value="create">
+    <label class="form-check-label" for="inlineRadio1">สร้างใหม่</label>
+  </div>
+  <div class="form-check form-check-inline">
+    <input class="form-check-input" type="radio" name="doit" id="inlineRadio2" value="update" checked>
+    <label class="form-check-label" for="inlineRadio2">อัพเดทข้อมูล</label>
+  </div>
+  <div class="form-check form-check-inline">
+    <input class="form-check-input" type="radio" name="doit" id="inlineRadio3" value="delete">
+    <label class="form-check-label" for="inlineRadio3">ลบทิ้ง</label>
+  </div>
+  </div>
+
+  <div  style="display : flex; justify-content: center ; margin-top: 2vh;">
+    <button  type="submit" style="display: flex;
+    justify-content: center;
+    padding : 0px 3vw;
+    width : 25%;
+    height : 40px;
+    font-size : 20px;
+    border-radius : 20px;
+    border : 4px solid white ;
+    outline-style: solid;
+    outline-color: green;
+    outline-width: thick;
+    background: green;">
+      <strong class="text-light" style="height: 100%;">Submit</strong>
+    </button> 
+  <div>
 
 </form>
 </div>

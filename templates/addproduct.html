@@ -1,25 +1,74 @@
 {% extends 'adminadddata.html' %}
+{% load static %}
+
+{% block style %}
+ <link rel="stylesheet"  href="{% static '/css/mainwallperper.css' %}"">
+{% endblock %}
+
+
 {% block content %}
 <div class="frm-body bg-white">
+  <!--ข้อมูลเก่า-->
+  <table class="table table-primary ">
+    <thead>
+      <tr>
+        <th>Mainmodel</th>
+        <th>Grade</th>
+        <th>Price</th>
+        <th>Margin</th>
+     </tr>
+    </thead>
+    <tbody>
+      {% for i in dataproduct %}
+      <tr>
+        <td>{{i.mainmodel}}</td>
+        <td>{{i.submodel}}</td>
+        <td>{{i.price}}</td>
+        <td>{{i.margin}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
 <form method="POST" action="addproduct">
 {% csrf_token %}
+{% for i in dataproduct %}
+    <div class="mb-3" style="display:none;" >
+                        <input type="text" class="form-control" name="idproduct" value={{i.id}}  placeholder="">
+    </div>
     <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">ร่น</label>
-                        <input type="text" class="form-control" name="mainmodel"  placeholder="mainmodel">
+                        <label for="exampleFormControlInput1" class="form-label">รุ่น</label>
+                        <input type="text" class="form-control" name="mainmodel" value={{i.mainmodel}}  placeholder="mainmodel">
     </div>
     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">เกรด</label>
-                        <input type="text" class="form-control" name="submodel"  placeholder="submodel">
+                        <input type="text" class="form-control" name="submodel" value={{i.submodel}} placeholder="submodel">
     </div>
     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">ราคา</label>
-                        <input type="number" class="form-control" name="price"  placeholder="price">
+                        <input type="number" class="form-control" name="price" value={{i.price}} placeholder="price">
     </div>
     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">margin</label>
-                        <input type="number" class="form-control" name="margin"  placeholder="margin">
+                        <input type="number" class="form-control" name="margin" value={{i.margin}} placeholder="margin">
     </div>
-    <div  align="center" style="display : flex; justify-content: center; margin-top: 2vh;">
+{% endfor %}
+    <div  style="display : flex; justify-content: center ; margin-top: 2vh;">
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="doit" id="inlineRadio1" value="create">
+      <label class="form-check-label" for="inlineRadio1">สร้างใหม่</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="doit" id="inlineRadio2" value="update" checked>
+      <label class="form-check-label" for="inlineRadio2">อัพเดทข้อมูล</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="doit" id="inlineRadio3" value="delete">
+      <label class="form-check-label" for="inlineRadio3">ลบทิ้ง</label>
+    </div>
+    </div>
+
+    <div  style="display : flex; justify-content: center ; margin-top: 2vh;">
       <button  type="submit" style="display: flex;
       justify-content: center;
       padding : 0px 3vw;
@@ -29,10 +78,10 @@
       border-radius : 20px;
       border : 4px solid white ;
       outline-style: solid;
-      outline-color: black;
+      outline-color: green;
       outline-width: thick;
-      background: black;">
-        <strong class="text-light" style="height: 100%;">Update</strong>
+      background: green;">
+        <strong class="text-light" style="height: 100%;">Submit</strong>
       </button> 
     <div>
 

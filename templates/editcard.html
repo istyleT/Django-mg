@@ -174,7 +174,19 @@
      <span class="input-group-text btn-warning" id="inputGroup-sizing-lg"><strong>หมายเหตุ</strong></span>
      <input type="text" name="customer-remark" class="form-control text-center" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" placeholder="เพิ่มหมายเหตุ">
    </div>
-
+   
+  <!--conditionในการเเก้ไขข้อมูล-->
+  <div  style="display : flex; justify-content: center ; margin-top: 2vh;">
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="doit" id="inlineRadio1" value="update" checked>
+      <label class="form-check-label" for="inlineRadio1">อัพเดทข้อมูล</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="doit" id="inlineRadio2" value="delete" >
+      <label class="form-check-label" for="inlineRadio2">ลบทิ้ง</label>
+    </div>
+  </div>
+  <!--button-->
    <div  align="center" style="display : flex; justify-content: center; margin-top: 2vh;">
     <button  type="submit" style="display: flex;
     justify-content: center;
@@ -185,10 +197,10 @@
     border-radius : 20px;
     border : 4px solid white ;
     outline-style: solid;
-    outline-color: black;
+    outline-color: green;
     outline-width: thick;
-    background: black;">
-      <strong class="text-light" style="height: 100%;">Update</strong>
+    background: green;">
+      <strong class="text-light" style="height: 100%;">Submit</strong>
     </button> 
    <div>
 </form>

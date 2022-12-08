@@ -106,7 +106,7 @@
           <td>
           <form action="pageaddproduct" method="POST">
             {% csrf_token %}
-            <button name="idproduct" value={{id.dashproduct}} >
+            <button name="idproduct" value={{i.id}} >
                <img  src="{% static 'picture/pencil-100.png' %}" class="img-fluid" width="30" height="30" alt="..."/>
             </button>
           </form>
@@ -134,7 +134,7 @@
           <td>
             <form action="pageaddregiscost" method="POST">
                {% csrf_token %}
-               <button name="idregiscost" value={{id.dashregiscosts}} >
+               <button name="idregiscost" value={{i.id}} >
                   <img  src="{% static 'picture/pencil-100.png' %}" class="img-fluid" width="30" height="30" alt="..."/>
                </button>
              </form>
@@ -160,7 +160,7 @@
           <td>
             <form action="pageaddcolor" method="POST">
                {% csrf_token %}
-               <button name="idcolor" value={{id.dashcolorsubmodels}} >
+               <button name="idcolor" value={{i.id}} >
                   <img  src="{% static 'picture/pencil-100.png' %}" class="img-fluid" width="30" height="30" alt="..."/>
                </button>
              </form>

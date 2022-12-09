@@ -237,8 +237,8 @@
                                 <option value=84>7 ปี/84 งวด</option>
                                 <option value=96>8 ปี/96 งวด</option>
                               </select>
-                              <label class="input-group-text btn-danger" for="inputGroupSelect00">ดอกเบี้ย</label>
-                              <input style="text-align:center; width: 5vw;" name="gen_inter" id="idgen_inter" onchange="payMonth()" class="form-control" placeholder="%ดอกเบี้ย">
+                              <label class="input-group-text btn-danger" for="inputGroupSelect00">ดอกเบี้ย</label><!-- pattern="[0-9]+[\.,]([0-9]{1,2})"-->
+                              <input style="text-align:center; width: 5vw;" name="gen_inter" id="idgen_inter" onchange="payMonth()" class="form-control"  placeholder="%ดอกเบี้ย">
                               <span class="input-group-text btn-danger">%</span>
                             </div>
                             <div class="input-group mb-3" style="margin-top: 0vh;" >
@@ -278,7 +278,7 @@
                                         <option value=96>8 ปี/96 งวด</option>
                                       </select>
                                       <label class="input-group-text" for="inputGroupSelect00">ดอกเบี้ย</label>
-                                      <input style="text-align:center; width: 5vw;" name="gen_inter_0" id="idgen_inter_0" onchange="payMonthOne()" class="form-control" placeholder="%ดอกเบี้ย">
+                                      <input style="text-align:center; width: 5vw;"  name="gen_inter_0" id="idgen_inter_0" onchange="payMonthOne()" class="form-control" placeholder="%ดอกเบี้ย">
                                       <span class="input-group-text">%</span>
                                     </div>
                                   
@@ -311,7 +311,7 @@
                                        <option value=96>8 ปี/96 งวด</option>
                                      </select>
                                      <label class="input-group-text" for="inputGroupSelect01">ดอกเบี้ย</label>
-                                     <input style="text-align:center; width: 5vw;" name="gen_inter_1" id="idgen_inter_1" onchange="payMonthTwo()" class="form-control" placeholder="%ดอกเบี้ย">
+                                     <input style="text-align:center; width: 5vw;"  name="gen_inter_1" id="idgen_inter_1" onchange="payMonthTwo()" class="form-control" placeholder="%ดอกเบี้ย">
                                      <span class="input-group-text">%</span>
                                    </div>
                                    
@@ -893,45 +893,6 @@
 
 
 <script>
-  /**********************************function คำนวณดอกเบี้ย******************************************/
-  /*
-  function  totalgeninter() {
-     //เก็บค่าตัวเเปร 
-     const productprice = Number(document.getElementById('productprice').innerHTML) ; //type int 
-     const min_reduce = Number(document.getElementById('idmin_reduce').value || 0); // type int
-     const add_eq = Number(document.getElementById('idadd_eq').value || 0);  // type int
-     const gen_down_percent = Number(document.getElementById('gen_down_percent').value || 0); //type float 
-     const gen_month = Number(document.getElementById('idgen_month').value || 0) ; // type int 
-     const gen_inter = Number(document.getElementById('idgen_inter').value || 0) ; // type float
-     //คำนวนค่าที่ต้องการ 
-     let net_productprice = productprice - min_reduce + add_eq ;
-     const cost_finance = net_productprice * (1-(gen_down_percent/100)) ;
-     let total_inter_ture =  parseInt(cost_finance * (gen_inter/100) * (gen_month /12));
-     let paymonth_1 = parseInt((total_inter_ture+cost_finance)/gen_month);
-     //เเสดงผลหน้าเว็บ
-     document.getElementById('showpaymonth0').style.display = 'block';
-     document.getElementById('showpaymonth0').innerHTML = 'ค่างวด' + '=' + ' ' + (paymonth_1.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')) + ' ' + 'บาท';
-     // เเสดงผลผ่าน consloe
-     console.log('ราคารถ ='+ productprice)
-     console.log(typeof(productprice))
-     console.log('ส่วนลดจากราคา ='+ min_reduce)
-     console.log(typeof(min_reduce))
-     console.log('บวกหัวค่าอุปกรณ์ ='+ add_eq)
-     console.log(typeof(add_eq))
-     console.log('% เงินดาวน์ =' + gen_down_percent + '%')
-     console.log(typeof(gen_down_percent))
-     console.log('จำนวนงวด =' + gen_month)
-     console.log(typeof(gen_month))
-     console.log('% ดอกเบี้ย =' + gen_inter + '%')
-     console.log(typeof(gen_inter))
-     console.log('ราคารถสุทธิ =' + net_productprice)
-     console.log('ยอดจัดไฟเเนนซ์ =' + cost_finance)
-     console.log('ดอกเบี้ยทั้งหมด =' + total_inter_ture)
-     console.log('------------------------------------')
-     
-     return total_inter_ture 
-};
-*/
 
 /**********************************************************************************************************/
 /****คำนวณยอดจัดไฟเเนนซ์****/

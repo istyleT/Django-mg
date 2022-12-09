@@ -58,58 +58,10 @@
 </style>
 {% endblock %}
 
-{% block script %}
-<script >
-  /*function statusstyle() {
-    const choosemainmodel = String(document.getElementById('productmodel').value);  
-    const choosestatus = String(document.querySelectorAll('.statuscustomer').value);
-    const cardimage = document.getElementById('card-image');  
-    const colorcard = document.getElementById('color-card');
-    const btnstatus= document.getElementById('btn-status');
-    console.log(choosemainmodel);
-    console.log(choosestatus);
-    switch (choosemainmodel){
-       case "MG5" : cardimage.src = "{% static 'picture/Newmg5.png' %}";break
-       case "MGVSHEV" : cardimage.src = "{% static 'picture/Newmgvshev.png' %}";break
-       case "MGZS" : cardimage.src = "{% static 'picture/Newmgzs.png' %}";break
-       case "MGETD" : cardimage.src = "{% static 'picture/Newmgextendergc.png' %}"; break
-       case "MGHSPHEV" : cardimage.src = "{% static 'picture/Newmghs.png' %}"; break
-       case "MGHS" : cardimage.src = "{% static 'picture/Newmghs.png' %}";break 
-       }
-    switch (choosestatus){
-      case "PP" : btnstatus.className = "text-primary";
-                  colorcard.style.border = "4px solid rgb(0, 128, 255)";
-                  cardimage.style.border = "1px solid rgb(0, 128, 255)";
-                  break
-      case "BK" : btnstatus.className = "text-warning";
-                  colorcard.style.border = "4px solid rgb(255, 198, 26)";
-                  cardimage.style.border = "1px solid rgb(255, 198, 26)";
-                  break
-      case "DV" : btnstatus.className = "text-success";
-                  colorcard.style.border = "4px solid rgb(26, 255, 26)";
-                  cardimage.style.border = "1px solid rgb(26, 255, 26)";
-                  break
-      case "TD" : btnstatus.className = "text-dark";
-                  colorcard.style.border = "4px solid black";
-                  cardimage.style.border = "1px solid black";
-                  break
-      case "F" : btnstatus.className = "text-danger";
-                 colorcard.style.border = "4px solid rgb(255, 26, 83)";
-                 cardimage.style.border = "1px solid rgb(255, 26, 83)";
-                  break
-    }
-    return (choosemainmodel)
-  };    
-  
-  window.addEventListener("load", statusstyle);
-  */
-</script>
-{%  endblock %}
+
 
 
 {% block content %}
-
-
 {% if datacustomer.count > 0 %}
    
 <!--ส่วนข้อมูล-->

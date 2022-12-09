@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+{% block alert %}
+<div class="alert alert-danger text-center" role="alert">
+<strong>
+    {% if error_code == 'gen_inter' %}
+       มีข้อผิดพลาด : ช่องดอกเบี้ย/เงื่อนไข* อัตราดอกเบี้ยต้องไม่มีเครื่องหมาย %
+    {% endif %}
+    {% if error_code == 'min_inter' %}
+       มีข้อผิดพลาด : ช่อง Subsidy ดอกเบี้ยเสนอลูกค้าต้องไม่มีเครื่องหมาย %
+    {% endif %}
+</strong>
+</div>
+{% endblock %}
+{% block content %}
+<div class="frm-body bg-white">
+<article >
+    <h5>การเเก้ไขข้อผิดพลาด</h5>
+    <ul>
+       <li>อ่านเเถบเเจ้งเตือนข้อผิดพลาดเพื่อทราบถึงสาเหตุ</li>
+       <li>ย้อนกลับไปเเก้ไขหน้าที่ผ่านมาให้เป็นไปตามเงื่อนไข</li>
+       <li>มีข้อสงสัยติดต่อผู้ดูเเลระบบนะครับ T-T</li>
+    </ul>
+</article>
+</div>
+{% endblock %}

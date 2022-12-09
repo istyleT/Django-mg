@@ -273,9 +273,9 @@ def updatedatacustomer(request):
         if doit == 'update' :
             if  customernameedit != "":
                 HTRcustomer.objects.filter(id= idcard).update(customername = customernameedit)
-            elif  contactcustomeredit != "":
+            if  contactcustomeredit != "":
                 HTRcustomer.objects.filter(id= idcard).update(contactcustomer = contactcustomeredit)
-            elif  customerremark != "":
+            if  customerremark != "":
                 HTRcustomer.objects.filter(id= idcard).update(remark = customerremark)
             HTRcustomer.objects.filter(id= idcard).update(statuscustomer = statuscustomeredit)
         elif doit == 'delete' :
@@ -372,18 +372,26 @@ def branceadd (request):
     total_exit_cash = '0'
 
     #เก็บข้อมูลหน้าตัวเอง
+    try :
+       gen_inter= float(request.POST.get('gen_inter')or 0)
+    except ValueError as gen_inter :
+        error_code = "gen_inter"
+        return render(request, 'err.html',{"error_code":error_code})
     productmargin = int(request.POST.get('productmargin')or 0)
     gen_company = str(request.POST.get('gen_company'))
     gen_down = int(request.POST.get('gen_down') or 0)
     gen_month= int(request.POST.get('gen_month'))
-    gen_inter= float(request.POST.get('gen_inter')or 0)
     gen_prepay= int(request.POST.get('gen_prepay')or 0)
     add_eq = int(request.POST.get('add_eq')or 0) 
     add_kickback = int(request.POST.get('add_kickback')or 0)
     com_fi_percent = int(request.POST.get('com_fi_percent'))
     com_fi_month = int(request.POST.get('com_fi_month'))
-    min_prosub = int(request.POST.get('min_prosub')or 0) 
-    min_inter = float(request.POST.get('min_inter')or gen_inter)
+    min_prosub = int(request.POST.get('min_prosub')or 0)
+    try :
+       min_inter = float(request.POST.get('min_inter')or gen_inter)
+    except ValueError as min_inter : 
+        error_code = "min_inter"
+        return render(request, 'err.html',{"error_code":error_code})
     min_reduce = int(request.POST.get('min_reduce')or 0)
     condition_finance = str(request.POST.get('condition_finance'))
     min_regis = str(request.POST.get('min_regis','N'))

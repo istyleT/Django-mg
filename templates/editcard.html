@@ -51,12 +51,7 @@
   .form-check-inline {
     margin-top : 8px;
   }
-  #text-status {
-    position : relative;
-    font-size: 35px;
-    top : 15%;
-    
-  }
+ 
 
 </style>
 {% endblock %}
@@ -64,10 +59,7 @@
 <script>
   function changestyle() {
     const choosemainmodel = String(document.getElementById('productmodel').innerHTML) ;  
-    const choosestatus = String(document.getElementById('statuscustomer').innerHTML) ;
     const cardimage = document.getElementById('card-image');  
-    const colorcard = document.getElementById('color-card');
-    const btnstatus= document.getElementById('btn-status');
     switch (choosemainmodel){
        case "MG5" : cardimage.src = "{% static 'picture/Newmg5.png' %}";break
        case "MGVSHEV" : cardimage.src = "{% static 'picture/Newmgvshev.png' %}";break
@@ -79,36 +71,15 @@
        case "MGEP" : cardimage.src = "{% static 'picture/Mgep.png' %}";break 
        }
 
-    switch (choosestatus){
-      case "PP" : btnstatus.className = "text-primary";
-                  colorcard.style.border = "4px solid rgb(0, 128, 255)";
-                  cardimage.style.border = "1px solid rgb(0, 128, 255)";
-                  break
-      case "BK" : btnstatus.className = "text-warning";
-                  colorcard.style.border = "4px solid rgb(255, 198, 26)";
-                  cardimage.style.border = "1px solid rgb(255, 198, 26)";
-                  break
-      case "DV" : btnstatus.className = "text-success";
-                  colorcard.style.border = "4px solid rgb(26, 255, 26)";
-                  cardimage.style.border = "1px solid rgb(26, 255, 26)";
-                  break
-      case "TD" : btnstatus.className = "text-dark";
-                  colorcard.style.border = "4px solid black";
-                  cardimage.style.border = "1px solid black";
-                  break
-      case "F" : btnstatus.className = "text-danger";
-                 colorcard.style.border = "4px solid rgb(255, 26, 83)";
-                 cardimage.style.border = "1px solid rgb(255, 26, 83)";
-                  break
-    }
     return (choosemainmodel)
   };    
   
   window.addEventListener("load", changestyle);
 </script>
 {% endblock %}
-{% block content %}
 
+
+{% block content %}
 <!--ส่วนเเสดงข้อมูลเดิม-->
 {% for i in datacustomeredit %} 
   <p id="productmodel" style="display: none;" >{{i.mainmodel}}</p> <!----สร้างเพื่อให้ javascript เก็บค่า--> 
@@ -119,21 +90,18 @@
                 <img  id="card-image" src="{% static 'picture/iconcustomer.png' %}" class="img-fluid" alt="..."  >
               </div>
               <div id="content-box1" >
-                <span>วันที่ : {{i.date}}</span>
-                <span>ผู้ใช้งาน : {{i.firstname}}</span>
+                <span>วันที่ : {{i.date}}/{{i.firstname}}</span>
                 <span>รุ่นรถ : {{i.mainmodel}}/{{i.chanelcustomer}}</span>
+                <span>หมายเหตุ : {{i.remark}}</span>
+
               </div>
               <div id="content-box2" > 
                 <span>ชื่อลูกค้า : {{i.customername}}</span>
                 <span>ติดต่อ : {{i.contactcustomer}}</span>
-                <span>หมายเหตุ : {{i.remark}}</span>
-              </div>
-              <div id="btn-status" class ="" >
-                  <strong id="text-status" >{{i.statuscustomer}}</strong>
+                <span>สถานะ : {{i.statuscustomer}}</span>
               </div>
             </div>
           </div>
-   
  {% endfor %}
 <!--form เเก้ข้อมูลใหม่-->
 <div  class="frm-body bg-white" style="margin-top: 2vh">
@@ -143,36 +111,40 @@
     {% csrf_token %} 
    <div class="input-group input-group-mb" style="margin-top: 1vh;">
       <span class="input-group-text btn-success" id="inputGroup-sizing-lg"><strong>ชื่อลูกค้า</strong></span>
-      <input type="text" name="customername-edit" class="form-control text-center" id="namecustomer" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" placeholder="ข้อมูลที่ต้องการเเก้ไข" onchange="checkdataclient()" >
+      <input type="text" name="customername-edit" class="form-control text-center" id="namecustomer" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" placeholder="ข้อมูลที่ต้องการเเก้ไข"  >
    </div>          
    <div class="input-group input-group-md" style="margin-top: 1vh;">
       <span class="input-group-text btn-primary" id="inputGroup-sizing-lg"><strong>การติดต่อ</strong></span>
       <input type="text" name="contactcustomer-edit" class="form-control text-center" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" placeholder="ข้อมูลที่ต้องการเเก้ไข">
     </div> 
-    <div class="status-box">
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="statuscustomer-edit" id="radiochanels1" value="PP" checked>
-                      <label class="form-check-label " style="border: 2px solid rgb(0, 128, 255);" for="radiochanels1"><strong>PP : ลูกค้ามุ่งหวัง</strong></label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="statuscustomer-edit" id="radiochanels2" value="BK">
-                      <label class="form-check-label" style="border: 2px solid rgb(255, 198, 26);" for="radiochanels2"><strong>BK : ลูกค้าจอง</strong></label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="statuscustomer-edit" id="radiochanels3" value="DV">
-                      <label class="form-check-label" style="border: 2px solid rgb(26, 255, 26);" for="radiochanels3"><strong>DV : ลูกค้าส่งมอบ</strong></label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="statuscustomer-edit" id="radiochanels4" value="TD">
-                      <label class="form-check-label" style="border: 2px solid black;" for="radiochanels4"><strong>TD : ทดลองขับ</strong></label>
-                    </div>                     
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="statuscustomer-edit" id="radiochanels5" value="F">
-                      <label class="form-check-label " style="border: 2px solid rgb(255, 26, 83);" for="radiochanels5"><strong>F : ล้มเหลว</strong></label>
-                    </div>                     
-      
-    </div> 
-    
+
+    {% for i in datacustomeredit %}
+    <!--status-->  
+    <div class="input-group mb-3" style="margin-top: 2vh;">
+      <label class="input-group-text btn-danger" for="inputGroupSelect01"><strong>สถานะล่าสุด</strong></label>
+      <select class="form-select text-center" name="statuscustomer-edit" id="inputGroupSelect01">
+        <option value="{{i.statuscustomer}}" selected>{{i.statuscustomer}}</option>
+        <option disabled>---เริ่มต้น---</option>
+        <option value="มุ่งหวังติดตาม">มุ่งหวังติดตาม</option>
+        <option value="ลูกค้าจอง">ลูกค้าจอง</option>
+        <option value="ทดลองขับ">ทดลองขับ</option>
+        <option disabled>---จัดไฟเเนนซ์---</option>
+        <option value="รอเอกสารลูกค้า">รอเอกสารลูกค้า</option>
+        <option value="รอไฟเเนนซ์เข้า">รอไฟเเนนซ์เข้า</option>
+        <option value="รอผลไฟเเนนซ์">รอผลไฟเเนนซ์</option>
+        <option value="ไฟเเนนซ์อนุมัติ">ไฟเเนนซ์อนุมัติ</option>
+        <option value="ไม่ผ่านไฟเเนนซ์">ไม่ผ่านไฟเเนนซ์</option>
+        <option disabled>---สำเร็จ---</option>
+        <option value="รอรถลง">รอรถลง</option>
+        <option value="รอส่งมอบ">รอส่งมอบ</option>
+        <option value="ส่งมอบสำเร็จ">ส่งมอบสำเร็จ</option>
+        <option disabled>---ล้มเหลว---</option>
+        <option value="ติดตามล้มเหลว">ติดตามล้มเหลว</option>
+        <option value="ขอคืนเงินจอง">ขอคืนเงินจอง</option>
+      </select>
+    </div>       
+    {% endfor %}
+
    <div class="input-group input-group-md" style="margin-top: 1vh;">
      <span class="input-group-text btn-warning" id="inputGroup-sizing-lg"><strong>หมายเหตุ</strong></span>
      <input type="text" name="customer-remark" class="form-control text-center" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" placeholder="เพิ่มหมายเหตุ">
@@ -182,11 +154,11 @@
   <div  style="display : flex; justify-content: center ; margin-top: 2vh;">
     <div class="form-check form-check-inline">
       <input class="form-check-input" type="radio" name="doit" id="inlineRadio1" value="update" checked>
-      <label class="form-check-label" for="inlineRadio1">อัพเดทข้อมูล</label>
+      <label class="form-check-label" for="inlineRadio1"><strong>อัพเดทข้อมูล</strong></label>
     </div>
     <div class="form-check form-check-inline">
       <input class="form-check-input" type="radio" name="doit" id="inlineRadio2" value="delete" >
-      <label class="form-check-label" for="inlineRadio2">ลบทิ้ง</label>
+      <label class="form-check-label" for="inlineRadio2"><strong>ลบทิ้ง</strong></label>
     </div>
   </div>
   <!--button-->
@@ -205,13 +177,30 @@
     background: green;">
       <strong class="text-light" style="height: 100%;">Submit</strong>
     </button> 
-   <div>
+  </div>
 </form>
 </div>
 {% endif %}
 
-
-
-
+<div  class="frm-body bg-white" style="margin-top: 2vh">
+  <table class="table table-hover table-secondary table-borderless">
+    <thead class="table table-dark">
+      <tr>
+        <th scope="col">วันที่ปรับปรุงสถานะ</th>
+        <th scope="col">สถานะ</th>
+        <th scope="col">หมายเหตุ</th>
+      </tr>
+    </thead>
+    {% for i in datapathstatus %}
+    <tbody class="">
+      <tr>
+        <td>{{i.date}}</td>
+        <td>{{i.statuscustomer}}</td>
+        <td>{{i.remark}}</td>
+      </tr>
+    </tbody>
+    {% endfor %}
+  </table>
+</div>
 
 {% endblock %}

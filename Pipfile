@@ -15,6 +15,7 @@ dj-database-url = "*"
 django-crispy-forms = "*"
 django-on-heroku = "*"
 filelock = "*"
+heroku = "*"
 
 [dev-packages]
 

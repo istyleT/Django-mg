@@ -7,6 +7,7 @@ from sellmg.models import Colorsubmodels ;
 from sellmg.models import QuotationsForm ;
 from sellmg.models import Quotations ;
 from sellmg.models import HTRcustomer ;
+from sellmg.models import Pathstatushtr ;
 from django.db.models import Q ;
 from django.contrib.auth.decorators import login_required ;
 from django.contrib.auth.models import User
@@ -254,13 +255,12 @@ def editcard(request):
     # ส่งข้อมูลออก
     request.session['idcard'] = idcard
     # หาข้อมูล card เพื่อไปเเสดง
-    datacustomeredit = HTRcustomer.objects.filter( id=idcard).values_list('date','firstname','mainmodel','customername','contactcustomer','chanelcustomer','statuscustomer','remark' , named=True)
-    
-    return render(request, 'editcard.html', {'datacustomeredit':datacustomeredit})
+    datacustomeredit = HTRcustomer.objects.filter( id=idcard).values_list('date','firstname','mainmodel','customername','contactcustomer','chanelcustomer','statuscustomer','remark' , named=True).order_by('-id')
+    datapathstatus = Pathstatushtr.objects.filter(id_htrcustomer = idcard).values_list('date','statuscustomer','remark', named=True).order_by('-id')
+    return render(request, 'editcard.html', {'datacustomeredit':datacustomeredit , 'datapathstatus':datapathstatus})
 
 @login_required(login_url='/firstdata') 
 def updatedatacustomer(request):
-                        
     if request.method == "POST":
         idcard = request.session.get('idcard')
         # เก็บข้อมูลหน้าตัวเอง
@@ -278,14 +278,17 @@ def updatedatacustomer(request):
             if  customerremark != "":
                 HTRcustomer.objects.filter(id= idcard).update(remark = customerremark)
             HTRcustomer.objects.filter(id= idcard).update(statuscustomer = statuscustomeredit)
+            Pathstatushtr.objects.create(id_htrcustomer= idcard , statuscustomer=statuscustomeredit,remark=customerremark)
         elif doit == 'delete' :
-            HTRcustomer.objects.filter(id= idcard).delete()                      
+            HTRcustomer.objects.filter(id= idcard).delete()   
+            Pathstatushtr.objects.filter(id_htrcustomer = idcard).delete()   
+
     return  redirect('/statuscustomer')
 
 @login_required(login_url='/firstdata') 
 def showprice(request): 
     
-    # สร้างตัวเเปรมาเก็บข้อมูลจากหน้าปัจจุบัน    
+    # สร้างตัวเเปรมาเก็บข้อมูลจากหน้าปัจจุบัน   
     submodel = request.POST.get('submodel')
    
     #ส่งข้อมูลออก

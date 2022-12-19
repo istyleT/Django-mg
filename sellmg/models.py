@@ -75,6 +75,7 @@ class QuotationsForm (forms.ModelForm):
 
 # เก็บข้อมูลลูกค้า HTR 
 class HTRcustomer(models.Model):
+      teamsell = models.CharField(max_length=10, default='-')
       date = models.DateField(auto_now_add=True)
       firstname = models.CharField(max_length=30)
       mainmodel = models.CharField(max_length=25)

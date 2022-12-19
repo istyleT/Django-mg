@@ -5,10 +5,22 @@
 <div class="frm-body bg-white">
 
 <form method="POST"  action="dataclient" >
-{% csrf_token %}  
-   <!--mainmodel-->    
+{% csrf_token %} 
+<!--เลือกทีม A/B/C/D/O-->
+<div class="input-group mb-3" style="margin-top: 1vh; ">
+   <label class="input-group-text btn-dark " for="inputGroupSelect01"><strong>ทีมขาย*</strong></label>
+   <select class="form-select text-center"  id="chooseteam" name="teamsell" onchange="appendpic()">
+     <option value="-" selected >กรุณาเลือกทีม</option>
+     <option value="A">ทีม A</option>
+     <option value="B">ทีม B</option>
+     <option value="C">ทีม C</option>
+     <option value="D">ทีม D</option>
+     <option value="O">ทีม Online</option>
+   </select>
+ </div>   
+   <!--mainmodel-->
    <div class="input-group mb-3" style="margin-top: 1vh; ">
-      <label class="input-group-text btn-danger " for="inputGroupSelect01"><strong>รุ่นรถ MG</strong></label>
+      <label class="input-group-text btn-danger " for="inputGroupSelect01"><strong>รุ่นรถ MG*</strong></label>
       <select class="form-select text-center"  id="choosemainmodel" name="mainmodel" onchange="appendpic()">
         <option value="-" selected >กรุณาเลือกรุ่น</option>
         <option value="MG5">NEW MG 5 MY2022</option>
@@ -21,10 +33,10 @@
         <option value="MGEP">MG EP</option>
       </select>
     </div>          
-   <!--colors-->              
+             
    <!--name customer-->   
    <div class="input-group input-group-mb" style="margin-top: 1vh;">
-      <span class="input-group-text btn-success" id="inputGroup-sizing-lg"><strong>ชื่อลูกค้า</strong></span>
+      <span class="input-group-text btn-success" id="inputGroup-sizing-lg"><strong>ชื่อลูกค้า*</strong></span>
       <input type="text" name="customername" class="form-control text-center" id="namecustomer" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" placeholder="กรุณากรอกชื่อลูกค้า" onchange="checkdataclient()" >
     </div>          
    <!--tel--> 
@@ -226,9 +238,10 @@
    }
 
    function checkdataclient(){
+      const chooseteam = document.getElementById('chooseteam').value;
       const choosemainmodel = document.getElementById('choosemainmodel').value;
       const namecustomer = document.getElementById('namecustomer').value;
-      if (choosemainmodel != '-' && namecustomer != "") {
+      if (choosemainmodel != '-' && namecustomer != "" && chooseteam != '-') {
          document.getElementById('btn-dataclient').style.display = "block";
       }
       else {

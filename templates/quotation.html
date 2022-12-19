@@ -11,529 +11,446 @@
        {% block script %}
        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
        {% endblock %}
-
     <script>
-        function saveToPdf() {
-          var element = document.getElementById('savePDF');
-          var opt = {
-            margin:       [0,0,0,1],
-            filename:     'quotation.pdf',
-            html2canvas:  { scale: 1 },
-            jsPDF:        { unit: 'cm', format: 'letter' }
-          };
-          
-          // New Promise-based usage:
-          html2pdf().set(opt).from(element).save();
-          
-          // Old monolithic-style usage:
-          html2pdf(element, opt);
-           
-        };
+    function saveToPdf() {
+      var element = document.getElementById('savePDF');
+      var opt = {
+        margin:       [0,0,0,1],
+        filename:     'quotation.pdf',
+        html2canvas:  { scale: 1 },
+        jsPDF:        { unit: 'cm', format: 'letter' }
+      };
+      // New Promise-based usage:
+      html2pdf().set(opt).from(element).save();
+      // Old monolithic-style usage:
+      html2pdf(element, opt);
+    };
    </script>
             
-  <style>
+<style>
   html body {
-                      margin:0;
-                     
+    margin:0;
   }
-    
   #addremark {
-                      margin-left: 1vw;
-                      font-size: 10px;
+    margin-left: 0vw;
+    font-size: 10px;
   }
-  
   #onepage {
-                      display: flex;
-                     
+    display: flex;
   }
-  
   table {
-                      font-size: 13px;
-                      margin: 0px 1vw;
+    font-size: 13px;
+    margin: 0px 1vw;
   }
-  
   .nameacc {
-                      font-size: 13px;
+    font-size: 13px;
   }
-    </style>
+</style>
    
-         
-  
 </head>
-
-
-
 
 <body onload="saveToPdf()">
 
-
 <div id="savePDF">
-
   <header class="header">
     <h4 align="center" >ใบเสนอราคา</h4>
   </header>
-
 <div id="onepage">
 
   <div class="container" style="width: 100vw;">
     <table class="table table-sm">
-                     <thead>
-                       <tr>
-                         <th  colspan="2" class="text-success">ข้อมูลทั่วไป</th>
-                       </tr>
-                     </thead>
-                     <tbody>
-                       <tr>
-                         <th>วันที่ใบเสนอราคา :</th>
-                         <td>{{now|date:'d-M-Y'}}</td>
-                       </tr>
-                       <tr>
-                         <th>รถยนต์ MG รุ่น :</th>
-                         <td>{{submodel}}</td>
- 
-                       </tr>
-                       <tr>
-                         <th scope="row">สีตัวถัง :</th>
-                         <td>{{bodycolor}}</td>
-  
-                       </tr>
-                       <tr>
-                         <th scope="row">เงื่อนไขการซื้อ :</th>
-                         {% if paytype == 'cash' %}
-                         <td>เงินสด</td>
-                         {% elif paytype == 'finance' %}
-                         <td>จัดไฟเเนนซ์</td>
-                         {% endif %}
-                       </tr>
-                       <tr>
-                         <th scope="row">จดทะเบียนภาษี :</th>
-                         {% if registype == 'person' %}
-                         <td>บุคคล</td>
-                         {% elif registype == 'company' %} 
-                         <td>นิติบุคคล</td>
-                         {% endif %}
-                       </tr>
-                       <tr>
-                         <th scope="row">สาขาที่ออกรถ :</th>
-                         {% if mgbranch == 'Ransit' %}
-                         <td>รังสิตคลองสี่</td>
-                         {% elif mgbranch == 'Srinakarin' %}
-                         <td>ศรีนครินทร์</td>
-                         {% elif mgbranch == 'Hathairat' %}
-                         <td>หทัยราษฎร์</td>
-                         {% endif %}
-                       </tr>
-                      
-                     
-                     </tbody>
-                   </table>  
-                   <table class="table table-sm">
-                     <thead>
-                       <tr>
-                         <th colspan="2" class="text-success">รายละเอียดการซื้อรถยนต์</th>
-                         
-                       </tr>
-                     </thead>
-                     <tbody>
-                       <tr>
-                         <th  scope="row">ราคารถยนต์ :</th>
-                         <td>{{productprice}} บาท</td>
- 
-                       </tr>
-                       <tr>
-                         <th scope="row">บวกหัวค่าอุปกรณ์ :</th>
-                         <td>{{add_eq}} บาท</td>
- 
-                       </tr>
-                       <tr>
-                         <th scope="row">ส่วนลดราคารถยนต์ :</th>
-                         <td>{{min_reduce}} บาท</td>
- 
-                       </tr>
-                       <tr>
-                         <th scope="row">ราคารถยนต์สุทธิ :</th>
-                         <td>{{net_produceprice}} บาท</td>
- 
-                       </tr>
-                       <tr>
-                         <th scope="row">เงินดาวน์ :</th>
-                         <td>{{gen_down}}% = {{cost_down}} บาท </td>
- 
-                       </tr>
-                       <tr>
-                         <th scope="row">ส่วนลดเงินดาวน์ :</th>
-                         <td>{{min_subdown}} บาท</td>
- 
-                       </tr>
-                       <tr>
-                         <th scope="row">เงินดาวน์สุทธิ :</th>
-                         <td>{{exit_cost_down}} บาท</td>
- 
-                       </tr>
-                       <tr>
-                         <th scope="row">ยอดจัดไฟแนนซ์ :</th>
-                         <td>{{cost_finance}} บาท</td>
- 
-                       </tr>
-                       <tr>
-                         <th scope="row">จำนวนงวด :</th>
-                         <td>{{gen_month}} เดือน</td>
- 
- 
-                       </tr>
-                      <!--
-                      <tr>
-                         <th scope="row">Kickback :</th>
-                         <td>{{add_kickback}} บาท</td>
- 
-                       </tr>
-                       <tr>
-                         <th scope="row">ดอกเบี้ยไฟเเนนซ์ :</th>
-                         <td>{{gen_inter}}%</td>
- 
-                       </tr>
-                      --> 
-                      
-                       <tr>
-                        <th scope="row">ดอกเบี้ย :</th>
-                        <td>{{min_inter}}%</td>
-
-                      </tr>
-                       <tr>
-                         <th scope="row">โปรโมชั่น Subsidy :</th>
-                         <td>{{min_prosub}} บาท</td>
- 
-                       </tr>
-                       
-                       <tr>
-                         <th scope="row">ค่างวด/เดือน :</th>
-                         <td>{{month_payment}} บาท</td>
- 
-                       </tr>
-                       {% if paytype == 'finance' %}
-                       <tr>
-                         <th scope="row">เงื่อนไขดอกเบี้ย :</th>
-                         {% if condition_finance == 'END' %}
-                         <td>Ending</td>
-                         {% elif condition_finance == 'BEGIN' %}
-                         <td>Begining</td>
-                         {% endif %}
-                       </tr>
-                       <tr>
-                         <th scope="row">บริษัทไฟแนนซ์ :</th>
-                         {% if gen_company == 'K' %}
-                         <td>ลีสซิ่งกสิกรไทย</td>
-                         {% elif gen_company == 'TTB' %}
-                         <td>ทหารไทยธนชาต</td>
-                         {% elif gen_company == 'AY' %}
-                         <td>กรุงศรีออโต้</td>
-                         {% elif gen_company == 'ICBC' %}
-                         <td>ICBC</td>
-                         {% elif gen_company == 'KPP' %}
-                         <td>เกียรตินาคิน</td>
-                         {% elif gen_company == 'TISCO' %}
-                         <td>TISCO</td>
-                         {% elif gen_company == 'SCB' %}
-                         <td>ไทยพาณิชย์</td>
-                         {% elif gen_company == 'CITY' %}
-                         <td>Cityleasing</td>
-                         {% endif %}
- 
-                       </tr>
-                        {% endif %}
-                     </tbody>
-                   </table>
-
-            <!--    <table  class="table table-sm">
-                    <thead>
-                      <tr>
-                        <th colspan="2" class="text-success">รายการของเเถม/อุปกรณ์ตกเเต่ง</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                    {% if paytype == 'finance' %}
-                      {% if statusvatdown == '1' %}
-                      <tr>
-                        <th scope="row">Vat Sub ดาวน์ 7% :</th>
-                        <td>{{exit_cost_down_vat}} บาท</td>
-                      </tr>
-                      {% endif %}
-                    {% endif %}
-                      {% if min_regis != '0' %}
-                      <tr>
-                        <th scope="row">ค่าจดทะเบียน :</th>
-                        <td>{{min_regis}} บาท</td>
-                      </tr>
-                      {% endif %}
-
-                      {% if min_pdi != 0 %}
-                      <tr>
-                        <th scope="row">ค่า PDI :</th>
-                        <td>{{min_pdi}} บาท</td>
-                      </tr>
-                      {% endif %}
-
-                      {% if min_frame != 0 %}
-                      <tr>
-                        <th scope="row">กรอบป้ายทะเบียน :</th>
-                        <td>{{min_frame}} บาท</td>
-                      </tr>
-                      {% endif %}
-
-                      {% if min_polish != 0 %}
-                      <tr>
-                        <th scope="row">ขัดเคลือบสีรถใหม่ :</th>
-                        <td>{{min_polish}} บาท</td>
-                      </tr>
-                      {% endif %}
-                      <tr>
-                        <th scope="row">อุปกรณ์ตกเเต่ง :</th>
-                        <td>{{min_acc}} บาท</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">รวมของเเถม/อุปกรณ์ตกเเต่ง :</th>
-                        <td>{{total_gift}} บาท</td>
-                      </tr>
-                    
-                    </tbody>
-                  </table>  -->
-                   
-                  <table class="table table-sm">
-                    <thead>
-                      <tr>
-                        <th colspan="2" class="text-success">รายละเอียดค่าใช้จ่ายวันออกรถยนต์</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        {% if paytype == 'finance' %}
-                        <th scope="row">เงินดาวน์ :</th>
-                        <td>{{exit_cost_down}} บาท</td>
-                        {% elif paytype == 'cash' %}
-                        <th scope="row">ราคารถยนต์สุทธิ :</th>
-                        <td>{{net_productprice}} บาท</td>
-                        {% endif %}
-                      </tr>
-                      <tr>
-                        <th scope="row">ค่าประกันภัย ชั้น 1 :</th>
-                        <td><strong class="text-success">ฟรี</strong></td>
-                      </tr>
-                      <tr>
-                        <th scope="row">ค่า พ.ร.บ. :</th>
-                        <td><strong class="text-success">ฟรี</strong></td>
-                      </tr>
-
-                      {% if min_regis == '0' %}
-                      <tr>
-                        <th scope="row">ค่าจดทะเบียน :</th>
-                        <td>{{regiscost}} บาท</td>
-                      </tr>
-                      <tr>
-                      {% endif %}
-
-                        <th scope="row">ค่าประกันป้ายแดง(ได้คืน) :</th>
-                        <td>{{red_frame}} บาท</td>
-                      </tr>
-                      {% if condition_finance == 'BEGIN' %}
-                      <tr>
-                        <th scope="row">ค่างวดแรก(Beginning) :</th>
-                        <td>{{month_payment}} บาท</td>
-                      </tr>
-                      {% endif %}
-                      {% if statusvatdown == '0' %}
-                      <tr>
-                        <th scope="row">Vat Sub ดาวน์ 7% :</th>
-                        <td>{{exit_cost_down_vat}} บาท</td>
-                      </tr>
-                      {% endif %}
-                      <tr>
-                        <th scope="row">หักเงินจอง :</th>
-                        <td>{{gen_prepay}} บาท</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">รวมค่าใช้จ่ายวันออกรถ :</th>
-                        {% if paytype == 'finance' %}
-                         <td>{{total_exit}} บาท</td>
-                        {% elif paytype == 'cash' %}
-                         <td>{{total_exit_cash}} บาท</td>
-                        {% endif %}
-                      </tr>
-                    </tbody>
-                  </table>
-
- 
+     <thead>
+       <tr>
+         <th  colspan="2" class="text-success">ข้อมูลทั่วไป</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr>
+         <th>วันที่ใบเสนอราคา :</th>
+         <td>{{now|date:'d-M-Y'}}</td>
+       </tr>
+       <tr>
+         <th>รถยนต์ MG รุ่น :</th>
+         <td>{{submodel}}</td>
+       </tr>
+       <tr>
+         <th scope="row">สีตัวถัง :</th>
+         <td>{{bodycolor}}</td>
+       </tr>
+       <tr>
+         <th scope="row">เงื่อนไขการซื้อ :</th>
+         {% if paytype == 'cash' %}
+         <td>เงินสด</td>
+         {% elif paytype == 'finance' %}
+         <td>จัดไฟเเนนซ์</td>
+         {% endif %}
+       </tr>
+       <tr>
+         <th scope="row">จดทะเบียนภาษี :</th>
+         {% if registype == 'person' %}
+         <td>บุคคล</td>
+         {% elif registype == 'company' %} 
+         <td>นิติบุคคล</td>
+         {% endif %}
+       </tr>
+       <tr>
+         <th scope="row">สาขาที่ออกรถ :</th>
+         {% if mgbranch == 'Ransit' %}
+         <td>รังสิตคลองสี่</td>
+         {% elif mgbranch == 'Srinakarin' %}
+         <td>ศรีนครินทร์</td>
+         {% elif mgbranch == 'Hathairat' %}
+         <td>หทัยราษฎร์</td>
+         {% endif %}
+       </tr>
+     </tbody>
+    </table>  
+    <table class="table table-sm">
+      <thead>
+        <tr>
+          <th colspan="2" class="text-success">รายละเอียดการซื้อรถยนต์</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th  scope="row">ราคารถยนต์ :</th>
+          <td>{{productprice}} บาท</td>
+        </tr>
+        <tr>
+          <th scope="row">บวกหัวค่าอุปกรณ์ :</th>
+          <td>{{add_eq}} บาท</td>
+        </tr>
+        <tr>
+          <th scope="row">ส่วนลดราคารถยนต์ :</th>
+          <td>{{min_reduce}} บาท</td>
+        </tr>
+        <tr>
+          <th scope="row">ราคารถยนต์สุทธิ :</th>
+          <td>{{netproductprice}} บาท</td>
+        </tr>
+        {% if paytype == "finance" %}
+        <tr>
+          <th scope="row">เงินดาวน์ :</th>
+          <td>{{gen_down}}% = {{cost_down}} บาท </td>
+        </tr>
+        <tr>
+          <th scope="row">ส่วนลดเงินดาวน์ :</th>
+          <td>{{min_subdown}} บาท</td>
+        </tr>
+        <tr>
+          <th scope="row">เงินดาวน์สุทธิ :</th>
+          <td>{{exit_cost_down}} บาท</td>
+        </tr>
+        {% endif %}
+        {% if paytype == "cash" %}
+        <tr>
+          <th scope="row">เงินดาวน์ :</th>
+          <td>0 บาท </td>
+        </tr>
+        <tr>
+          <th scope="row">ส่วนลดเงินดาวน์ :</th>
+          <td>0 บาท</td>
+        </tr>
+        <tr>
+          <th scope="row">เงินดาวน์สุทธิ :</th>
+          <td>0 บาท</td>
+        </tr>
+        {% endif %}
+        <tr>
+          <th scope="row">ยอดจัดไฟแนนซ์ :</th>
+          <td>{{cost_finance}} บาท</td>
+        </tr>
+        <tr>
+         <th scope="row">โปรโมชั่น Subsidy :</th>
+         <td>{{min_prosub}} บาท</td>
+       </tr>
+       {% if paytype == "finance" %}
+        <tr>
+          <th scope="row">จำนวนงวด :</th>
+          <td>{{gen_month}} เดือน</td>
+        </tr>
+       {% endif %}
+       {% if paytype == "cash" %}
+        <tr>
+          <th scope="row">จำนวนงวด :</th>
+          <td>0 เดือน</td>
+        </tr>
+       {% endif %}
+        <tr>
+         <th scope="row">ดอกเบี้ย :</th>
+         <td>{{min_inter}}%</td>
+       </tr>
+       <tr>
+          <th scope="row">ค่างวด/เดือน :</th>
+          <td>{{month_payment}} บาท</td>
+        </tr>
+        {% if paytype == 'finance' %}
+        <tr>
+          <th scope="row">เงื่อนไขดอกเบี้ย :</th>
+          {% if condition_finance == 'END' %}
+          <td>Ending</td>
+          {% elif condition_finance == 'BEGIN' %}
+          <td>Begining</td>
+          {% endif %}
+        </tr>
+        <tr>
+          <th scope="row">บริษัทไฟแนนซ์ :</th>
+          {% if gen_company == 'K' %}
+          <td>ลีสซิ่งกสิกรไทย</td>
+          {% elif gen_company == 'TTB' %}
+          <td>ทหารไทยธนชาต</td>
+          {% elif gen_company == 'AY' %}
+          <td>กรุงศรีออโต้</td>
+          {% elif gen_company == 'ICBC' %}
+          <td>ICBC</td>
+          {% elif gen_company == 'KPP' %}
+          <td>เกียรตินาคิน</td>
+          {% elif gen_company == 'TISCO' %}
+          <td>TISCO</td>
+          {% elif gen_company == 'SCB' %}
+          <td>ไทยพาณิชย์</td>
+          {% elif gen_company == 'CITY' %}
+          <td>Cityleasing</td>
+          {% endif %}
+        </tr>
+         {% endif %}
+      </tbody>
+    </table>
+    <table class="table table-sm">
+      <thead>
+        <tr>
+          <th colspan="2" class="text-success">รายละเอียดค่าใช้จ่ายวันออกรถยนต์</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          {% if paytype == 'finance' %}
+          <th scope="row">เงินดาวน์ :</th>
+          <td>{{exit_cost_down}} บาท</td>
+          {% endif %}
+          {% if paytype == 'cash' %}
+          <th scope="row">ราคารถยนต์สุทธิ :</th>
+          <td>{{netproductprice}} บาท</td>
+          {% endif %}
+        </tr>
+        <tr>
+          <th scope="row">ค่าประกันภัย ชั้น 1 :</th>
+          <td><strong class="text-success">ฟรี</strong></td>
+        </tr>
+        <tr>
+          <th scope="row">ค่า พ.ร.บ. :</th>
+          <td><strong class="text-success">ฟรี</strong></td>
+        </tr>
+        {% if min_regis == 'N' %}
+        <tr>
+          <th scope="row">ค่าจดทะเบียน :</th>
+          <td>{{regiscost}} บาท</td>
+        </tr>
+        <tr>
+        {% endif %}
+          <th scope="row">ค่าประกันป้ายแดง(ได้คืน) :</th>
+          <td>3,000 บาท</td>
+        </tr>
+        {% if condition_finance == 'BEGIN' %}
+        <tr>
+          <th scope="row">ค่างวดแรก(Beginning) :</th>
+          <td>{{month_payment}} บาท</td>
+        </tr>
+        {% endif %}
+        {% if min_subdown_vat == 'N' and min_subdown != '0' %}
+        <tr>
+          <th scope="row">Vat Sub ดาวน์ 7% :</th>
+          <td>{{exit_cost_down_vat}} บาท</td>
+        </tr>
+        {% endif %}
+        <tr>
+          <th scope="row">หักเงินจอง :</th>
+          <td>{{gen_prepay}} บาท</td>
+        </tr>
+        <tr>
+          <th scope="row">รวมค่าใช้จ่ายวันออกรถ :</th>
+           <td>{{total_exit}} บาท</td>
+        </tr>
+      </tbody>
+    </table>
  </div>
     
  <div class="container" style="width: 100vw;">
-   
-    
-                   
-                   <table  class="table table-sm">
-                    <thead>
-                      <tr>
-                        <th colspan="2" class="text-success">รายการอุปกรณ์ตกเเต่ง/ของเเถม</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>
-                          <ul >
-                            <li class="name_acc">ค่า PDI</li>
-                            <li class="name_acc">กรอบป้ายทะเบียน MSA</li>
-                            <li class="name_acc">ขัดเคลือบสีรถใหม่</li>
-                            {% if paytype == 'finance' %}
-                              {% if statusvatdown == '1' %}
-                                <li class="name_acc">Vat Sub ดาวน์ 7% </li>
-                              {% endif %}
-                            {% endif %}
-                            {% if min_regis != '0' %}
-                              <li class="name_acc">ค่าจดทะเบียน</li>
-                            {% endif %}
-                            {% if text_acc_card != "-" %}
-                            <li class="nameacc">{{text_acc_card}}</li>
-                            {% endif %}
-                            {% if text_acc_card_1 != "-" %}
-                            <li class="nameacc">{{text_acc_card_1}}</li>
-                            {% endif %}
-                            {% if text_acc_card_2 != "-" %}
-                            <li class="nameacc">{{text_acc_card_2}}</li>
-                            {% endif %}
-                            {% if text_acc_card_3 != "-" %}
-                            <li class="nameacc">{{text_acc_card_3}}</li>
-                            {% endif %}
-                            {% if text_acc_card_4 != "-" %}
-                            <li class="nameacc">{{text_acc_card_4}}</li>
-                            {% endif %}
-                            {% if text_acc_card_5 != "-" %}
-                            <li class="nameacc">{{text_acc_card_5}}</li>
-                            {% endif %}
-                            {% if text_acc_card_6 != "-" %}
-                            <li class="nameacc">{{text_acc_card_6}}</li>
-                            {% endif %}
-                            {% if text_acc_card_7 != "-" %}
-                            <li class="nameacc">{{text_acc_card_7}}</li>
-                            {% endif %}
-                            {% if text_acc_card_8 != "-" %}
-                            <li class="nameacc">{{text_acc_card_8}}</li>
-                            {% endif %}
-                            {% if text_acc_card_9 != "-" %}
-                            <li class="nameacc">{{text_acc_card_9}}</li>
-                            {% endif %}
-                            {% if text_acc_1 != "-" %}
-                            <li class="nameacc">{{text_acc_1}}</li>
-                            {% endif %}
-                            {% if text_acc_2 != "-" %}
-                            <li class="nameacc">{{text_acc_2}}</li>
-                            {% endif %}
-                            {% if text_acc_3 != "-" %}
-                            <li class="nameacc">{{text_acc_3}}</li>
-                            {% endif %}
-                            {% if text_acc_4 != "-" %}
-                            <li class="nameacc">{{text_acc_4}}</li>
-                            {% endif %}
-                            {% if text_acc_5 != "-" %}
-                            <li class="nameacc">{{text_acc_5}}</li>
-                            {% endif %}
-                            {% if text_acc_6 != "-" %}
-                            <li class="nameacc">{{text_acc_6}}</li>
-                            {% endif %}
-                            {% if text_acc_7 != "-" %}
-                            <li class="nameacc">{{text_acc_7}}</li>
-                            {% endif %}
-                            {% if text_acc_8 != "-" %}
-                            <li class="nameacc">{{text_acc_8}}</li>
-                            {% endif %}
-                            {% if text_acc_9 != "-" %}
-                            <li class="nameacc">{{text_acc_9}}</li>
-                            {% endif %}
-                            {% if text_acc_10 != "-" %}
-                            <li class="nameacc">{{text_acc_10}}</li>
-                            {% endif %}
-                            {% if text_acc_11 != "-" %}
-                            <li class="nameacc">{{text_acc_11}}</li>
-                            {% endif %}
-                            {% if text_acc_12 != "-" %}
-                            <li class="nameacc">{{text_acc_12}}</li>
-                            {% endif %}
-                            {% if text_acc_13 != "-" %}
-                            <li class="nameacc">{{text_acc_13}}</li>
-                            {% endif %}
-                            {% if text_acc_14 != "-" %}
-                            <li class="nameacc">{{text_acc_14}}</li>
-                            {% endif %}
-                            {% if text_acc_15 != "-" %}
-                            <li class="nameacc">{{text_acc_15}}</li>
-                            {% endif %}
-
-                          </ul>
-
-                        </td>
-                        
-
-                      </tr>
-                        
-                    </tbody>
-                  </table>
-
-                  <table  class="table table-sm">
-                    <thead>
-                      <tr>
-                        <th colspan="2" class="text-success">หมายเหตุ</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>{{gen_remark}}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <!----------ข้อมูลการติดต่อ------------>
-                  
-                  <table  class="table table-sm">
-                    <thead>
-                      <tr>
-                        <th colspan="2" class="text-success">ข้อมูลติดต่อ</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                         <tr>
-                           <td>ผู้เสนอ: คุณ {{firstname}} / {{sellphone}}</td>
-                         </tr>
-                          <tr>
-                            <td>ลูกค้า: คุณ {{customername}} /{{contactcustomer}}</td>
-                          </tr>
-                      <tr>
-                        <td>-</td>
-                      </tr>
-                    </tbody>
-                  </table>
+<!--รายการอุปกรณ์ตกเเต่ง/ของเเถม-->
+   <table  class="table table-sm">
+    <thead>
+      <tr>
+        <th colspan="2" class="text-success">รายการอุปกรณ์ตกเเต่ง/ของเเถม</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <ul >
+            <li class="name_acc">ค่า PDI</li>
+            <li class="name_acc">กรอบป้ายทะเบียน MSA</li>
+            <li class="name_acc">ขัดเคลือบสีรถใหม่</li>
+            {% if paytype == 'finance' %}
+              {% if min_subdown_vat == 'Y' and min_subdown != '0' %}
+                <li class="name_acc">Vat Sub ดาวน์ 7% </li>
+              {% endif %}
+            {% endif %}
+            {% if min_regis == 'Y' %}
+              <li class="name_acc">ค่าจดทะเบียนภาษี</li>
+            {% endif %}
+            {% if text_acc_card != "-" %}
+            <li class="nameacc">{{text_acc_card}}</li>
+            {% endif %}
+            {% if text_acc_card_1 != "-" %}
+            <li class="nameacc">{{text_acc_card_1}}</li>
+            {% endif %}
+            {% if text_acc_card_2 != "-" %}
+            <li class="nameacc">{{text_acc_card_2}}</li>
+            {% endif %}
+            {% if text_acc_card_3 != "-" %}
+            <li class="nameacc">{{text_acc_card_3}}</li>
+            {% endif %}
+            {% if text_acc_card_4 != "-" %}
+            <li class="nameacc">{{text_acc_card_4}}</li>
+            {% endif %}
+            {% if text_acc_card_5 != "-" %}
+            <li class="nameacc">{{text_acc_card_5}}</li>
+            {% endif %}
+            {% if text_acc_card_6 != "-" %}
+            <li class="nameacc">{{text_acc_card_6}}</li>
+            {% endif %}
+            {% if text_acc_card_7 != "-" %}
+            <li class="nameacc">{{text_acc_card_7}}</li>
+            {% endif %}
+            {% if text_acc_card_8 != "-" %}
+            <li class="nameacc">{{text_acc_card_8}}</li>
+            {% endif %}
+            {% if text_acc_card_9 != "-" %}
+            <li class="nameacc">{{text_acc_card_9}}</li>
+            {% endif %}
+            {% if text_acc_1 != "-" %}
+            <li class="nameacc">{{text_acc_1}}</li>
+            {% endif %}
+            {% if text_acc_2 != "-" %}
+            <li class="nameacc">{{text_acc_2}}</li>
+            {% endif %}
+            {% if text_acc_3 != "-" %}
+            <li class="nameacc">{{text_acc_3}}</li>
+            {% endif %}
+            {% if text_acc_4 != "-" %}
+            <li class="nameacc">{{text_acc_4}}</li>
+            {% endif %}
+            {% if text_acc_5 != "-" %}
+            <li class="nameacc">{{text_acc_5}}</li>
+            {% endif %}
+            {% if text_acc_6 != "-" %}
+            <li class="nameacc">{{text_acc_6}}</li>
+            {% endif %}
+            {% if text_acc_7 != "-" %}
+            <li class="nameacc">{{text_acc_7}}</li>
+            {% endif %}
+            {% if text_acc_8 != "-" %}
+            <li class="nameacc">{{text_acc_8}}</li>
+            {% endif %}
+            {% if text_acc_9 != "-" %}
+            <li class="nameacc">{{text_acc_9}}</li>
+            {% endif %}
+            {% if text_acc_10 != "-" %}
+            <li class="nameacc">{{text_acc_10}}</li>
+            {% endif %}
+            {% if text_acc_11 != "-" %}
+            <li class="nameacc">{{text_acc_11}}</li>
+            {% endif %}
+            {% if text_acc_12 != "-" %}
+            <li class="nameacc">{{text_acc_12}}</li>
+            {% endif %}
+            {% if text_acc_13 != "-" %}
+            <li class="nameacc">{{text_acc_13}}</li>
+            {% endif %}
+            {% if text_acc_14 != "-" %}
+            <li class="nameacc">{{text_acc_14}}</li>
+            {% endif %}
+            {% if text_acc_15 != "-" %}
+            <li class="nameacc">{{text_acc_15}}</li>
+            {% endif %}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+<!--ตัวเลือกเพิ่มเติม-->
+{% if paytype == "finance" %}
+{% if gen_inter2 != "0.00" or gen_inter3 != "0.00" %}
+<table  class="table table-sm text-center">
+  <thead>
+    <tr>
+      <th colspan="4" class="text-success">เงื่อนไขทางเลือก</th>
+    </tr>
+  </thead>
+  <thead>
+    <tr>
+      <th>ลำดับ</th>
+      <th>จำนวนงวด</th>
+      <th>ดอกเบี้ย</th>
+      <th>ค่างวด</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% if gen_inter2 != "0.00" %}
+    <tr>
+      <td>(2)</td>
+      <td>{{gen_month2}}งวด</td>
+      <td>{{gen_inter2}}%</td>
+      <td>{{month_payment2}} บาท</td>
+    </tr>
+    {% endif %}
+    {% if gen_inter3 != "0.00" %}
+    <tr>
+      <td>(3)</td>
+      <td>{{gen_month3}}งวด</td>
+      <td>{{gen_inter3}}%</td>
+      <td>{{month_payment3}} บาท</td>
+    </tr>
+    {% endif %}
+  </tbody>
+</table>
+{% endif %}
+{% endif %}
+<!--หมายเหตุ-->
+  <table  class="table table-sm">
+    <thead>
+      <tr>
+        <th colspan="2" class="text-success">หมายเหตุ</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{gen_remark}}</td>
+      </tr>
+    </tbody>
+  </table>
+<!----------ข้อมูลการติดต่อ------------>
+  <table  class="table table-sm">
+    <thead>
+      <tr>
+        <th colspan="2" class="text-success">ข้อมูลติดต่อ</th>
+      </tr>
+    </thead>
+    <tbody>
+         <tr>
+           <td>ผู้เสนอ: คุณ {{firstname}} / {{sellphone}}</td>
+         </tr>
+          <tr>
+            <td>ลูกค้า: คุณ {{customername}} /{{contactcustomer}}</td>
+          </tr>
+      <tr>
+        <td>-</td>
+      </tr>
+    </tbody>
+  </table>
                                              
- 
  </div>
 </div>
-
   <span id="addremark" style="margin-left: 2.5vw; font-size: 12px;">หมายเหตุ : เงื่อนไขเป็นไปตามที่บริษัทกำหนด</span>
-
 </div>
-
-
-<div  align="center" style="display : flex; justify-content: center; margin-top: 3vh;">
-  <a href="uploadpage" style="display: flex;
-  text-decoration : none;
-  justify-content: center;
-  padding : 0px 3vw;
-  width : 30%;
-  height : 45px;
-  font-size : 24px;
-  border-radius : 20px;
-  border : 4px solid white ;
-  outline-style: solid;
-  outline-color: #3399ff;
-  outline-width: thick;
-  background: #3399ff;">
-    <strong class="text-light"  style="height: 100%;">Upload</strong>
-  </a> 
- <div>
-
 </body>
 </html>

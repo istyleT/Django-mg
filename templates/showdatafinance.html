@@ -16,8 +16,7 @@
 {% block content %}
 <div  class="frm-body bg-white">
 <div style="margin-top:1vh;" class="accordion accordion-flush" id="accordionPanelsStayOpenExample">
-<!-------->
- 
+<!----ส่วนลดคงเหลือ---->
  <div class="accordion-item">
   <div class="accordion-header" id="panelsStayOpen-headingOne">
     <button style="border-left: 2px solid gray; border-right: 2px solid gray; border-top: 2px solid gray; border-top-left-radius: 25px; border-top-right-radius: 25px;" class="accordion-button " type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
@@ -46,7 +45,7 @@
     </div>
   </div>
 </div>
-<!-------------->
+<!------ส่วนเพิ่มส่วนลด-------->
   <div class="accordion-item">
     <h2 class="accordion-header" id="panelsStayOpen-headingA">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseA" aria-expanded="false" aria-controls="panelsStayOpen-collapseA">
@@ -72,11 +71,10 @@
             </label>
        </li> 
 
-
       </div>
     </div>
   </div>
-<!-------------->
+<!-----การใช้ส่วนลด--------->
   <div class="accordion-item">
     <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
@@ -88,11 +86,6 @@
 
         <li class="list-group-item" style="border-top: 2px solid gray; border-top-left-radius: 15px; border-top-right-radius: 15px;">
           <label >
-             <strong>โปรโมชั่น Subsidy</strong> : <strong class="text-danger">-{{min_prosub}}</strong> บาท
-          </label>
-        </li>  
-        <li class="list-group-item">
-          <label >
              <strong>ส่วนลดจากราคาขาย</strong> : <strong class="text-danger">-{{min_reduce}}</strong> บาท
           </label>
         </li>  
@@ -103,49 +96,27 @@
         </li>  
         <li class="list-group-item">
           <label >
-             <strong>ซับเงินดาวน์</strong> : <strong class="text-danger">-{{min_subdown}}</strong> บาท
+             <strong>ส่วนลดเงินดาวน์</strong> : <strong class="text-danger">-{{min_subdown}}</strong> บาท
           </label>
         </li>  
-        {% if statusvatdown == "1" %}
-        <li class="list-group-item">
-          <label >
-             <strong>Vat ซับดาวน์ 7%</strong> : <strong class="text-danger">-{{exit_cost_down_vat}}</strong> บาท
-          </label>
-        </li>  
-        {% endif %}
         <li class="list-group-item" style="border-bottom: 2px solid gray; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px;">
           <label >
-             <strong>ซับดอกเบี้ย</strong> : <strong class="text-danger">-{{subsidy_inter}}</strong> บาท
+             <strong>ค่า Subsidy</strong> : <strong class="text-danger">-{{sumsubsidy}}</strong> บาท 
           </label>
         </li> 
         
-
       </div>
     </div>
   </div>
-
-  <!-------------->
+  <!-------ค่าใช้จ่ายวันออกรถ------->
   <div class="accordion-item">
     <h2 class="accordion-header" id="panelsStayOpen-headingThree">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
-      {% if paytype == 'finance' %}
         <strong class="text-dark">ค่าใช้จ่ายวันออกรถ : {{total_exit}} บาท</strong>
-      {% endif %}
-
-      {% if paytype == 'cash' %}
-        <strong class="text-dark">ค่าใช้จ่ายวันออกรถ : {{total_exit_cash}} บาท</strong>
-      {% endif %}
       </button>
     </h2>
     <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
       <div class="accordion-body">
-        {% if paytype == 'cash' %}
-        <li class="list-group-item" style="border-top: 2px solid gray; border-top-left-radius: 15px; border-top-right-radius: 15px;">
-          <label >
-             <strong>ราคารถสุทธิ</strong> : <strong class="text-muted">{{net_productprice}}</strong> บาท
-          </label>
-        </li>
-        {% endif %}
         {% if paytype == 'finance' %}
         <li class="list-group-item" style="border-top: 2px solid gray; border-top-left-radius: 15px; border-top-right-radius: 15px;" >
           <label >
@@ -153,12 +124,12 @@
           </label>
         </li>
         {% endif %}
-        {% if statusvatdown == "0"  %} 
-        <li class="list-group-item">
+        {% if paytype == 'cash' %}
+        <li class="list-group-item" style="border-top: 2px solid gray; border-top-left-radius: 15px; border-top-right-radius: 15px;">
           <label >
-             <strong>VAT 7% ดาวน์ </strong> : <strong class="text-muted">{{exit_cost_down_vat}}</strong> บาท
+             <strong>ราคารถสุทธิ</strong> : <strong class="text-muted">{{exit_cost_down}}</strong> บาท
           </label>
-        </li> 
+        </li>
         {% endif %}
         <li class="list-group-item">
           <label >
@@ -169,25 +140,34 @@
           <label >
              <strong>ค่า พ.ร.บ.</strong> : <strong class="text-success">ฟรี</strong>
           </label>
-        </li> 
-        <li class="list-group-item">
-          <label >
-             <strong>ค่าประกันป้ายเเดง</strong> : <strong class="text-muted">{{red_frame}}</strong> บาท
-          </label>
-        </li> 
-        {% if min_regis == '0' %}
+        </li>
+        {% if min_regis == 'N' %}
         <li class="list-group-item">
           <label >
              <strong>ค่าจดทะเบียน</strong> : <strong class="text-muted">{{regiscost}}</strong> บาท
           </label>
         </li> 
         {% endif %}
+        <li class="list-group-item">
+          <label >
+             <strong>ค่าประกันป้ายเเดง</strong> : <strong class="text-muted">3,000</strong> บาท
+          </label>
+        </li> 
+        {% if paytype == 'finance' %}
         {% if condition_finance == 'BEGIN' %}
         <li class="list-group-item">
           <label >
              <strong>ค่างวดเเรก</strong> : <strong class="text-muted">{{month_payment}}</strong> บาท
           </label>
         </li> 
+        {% endif %}
+        {% if min_subdown_vat == 'N'  %} 
+        <li class="list-group-item">
+          <label >
+             <strong>VAT 7% ดาวน์ </strong> : <strong class="text-muted">{{exit_cost_down_vat}}</strong> บาท
+          </label>
+        </li> 
+        {% endif %}
         {% endif %}
         <li class="list-group-item" style="border-bottom: 2px solid gray; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px;">
           <label >
@@ -198,9 +178,9 @@
       </div>
     </div>
   </div>
-  <!---------------------------->
+ 
 
-<!-------------->
+<!------รายละเอียดเพิ่มเติม-------->
 <div class="accordion-item">
   <h2 class="accordion-header" id="panelsStayOpen-headingFive">
     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFive" aria-expanded="false" aria-controls="panelsStayOpen-collapseFive">
@@ -209,30 +189,47 @@
   </h2>
   <div id="panelsStayOpen-collapseFive" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFive">
     <div class="accordion-body">
-
-      <li class="list-group-item" style="border-top: 2px solid gray; border-top-left-radius: 15px; border-top-right-radius: 15px;">
-        <label >
-           <strong>ค่างวด/เดือน</strong> : <strong class="text-dark">{{month_payment}}</strong> บาท
-        </label>
-      </li> 
-      <li class="list-group-item">
-        <label >
-           <strong>ดอกเบี้ยทั้งหมด</strong> : <strong class="text-dark">{{total_inter}}</strong> บาท
-        </label>
-      </li> 
-      <li class="list-group-item" style="border-bottom: 2px solid gray; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px;">
-        <label >
-           <strong>ค่าใช้จ่ายทั้งหมด</strong> : <strong class="text-dark">{{net_total_payment}}</strong> บาท
-        </label>
-      </li> 
-      
-
+      <table class="table table-hover text-center table-bordered border-dark">
+        <thead class="table-warning table-bordered border-dark">
+          <tr>
+            <th scope="col">เงื่อนไข</th>
+            <th scope="col">ค่างวด/เดือน</th>
+            <th scope="col">ดอกเบี้ยทั้งหมด</th>
+            <th scope="col">ค่าใช้จ่ายทั้งหมด</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">เงื่อนไข(1)</th>
+            <td>{{month_payment}} บาท</td>
+            <td>{{total_inter}} บาท</td>
+            <td>{{net_total_payment}} บาท</td>
+          </tr>
+          {% if paytype == 'finance' %}
+            {% if total_inter2 != '0' %}
+            <tr>
+              <th scope="row">เงื่อนไข(2)</th>
+              <td>{{month_payment2}} บาท</td>
+              <td>{{total_inter2}} บาท</td>
+              <td>{{net_total_payment2}} บาท</td>
+            </tr>
+            {% endif %}
+            {% if total_inter3 != '0' %}
+            <tr>
+              <th scope="row">เงื่อนไข(3)</th>
+              <td>{{month_payment3}} บาท</td>
+              <td>{{total_inter3}} บาท</td>
+              <td>{{net_total_payment3}} บาท</td>
+            </tr>
+            {% endif %}
+          {% endif %}
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
 
-
-  <!---------------------------->
+  <!-------------ข้อมูลการติดต่อ--------------->
   <div class="accordion-item">
 
     <div id="panelsStayOpen-collapseX" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingX">

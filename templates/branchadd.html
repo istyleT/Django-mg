@@ -15,7 +15,7 @@
   }
 
   .table {
-    border : none
+    border : none;
     text-align : center;
   }
 </style>
@@ -146,7 +146,7 @@
                               <div style="width:20vw ;">
                                 <span class="form-control text-center" style="display: none;" id="show_down_percent" ></span><input name="gen_down" id="gen_down_percent" onchange="tagGDPC()" type="number" style="display: block;" class="form-control text-center"  placeholder="%ดาวน์">
                               </div>
-                                <button type="button" class="btn-success" onclick="caldown()"> = </button>
+                                <button type="button" class="btn-primary" onclick="caldown()"><strong> = </strong></button>
                                 <span class="form-control text-center" style="display: none;" id="show_down_bath" ></span><input id="gen_down_bath" type="number" style="display: block;"  class="form-control text-center" placeholder="เงินดาวน์ (บาท)" >
                               </div>
                               <div align="center" style="margin-top: 0vh;">
@@ -181,36 +181,7 @@
                       </div>
                     </div>
                         
-                      
-                  <!--จำนวนงวด-->
-                       <!-- <div class="accordion-item" style="display:none;">
-                          <h2 class="accordion-header" id="flush-headingSeven">
-                            <button class="accordion-button collapsed text-primary" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSeven" aria-expanded="false" aria-controls="flush-collapseSeven">
-                              <h5>
-                                <strong>จำนวนงวด*</strong>
-                                <strong align="right" id="gen_month"></strong>
-                              </h5>
-                              
-                            </button>
-                          </h2>
-                          <div id="flush-collapseSeven" class="accordion-collapse collapse" aria-labelledby="flush-headingSeven" data-bs-parent="#accordionFlushExample">
-                            <div class="input-group mb-3" >
-                              
-                              <select name="gen_month" id="idgen_month" onchange="tagGM()" class="form-select" id="inputGroupSelect01">
-                                <option value=1 selected>จำนวนงวด</option>
-                                <option value=12>1ปี/12งวด</option>
-                                <option value=24>2ปี/24งวด</option>
-                                <option value=36>3ปี/36งวด</option>
-                                <option value=48>4ปี/48งวด</option>
-                                <option value=60>5ปี/60งวด</option>
-                                <option value=72>6ปี/72งวด</option>
-                                <option value=84>7ปี/84งวด</option>
-                                <option value=96>8ปี/96งวด</option>
-                              </select>
-                              <label class="input-group-text" for="inputGroupSelect01">ดอกเบี้ย</label>
-                             </div>
-                          </div>
-                        </div>-->
+                 
                         <!------อัตราดอกเบี้ย/เงื่อนไขดอกเบี้ย-------->
                         <div class="accordion-item">
                           <h2 class="accordion-header" id="flush-headingOne">
@@ -224,7 +195,7 @@
                             </button>
                           </h2>
                           <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-
+                            <!--เงื่อนไข 1-->
                             <div class="input-group" >
                               <select style="text-align: center;" name="gen_month" id="idgen_month" onchange="payMonth()" class="form-select" id="inputGroupSelect00">
                                 <option value=1 selected>จำนวนงวด</option>
@@ -237,127 +208,57 @@
                                 <option value=84>7 ปี/84 งวด</option>
                                 <option value=96>8 ปี/96 งวด</option>
                               </select>
-                              <label class="input-group-text btn-danger" for="inputGroupSelect00">ดอกเบี้ย</label><!-- pattern="[0-9]+[\.,]([0-9]{1,2})"-->
+                              <label class="input-group-text btn-primary" for="inputGroupSelect00">ดอกเบี้ย</label><!-- pattern="[0-9]+[\.,]([0-9]{1,2})"-->
                               <input style="text-align:center; width: 5vw;" name="gen_inter" id="idgen_inter" onchange="payMonth()" class="form-control"  placeholder="%ดอกเบี้ย">
-                              <span class="input-group-text btn-danger">%</span>
+                              <span class="input-group-text btn-primary">%</span>
                             </div>
+                            <div class="alert alert-primary" role="alert" style="display:none; text-align:center;" id="showpaymonth"></div>
+                            <!--เงื่อนไข 2-->
+                            <div class="input-group" >
+                              <select style="text-align: center;" name="gen_month2" id="idgen_month2" onchange="payMonthTwo()" class="form-select" id="inputGroupSelect00">
+                                <option value=1 selected>จำนวนงวด(2)</option>
+                                <option value=12>1 ปี/12 งวด</option>
+                                <option value=24>2 ปี/24 งวด</option>
+                                <option value=36>3 ปี/36 งวด</option>
+                                <option value=48>4 ปี/48 งวด</option>
+                                <option value=60>5 ปี/60 งวด</option>
+                                <option value=72>6 ปี/72 งวด</option>
+                                <option value=84>7 ปี/84 งวด</option>
+                                <option value=96>8 ปี/96 งวด</option>
+                              </select>
+                              <label class="input-group-text btn-primary" for="inputGroupSelect00">ดอกเบี้ย(2)</label><!-- pattern="[0-9]+[\.,]([0-9]{1,2})"-->
+                              <input style="text-align:center; width: 5vw;" name="gen_inter2" id="idgen_inter2" onchange="payMonthTwo()" class="form-control"  placeholder="%ดอกเบี้ย(2)">
+                              <span class="input-group-text btn-primary">%</span>
+                            </div>
+                            <div class="alert alert-primary" role="alert" style="display:none; text-align:center;" id="showpaymonth2"></div>
+                            <!--เงื่อนไข 3-->
+                            <div class="input-group" >
+                              <select style="text-align: center;" name="gen_month3" id="idgen_month3" onchange="payMonthThree()" class="form-select" id="inputGroupSelect00">
+                                <option value=1 selected>จำนวนงวด(3)</option>
+                                <option value=12>1 ปี/12 งวด</option>
+                                <option value=24>2 ปี/24 งวด</option>
+                                <option value=36>3 ปี/36 งวด</option>
+                                <option value=48>4 ปี/48 งวด</option>
+                                <option value=60>5 ปี/60 งวด</option>
+                                <option value=72>6 ปี/72 งวด</option>
+                                <option value=84>7 ปี/84 งวด</option>
+                                <option value=96>8 ปี/96 งวด</option>
+                              </select>
+                              <label class="input-group-text btn-primary" for="inputGroupSelect00">ดอกเบี้ย(3)</label><!-- pattern="[0-9]+[\.,]([0-9]{1,2})"-->
+                              <input style="text-align:center; width: 5vw;" name="gen_inter3" id="idgen_inter3" onchange="payMonthThree()" class="form-control"  placeholder="%ดอกเบี้ย(3)">
+                              <span class="input-group-text btn-primary">%</span>
+                            </div>
+                            <div class="alert alert-primary" role="alert" style="display:none; text-align:center;" id="showpaymonth3"></div>
+                            <!--จ่ายงวดเเรกไหม-->
                             <div class="input-group mb-3" style="margin-top: 0vh;" >
-                              <label class="input-group-text btn-danger" for="inputGroupSelect01">เงื่อนไขดอกเบี้ย</label>
+                              <label class="input-group-text btn-primary" for="inputGroupSelect01">เงื่อนไขดอกเบี้ย</label>
                               <select name="condition_finance" class="form-select" id="idcondition_finance" onchange="tagCDTFN()">
                                 <option value='END' selected>Ending</option>
                                 <option value='BEGIN'>Beginning</option>
                               </select>
                             </div>
-                            <div class="alert alert-danger" role="alert" style="display:none; text-align:center;" id="showpaymonth"></div>
-                          
-
-
-
-                            <div style="margin-top:1vh; margin-bottom:1vh; margin-left:5%; width:90%;"  class="accordion accordion-flush" id="accordionPanelsStayOpenExample">
-                              <div class="accordion-item" >
-                                <div class="accordion-header" id="panelsStayOpen-headingOne">
-                                  <button style="border-left: 2px solid gray; border-right: 2px solid gray; border-top: 2px solid gray; border-top-left-radius: 25px; border-top-right-radius: 25px;" class="accordion-button " type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-                                    เปรียบเทียบ (1)
-                                    <div  id="showpaymonth0" style="display: none;"></div>
-                                  </button>
-                                </h2>
-                                <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
-                                  <div class="accordion-body">
-                                    <!--1set-->
-                                    <div class="input-group" >
-                                      
-                                      <select style="text-align: center;" name="gen_month_0" id="idgen_month_0" onchange="payMonthOne()" class="form-select" id="inputGroupSelect00">
-                                        <option value=1 selected>จำนวนงวด</option>
-                                        <option value=12>1 ปี/12 งวด</option>
-                                        <option value=24>2 ปี/24 งวด</option>
-                                        <option value=36>3 ปี/36 งวด</option>
-                                        <option value=48>4 ปี/48 งวด</option>
-                                        <option value=60>5 ปี/60 งวด</option>
-                                        <option value=72>6 ปี/72 งวด</option>
-                                        <option value=84>7 ปี/84 งวด</option>
-                                        <option value=96>8 ปี/96 งวด</option>
-                                      </select>
-                                      <label class="input-group-text" for="inputGroupSelect00">ดอกเบี้ย</label>
-                                      <input style="text-align:center; width: 5vw;"  name="gen_inter_0" id="idgen_inter_0" onchange="payMonthOne()" class="form-control" placeholder="%ดอกเบี้ย">
-                                      <span class="input-group-text">%</span>
-                                    </div>
-                                  
-                                    
-                                    <!---->
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="accordion-item">
-                                <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
-                                  <button style="border-bottom: 1px solid; border-top: 1px solid;" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-                                    เปรียบเทียบ (2)
-                                    <div  id="showpaymonth1" style="display: none;"></div>
-                                  </button>
-                                </h2>
-                                <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
-                                  <div class="accordion-body">
-                                    <!--2set-->
-                                    <div class="input-group" >
-                                    
-                                     <select style="text-align: center;" name="gen_month_1" id="idgen_month_1" onchange="payMonthTwo()" class="form-select" id="inputGroupSelect01">
-                                       <option value=1 selected>จำนวนงวด</option>
-                                       <option value=12>1 ปี/12 งวด</option>
-                                       <option value=24>2 ปี/24 งวด</option>
-                                       <option value=36>3 ปี/36 งวด</option>
-                                       <option value=48>4 ปี/48 งวด</option>
-                                       <option value=60>5 ปี/60 งวด</option>
-                                       <option value=72>6 ปี/72 งวด</option>
-                                       <option value=84>7 ปี/84 งวด</option>
-                                       <option value=96>8 ปี/96 งวด</option>
-                                     </select>
-                                     <label class="input-group-text" for="inputGroupSelect01">ดอกเบี้ย</label>
-                                     <input style="text-align:center; width: 5vw;"  name="gen_inter_1" id="idgen_inter_1" onchange="payMonthTwo()" class="form-control" placeholder="%ดอกเบี้ย">
-                                     <span class="input-group-text">%</span>
-                                   </div>
-                                   
-                                   <!---->  
-                                    </div>
-                                </div>
-                              </div>
-                              <div class="accordion-item">
-                                <h2 class="accordion-header" id="panelsStayOpen-headingThree">
-                                  <button style="border-left: 2px solid gray; border-right: 2px solid gray; border-bottom: 2px solid gray; border-bottom-right-radius: 25px; border-bottom-left-radius: 25px;" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
-                                    เปรียบเทียบ (3)
-                                    <div  id="showpaymonth2" style="display: none;"></div>
-                                  </button>
-                                </h2>
-                                <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
-                                  <div class="accordion-body">
-                                        <!--3set-->
-                                        <div class="input-group" >
-                                          
-                                          <select style="text-align: center;" name="gen_month_2" id="idgen_month_2" onchange="payMonthThree()" class="form-select" id="inputGroupSelect02">
-                                            <option value=1 selected>จำนวนงวด</option>
-                                            <option value=12>1 ปี/12 งวด</option>
-                                            <option value=24>2 ปี/24 งวด</option>
-                                            <option value=36>3 ปี/36 งวด</option>
-                                            <option value=48>4 ปี/48 งวด</option>
-                                            <option value=60>5 ปี/60 งวด</option>
-                                            <option value=72>6 ปี/72 งวด</option>
-                                            <option value=84>7 ปี/84 งวด</option>
-                                            <option value=96>8 ปี/96 งวด</option>
-                                          </select>
-                                          <label class="input-group-text" for="inputGroupSelect02">ดอกเบี้ย</label>
-                                          <input style="text-align:center; width: 5vw;" name="gen_inter_2" id="idgen_inter_2" onchange="payMonthThree()" class="form-control" placeholder="%ดอกเบี้ย">
-                                          <span class="input-group-text">%</span>
-                                        </div>
-                                      
-                                        <!---->
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-
-                                        
-
-                                       
-    
-                          </div>
+                            
+          
                         </div>
                         </div>
                          
@@ -444,10 +345,33 @@
                         </button>
                       </h2>
                       <div id="flush-collapseD" class="accordion-collapse collapse" aria-labelledby="flush-headingD" data-bs-parent="#accordionFlushExample">
-                       
+                        <li class="list-group-item" style="display: none;">
+                          <div class="form-check">
+                            <input name="min_pdi" class="form-check-input" type="checkbox" value=500 checked disabled>
+                            <label class="form-check-label" for="flexCheckDefault">
+                               ค่า PDI (ตรวจสอบก่อนส่งมอบ) 500 บาท
+                            </label>
+                          </div>
+                       </li> 
+                       <li class="list-group-item" style="display: none;">
+                          <div class="form-check">
+                            <input name="min_frame" class="form-check-input" type="checkbox" value=130 checked disabled>
+                            <label class="form-check-label" for="flexCheckDefault">
+                               กรอบป้ายทะเบียนโชว์รูม 130 บาท
+                            </label>
+                          </div>
+                       </li> 
+                       <li class="list-group-item" style="display: none;">
+                          <div class="form-check">
+                            <input name="min_polish" class="form-check-input" type="checkbox" value=500 checked disabled>
+                            <label class="form-check-label" for="flexCheckDefault">
+                               ขัดเคลือบสีรถใหม่ 500 บาท
+                            </label>
+                          </div>
+                       </li> 
                         <li class="list-group-item">
                           <div class="form-check">
-                            <input name="min_regis" class="form-check-input" type="checkbox"  checked >
+                            <input name="min_regis" value='Y' class="form-check-input" type="checkbox" checked >
                             <label class="form-check-label" for="flexCheckDefault">
                                ค่าจดทะเบียน {{regiscost}} บาท
                             </label>
@@ -462,31 +386,8 @@
                           <span id="idshowvatsubdown" style="display: none;"></span>
                         </div>
                        </li>  
-                       <!--display none-->
-                       <li class="list-group-item" style="display:none">
-                          <div class="form-check">
-                            <input name="min_pdi" class="form-check-input" type="checkbox" value=500   checked>
-                            <label class="form-check-label" for="flexCheckDefault">
-                               ค่า PDI (ตรวจสอบก่อนส่งมอบ) 500 บาท
-                            </label>
-                          </div>
-                       </li> 
-                       <li class="list-group-item"  style="display:none">
-                          <div class="form-check">
-                            <input name="min_frame" class="form-check-input" type="checkbox" value=130   checked>
-                            <label class="form-check-label" for="flexCheckDefault">
-                               กรอบป้ายทะเบียนโชว์รูม 130 บาท
-                            </label>
-                          </div>
-                       </li> 
-                       <li class="list-group-item"  style="display:none">
-                          <div class="form-check">
-                            <input name="min_polish" class="form-check-input" type="checkbox" value=500  checked>
-                            <label class="form-check-label" for="flexCheckDefault">
-                               ขัดเคลือบสีรถใหม่ 500 บาท
-                            </label>
-                          </div>
-                       </li> 
+                    
+                      
                       <!---->
 
 
@@ -910,89 +811,65 @@ function costFinance(){
   return cost_finance 
 };
 
-
-
 /*คำนวนค่างวดจริง*/
 function payMonth() {
   /*เก็บค่า*/
   const x = costFinance();
-  const gen_month = Number(document.getElementById('idgen_month').value || 0) ;
+  const gen_month = Number(document.getElementById('idgen_month').value) ;
   const gen_inter = Number(document.getElementById('idgen_inter').value || 0) ;
   /*คำนวนดอกเบี้ย/ค่างวด*/
   const totalinter =  parseInt(x * (gen_inter/100) * (gen_month /12));
   const paymonth = parseInt((totalinter + x)/gen_month);
   /*ส่งค่า*/
-  document.getElementById('gen_inter').innerHTML = "="+" "+ gen_inter + "%";
-  document.getElementById('showpaymonth').style.display = 'block';
-  document.getElementById('showpaymonth').innerHTML = 'ดอกเบี้ย'+' '+'='+' '+(totalinter.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')) + ' ' + 'บาท'+'/'+'ค่างวด' +" " + '=' + ' ' + (paymonth.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')) + ' ' + 'บาท';
-  return paymonth
-}
-
-
-
-/*คำนวนค่างวด1*/
-function payMonthOne() {
-  /*เก็บค่า*/
-  const x = costFinance();
-  const gen_month_0 = Number(document.getElementById('idgen_month_0').value || 0) ;
-  const gen_inter_0 = Number(document.getElementById('idgen_inter_0').value || 0) ;
-  /*คำนวนดอกเบี้ย/ค่างวด*/
-  const totalinter_0 =  parseInt(x * (gen_inter_0/100) * (gen_month_0 /12));
-  const paymonth_1 = parseInt((totalinter_0 + x)/gen_month_0);
-  /*ส่งค่า*/
-  if (gen_month_0 === 1 || gen_inter_0 === 0) {
-    document.getElementById('showpaymonth0').style.display = 'block';
-    document.getElementById('showpaymonth0').innerHTML = " ";
-  } else {
-    document.getElementById('showpaymonth0').style.display = 'block';
-    document.getElementById('showpaymonth0').innerHTML = " " + 'ค่างวด' +" " + '=' + ' ' + (paymonth_1.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')) + ' ' + 'บาท';
+  if (gen_month === 1 || gen_inter === 0) {
+    document.getElementById('showpaymonth2').style.display = 'none';
+  } 
+  else{
+    document.getElementById('gen_inter').innerHTML = "="+" "+ gen_inter + "%";
+    document.getElementById('showpaymonth').style.display = 'block';
+    document.getElementById('showpaymonth').innerHTML = 'ดอกเบี้ย'+' '+'='+' '+(totalinter.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')) + ' ' + 'บาท'+'/'+'ค่างวด' +" " + '=' + ' ' + (paymonth.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')) + ' ' + 'บาท';
   }
- 
-  return paymonth_1
+  return 
 }
 
 /*คำนวนค่างวด2*/
 function payMonthTwo() {
   /*เก็บค่า*/
   const x = costFinance();
-  const gen_month_1 = Number(document.getElementById('idgen_month_1').value || 0) ;
-  const gen_inter_1 = Number(document.getElementById('idgen_inter_1').value || 0) ;
+  const gen_month2 = Number(document.getElementById('idgen_month2').value) ;
+  const gen_inter2 = Number(document.getElementById('idgen_inter2').value || 0) ;
   /*คำนวนดอกเบี้ย/ค่างวด*/
-  const totalinter_1 =  parseInt(x * (gen_inter_1/100) * (gen_month_1 /12));
-  const paymonth_2 = parseInt((totalinter_1 + x)/gen_month_1);
+  const totalinter2 =  parseInt(x * (gen_inter2/100) * (gen_month2 /12));
+  const paymonth2 = parseInt((totalinter2 + x)/gen_month2);
   /*ส่งค่า*/
-  if (gen_month_1 === 1 || gen_inter_1 === 0) {
-    document.getElementById('showpaymonth1').style.display = 'block';
-    document.getElementById('showpaymonth1').innerHTML = " ";
-  } else {
-    document.getElementById('showpaymonth1').style.display = 'block';
-    document.getElementById('showpaymonth1').innerHTML = " " + 'ค่างวด' +" " + '=' + ' ' + (paymonth_2.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')) + ' ' + 'บาท';
+  if (gen_month2 === 1 || gen_inter2 === 0) {
+    document.getElementById('showpaymonth2').style.display = 'none';
+  } 
+  else {
+    document.getElementById('showpaymonth2').style.display = 'block';
+    document.getElementById('showpaymonth2').innerHTML = 'ดอกเบี้ย'+' '+'='+' '+(totalinter2.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')) + ' ' + 'บาท'+'/'+'ค่างวด' +" " + '=' + ' ' + (paymonth2.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')) + ' ' + 'บาท';
   }
-  
-  return paymonth_2
+  return
 }
 /*คำนวนค่างวด2*/
 function payMonthThree() {
   /*เก็บค่า*/
   const x = costFinance();
-  const gen_month_2 = Number(document.getElementById('idgen_month_2').value || 0) ;
-  const gen_inter_2 = Number(document.getElementById('idgen_inter_2').value || 0) ;
+  const gen_month3 = Number(document.getElementById('idgen_month3').value) ;
+  const gen_inter3 = Number(document.getElementById('idgen_inter3').value || 0) ;
   /*คำนวนดอกเบี้ย/ค่างวด*/
-  const totalinter_2 =  parseInt(x * (gen_inter_2/100) * (gen_month_2 /12));
-  const paymonth_3 = parseInt((totalinter_2 + x)/gen_month_2);
+  const totalinter3 =  parseInt(x * (gen_inter3/100) * (gen_month3 /12));
+  const paymonth3 = parseInt((totalinter3 + x)/gen_month3);
   /*ส่งค่า*/
-  if (gen_month_2 === 1 || gen_inter_2 === 0) {
-    document.getElementById('showpaymonth2').style.display = 'block';
-    document.getElementById('showpaymonth2').innerHTML = " ";
-  }
+  if (gen_month3 === 1 || gen_inter3 === 0) {
+    document.getElementById('showpaymonth2').style.display = 'none';
+  } 
   else {
-    document.getElementById('showpaymonth2').style.display = 'block';
-    document.getElementById('showpaymonth2').innerHTML = " " + 'ค่างวด' +" " + '=' + ' ' + (paymonth_3.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')) + ' ' + 'บาท';
+    document.getElementById('showpaymonth3').style.display = 'block';
+    document.getElementById('showpaymonth3').innerHTML = 'ดอกเบี้ย'+' '+'='+' '+(totalinter3.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')) + ' ' + 'บาท'+'/'+'ค่างวด' +" " + '=' + ' ' + (paymonth3.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')) + ' ' + 'บาท';
   }
-  
-  return paymonth_3
+  return 
 }
-
 
 /*ส่วนฟังก์ชันเเสดงผล*/
 function tagPDMG() {
@@ -1015,7 +892,6 @@ function tagMRD() {
   }
   caldownthis()
   payMonth();
-  payMonthOne();
   payMonthTwo();
   payMonthThree();
   
@@ -1030,7 +906,6 @@ function tagAEQ() {
   }
   caldownthis()
   payMonth();
-  payMonthOne();
   payMonthTwo();
   payMonthThree();
   
@@ -1064,7 +939,6 @@ function tagGDPC() {
     caldownthis();
   }
   payMonth();
-  payMonthOne();
   payMonthTwo();
   payMonthThree();
    
@@ -1099,7 +973,6 @@ function tagMSD() {
 function tagGM() {
   const taggen_month = document.getElementById('idgen_month').value;
   payMonth();
-  payMonthOne();
   payMonthTwo();
   payMonthThree();
 };
@@ -1121,7 +994,6 @@ function tagGIT() {
   else {
     document.getElementById('gen_inter').innerHTML =  "="+" "+(taggen_inter.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','))+"%"; 
   }
-  payMonthOne();
   payMonthTwo();
   payMonthThree();
 };

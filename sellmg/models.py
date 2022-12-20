@@ -1,23 +1,14 @@
 from django.db import models
 from django import forms
-from django.contrib.auth.models import User
 
-class Employee(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    telephone = models.CharField(max_length=12)
-
-# ตารางเพื่อตั้งค่า รุ่นหลัก รุ่นย่อย ราคา ส่วนลด ค่าจดทะเทียน
 class Product(models.Model) :
-                    mainmodel = models.CharField(max_length=25)
-                    submodel = models.CharField(max_length=50)
-                    price = models.IntegerField()
-                    margin = models.IntegerField() 
-                                  
+      mainmodel = models.CharField(max_length=25)
+      submodel = models.CharField(max_length=50)
+      price = models.IntegerField()
+      margin = models.IntegerField() 
                     
-                    def __str__(self) : #เเสดงข้อมูลที่ query มาได้
-                          return f'{self.mainmodel} | {self.submodel} | {self.price} |{self.margin}'
-
-
+      def __str__(self) : #เเสดงข้อมูลที่ query มาได้
+          return f'{self.mainmodel} | {self.submodel} | {self.price} |{self.margi}'    
 
 class Regiscosts(models.Model):
       regis_code = models.CharField(max_length=30)
@@ -25,10 +16,8 @@ class Regiscosts(models.Model):
       regis_company = models.IntegerField()
 
       def __str__(self) : 
-                          return f'{self.regis_code} | {self.regis_personal} | {self.regis_company} '
+          return f'{self.regis_code} | {self.regis_personal} | {self.regis_company} '
       
-
-
 class Accmgs(models.Model) :
       acc_code = models.CharField(max_length=20)
       acc_name = models.CharField(max_length=100)
@@ -36,16 +25,13 @@ class Accmgs(models.Model) :
       acc_type = models.CharField(max_length=10)
       acc_model = models.CharField(max_length=10)
 
-
-
 class Colorsubmodels(models.Model):
       submodel = models.CharField(max_length=50)
       color = models.CharField(max_length=50)
       
       def __str__(self):
-             return f'{self.submodel} | {self.color}'
+          return f'{self.submodel} | {self.color}'
 
-#เก็บข้อมูลหน้า filepdf ที่ upload เข้ามา
 class Quotations(models.Model):
       date = models.DateField(auto_now_add=True)
       username = models.CharField(max_length=20)
@@ -57,9 +43,8 @@ class Quotations(models.Model):
             )
       filepdf = models.FileField(upload_to='upload/')
       def __str__(self):
-             return f'{self.date} | {self.username} | {self.mainmodel} | {self.filepdf}'
+          return f'{self.date} | {self.username} | {self.mainmodel} | {self.filepdf}'
 
-#form ที่เอาไว้เก็บข้อมูลจาก class quotation
 class QuotationsForm (forms.ModelForm):
       class Meta :
             model = Quotations
@@ -72,8 +57,7 @@ class QuotationsForm (forms.ModelForm):
             'Model': forms.Select()}
             exclude = []
             
-
-# เก็บข้อมูลลูกค้า HTR 
+#เก็บข้อมูลลูกค้าทั้งหมด
 class HTRcustomer(models.Model):
       teamsell = models.CharField(max_length=10, default='-')
       date = models.DateField(auto_now_add=True)
@@ -81,12 +65,12 @@ class HTRcustomer(models.Model):
       mainmodel = models.CharField(max_length=25)
       customername = models.CharField(max_length=50) #เเก้ได้
       contactcustomer = models.CharField(max_length=50) #เเก้ได้
-      chanelcustomer = models.CharField(max_length=30) 
+      chanelcustomer = models.CharField(max_length=30)  
       statuscustomer = models.CharField(max_length=30) #เเก้ได้
       remark = models.CharField(max_length=100, default='-') #เเก้ได้
       def __str__(self):
          return f'{self.date} | {self.firstname} | {self.mainmodel} | {self.customername} | {self.contactcustomer} | {self.chanelcustomer} | {self.statuscustomer}'
-
+#ประวัติลูกค้าทั้งหมด
 class Pathstatushtr(models.Model):
       id_htrcustomer = models.CharField(max_length=4)
       date = models.DateField(auto_now_add=True)    
@@ -94,5 +78,3 @@ class Pathstatushtr(models.Model):
       remark = models.CharField(max_length=100, default='-')
       def __str__(self):
          return f'{self.id_htrcustomer} | {self.date} | {self.statuscustomer} | {self.remark}'
-     
-

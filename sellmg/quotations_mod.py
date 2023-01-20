@@ -36,6 +36,8 @@ net_total_payment_m = lambda debt_fi_m,exit_cost_down : int(debt_fi_m+exit_cost_
 total_margin_m = lambda productmargin,total_addmargin,total_minmargin : int(productmargin+total_addmargin- total_minmargin)
 #ส่วนลดส่วนลด
 total_minmargin_m = lambda min_reduce,min_subdown,sumsubsidy,total_gift : int(min_reduce+min_subdown+sumsubsidy+total_gift)
+#รายได้ที่ปรึกษาการขาย
+income_sell_m = lambda total_margin,release_fee : int(total_margin+release_fee)
 #เงินดาวน์ return 3 ค่า ค่าไฟเเนนซ์ /ลูกค้าจ่าย /ค่าvatsubdown
 def costdown_m(netproductprice,gen_down,min_subdown):
    cost_down_fi = int(netproductprice*(gen_down/100)) #ดาวน์ที่ไฟเเนซ์เข้าใจ

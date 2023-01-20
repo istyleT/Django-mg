@@ -90,15 +90,16 @@
                 <img  id="card-image" src="{% static 'picture/iconcustomer.png' %}" class="img-fluid" alt="..."  >
               </div>
               <div id="content-box1" >
-                <span>วันที่ : {{i.date}}/{{i.firstname}}</span>
-                <span>รุ่นรถ : {{i.mainmodel}}/{{i.chanelcustomer}}</span>
-                <span>หมายเหตุ : {{i.remark}}</span>
-
+                <span><strong>วันที่ :</strong> {{i.date}}/{{i.firstname}}</span>
+                <span><strong>รุ่นรถ :</strong> {{i.mainmodel}}/{{i.chanelcustomer}}</span>
+                <span><strong>สาขา :</strong> {{i.msabranch}} / ทีม : {{i.teamsell}}</span>
+                <span><strong>ใบเสนอราคา : </strong><a href="###">{{i.quotation}}</a></span>
               </div>
               <div id="content-box2" > 
-                <span>ชื่อลูกค้า : {{i.customername}}</span>
-                <span>ติดต่อ : {{i.contactcustomer}}</span>
-                <span>สถานะ : {{i.statuscustomer}}</span>
+                <span><strong>ชื่อลูกค้า :</strong> {{i.customername}}</span>
+                <span><strong>ติดต่อ :</strong> {{i.contactcustomer}}</span>
+                <span><strong>หมายเหตุ :</strong> {{i.remark}}</span>
+                <span><strong>สถานะล่าสุด :</strong> {{i.statuscustomer}}</span>
               </div>
             </div>
           </div>
@@ -119,13 +120,18 @@
     </div> 
 
     {% for i in datacustomeredit %}
-    <!--status-->  
+    <!--status-oldใส่เพื่อตรวจความเปลี่ยนเเปลงสถานะ-->
+    <div class="input-group input-group-mb" style="margin-top: 1vh; display: none;"> 
+      <span class="input-group-text btn-success" id="inputGroup-sizing-lg"><strong>สถานะเดิม</strong></span>
+      <input type="text" name="statuscustomer-old" value={{i.statuscustomer}} class="form-control text-center"  aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" placeholder=""  >
+    </div>
+    <!--status-new-->
     <div class="input-group mb-3" style="margin-top: 2vh;">
       <label class="input-group-text btn-danger" for="inputGroupSelect01"><strong>สถานะล่าสุด</strong></label>
       <select class="form-select text-center" name="statuscustomer-edit" id="inputGroupSelect01">
-        <option value="{{i.statuscustomer}}" selected>{{i.statuscustomer}}</option>
+        <option value={{i.statuscustomer}} selected>{{i.statuscustomer}}</option>
         <option disabled>---เริ่มต้น---</option>
-        <option value="มุ่งหวังติดตาม">มุ่งหวังติดตาม</option>
+        <option value="ลูกค้ามุ่งหวัง">ลูกค้ามุ่งหวัง</option>
         <option value="ลูกค้าจอง">ลูกค้าจอง</option>
         <option value="ทดลองขับ">ทดลองขับ</option>
         <option disabled>---จัดไฟเเนนซ์---</option>

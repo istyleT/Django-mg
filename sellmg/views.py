@@ -65,9 +65,9 @@ def dashboard (request):
     dashregiscosts = Regiscosts.objects.all().order_by("regis_code")
     dashaccmgs = Accmgs.objects.all().order_by("acc_code")
     dashcolorsubmodels = Colorsubmodels.objects.all().order_by("submodel")
-    dashhtrcustomer = HTRcustomer.objects.all().order_by("-date")
+    dashmsacustomer = MSAcustomer.objects.all().order_by("-date")
     #สั่ง render เเละส่งค่าเข้าสุ่ Template                  
-    return render(request,'dashboard.html',{'dashproduct':dashproduct,'dashregiscosts':dashregiscosts,'dashaccmgs':dashaccmgs,'dashcolorsubmodels':dashcolorsubmodels, 'dashhtrcustomer':dashhtrcustomer})
+    return render(request,'dashboard.html',{'dashproduct':dashproduct,'dashregiscosts':dashregiscosts,'dashaccmgs':dashaccmgs,'dashcolorsubmodels':dashcolorsubmodels, 'dashhtrcustomer':dashmsacustomer})
 def addcolor(request):
     #ตัวเเปรเงื่อนไข
     doit_add = request.POST.get('doit') 
@@ -149,30 +149,44 @@ def upload(request):
     data = Quotations.objects.order_by('-id') # เรียงตาม id เเบบย้อนกลับ
     return render(request,'filedata.html',{'data': data})
 def collectdata(request): 
-    
     # เก็บข้อมูลการ login จาก user 
     username = str(request.POST.get('username'))
     password = str(request.POST.get('password'))
-
     # เอาข้อมูลที่เก็บได้ไปเช็คมามีไหม
     user = authenticate(request, username=username, password=password)
-    
     # ถ้ามี เข้า condition render หน้าต่อไป 
     if user is not None:
-        
         # Log a user in
          login(request, user)
-         # query เอา firstname  จาก table auth_user
-         firstname_set = User.objects.filter(username = username).values_list('first_name','last_name',named=True)
+         # query เอาข้อมูลจาก table auth_user
+         firstname_set = User.objects.filter(username = username).values_list('first_name','last_name','email',named=True)
          # for เอาข้อมูลจาก Queryset
          for i in firstname_set :
-             firstname =  str(i.first_name)
-             sellphone =  str(i.last_name)
-         # ส่งออกเผื่อเป็น admin
+            firstname =  str(i.first_name)
+            sellphone =  str(i.last_name)
+            branchset = str(i.email) #e-mailจะเป็นคนกำหนดสิทธิ์ในการเข้าถึงข้อมูล
+            #กำหนดค่าสาขาโดยการใช้ e-mail
+            #sellbranch เป็นข้อมูลที่จะบันทึกเข้าฐานข้อมูลลูกค้า
+            if branchset == "AD@mg.msa":
+                sellbranch = "Admin"
+            elif branchset == "HO@mg.msam":
+                sellbranch = "HO"
+            elif branchset == "RS@mg.msam":
+                sellbranch = "RS"
+            elif branchset == "HTR@mg.msam":
+                sellbranch = "HTR"
+            elif branchset == "HO@mg.msa":
+                sellbranch = "HO"
+            elif branchset == "RS@mg.msa":
+                sellbranch = "RS"
+            elif branchset == "HTR@mg.msa":
+                sellbranch = "HTR"
          #ส่งข้อมูลออก
-         request.session['username'] = username
+         request.session['username'] = username  #ส่งออกเผื่อเป็น admin จะมี menu พิเศษที่ navbar
          request.session['firstname'] = firstname
          request.session['sellphone'] = sellphone
+         request.session['sellbranch'] = sellbranch
+         request.session['branchset'] = branchset
          return render(request,'dataclient.html',{'username':username})
     # ถ้าไม่มี สั่ง render หน้าเดิม
     else:
@@ -183,7 +197,8 @@ def dataclient(request):
     #เก็บข้อมูล username
     username = str(request.session.get('username'))
     firstname = str(request.session.get('firstname'))
-    # เก็บข้อมูลหน้าตัวเอง
+    sellbranch = str(request.session.get('sellbranch'))
+    #เก็บข้อมูลหน้าตัวเอง
     teamsell = str(request.POST.get('teamsell'))
     mainmodel = str(request.POST.get('mainmodel'))
     customername = str(request.POST.get('customername'))
@@ -194,8 +209,8 @@ def dataclient(request):
     request.session['mainmodel'] = mainmodel
     request.session['customername'] = customername
     request.session['contactcustomer'] = contactcustomer
-    # เก็บข้อมลูเข้า database
-    HTRcustomer.objects.create(teamsell=teamsell ,firstname = firstname, mainmodel = mainmodel, customername = customername, contactcustomer= contactcustomer, chanelcustomer = chanelcustomer, statuscustomer = statuscustomer)
+    #เก็บข้อมลูลูกค้าเข้า database
+    MSAcustomer.objects.create(msabranch=sellbranch,teamsell=teamsell ,firstname = firstname, mainmodel = mainmodel, customername = customername, contactcustomer= contactcustomer, chanelcustomer = chanelcustomer, statuscustomer = statuscustomer)
     if mainmodel == "MG5":
        return render(request ,'Model_A.html',{'username': username})
     elif mainmodel == "MGVSHEV" :
@@ -214,53 +229,139 @@ def dataclient(request):
         return render(request ,'Model_H.html',{'username': username})
 @login_required(login_url='/firstdata') 
 def statuscustomer(request):
-    #เก็บข้อมูลทำเงื่อนไข
-    firstname = str(request.session.get('firstname'))    
-    #เชื่อมต่อ database ค้นข้อมูลตามเงื่อนไขป้องกันการเห็นข้อมูลของคนอื่น
-    datacustomer = HTRcustomer.objects.filter( firstname=firstname).values_list('id', 'date','firstname','mainmodel','customername','contactcustomer','chanelcustomer','statuscustomer','remark' , named=True).order_by('-id')
-    # สั่งเเสดงหน้า UI พร้อมส่งข้อมูล         
-    return render(request,'statuscustomer.html',{'datacustomer':datacustomer})
+    #เก็บข้อมูลทำเงื่อนในการมองเห็น
+    firstname = str(request.session.get('firstname'))#กรณี sell ดูได้เเค่ชื่อตัวเอง
+    branchset = str(request.session.get('branchset'))#กรณีไม่ใช่ sell กำหนดการเห็นข้อมูล
+    #เงื่อนไขดูข้อมูลของ admin    
+    if  branchset == "AD@mg.msa": 
+        datacustomer = MSAcustomer.objects.all().values_list('id','msabranch','teamsell','date','firstname','mainmodel','customername','contactcustomer','chanelcustomer','statuscustomer','remark','quotation',named=True).order_by('-id')
+    #เงื่อนไขดูข้อมูลผจก.
+    elif branchset == "HO@mg.msam":
+        datacustomer = MSAcustomer.objects.filter(msabranch = "HO").values_list('id','msabranch','teamsell','date','firstname','mainmodel','customername','contactcustomer','chanelcustomer','statuscustomer','remark','quotation',named=True).order_by('-id')
+    elif branchset == "RS@mg.msam":
+        datacustomer = MSAcustomer.objects.filter(msabranch = "RS").values_list('id','msabranch','teamsell','date','firstname','mainmodel','customername','contactcustomer','chanelcustomer','statuscustomer','remark','quotation',named=True).order_by('-id')
+    elif branchset == "HTR@mg.msam":
+        datacustomer = MSAcustomer.objects.filter(msabranch = "HTR").values_list('id','msabranch','teamsell','date','firstname','mainmodel','customername','contactcustomer','chanelcustomer','statuscustomer','remark','quotation',named=True).order_by('-id')
+    #เงื่อนไขดูข้อมูลของ sell 
+    else:
+        datacustomer = MSAcustomer.objects.filter(firstname=firstname).values_list('id','msabranch','teamsell','date','firstname','mainmodel','customername','contactcustomer','chanelcustomer','statuscustomer','remark','quotation',named=True).order_by('-id')
+    countdatacustomer = datacustomer.count()
+    #ส่งไปเเสดงค่าให้ตรงตามเงื่อนไขข้อมูลที่เเสดงเริ่มต้น
+    querybranch_new = "ทั้งหมด"
+    queryteam_new = "ทังหมด"
+    querystatus_new ="ทั้งหมด"
+    return render(request,'statuscustomer.html',{'datacustomer':datacustomer,'branchset':branchset,'countdatacustomer':countdatacustomer,'querystatus_new':querystatus_new,'queryteam_new':queryteam_new,'querybranch_new':querybranch_new})
 @login_required(login_url='/firstdata') 
 def editcard(request):
-    # เก็บข้อมูลหน้าตัวเอง
+    #เก็บข้อมูลหน้าตัวเอง idcard = id ของ MSAcustomer
     idcard = request.POST.get('idcard') 
-    # ส่งข้อมูลออก
+    #ส่งข้อมูลออก
     request.session['idcard'] = idcard
-    # หาข้อมูล card เพื่อไปเเสดง
-    datacustomeredit = HTRcustomer.objects.filter( id=idcard).values_list('date','firstname','mainmodel','customername','contactcustomer','chanelcustomer','statuscustomer','remark' , named=True).order_by('-id')
-    datapathstatus = Pathstatushtr.objects.filter(id_htrcustomer = idcard).values_list('date','statuscustomer','remark', named=True).order_by('-id')
+    #หาข้อมูลลูกค้าเพื่อไปเเสดง
+    datacustomeredit = MSAcustomer.objects.filter(id=idcard).values_list('id','msabranch','teamsell','date','firstname','mainmodel','customername','contactcustomer','chanelcustomer','statuscustomer','remark','quotation',named=True).order_by('-id')
+    #หาข้อมูลประวัติลูกค้าไปเเสดง
+    datapathstatus = Pathstatusmsa.objects.filter(id_msacustomer = idcard).values_list('date','statuscustomer','remark', named=True).order_by('-id')
     return render(request, 'editcard.html', {'datacustomeredit':datacustomeredit , 'datapathstatus':datapathstatus})
+@login_required(login_url='/firstdata') 
+def querydatacustomer(request):
+    #เก็บข้อมูลทำเงื่อนในการมองเห็น
+    firstname = str(request.session.get('firstname'))#กรณี sell ดูได้เเค่ชื่อตัวเอง
+    branchset = str(request.session.get('branchset'))#กรณีไม่ใช่ sell กำหนดการเห็นข้อมูล
+    #เก็บข้อมูลเงื่อนไขจากหน้าตัวเอง
+    querybranch = str(request.POST.get('querybranch'))
+    queryteam = str(request.POST.get('queryteam'))
+    querystatus = str(request.POST.get('querystatus'))
+    #เงื่อนไขดูข้อมูลของ admin ทั้งหมด มี 8 เงื่อนไข
+    if  branchset == "AD@mg.msa":
+        if querybranch == 'ทั้งหมด' and queryteam == 'ทั้งหมด' and querystatus == 'ทั้งหมด' :
+           datacustomer = MSAcustomer.objects.all().values_list('id','msabranch','teamsell','date','firstname','mainmodel','customername','contactcustomer','chanelcustomer','statuscustomer','remark','quotation',named=True).order_by('-id')
+        elif  querybranch != 'ทั้งหมด' and queryteam == 'ทั้งหมด' and querystatus == 'ทั้งหมด' :
+           datacustomer = MSAcustomer.objects.filter(Q(msabranch=querybranch)).values_list('id','msabranch','teamsell','date','firstname','mainmodel','customername','contactcustomer','chanelcustomer','statuscustomer','remark','quotation',named=True).order_by('-id')   
+        elif  querybranch == 'ทั้งหมด' and queryteam != 'ทั้งหมด' and querystatus == 'ทั้งหมด' :
+           datacustomer = MSAcustomer.objects.filter(Q(teamsell=queryteam)).values_list('id','msabranch','teamsell','date','firstname','mainmodel','customername','contactcustomer','chanelcustomer','statuscustomer','remark','quotation',named=True).order_by('-id')  
+        elif  querybranch == 'ทั้งหมด' and queryteam == 'ทั้งหมด' and querystatus != 'ทั้งหมด' :
+           datacustomer = MSAcustomer.objects.filter(Q(statuscustomer=querystatus)).values_list('id','msabranch','teamsell','date','firstname','mainmodel','customername','contactcustomer','chanelcustomer','statuscustomer','remark','quotation',named=True).order_by('-id')   
+        elif  querybranch == 'ทั้งหมด' and queryteam != 'ทั้งหมด' and querystatus != 'ทั้งหมด' : 
+           datacustomer = MSAcustomer.objects.filter(Q(teamsell=queryteam)&Q(statuscustomer=querystatus)).values_list('id','msabranch','teamsell','date','firstname','mainmodel','customername','contactcustomer','chanelcustomer','statuscustomer','remark','quotation',named=True).order_by('-id') 
+        elif  querybranch != 'ทั้งหมด' and queryteam != 'ทั้งหมด' and querystatus == 'ทั้งหมด' : 
+           datacustomer = MSAcustomer.objects.filter(Q(msabranch=querybranch)&Q(teamsell=queryteam)).values_list('id','msabranch','teamsell','date','firstname','mainmodel','customername','contactcustomer','chanelcustomer','statuscustomer','remark','quotation',named=True).order_by('-id')  
+        elif  querybranch != 'ทั้งหมด' and queryteam == 'ทั้งหมด' and querystatus != 'ทั้งหมด' : 
+           datacustomer = MSAcustomer.objects.filter(Q(msabranch=querybranch)&Q(statuscustomer=querystatus)).values_list('id','msabranch','teamsell','date','firstname','mainmodel','customername','contactcustomer','chanelcustomer','statuscustomer','remark','quotation',named=True).order_by('-id')  
+        elif  querybranch != 'ทั้งหมด' and queryteam != 'ทั้งหมด' and querystatus != 'ทั้งหมด' : 
+           datacustomer = MSAcustomer.objects.filter(Q(msabranch=querybranch)&Q(teamsell=queryteam)&Q(statuscustomer=querystatus)).values_list('id','msabranch','teamsell','date','firstname','mainmodel','customername','contactcustomer','chanelcustomer','statuscustomer','remark','quotation',named=True).order_by('-id')  
+    #เงื่อนไขดูข้อมูลผจก.
+    elif branchset == "HO@mg.msam":
+        if queryteam == 'ทั้งหมด' and querystatus == 'ทั้งหมด':
+           datacustomer = MSAcustomer.objects.filter(Q(msabranch = "HO")).values_list('id','msabranch','teamsell','date','firstname','mainmodel','customername','contactcustomer','chanelcustomer','statuscustomer','remark','quotation',named=True).order_by('-id')
+        elif queryteam != 'ทั้งหมด' and querystatus == 'ทั้งหมด':
+           datacustomer = MSAcustomer.objects.filter(Q(msabranch = "HO")&Q(teamsell=queryteam)).values_list('id','msabranch','teamsell','date','firstname','mainmodel','customername','contactcustomer','chanelcustomer','statuscustomer','remark','quotation',named=True).order_by('-id')
+        elif queryteam == 'ทั้งหมด' and querystatus != 'ทั้งหมด':
+           datacustomer = MSAcustomer.objects.filter(Q(msabranch = "HO")&Q(statuscustomer=querystatus)).values_list('id','msabranch','teamsell','date','firstname','mainmodel','customername','contactcustomer','chanelcustomer','statuscustomer','remark','quotation',named=True).order_by('-id')
+        elif queryteam != 'ทั้งหมด' and querystatus != 'ทั้งหมด':
+           datacustomer = MSAcustomer.objects.filter(Q(msabranch = "HO")&Q(teamsell=queryteam)&Q(statuscustomer=querystatus)).values_list('id','msabranch','teamsell','date','firstname','mainmodel','customername','contactcustomer','chanelcustomer','statuscustomer','remark','quotation',named=True).order_by('-id')
+    elif branchset == "RS@mg.msam":
+        if queryteam == 'ทั้งหมด' and querystatus == 'ทั้งหมด':
+           datacustomer = MSAcustomer.objects.filter(Q(msabranch = "RS")).values_list('id','msabranch','teamsell','date','firstname','mainmodel','customername','contactcustomer','chanelcustomer','statuscustomer','remark','quotation',named=True).order_by('-id')
+        elif queryteam != 'ทั้งหมด' and querystatus == 'ทั้งหมด':
+           datacustomer = MSAcustomer.objects.filter(Q(msabranch = "RS")&Q(teamsell=queryteam)).values_list('id','msabranch','teamsell','date','firstname','mainmodel','customername','contactcustomer','chanelcustomer','statuscustomer','remark','quotation',named=True).order_by('-id')
+        elif queryteam == 'ทั้งหมด' and querystatus != 'ทั้งหมด':
+           datacustomer = MSAcustomer.objects.filter(Q(msabranch = "RS")&Q(statuscustomer=querystatus)).values_list('id','msabranch','teamsell','date','firstname','mainmodel','customername','contactcustomer','chanelcustomer','statuscustomer','remark','quotation',named=True).order_by('-id')
+        elif queryteam != 'ทั้งหมด' and querystatus != 'ทั้งหมด':
+           datacustomer = MSAcustomer.objects.filter(Q(msabranch = "RS")&Q(teamsell=queryteam)&Q(statuscustomer=querystatus)).values_list('id','msabranch','teamsell','date','firstname','mainmodel','customername','contactcustomer','chanelcustomer','statuscustomer','remark','quotation',named=True).order_by('-id')
+    elif branchset == "HTR@mg.msam":
+        if queryteam == 'ทั้งหมด' and querystatus == 'ทั้งหมด':
+           datacustomer = MSAcustomer.objects.filter(Q(msabranch = "HTR")).values_list('id','msabranch','teamsell','date','firstname','mainmodel','customername','contactcustomer','chanelcustomer','statuscustomer','remark','quotation',named=True).order_by('-id')
+        elif queryteam != 'ทั้งหมด' and querystatus == 'ทั้งหมด':
+           datacustomer = MSAcustomer.objects.filter(Q(msabranch = "HTR")&Q(teamsell=queryteam)).values_list('id','msabranch','teamsell','date','firstname','mainmodel','customername','contactcustomer','chanelcustomer','statuscustomer','remark','quotation',named=True).order_by('-id')
+        elif queryteam == 'ทั้งหมด' and querystatus != 'ทั้งหมด':
+           datacustomer = MSAcustomer.objects.filter(Q(msabranch = "HTR")&Q(statuscustomer=querystatus)).values_list('id','msabranch','teamsell','date','firstname','mainmodel','customername','contactcustomer','chanelcustomer','statuscustomer','remark','quotation',named=True).order_by('-id')
+        elif queryteam != 'ทั้งหมด' and querystatus != 'ทั้งหมด':
+           datacustomer = MSAcustomer.objects.filter(Q(msabranch = "HTR")&Q(teamsell=queryteam)&Q(statuscustomer=querystatus)).values_list('id','msabranch','teamsell','date','firstname','mainmodel','customername','contactcustomer','chanelcustomer','statuscustomer','remark','quotation',named=True).order_by('-id')
+    #เงื่อนไขดูข้อมูลของ sell 
+    else:
+        if querystatus == 'ทั้งหมด':
+           datacustomer = MSAcustomer.objects.filter(Q(firstname = firstname)).values_list('id','msabranch','teamsell','date','firstname','mainmodel','customername','contactcustomer','chanelcustomer','statuscustomer','remark','quotation',named=True).order_by('-id')
+        else :
+           datacustomer = MSAcustomer.objects.filter(Q(firstname = firstname)&Q(statuscustomer=querystatus)).values_list('id','msabranch','teamsell','date','firstname','mainmodel','customername','contactcustomer','chanelcustomer','statuscustomer','remark','quotation',named=True).order_by('-id')
+    #ตัวเเปรเเสดงค่าการค้นหา
+    querybranch_new = querybranch
+    queryteam_new = queryteam
+    querystatus_new = querystatus
+    #ตัวเเปรนับจำนวนข้อมูล
+    countdatacustomer = datacustomer.count()
+    return render(request,'statuscustomer.html',{'datacustomer':datacustomer,'branchset':branchset,'countdatacustomer':countdatacustomer,'querystatus_new':querystatus_new,'queryteam_new':queryteam_new,'querybranch_new':querybranch_new})
 @login_required(login_url='/firstdata') 
 def updatedatacustomer(request):
     if request.method == "POST":
+        #ข้อมูลเงื่อนไข
         idcard = request.session.get('idcard')
-        # เก็บข้อมูลหน้าตัวเอง
+        # เก็บข้อมูลหน้าตัวเอง/เงื่อนไขว่าจะทำอะไร
         doit = request.POST.get('doit')
+        statuscustomerold = request.POST.get('statuscustomer-old') #ที่ไม่เเสดงเเต่ใส่ค่าเอาไว้
         customernameedit = request.POST.get('customername-edit')     
         contactcustomeredit = request.POST.get('contactcustomer-edit')     
         statuscustomeredit = request.POST.get('statuscustomer-edit')     
         customerremark = request.POST.get('customer-remark') 
-        # update ข้อมูล
+        #update ข้อมูลทุกครั้งที่มีการเปลี่ยนเเปลง statuscustomer หรือ remark จะถูกบันทึกประวัติ
         if doit == 'update' :
-            if  customernameedit != "":
-                HTRcustomer.objects.filter(id= idcard).update(customername = customernameedit)
-            if  contactcustomeredit != "":
-                HTRcustomer.objects.filter(id= idcard).update(contactcustomer = contactcustomeredit)
-            if  customerremark != "":
-                HTRcustomer.objects.filter(id= idcard).update(remark = customerremark)
-            HTRcustomer.objects.filter(id= idcard).update(statuscustomer = statuscustomeredit)
-            Pathstatushtr.objects.create(id_htrcustomer= idcard , statuscustomer=statuscustomeredit,remark=customerremark)
+            if customernameedit != "":
+                MSAcustomer.objects.filter(id= idcard).update(customername = customernameedit)
+            if contactcustomeredit != "":
+                MSAcustomer.objects.filter(id= idcard).update(contactcustomer = contactcustomeredit)
+            if customerremark != "":
+                MSAcustomer.objects.filter(id= idcard).update(remark = customerremark)
+            if statuscustomerold != statuscustomeredit :
+                MSAcustomer.objects.filter(id= idcard).update(statuscustomer = statuscustomeredit)
+            if customerremark != "" or statuscustomerold != statuscustomeredit :
+                Pathstatusmsa.objects.create(id_msacustomer= idcard , statuscustomer=statuscustomeredit,remark=customerremark)
         elif doit == 'delete' :
-            HTRcustomer.objects.filter(id= idcard).delete()   
-            Pathstatushtr.objects.filter(id_htrcustomer = idcard).delete()   
-
+            MSAcustomer.objects.filter(id= idcard).delete()   
+            Pathstatusmsa.objects.filter(id_msacustomer = idcard).delete()
     return  redirect('/statuscustomer')
 @login_required(login_url='/firstdata') 
 def showprice(request): 
-    
     # สร้างตัวเเปรมาเก็บข้อมูลจากหน้าปัจจุบัน   
     submodel = request.POST.get('submodel')
-   
     #ส่งข้อมูลออก
     request.session['submodel'] = submodel
     productdata = Product.objects.filter( submodel = submodel).values_list('price','margin', named=True)
@@ -270,7 +371,6 @@ def showprice(request):
             #productmargin = int(i.margin)               
     request.session['productprice'] = productprice     
     #request.session['productmargin'] = productmargin     
-    
     return render(request, 'showprice.html',{"productprice": '{:,}'.format(productprice), "submodel": submodel, "productcolor": productcolor})
 @login_required(login_url='/firstdata') 
 def PaymentRegis(request):
@@ -989,10 +1089,14 @@ def showdata(request):
       'text_acc_14':text_acc_14,  
       'text_acc_15':text_acc_15, 
       #ข้อมูลการติดต่อ
-      'customername':customername,  
-      'contactcustomer':contactcustomer,  
+      'customername':customername,
+      'contactcustomer':contactcustomer,
       'firstname':firstname, 
       'sellphone':sellphone,
    }
    return render(request, 'quotation.html', dataquo)
-##############################################################################
+
+###############ใบสรุปการขาย#######################
+@login_required(login_url='/firstdata')
+def sellsummaryHead(request):
+    return render(request,'sellsummary.html')

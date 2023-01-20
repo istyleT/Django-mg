@@ -58,7 +58,8 @@ class QuotationsForm (forms.ModelForm):
             exclude = []
             
 #เก็บข้อมูลลูกค้าทั้งหมด
-class HTRcustomer(models.Model):
+class MSAcustomer(models.Model):
+      msabranch = models.CharField(max_length=20, default='-')
       teamsell = models.CharField(max_length=10, default='-')
       date = models.DateField(auto_now_add=True)
       firstname = models.CharField(max_length=30)
@@ -68,13 +69,15 @@ class HTRcustomer(models.Model):
       chanelcustomer = models.CharField(max_length=30)  
       statuscustomer = models.CharField(max_length=30) #เเก้ได้
       remark = models.CharField(max_length=100, default='-') #เเก้ได้
+      quotation = models.CharField(max_length=20, default='-')
       def __str__(self):
-         return f'{self.date} | {self.firstname} | {self.mainmodel} | {self.customername} | {self.contactcustomer} | {self.chanelcustomer} | {self.statuscustomer}'
+         return f'{self.msabranch} |{self.teamsell} |{self.date} | {self.firstname} | {self.mainmodel} | {self.customername} | {self.contactcustomer} | {self.chanelcustomer} | {self.statuscustomer}| {self.quotation}'
 #ประวัติลูกค้าทั้งหมด
-class Pathstatushtr(models.Model):
-      id_htrcustomer = models.CharField(max_length=4)
+class Pathstatusmsa(models.Model):
+      msabranch = models.CharField(max_length=20, default='-')
+      id_msacustomer = models.CharField(max_length=4)
       date = models.DateField(auto_now_add=True)    
       statuscustomer = models.CharField(max_length=30)
       remark = models.CharField(max_length=100, default='-')
       def __str__(self):
-         return f'{self.id_htrcustomer} | {self.date} | {self.statuscustomer} | {self.remark}'
+         return f'{self.msabranch} |{self.id_msacustomer} | {self.date} | {self.statuscustomer} | {self.remark}'

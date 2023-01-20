@@ -7,7 +7,7 @@
     border: 3px solid black;
     border-radius: 35px;
     box-shadow: 10px 10px 5px #666699;
-    margin-top : 2vh;
+    margin : 2vh 0vw;
     padding: 5px 10px;
    }
   .img-fluid {
@@ -35,33 +35,91 @@
   .btn-outline-light {
     height: 100%;
   }
+  .input-group {
+    margin-top : 2vh;
+  }
 
 </style>
 {% endblock %}
 
-
-
-
 {% block content %}
+<!--ตัวเลือกกรองข้อมูล-->
+<form method="POST" action="querydatacustomer">
+{% csrf_token %}
+<div class="input-group mb-3">
+  <!--ตามสาขา-->
+  {% if branchset == "AD@mg.msa" %}
+  <select class="form-select text-center" name="querybranch">
+    <option value="ทั้งหมด" selected>สาขา : ทั้งหมด</option>
+    <option value="HO">สำนักงานใหญ่</option>
+    <option value="RS">รังสิตคลอง 4</option>
+    <option value="HTR">หทัยราษฎร์</option>
+  </select>
+  {% endif %}
+  <!--ตามทีมขาย-->
+  {% if branchset == "AD@mg.msa" or branchset == "HO@mg.msam" or branchset == "RS@mg.msam" or branchset == "HTR@mg.msam"%}
+  <select class="form-select text-center" name="queryteam">
+    <option value="ทั้งหมด" selected>ทีมขาย : ทั้งหมด</option>
+    <option value="A">ทีม A</option>
+    <option value="B">ทีม B</option>
+    <option value="C">ทีม C</option>
+    <option value="D">ทีม D</option>
+    <option value="O">Online</option>
+  </select>
+  {% endif %}
+  <!--ตามสถานะ-->
+  <select class="form-select text-center" name="querystatus">
+    <option value="ทั้งหมด" selected>สถานะ : ทั้งหมด</option>
+    <option value="ลูกค้ามุ่งหวัง">ลูกค้ามุ่งหวัง</option>
+    <option value="ลูกค้าจอง">ลูกค้าจอง</option>
+    <option value="ทดลองขับ">ทดลองขับ</option>
+    <option value="รอเอกสารลูกค้า">รอเอกสารลูกค้า</option>
+    <option value="รอไฟเเนนซ์เข้า">รอไฟเเนนซ์เข้า</option>
+    <option value="รอผลไฟเเนนซ์">รอผลไฟเเนนซ์</option>
+    <option value="ไฟเเนนซ์อนุมัติ">ไฟเเนนซ์อนุมัติ</option>
+    <option value="ไม่ผ่านไฟเเนนซ์">ไม่ผ่านไฟเเนนซ์</option>
+    <option value="รอรถลง">รอรถลง</option>
+    <option value="รอส่งมอบ">รอส่งมอบ</option>
+    <option value="ส่งมอบสำเร็จ">ส่งมอบสำเร็จ</option>
+    <option value="ติดตามล้มเหลว">ติดตามล้มเหลว</option>
+    <option value="ขอคืนเงินจอง">ขอคืนเงินจอง</option>
+  </select>
+  <button class="input-group-btn btn-success"><strong>ค้นหา</strong></button>
+</div>
+</form>
+<!--เเสดงจำนวนผลลัพธ์การค้นหา-->
+{% if branchset == 'AD@mg.msa' %}
+<div class="alert alert-success text-center" role="alert">
+  <strong>สาขา = {{querybranch_new}} / ทีมขาย = {{queryteam_new}} / สถานะ = {{querystatus_new}} : ผลลัพธ์  {{countdatacustomer}} รายการ</strong>
+</div>
+{% elif branchset == 'HO@mg.msam' or branchset == 'RS@mg.msam' or branchset == 'HTR@mg.msam' %}
+<div class="alert alert-success text-center" role="alert">
+  <strong>ทีมขาย = {{queryteam_new}} / สถานะ = {{querystatus_new}} : ผลลัพธ์  {{countdatacustomer}} รายการ</strong>
+</div>
+{% else  %}
+<div class="alert alert-success text-center" role="alert">
+  <strong>สถานะ = {{querystatus_new}} : ผลลัพธ์  {{countdatacustomer}} รายการ</strong>
+</div>
+{% endif %}
 {% if datacustomer.count > 0 %}
-   
 <!--ส่วนข้อมูล-->
- 
  {% for i in datacustomer %}
  <!---สร้างเพื่อให้ javascript เก็บค่า-->
-          <div  class="card" id="color-card">
+          <div  class="card">
             <div class="card-body">
               <div class="card-image">
               </div>
               <div id="content-box1" >
-                <span>วันที่ : {{i.date}}/{{i.firstname}}</span>
-                <span>รุ่นรถ : {{i.mainmodel}}/{{i.chanelcustomer}}</span>
-                <span>หมายเหตุ : {{i.remark}}</span>
+                <span><strong>วันที่ :</strong> {{i.date}}/{{i.firstname}}</span>
+                <span><strong>รุ่นรถ :</strong> {{i.mainmodel}}/{{i.chanelcustomer}}</span>
+                <span><strong>สาขา :</strong> {{i.msabranch}} / ทีม : {{i.teamsell}}</span>
+                <span><strong>ใบเสนอราคา : </strong><a href="###">{{i.quotation}}</a></span>
               </div>
               <div id="content-box2" > 
-                <span>ชื่อลูกค้า : {{i.customername}}</span>
-                <span>ติดต่อ : {{i.contactcustomer}}</span>
-                <span>สถานะล่าสุด : {{i.statuscustomer}}</span>
+                <span><strong>ชื่อลูกค้า :</strong> {{i.customername}}</span>
+                <span><strong>ติดต่อ :</strong> {{i.contactcustomer}}</span>
+                <span><strong>หมายเหตุ :</strong> {{i.remark}}</span>
+                <span><strong>สถานะล่าสุด :</strong> {{i.statuscustomer}}</span>
               </div>
               <form action="editcard" method="POST">
                 {% csrf_token %}
@@ -72,7 +130,6 @@
             </div>
           </div>
    
-
  {% endfor %}
 
 {% endif %}

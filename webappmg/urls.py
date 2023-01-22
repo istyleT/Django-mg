@@ -30,8 +30,6 @@ urlpatterns = [
     path('branchcash',views.branchcash),
     path('showdata',views.showdata),
     path('logout', views.log_user_out),
-    #path('uploadpage',views.uploadpage),
-    #path('upload',views.upload),
     path('dataclient',views.dataclient),
     path('statuscustomer',views.statuscustomer),
     path('editcard',views.editcard),

@@ -2,110 +2,90 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-                    <meta charset="UTF-8">
-                    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                    <title>MG Saengaree Auto Webapp</title>
-                    <link rel="stylesheet"  href="{% static 'bootstrap/css/bootstrap.min.css' %}">
-                    {% block style  %} {% endblock %}
-
-                    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"> </script>
-                    {% block script %} {% endblock %}
-                    
-                    <style>
-                     
-                      .dropdown-item:hover {
-                        background-color: green;
-                        
-                      }
-                      .navbar-menu {
-                        height: 100%;
-                      }
-                      #a-menu {
-                        border: none;
-                        height : 100%;
-                        font-size : 20px;
-                        margin-left : 2vw;
-                        text-decoration : none;
-                        color : white;
-                        
-                      }
-
-                      #ul-menu{
-                        margin : -0.5px 3vw;
-                        opacity: 1 ;
-                      }
-                      #listdrop {
-                        font-size : 18px;
-                        text-align : center;
-                        
-                      }
-
-                      body {
-                        background: linear-gradient(to bottom right, #666699 -50%, #ffffff 120%);
-                        background-repeat: no-repeat;
-                        background-attachment: fixed;
-                      }
-
-                      .frm-body{
-                        margin-top: 2vh;
-                        margin-bottom: 2vh;
-                        padding : 2vh 2vw;
-                        border-radius: 20px;
-                        box-shadow: 10px 10px 5px #666699;
-                      }
-
-          
-                    </style>
-
-         
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MG Saengaree Auto</title>
+  <link rel="stylesheet"  href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+  {% block style  %} {% endblock %}
+  <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"> </script>
+  {% block script %} {% endblock %}              
+  <style>
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      height: 60px;
+      background-color: white;
+    }
+    .navbar-logo {
+      display: flex;
+      align-items: center;
+      height: 100%;
+    }
+    .image-navbar {
+      width: 115px;
+      height: 38.95px;
+    }
+    .navbar-menu {
+      display: flex;
+      align-items: center;
+      height: 100%;
+    }
+    #a-menu {
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      border: none;
+      height : 100%;
+      margin-right: 5px;
+      transition: 0.3s;
+    }
+    #a-menu:hover {
+      background-color: lightgray;
+    }
+    .menu-navbar {
+      width: 35px;
+      height: 35px;
+    }
+    body {
+      background: lightgray;
+    }
+    .frm-body{
+      margin-top: 2vh;
+      margin-bottom: 2vh;
+      padding : 2vh 2vw;
+      border-radius: 20px;
+    }
+  </style>     
 </head>
-
 <body>
-  
-                    <nav class="navbar navbar-dark bg-dark">
-                      <div class="container-fluid">
-                        <div style="display:flex;" >
-                          <img src="{% static 'picture/logo.png' %}"  alt="" width="42" height="40" class="d-inline-block align-text-top"/>
-                          <h2 style="margin-left:2vw ; text-shadow: -1px 0 red, 0 1px red, 1px 0 red, 0 -1px red;"><strong class="text-light">MG Saengaree Auto</strong></h2>
-                        </div>
-                        {% if user.is_authenticated %}
-                        <div class="navbar-menu">
-                          <a id="a-menu" href="/firstdata">
-                            <strong class="text-light">Home</strong>
-                          </a>
-                          <a  id="a-menu" class=" dropdown-toggle"  data-bs-toggle="dropdown" aria-expanded="false">
-                            <strong class="text-light">Staff</strong>
-                          </a>
-                            <ul id="ul-menu" class=" bg-dark dropdown-menu dropdown-menu-end " style="border: none; border-radius: 0px;">
-                              <li><a id="listdrop" class="dropdown-item text-white text-left" href="/statuscustomer"><strong>ข้อมูลลูกค้า</strong></a></li>
-                              {% if username == "istyletoon" %}
-                              <li><a id="listdrop" class="dropdown-item text-white text-left" href="/dashboard"><strong>Dashboard</strong></a></li>
-                              {% endif %}                 
-                            </ul>
-                          <a id="a-menu" href="/logout">
-                            <strong class="text-light">Logout</strong>
-                          </a>
-                        </div>
-                        {% endif %}
-                      </div>
-
-                    </nav>
-                    {% block alert %}
-                            
-                    {% endblock %}
-                    
-                    <div  class="container">
-                      
-                                        {% block content %}
-
-
-
-     
-                                        {% endblock %}
-
-                    </div>
-                    
-      
+  <nav class="navbar">
+    <div class="navbar-logo" >
+      <img class="image-navbar" src="{% static 'picture/logomg.png' %}"  alt="logonavbarmsa">
+    </div>
+    {% if user.is_authenticated %}
+    <div class="navbar-menu">
+      <a id="a-menu" href="/firstdata">
+        <img class="menu-navbar" src="{% static 'picture/icons8-home-page-90.png' %}" alt="image-home">
+      </a>
+      <a id="a-menu" href="/statuscustomer">
+        <img class="menu-navbar" src="{% static 'picture/icons8-customer-90.png' %}" alt="image-customer">
+      </a>
+      <a id="a-menu" href="/logout">
+        <img class="menu-navbar" style="padding:4px;" src="{% static 'picture/icons8-logout-100.png' %}" alt="image-logout">
+      </a>
+    </div>
+    {% endif %}
+  </nav>
+  {% block alert %}
+          
+  {% endblock %}
+  <div class="container">
+      {% block content %}
+       
+      {% endblock %}
+  </div>
 </body>
 </html>

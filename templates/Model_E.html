@@ -1,4 +1,3 @@
-
 {% extends 'layout.html' %}
 {% block content %}
 {% load static %}
@@ -6,54 +5,31 @@
 <script type="text/javascript" src="{% static 'js/checksubmodel.js' %}" defer></script> <!---->
 {%  endblock %}
 {% block style %}
-
 <style>
   .form-select {
     border: 1px solid gray;
-    border-radius: 25px;
+    border-radius: 5px;
     text-align: center;
   }
-  
   label {
     margin-left: 2vw;
   }
 </style>
 {% endblock %}
-    
     <div align="center">
-      <img  src="{% static 'picture/Newmghs.png' %}" class="img-fluid" alt="..."/>
+      <img  src="{% static 'picture/Newmghs.png' %}" class="img-fluid" alt="Newmghs.png"/>
     </div>
-    
-     <form  action="queryprice"  method="POST"  >  <!---->
+    <form  action="queryprice"  method="POST"  >  <!---->
       {% csrf_token %}
       <label for="formGroupExampleInput2" class="col-lg col-form-label col-form-label-lg"><strong>Choose Grade</strong></label>
-      <select onchange="appendbutton()" class="form-select form-select-lg mb-3" name="submodel" id="submodelid" aria-label=".form-select-lg example"> <!---->
+      <select onchange="appendbutton()" class="form-select form-select mb-3" name="submodel" id="submodelid" aria-label=".form-select example"> <!---->
           <option value="-" selected>Choose Model Grade</option>
           <option value="MGHSPHEVX2022">MG HS PHEV X 2022</option>
           <option value="MGHSPHEVD2022">MG HS PHEV D 2022</option>
           <option value="MGHSPHEV2020">MG HS PHEV 2020</option>
-        </select>
-
-        <div id="append-btn" style="display:none"> 
-          <div  align="center" style="display : flex; justify-content: center; margin-top: 3vh;">
-            <button  type="submit" style="display: flex;
-            justify-content: center;
-            padding : 0px 3vw;
-            width : 35%;
-            height : 50px;
-            font-size : 26px;
-            border-radius : 20px;
-            border : 4px solid white ;
-            outline-style: solid;
-            outline-color: #9933ff;
-            outline-width: thick;
-            background: #9933ff;">
-              <strong class="text-light"  style="height: 100%;">Continue</strong>
-            </button> 
-          </div>
-        </div>
-
-    </form>
-   
-    
+      </select>
+      <div class="d-grid gap-1" id="append-btn" style="display:none">
+        <button class="btn btn-danger" type="submit">ดำเนินการต่อ</button>
+      </div>
+    </form>   
 {% endblock %}

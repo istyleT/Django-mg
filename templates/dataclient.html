@@ -8,7 +8,7 @@
 {% csrf_token %} 
 <!--เลือกทีม A/B/C/D/O-->
 <div class="input-group mb-3" style="margin-top: 1vh; ">
-   <label class="input-group-text btn-dark " for="inputGroupSelect01"><strong>ทีมขาย*</strong></label>
+   <label class="input-group-text btn-dark " for="inputGroupSelect01">ทีมขาย*</label>
    <select class="form-select text-center"  id="chooseteam" name="teamsell" onchange="appendpic()">
      <option value="-" selected >กรุณาเลือกทีม</option>
      <option value="A">ทีม A</option>
@@ -20,7 +20,7 @@
  </div>   
    <!--mainmodel-->
    <div class="input-group mb-3" style="margin-top: 1vh; ">
-      <label class="input-group-text btn-danger " for="inputGroupSelect01"><strong>รุ่นรถ MG*</strong></label>
+      <label class="input-group-text btn-success " for="inputGroupSelect01">รุ่นรถ*</label>
       <select class="form-select text-center"  id="choosemainmodel" name="mainmodel" onchange="appendpic()">
         <option value="-" selected >กรุณาเลือกรุ่น</option>
         <option value="MG5">NEW MG 5 MY2022</option>
@@ -36,100 +36,68 @@
              
    <!--name customer-->   
    <div class="input-group input-group-mb" style="margin-top: 1vh;">
-      <span class="input-group-text btn-success" id="inputGroup-sizing-lg"><strong>ชื่อลูกค้า*</strong></span>
+      <span class="input-group-text btn-warning" id="inputGroup-sizing-lg">ชื่อลูกค้า*</span>
       <input type="text" name="customername" class="form-control text-center" id="namecustomer" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" placeholder="กรุณากรอกชื่อลูกค้า" onchange="checkdataclient()" >
     </div>          
    <!--tel--> 
    <div class="input-group input-group-md" style="margin-top: 1vh;">
-      <span class="input-group-text btn-primary" id="inputGroup-sizing-lg"><strong>การติดต่อ</strong></span>
-      <input type="text" name="contactcustomer" class="form-control text-center" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" placeholder="เบอร์โทรศัพท์ / Id Line / E-mail">
+      <span class="input-group-text btn-primary" id="inputGroup-sizing-lg">การติดต่อ</span>
+      <input type="text" name="contactcustomer" class="form-control text-center" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" placeholder="Tel / ID line">
     </div>               
    <!--source-->
- 
-   <div style="margin-top: 2vh; border:2px solid RebeccaPurple; border-radius: 30px; padding: 1vh 0vw">
-      
-      <div style="display: flex; justify-content: space-around; font-size: 18px;">
-         <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="chanelcustomer" id="radiochanels1" value="Walk-in" checked>
-            <label class="form-check-label" for="radiochanels1"><strong>Walk in</strong></label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="chanelcustomer" id="radiochanels2" value="Online">
-            <label class="form-check-label" for="radiochanels2"><strong>Online</strong></label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="chanelcustomer" id="radiochanels3" value="Event-booth">
-            <label class="form-check-label" for="radiochanels3"><strong>ออกบูธ</strong></label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="chanelcustomer" id="radiochanels4" value="Advice">
-            <label class="form-check-label" for="radiochanels4"><strong>ลูกค้าเเนะนำ</strong></label>
-          </div>       
-      </div>
-   </div>   
- 
+   <div class="input-group mb-3" style="margin-top: 1vh; ">
+      <label class="input-group-text btn-secondary " for="inputGroupSelect01">ที่มา</label>
+      <select class="form-select text-center" name="chanelcustomer">
+        <option value="Walk-in" selected >Walk in</option>
+        <option value="Online">Online</option>
+        <option value="Event-booth">ออกบูธ</option>
+        <option value="Advice">ลูกค้าเเนะนำ</option>
+      </select>
+    </div>  
    <!--status-->  
    <div class="input-group mb-3" style="margin-top: 2vh;">
-      <label class="input-group-text btn-warning" for="inputGroupSelect01"><strong>สถานะ</strong></label>
+      <label class="input-group-text btn-info" for="inputGroupSelect01">สถานะ</label>
       <select class="form-select text-center" name="statuscustomer" id="inputGroupSelect01">
         <option value="ลูกค้ามุ่งหวัง" selected>PP : ลูกค้ามุ่งหวัง</option>
         <option value="ลูกค้าจอง">BK : ลูกค้าจอง</option>
         <option value="ทดลองขับ">TD : ทดลองขับ</option>
       </select>
     </div>
-    
-    
-   <div align="center" id="btn-dataclient" style="display: none; display : flex; justify-content: center; margin-top: 2vh;">
-      <button  type="submit" style="display: flex;
-      justify-content: center;
-      padding : 0px 3vw;
-      width : 35%;
-      height : 50px;
-      font-size : 26px;
-      border-radius : 20px;
-      border : 4px solid white ;
-      outline-style: solid;
-      outline-color: #9933ff;
-      outline-width: thick;
-      background: #9933ff;">
-        <strong class="text-light"  style="height: 100%;">Continue</strong>
-      </button> 
-   </div>
-   
-
+    <!--button-->
+    <div class="d-grid gap-1" id="btn-dataclient" style="margin-top: 2vh;">
+      <button type="submit" class="btn btn-danger" type="submit">ดำเนินการต่อ</button>
+    </div>
 </form>
 <!--picture zone-->
-
-<div align="center" id="carshadow" style="margin-top: 8vh">
-   <img  src="{% static 'picture/carshadow.png' %}" class="img-fluid" alt="..."/>
-</div>
-<div align="center" id="picmg5" style="display: none;">
-   <img  src="{% static 'picture/Newmg5.png' %}" class="img-fluid" alt="..."/>
-</div>
-<div align="center" id="picmgvshev" style="display: none;">
-   <img  src="{% static 'picture/Newmgvshev.png' %}" class="img-fluid" alt="..."/>
-</div>
-<div align="center" id="picmgzs" style="display: none;">
-   <img  src="{% static 'picture/Newmgzs.png' %}" class="img-fluid" alt="..."/>
-</div>
-<div align="center" id="picmgetd" style="display: none;">
-   <img  src="{% static 'picture/Newmgextendergc.png' %}" class="img-fluid" alt="..."/>
-</div>
-<div align="center" id="picmghsphev" style="display: none;">
-   <img  src="{% static 'picture/Newmghs.png' %}" class="img-fluid" alt="..."/>
-</div>
-<div align="center" id="picmghs" style="display: none;">
-   <img  src="{% static 'picture/Newmghs.png' %}" class="img-fluid" alt="..."/>
-</div>
-<div align="center" id="picmg4" style="display: none;">
-   <img  src="{% static 'picture/Mg4.png' %}" class="img-fluid" alt="..."/>
-</div>
-<div align="center" id="picmgep" style="display: none;">
-   <img  src="{% static 'picture/Mgep.png' %}" class="img-fluid" alt="..."/>
-</div>
+  <div align="center" id="carshadow" style="margin-top: 8vh">
+     <img  src="{% static 'picture/carshadow.png' %}" class="img-fluid" alt="carshadow"/>
+  </div>
+  <div align="center" id="picmg5" style="display: none;">
+     <img  src="{% static 'picture/Newmg5.png' %}" class="img-fluid" alt="Newmg5"/>
+  </div>
+  <div align="center" id="picmgvshev" style="display: none;">
+     <img  src="{% static 'picture/Newmgvshev.png' %}" class="img-fluid" alt="Newmgvshev"/>
+  </div>
+  <div align="center" id="picmgzs" style="display: none;">
+     <img  src="{% static 'picture/Newmgzs.png' %}" class="img-fluid" alt="Newmgzs"/>
+  </div>
+  <div align="center" id="picmgetd" style="display: none;">
+     <img  src="{% static 'picture/Newmgextendergc.png' %}" class="img-fluid" alt="Newmgextendergc"/>
+  </div>
+  <div align="center" id="picmghsphev" style="display: none;">
+     <img  src="{% static 'picture/Newmghs.png' %}" class="img-fluid" alt="Newmghs"/>
+  </div>
+  <div align="center" id="picmghs" style="display: none;">
+     <img  src="{% static 'picture/Newmghs.png' %}" class="img-fluid" alt="Newmghs"/>
+  </div>
+  <div align="center" id="picmg4" style="display: none;">
+     <img  src="{% static 'picture/Mg4.png' %}" class="img-fluid" alt="Mg4"/>
+  </div>
+  <div align="center" id="picmgep" style="display: none;">
+     <img  src="{% static 'picture/Mgep.png' %}" class="img-fluid" alt="Mgep"/>
+  </div>
 </div>
 <script>
-
    function appendpic() {
       const carshadow = document.getElementById('carshadow');
       const picmg5 = document.getElementById('picmg5');
@@ -236,7 +204,6 @@
       checkdataclient();
       return 
    }
-
    function checkdataclient(){
       const chooseteam = document.getElementById('chooseteam').value;
       const choosemainmodel = document.getElementById('choosemainmodel').value;
@@ -249,10 +216,7 @@
       }
       return ;
    }
-   
    window.addEventListener("load", checkdataclient);
 </script>
-
-
 {% endblock %}
 

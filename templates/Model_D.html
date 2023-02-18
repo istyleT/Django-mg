@@ -2,32 +2,27 @@
 {% block content %}
 {% load static %}
 {% block script %}
-<script type="text/javascript" src="{% static 'js/checksubmodel.js' %}" defer></script> <!---->
+<script type="text/javascript" src="{% static 'js/checksubmodel.js' %}" defer></script>
 {%  endblock %}
-
 {% block style %}
-
 <style>
   .form-select {
     border: 1px solid gray;
-    border-radius: 25px;
+    border-radius: 5px;
     text-align: center;
   }
-  
   label {
     margin-left: 2vw;
   }
 </style>
 {% endblock %}
-  
     <div align="center">
-      <img  src="{% static 'picture/Newmgextendergc.png' %}" class="img-fluid" alt="..."/>
+      <img  src="{% static 'picture/Newmgextendergc.png' %}" class="img-fluid" alt="Newmgextendergc.png"/>
     </div>
-    
-    <form  action="queryprice"  method="POST"  >  <!---->
+    <form  action="queryprice"  method="POST"  >  
       {% csrf_token %}
       <label for="formGroupExampleInput2" class="col-lg col-form-label col-form-label-lg"><strong>Choose Grade</strong></label>
-      <select onchange="appendbutton()" class="form-select form-select-lg mb-3" name="submodel" id="submodelid" aria-label=".form-select-lg example"> <!---->
+      <select onchange="appendbutton()" class="form-select form-select mb-3" name="submodel" id="submodelid" aria-label=".form-select example"> <!---->
           <option value="-" selected>Choose Model Grade</option>
           <option value="EXTENDER2.0DCG4WDX6AT">EXTENDER 2.0 DC G 4WD X 6AT</option>
           <option value="EXTENDER2.0DCGX6AT">EXTENDER 2.0 DC G X 6AT</option>
@@ -37,28 +32,9 @@
           <option value="EXTENDER2.0GCGD6MT">EXTENDER 2.0 GC G D 6MT</option>
           <option value="EXTENDER2.0GCD6MT">EXTENDER 2.0 GC D 6MT</option>
           <option value="EXTENDER2.0GCC6MT">EXTENDER 2.0 GC C 6MT</option>
-          </select>
-
-          <div id="append-btn" style="display:none"> 
-            <div  align="center" style="display : flex; justify-content: center; margin-top: 3vh;">
-              <button  type="submit" style="display: flex;
-              justify-content: center;
-              padding : 0px 3vw;
-              width : 35%;
-              height : 50px;
-              font-size : 26px;
-              border-radius : 20px;
-              border : 4px solid white ;
-              outline-style: solid;
-              outline-color: #9933ff;
-              outline-width: thick;
-              background: #9933ff;">
-                <strong class="text-light"  style="height: 100%;">Continue</strong>
-              </button> 
-            </div>
-          </div>
-  
-    </form>
-    
-    
+      </select>
+      <div class="d-grid gap-1" id="append-btn" style="display:none">
+        <button class="btn btn-danger" type="submit">ดำเนินการต่อ</button>
+      </div>
+    </form> 
 {% endblock %}

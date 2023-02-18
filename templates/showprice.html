@@ -26,7 +26,7 @@
 <div class="frm-body bg-white">
   <div align="center" >
     <div align="center" class="card text-white bg-danger mb-3" style="max-width: 35rem;">
-        <div class="card-header"><h5><strong>รายละเอียด</strong></h5></div>
+        <div class="card-header"><h6><strong>รายละเอียดรุ่นเเละราคา</strong></h6></div>
         <ul class="list-group list-group-flush" style=" border-radius: 5px;">
           <li class="list-group-item"> <h6><strong>รุ่นรถ :</strong> {{submodel}}</h6> </li>
           <li class="list-group-item"><h6><strong>ราคา :</strong> {{productprice}} บาท</h6> </li>
@@ -61,9 +61,11 @@
              <option value="Ransit">รังสิตคลองสี่</option>
              <option value="Hathairat">หทัยราษฎร์</option>
          </select>
-         <div class="d-grid gap-1" id="append-btn" style="display:none">
-           <button class="btn btn-danger" type="submit">ดำเนินการต่อ</button>
-         </div>
+         <div id="append-btn" style="display:none; margin-top:2vh;">
+           <div class="d-grid gap-1">
+             <button class="btn btn-danger" type="submit">ดำเนินการต่อ</button>
+           </div>
+         </div>      
   </form>
 </div>     
 {% endblock %}

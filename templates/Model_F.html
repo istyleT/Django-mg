@@ -21,16 +21,18 @@
     </div>
     <form  action="queryprice"  method="POST" >  <!---->
       {% csrf_token %}
-      <label for="formGroupExampleInput2" class="col-lg col-form-label col-form-label-lg"><strong>Choose Grade</strong></label>
+      <label for="formGroupExampleInput2" class="col-lg col-form-label col-form-label-lg">Choose Grade</label>
       <select  onchange="appendbutton()" class="form-select form-select mb-3" name="submodel" id="submodelid" aria-label=".form-select example"> <!---->
-          <option value="-" selected>Choose Model Grade</option>
+          <option value="-" selected>กรุณาเลือกรุ่นย่อย</option>
           <option value="MGHS1.5TX2022">MG HS 1.5T X 2022</option>
           <option value="MGHS1.5TD2022">MG HS 1.5T D 2022</option>
           <option value="MGHS1.5TC2022">MG HS 1.5T C 2022</option>
           <!--<option value="MGHS1.5TD2020">MG HS 1.5T D 2020</option>-->
           </select>
-          <div class="d-grid gap-1" id="append-btn" style="display:none">
-            <button class="btn btn-danger" type="submit">ดำเนินการต่อ</button>
+          <div id="append-btn" style="display:none">
+            <div class="d-grid gap-1" >
+              <button class="btn btn-danger" type="submit">ดำเนินการต่อ</button>
+            </div>
           </div>
     </form>
 {% endblock %}

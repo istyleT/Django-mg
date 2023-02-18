@@ -21,9 +21,9 @@
     </div>
     <form  action="queryprice"  method="POST"  >  
       {% csrf_token %}
-      <label for="formGroupExampleInput2" class="col-lg col-form-label col-form-label-lg"><strong>Choose Grade</strong></label>
+      <label for="formGroupExampleInput2" class="col-lg col-form-label col-form-label-lg">Choose Grade</label>
       <select onchange="appendbutton()" class="form-select form-select mb-3" name="submodel" id="submodelid" aria-label=".form-select example"> <!---->
-          <option value="-" selected>Choose Model Grade</option>
+          <option value="-" selected>กรุณาเลือกรุ่นย่อย</option>
           <option value="EXTENDER2.0DCG4WDX6AT">EXTENDER 2.0 DC G 4WD X 6AT</option>
           <option value="EXTENDER2.0DCGX6AT">EXTENDER 2.0 DC G X 6AT</option>
           <option value="EXTENDER2.0DCGD6MT">EXTENDER 2.0 DC G D 6MT</option>
@@ -33,8 +33,10 @@
           <option value="EXTENDER2.0GCD6MT">EXTENDER 2.0 GC D 6MT</option>
           <option value="EXTENDER2.0GCC6MT">EXTENDER 2.0 GC C 6MT</option>
       </select>
-      <div class="d-grid gap-1" id="append-btn" style="display:none">
-        <button class="btn btn-danger" type="submit">ดำเนินการต่อ</button>
+      <div id="append-btn" style="display:none">
+        <div class="d-grid gap-1" >
+          <button class="btn btn-danger" type="submit">ดำเนินการต่อ</button>
+        </div>
       </div>
     </form> 
 {% endblock %}

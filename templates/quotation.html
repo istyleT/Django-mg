@@ -28,8 +28,8 @@
    </script>
             
 <style>
-  html body {
-    margin:0;
+  body {
+    padding: 5px;
   }
   #addremark {
     margin-left: 0vw;
@@ -37,6 +37,7 @@
   }
   #onepage {
     display: flex;
+    justify-content: center;
   }
   table {
     font-size: 13px;
@@ -52,8 +53,9 @@
 <body onload="saveToPdf()">
 
 <div id="savePDF">
+ <br> 
   <header class="header">
-    <h4 align="center" >ใบเสนอราคา</h4>
+    <h4 align="center" class="text-success fw-bold ">ใบเสนอราคา</h4>
   </header>
 <div id="onepage">
 
@@ -61,7 +63,7 @@
     <table class="table table-sm">
      <thead>
        <tr>
-         <th  colspan="2" class="text-success">ข้อมูลทั่วไป</th>
+         <th  colspan="2" class="text-secondary fw-bold fst-italic">ข้อมูลทั่วไป</th>
        </tr>
      </thead>
      <tbody>
@@ -108,7 +110,7 @@
     <table class="table table-sm">
       <thead>
         <tr>
-          <th colspan="2" class="text-success">รายละเอียดการซื้อรถยนต์</th>
+          <th colspan="2" class="text-secondary fw-bold fst-italic">รายละเอียดการซื้อรถยนต์</th>
         </tr>
       </thead>
       <tbody>
@@ -219,7 +221,7 @@
     <table class="table table-sm">
       <thead>
         <tr>
-          <th colspan="2" class="text-success">รายละเอียดค่าใช้จ่ายวันออกรถยนต์</th>
+          <th colspan="2" class="text-secondary fw-bold fst-italic">รายละเอียดค่าใช้จ่ายวันออกรถยนต์</th>
         </tr>
       </thead>
       <tbody>
@@ -280,7 +282,7 @@
    <table  class="table table-sm">
     <thead>
       <tr>
-        <th colspan="2" class="text-success">รายการอุปกรณ์ตกเเต่ง/ของเเถม</th>
+        <th colspan="2" class="text-secondary fw-bold fst-italic">รายการอุปกรณ์ตกเเต่ง/ของเเถม</th>
       </tr>
     </thead>
     <tbody>
@@ -383,12 +385,12 @@
 <table  class="table table-sm text-center">
   <thead>
     <tr>
-      <th colspan="4" class="text-success">เงื่อนไขทางเลือก</th>
+      <th colspan="4" class="text-secondary fw-bold fst-italic">เงื่อนไขทางเลือก</th>
     </tr>
   </thead>
   <thead>
     <tr>
-      <th>ลำดับ</th>
+      <th>เงื่อนไข</th>
       <th>จำนวนงวด</th>
       <th>ดอกเบี้ย</th>
       <th>ค่างวด</th>
@@ -419,7 +421,7 @@
   <table  class="table table-sm">
     <thead>
       <tr>
-        <th colspan="2" class="text-success">หมายเหตุ</th>
+        <th colspan="2" class="text-secondary fw-bold fst-italic">หมายเหตุ</th>
       </tr>
     </thead>
     <tbody>
@@ -432,7 +434,7 @@
   <table  class="table table-sm">
     <thead>
       <tr>
-        <th colspan="2" class="text-success">ข้อมูลติดต่อ</th>
+        <th colspan="2" class="text-secondary fw-bold fst-italic">ข้อมูลติดต่อ</th>
       </tr>
     </thead>
     <tbody>
@@ -450,7 +452,7 @@
                                              
  </div>
 </div>
-  <span id="addremark" style="margin-left: 2.5vw; font-size: 12px;">หมายเหตุ : เงื่อนไขเป็นไปตามที่บริษัทกำหนด</span>
+  <span id="addremark" style="margin-left: 2.5vw; font-size: 12px;" class="text-muted">หมายเหตุ : เงื่อนไขเป็นไปตามที่บริษัทกำหนด</span>
 </div>
 </body>
 </html>

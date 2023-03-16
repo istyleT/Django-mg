@@ -15,7 +15,7 @@
   </div>
   <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne">
     <div class="accordion-body">
-      <li class="list-group-item" style="border-top: 2px solid gray; border-top-left-radius: 15px; border-top-right-radius: 15px;">
+      <li class="list-group-item" style="border-top:1px solid gray; border-top-left-radius: 15px; border-top-right-radius: 15px;">
         <label >
            <strong>ส่วนลดตามรุ่น</strong> : <strong class="text-dark">{{productmargin}}</strong> บาท
         </label>
@@ -25,12 +25,11 @@
            <strong>ส่วนเพิ่มส่วนลด</strong> : <strong class="text-success">{{total_addmargin}}</strong> บาท
         </label>
       </li> 
-      <li class="list-group-item" style="border-bottom: 2px solid gray; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px;">
+      <li class="list-group-item" style="border-bottom: 1px solid gray; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px;">
         <label >
            <strong>การใช้ส่วนลด</strong> : <strong class="text-danger">{{total_minmargin}}</strong> บาท
         </label>
       </li> 
-      
     </div>
   </div>
 </div>
@@ -44,7 +43,7 @@
     <div id="panelsStayOpen-collapseA" class="accordion-collapse collapse " aria-labelledby="panelsStayOpen-headingA">
       <div class="accordion-body">
 
-        <li class="list-group-item" style="border-top: 2px solid gray; border-top-left-radius: 15px; border-top-right-radius: 15px;">
+        <li class="list-group-item" style="border-top: 1px solid gray; border-top-left-radius: 15px; border-top-right-radius: 15px;">
             <label >
                <strong>บวกหัวค่าอุปกรณ์</strong> : <strong class="text-success">+{{add_eq}}</strong> บาท
             </label>
@@ -54,7 +53,7 @@
                <strong>Kickback</strong> : <strong class="text-success">+{{add_kickback}}</strong> บาท
             </label>
        </li> 
-        <li class="list-group-item" style="border-bottom: 2px solid gray; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px;">
+        <li class="list-group-item" style="border-bottom: 1px solid gray; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px;">
             <label >
                <strong>Com ไฟเเนนซ์</strong> : <strong class="text-success">+{{total_com_finance}}</strong> บาท
             </label>
@@ -67,13 +66,13 @@
   <div class="accordion-item">
     <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-        <strong class="text-danger" >การใช้ส่วนลด : (-{{total_minmargin}}) บาท</strong>
+        <strong class="text-danger fw-normal" >การใช้ส่วนลด : (-{{total_minmargin}}) บาท</strong>
       </button>
     </h2>
     <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
       <div class="accordion-body">
 
-        <li class="list-group-item" style="border-top: 2px solid gray; border-top-left-radius: 15px; border-top-right-radius: 15px;">
+        <li class="list-group-item" style="border-top: 1px solid gray; border-top-left-radius: 15px; border-top-right-radius: 15px;">
           <label >
              <strong>ส่วนลดจากราคาขาย</strong> : <strong class="text-danger">-{{min_reduce}}</strong> บาท
           </label>
@@ -88,7 +87,7 @@
              <strong>ส่วนลดเงินดาวน์</strong> : <strong class="text-danger">-{{min_subdown}}</strong> บาท
           </label>
         </li>  
-        <li class="list-group-item" style="border-bottom: 2px solid gray; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px;">
+        <li class="list-group-item" style="border-bottom: 1px solid gray; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px;">
           <label >
              <strong>ค่า Subsidy</strong> : <strong class="text-danger">-{{sumsubsidy}}</strong> บาท 
           </label>
@@ -101,20 +100,20 @@
   <div class="accordion-item">
     <h2 class="accordion-header" id="panelsStayOpen-headingThree">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
-        <strong class="text-dark">ค่าใช้จ่ายวันออกรถ : {{total_exit}} บาท</strong>
+        <strong class="text-dark fw-normal">ค่าใช้จ่ายวันออกรถ : {{total_exit}} บาท</strong>
       </button>
     </h2>
     <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
       <div class="accordion-body">
         {% if paytype == 'finance' %}
-        <li class="list-group-item" style="border-top: 2px solid gray; border-top-left-radius: 15px; border-top-right-radius: 15px;" >
+        <li class="list-group-item" style="border-top: 1px solid gray; border-top-left-radius: 15px; border-top-right-radius: 15px;" >
           <label >
              <strong>เงินดาวน์</strong> : <strong class="text-muted">{{exit_cost_down}}</strong> บาท
           </label>
         </li>
         {% endif %}
         {% if paytype == 'cash' %}
-        <li class="list-group-item" style="border-top: 2px solid gray; border-top-left-radius: 15px; border-top-right-radius: 15px;">
+        <li class="list-group-item" style="border-top: 1px solid gray; border-top-left-radius: 15px; border-top-right-radius: 15px;">
           <label >
              <strong>ราคารถสุทธิ</strong> : <strong class="text-muted">{{exit_cost_down}}</strong> บาท
           </label>
@@ -158,7 +157,7 @@
         </li> 
         {% endif %}
         {% endif %}
-        <li class="list-group-item" style="border-bottom: 2px solid gray; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px;">
+        <li class="list-group-item" style="border-bottom: 1px solid gray; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px;">
           <label >
              <strong>หักเงินจอง</strong> : <strong class="text-muted">-{{gen_prepay}}</strong> บาท
           </label>
@@ -173,7 +172,7 @@
 <div class="accordion-item">
   <h2 class="accordion-header" id="panelsStayOpen-headingFive">
     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFive" aria-expanded="false" aria-controls="panelsStayOpen-collapseFive">
-      <strong class="text-warning">รายละเอียดเพิ่มเติม</strong>
+      <strong class="text-warning fw-normal">รายละเอียดเพิ่มเติม</strong>
     </button>
   </h2>
   <div id="panelsStayOpen-collapseFive" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFive">
@@ -181,34 +180,34 @@
       <table class="table table-hover text-center table-bordered border-dark">
         <thead class="table-warning table-bordered border-dark">
           <tr>
-            <th scope="col">เงื่อนไข</th>
-            <th scope="col">ค่างวด/เดือน</th>
-            <th scope="col">ดอกเบี้ยทั้งหมด</th>
-            <th scope="col">ค่าใช้จ่ายทั้งหมด</th>
+            <th scope="col" class="align-middle">Condition</th>
+            <th scope="col" class="align-middle">Pay/Month</th>
+            <th scope="col" class="align-middle">Tot Inter</th>
+            <th scope="col" class="align-middle">Tot Pay</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <th scope="row">เงื่อนไข(1)</th>
-            <td>{{month_payment}} บาท</td>
-            <td>{{total_inter}} บาท</td>
-            <td>{{net_total_payment}} บาท</td>
+            <td>{{month_payment}}</td>
+            <td>{{total_inter}}</td>
+            <td>{{net_total_payment}}</td>
           </tr>
           {% if paytype == 'finance' %}
             {% if total_inter2 != '0' %}
             <tr>
               <th scope="row">เงื่อนไข(2)</th>
-              <td>{{month_payment2}} บาท</td>
-              <td>{{total_inter2}} บาท</td>
-              <td>{{net_total_payment2}} บาท</td>
+              <td>{{month_payment2}}</td>
+              <td>{{total_inter2}}</td>
+              <td>{{net_total_payment2}}</td>
             </tr>
             {% endif %}
             {% if total_inter3 != '0' %}
             <tr>
               <th scope="row">เงื่อนไข(3)</th>
-              <td>{{month_payment3}} บาท</td>
-              <td>{{total_inter3}} บาท</td>
-              <td>{{net_total_payment3}} บาท</td>
+              <td>{{month_payment3}}</td>
+              <td>{{total_inter3}}</td>
+              <td>{{net_total_payment3}}</td>
             </tr>
             {% endif %}
           {% endif %}
@@ -224,12 +223,12 @@
     <div id="panelsStayOpen-collapseX" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingX">
       <div class="accordion-body" style="border-top: 1px solid black">
 
-        <li class="list-group-item" style="border-top: 2px solid gray; border-top-left-radius: 15px; border-top-right-radius: 15px;">
+        <li class="list-group-item" style="border-top: 1px solid gray; border-top-left-radius: 15px; border-top-right-radius: 15px;">
           <label >
              <strong>ผู้เสนอราคา</strong> : <strong class="text-dark">{{firstname}} / {{sellphone}}</strong>
           </label>
         </li> 
-        <li class="list-group-item" style="border-bottom: 2px solid gray; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px;">
+        <li class="list-group-item" style="border-bottom: 1px solid gray; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px;">
           <label >
              <strong>ลูกค้า</strong> : <strong class="text-dark">{{customername}} / {{contactcustomer}}</strong> 
           </label>
@@ -239,7 +238,7 @@
     </div>
     <h2 class="accordion-header" id="panelsStayOpen-headingX">
       <button style="border-left: 1px solid gray; border-right: 1px solid gray; border-bottom: 1px solid gray; border-bottom-right-radius: 15px; border-bottom-left-radius: 15px;" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseX" aria-expanded="false" aria-controls="panelsStayOpen-collapseX">
-        <strong class="text-muted">ข้อมูลการติดต่อ</strong>
+        <strong class="text-secondary fw-normal">ข้อมูลการติดต่อ</strong>
       </button>
     </h2>
     </div>
@@ -247,7 +246,7 @@
   <form method="POST" action="showdata"> 
     {% csrf_token %}
     <div class="d-grid gap-1" style="margin-top: 2vh;">
-      <button class="btn btn-danger" type="submit">ใบเสนอราคา</button>
+      <button class="btn btn-danger" type="submit">Download ใบเสนอราคา</button>
     </div>
   </form>
 

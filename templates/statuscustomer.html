@@ -84,20 +84,20 @@
     <option value="ติดตามล้มเหลว">ติดตามล้มเหลว</option>
     <option value="ขอคืนเงินจอง">ขอคืนเงินจอง</option>
   </select>
-  <button class="input-group-btn btn-success"><strong>ค้นหา</strong></button>
+  <button class="input-group-btn btn-primary"><strong>ค้นหา</strong></button>
 </div>
 </form>
 <!--เเสดงจำนวนผลลัพธ์การค้นหา-->
 {% if branchset == 'AD@mg.msa' %}
-<div class="alert alert-success text-center" role="alert">
+<div class="alert alert-primary text-center" role="alert">
   <strong>สาขา = {{querybranch_new}} / ทีมขาย = {{queryteam_new}} / สถานะ = {{querystatus_new}} : ผลลัพธ์  {{countdatacustomer}} รายการ</strong>
 </div>
 {% elif branchset == 'HO@mg.msam' or branchset == 'RS@mg.msam' or branchset == 'HTR@mg.msam' %}
-<div class="alert alert-success text-center" role="alert">
+<div class="alert alert-primary text-center" role="alert">
   <strong>ทีมขาย = {{queryteam_new}} / สถานะ = {{querystatus_new}} : ผลลัพธ์  {{countdatacustomer}} รายการ</strong>
 </div>
 {% else  %}
-<div class="alert alert-success text-center" role="alert">
+<div class="alert alert-primary text-center" role="alert">
   <strong>สถานะ = {{querystatus_new}} : ผลลัพธ์  {{countdatacustomer}} รายการ</strong>
 </div>
 {% endif %}

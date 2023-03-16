@@ -176,7 +176,7 @@ def collectdata(request):
          request.session['sellphone'] = sellphone
          request.session['sellbranch'] = sellbranch
          request.session['branchset'] = branchset
-         return render(request,'dataclient.html',{'username':username})
+         return render(request,'dataclient.html',{'username':username,'branchset':branchset})
     # ถ้าไม่มี สั่ง render หน้าเดิม
     else:
         status_login = 'False'
@@ -187,6 +187,7 @@ def dataclient(request):
     username = str(request.session.get('username'))
     firstname = str(request.session.get('firstname'))
     sellbranch = str(request.session.get('sellbranch'))
+    branchset = str(request.session.get('branchset'))
     #เก็บข้อมูลหน้าตัวเอง
     teamsell = str(request.POST.get('teamsell'))
     mainmodel = str(request.POST.get('mainmodel'))
@@ -201,21 +202,21 @@ def dataclient(request):
     #เก็บข้อมลูลูกค้าเข้า database
     MSAcustomer.objects.create(msabranch=sellbranch,teamsell=teamsell ,firstname = firstname, mainmodel = mainmodel, customername = customername, contactcustomer= contactcustomer, chanelcustomer = chanelcustomer, statuscustomer = statuscustomer)
     if mainmodel == "MG5":
-       return render(request ,'Model_A.html',{'username': username})
+       return render(request ,'Model_A.html',{'username': username,'branchset':branchset})
     elif mainmodel == "MGVSHEV" :
-        return render(request ,'Model_B.html',{'username': username})
+        return render(request ,'Model_B.html',{'username': username,'branchset':branchset})
     elif mainmodel == "MGZS" :
-        return render(request ,'Model_C.html',{'username': username})
+        return render(request ,'Model_C.html',{'username': username,'branchset':branchset})
     elif mainmodel == "MGETD" :
-        return render(request ,'Model_D.html',{'username': username})
+        return render(request ,'Model_D.html',{'username': username,'branchset':branchset})
     elif mainmodel == "MGHSPHEV" :
-        return render(request ,'Model_E.html',{'username': username})
+        return render(request ,'Model_E.html',{'username': username,'branchset':branchset})
     elif mainmodel == "MGHS" :
-        return render(request ,'Model_F.html',{'username': username})
+        return render(request ,'Model_F.html',{'username': username,'branchset':branchset})
     elif mainmodel == "MG4" :
-        return render(request ,'Model_G.html',{'username': username})
+        return render(request ,'Model_G.html',{'username': username,'branchset':branchset})
     elif mainmodel == "MGEP" :
-        return render(request ,'Model_H.html',{'username': username})
+        return render(request ,'Model_H.html',{'username': username,'branchset':branchset})
 @login_required(login_url='/firstdata') 
 def statuscustomer(request):
     #เก็บข้อมูลทำเงื่อนในการมองเห็น
@@ -349,6 +350,8 @@ def updatedatacustomer(request):
     return  redirect('/statuscustomer')
 @login_required(login_url='/firstdata') 
 def showprice(request): 
+    # เก็บตัวเเปรผู้ใช้งาน
+    branchset = str(request.session.get('branchset'))
     # สร้างตัวเเปรมาเก็บข้อมูลจากหน้าปัจจุบัน   
     submodel = request.POST.get('submodel')
     #ส่งข้อมูลออก
@@ -360,13 +363,14 @@ def showprice(request):
             #productmargin = int(i.margin)               
     request.session['productprice'] = productprice     
     #request.session['productmargin'] = productmargin     
-    return render(request, 'showprice.html',{"productprice": '{:,}'.format(productprice), "submodel": submodel, "productcolor": productcolor})
+    return render(request, 'showprice.html',{"productprice": '{:,}'.format(productprice), "submodel": submodel, "productcolor": productcolor,'branchset':branchset})
 @login_required(login_url='/firstdata') 
 def PaymentRegis(request):
     #สร้างตัวเเปรการเก็บของข้อมูลรุ่นจากข้อมูลที่ส่งมาก่อนหน้า ใช้ request.session
     submodel = request.session.get('submodel')
     mainmodel = request.session.get('mainmodel')
     productprice = int(request.session.get('productprice'))
+    branchset = str(request.session.get('branchset'))
     #productmargin = int(request.session.get('productmargin'))
     
     text_productprice = productprice
@@ -393,26 +397,26 @@ def PaymentRegis(request):
     if mainmodel == 'MGVSHEV' :
         mainacc = Accmgs.objects.filter(Q(acc_model = 'MGZS') | Q(acc_model = 'ALL')).values_list('id', 'acc_code', 'acc_name','acc_price','acc_type', named=True).order_by('acc_code')
         if paytype == 'cash':
-             return render(request, 'branchcash.html',{'submodel': submodel,'regiscost':'{:,}'.format(regiscost),'text_productprice':'{:,}'.format(text_productprice),'mainacc':mainacc,})
+             return render(request, 'branchcash.html',{'submodel': submodel,'branchset':branchset,'regiscost':'{:,}'.format(regiscost),'text_productprice':'{:,}'.format(text_productprice),'mainacc':mainacc,})
     
         elif paytype == 'finance' :
-            return render(request, 'branchadd.html',{'submodel': submodel,'regiscost':'{:,}'.format(regiscost),'text_productprice':'{:,}'.format(text_productprice),'mainacc':mainacc,'productprice':productprice,'mainmodel': mainmodel})
+            return render(request, 'branchadd.html',{'submodel': submodel,'branchset':branchset,'regiscost':'{:,}'.format(regiscost),'text_productprice':'{:,}'.format(text_productprice),'mainacc':mainacc,'productprice':productprice,'mainmodel': mainmodel})
     elif mainmodel == 'MGHSPHEV' :
         mainacc = Accmgs.objects.filter(Q(acc_model = 'MGHS') | Q(acc_model = 'ALL')).values_list('id', 'acc_code', 'acc_name','acc_price','acc_type', named=True).order_by('acc_code')
         if paytype == 'cash':
-             return render(request, 'branchcash.html',{'submodel': submodel,'regiscost':'{:,}'.format(regiscost),'text_productprice':'{:,}'.format(text_productprice),'mainacc':mainacc,})
+             return render(request, 'branchcash.html',{'submodel': submodel,'branchset':branchset,'regiscost':'{:,}'.format(regiscost),'text_productprice':'{:,}'.format(text_productprice),'mainacc':mainacc,})
     
         elif paytype == 'finance' :
-            return render(request, 'branchadd.html',{'submodel': submodel,'regiscost':'{:,}'.format(regiscost),'text_productprice':'{:,}'.format(text_productprice),'mainacc':mainacc,'productprice':productprice,'mainmodel': mainmodel})
+            return render(request, 'branchadd.html',{'submodel': submodel,'branchset':branchset,'regiscost':'{:,}'.format(regiscost),'text_productprice':'{:,}'.format(text_productprice),'mainacc':mainacc,'productprice':productprice,'mainmodel': mainmodel})
 
     else :
         mainacc = Accmgs.objects.filter(Q(acc_model = mainmodel) | Q(acc_model = 'ALL')).values_list('id', 'acc_code', 'acc_name','acc_price','acc_type', named=True).order_by('acc_code')
 
         if paytype == 'cash':
-             return render(request, 'branchcash.html',{'submodel': submodel,'regiscost':'{:,}'.format(regiscost),'text_productprice':'{:,}'.format(text_productprice),'mainacc':mainacc,})
+             return render(request, 'branchcash.html',{'submodel': submodel,'branchset':branchset,'regiscost':'{:,}'.format(regiscost),'text_productprice':'{:,}'.format(text_productprice),'mainacc':mainacc,})
     
         elif paytype == 'finance' :
-            return render(request, 'branchadd.html',{'submodel': submodel,'regiscost':'{:,}'.format(regiscost),'text_productprice':'{:,}'.format(text_productprice),'mainacc':mainacc,'productprice':productprice,'mainmodel': mainmodel})
+            return render(request, 'branchadd.html',{'submodel': submodel,'branchset':branchset,'regiscost':'{:,}'.format(regiscost),'text_productprice':'{:,}'.format(text_productprice),'mainacc':mainacc,'productprice':productprice,'mainmodel': mainmodel})
 @login_required(login_url='/firstdata') 
 def branceadd (request):
 #สร้างตัวเเปรการเก็บของข้อมูลรุ่นจากข้อมูลที่ส่งมาก่อนหน้า ใช้ request.session
@@ -423,6 +427,7 @@ def branceadd (request):
     paytype = str(request.session.get('paytype'))
     customername = str(request.session.get('customername'))
     contactcustomer = str(request.session.get('contactcustomer'))
+    branchset = str(request.session.get('branchset'))
     #productmargin  = int(request.session.get('productmargin'))
     
 #เก็บข้อมูลหน้าตัวเอง
@@ -696,6 +701,7 @@ def branceadd (request):
         'customername':customername,
         'sellphone':sellphone,
         'contactcustomer':contactcustomer,
+        'branchset':branchset,
     }
     return render(request, 'showdatafinance.html', data)
 @login_required(login_url='/firstdata') 
@@ -708,6 +714,7 @@ def branchcash (request):
     paytype = str(request.session.get('paytype'))
     customername = str(request.session.get('customername'))
     contactcustomer = str(request.session.get('contactcustomer'))
+    branchset = str(request.session.get('branchset'))
     #productmargin  = int(request.session.get('productmargin'))
     
 #เก็บข้อมูลหน้าตัวเอง
@@ -940,6 +947,7 @@ def branchcash (request):
         'customername':customername,
         'sellphone':sellphone,
         'contactcustomer':contactcustomer,
+        'branchset':branchset,
     }
     return render(request, 'showdatafinance.html', data)
 @login_required(login_url='/firstdata') 

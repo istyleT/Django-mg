@@ -11,6 +11,7 @@
   <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"> </script>
   {% block script %} {% endblock %}              
   <style>
+    
     .navbar {
       display: flex;
       justify-content: space-between;
@@ -71,11 +72,16 @@
       <a id="a-menu" href="/firstdata">
         <img class="menu-navbar" src="{% static 'picture/icons8-home-page-90.png' %}" alt="image-home">
       </a>
+      {% if branchset == 'AD@mg.msa' %}
+      <a id="a-menu" href="/dashboard">
+        <img class="menu-navbar" style="padding:3px;" src="{% static 'picture/icons8-database-100.png' %}" alt="image-data">
+      </a>
+      {% endif %}
       <a id="a-menu" href="/statuscustomer">
         <img class="menu-navbar" src="{% static 'picture/icons8-customer-90.png' %}" alt="image-customer">
       </a>
       <a id="a-menu" href="/logout">
-        <img class="menu-navbar" style="padding:4px;" src="{% static 'picture/icons8-logout-100.png' %}" alt="image-logout">
+        <img class="menu-navbar" style="padding:3px;" src="{% static 'picture/icons8-logout-100.png' %}" alt="image-logout">
       </a>
     </div>
     {% endif %}
@@ -83,7 +89,7 @@
   {% block alert %}
           
   {% endblock %}
-  <div class="container">
+  <div class="container" align="center">
       {% block content %}
        
       {% endblock %}

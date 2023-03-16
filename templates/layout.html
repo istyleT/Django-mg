@@ -70,7 +70,7 @@
     {% if user.is_authenticated %}
     <div class="navbar-menu">
       <a id="a-menu" href="/firstdata">
-        <img class="menu-navbar" src="{% static 'picture/icons8-home-page-90.png' %}" alt="image-home">
+        <img class="menu-navbar" style="padding:2px;" src="{% static 'picture/icons8-home-page-100.png' %}" alt="image-home">
       </a>
       {% if branchset == 'AD@mg.msa' %}
       <a id="a-menu" href="/dashboard">
@@ -78,7 +78,7 @@
       </a>
       {% endif %}
       <a id="a-menu" href="/statuscustomer">
-        <img class="menu-navbar" src="{% static 'picture/icons8-customer-90.png' %}" alt="image-customer">
+        <img class="menu-navbar" src="{% static 'picture/icons8-customer-100.png' %}" alt="image-customer">
       </a>
       <a id="a-menu" href="/logout">
         <img class="menu-navbar" style="padding:3px;" src="{% static 'picture/icons8-logout-100.png' %}" alt="image-logout">

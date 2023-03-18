@@ -29,12 +29,14 @@
     padding : 0px;
     display: flex; 
     flex-direction:column;
+    align-items: start;
   }
   #content-box2 {
     width : 30vw;
     padding : 0px;
     display: flex; 
     flex-direction:column;
+    align-items: start;
   }
   
   .status-box {
@@ -70,10 +72,8 @@
        case "MG4" : cardimage.src = "{% static 'picture/Mg4.png' %}";break 
        case "MGEP" : cardimage.src = "{% static 'picture/Mgep.png' %}";break 
        }
-
     return (choosemainmodel)
   };    
-  
   window.addEventListener("load", changestyle);
 </script>
 {% endblock %}
@@ -89,7 +89,7 @@
               <div class="card-image">
                 <img  id="card-image" src="{% static 'picture/iconcustomer.png' %}" class="img-fluid" alt="..."  >
               </div>
-              <div id="content-box1" >
+              <div id="content-box1">
                 <span><strong>วันที่ :</strong> {{i.date}}/{{i.firstname}}</span>
                 <span><strong>รุ่นรถ :</strong> {{i.mainmodel}}/{{i.chanelcustomer}}</span>
                 <span><strong>สาขา :</strong> {{i.msabranch}} / ทีม : {{i.teamsell}}</span>

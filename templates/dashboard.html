@@ -68,14 +68,11 @@
 
 
 {% block content %}
-<!--ช่องตัวกรองเพื่อเเสดงข้อมูลที่ต้องการ-->
 
-
-<!---->
 <div class="frm-body bg-white">
   
     <div class="input-group mb-3">
-      <label class="input-group-text btn btn-success fw-bold font-monospace" for="inputGroupSelect02">Filter</label>
+      <label class="input-group-text btn btn-danger fw-bold font-monospace" for="inputGroupSelect02">Filter</label>
       <select class="form-select text-center fw-bold" id="dashdata" onchange="tabledisplay()">
         <option value="-" selected>เลือกข้อมูลที่ต้องการ</option>
          <option value="dashproduct">รุ่นรถ</option>
@@ -86,10 +83,9 @@
       </select>
     </div>
   {% comment %} ปุ่ม Export {% endcomment %}
-  <div class="d-grid gap-2 mt-2 mb-2">
+  <!--<div class="d-grid gap-2 mt-2 mb-2">
    <button class="btn btn-success fw-normal font-monospace" type="button">Export Excel</button>
-  </div>
- {% comment %}  {% endcomment %}
+  </div>-->
     <table id="dashproduct" style="display:none ;" class="table table-primary table-hover">
       <thead>
          <tr>

@@ -243,6 +243,8 @@ def statuscustomer(request):
     return render(request,'statuscustomer.html',{'datacustomer':datacustomer,'branchset':branchset,'countdatacustomer':countdatacustomer,'querystatus_new':querystatus_new,'queryteam_new':queryteam_new,'querybranch_new':querybranch_new})
 @login_required(login_url='/firstdata') 
 def editcard(request):
+    #เก็บตตัวเเปรระดับ User
+    branchset = str(request.session.get('branchset'))
     #เก็บข้อมูลหน้าตัวเอง idcard = id ของ MSAcustomer
     idcard = request.POST.get('idcard') 
     #ส่งข้อมูลออก
@@ -251,7 +253,7 @@ def editcard(request):
     datacustomeredit = MSAcustomer.objects.filter(id=idcard).values_list('id','msabranch','teamsell','date','firstname','mainmodel','customername','contactcustomer','chanelcustomer','statuscustomer','remark','quotation',named=True).order_by('-id')
     #หาข้อมูลประวัติลูกค้าไปเเสดง
     datapathstatus = Pathstatusmsa.objects.filter(id_msacustomer = idcard).values_list('date','statuscustomer','remark', named=True).order_by('-id')
-    return render(request, 'editcard.html', {'datacustomeredit':datacustomeredit , 'datapathstatus':datapathstatus})
+    return render(request, 'editcard.html', {'datacustomeredit':datacustomeredit , 'datapathstatus':datapathstatus,'branchset':branchset})
 @login_required(login_url='/firstdata') 
 def querydatacustomer(request):
     #เก็บข้อมูลทำเงื่อนในการมองเห็น

@@ -23,7 +23,7 @@
       {% csrf_token %}
         <label for="formGroupExampleInput2" class="col-lg col-form-label col-form-label-lg fw-bold fst-italic">Choose Grade</label>
         <select onchange="appendbutton()" class="form-select form-select mb-3" name="submodel" id="submodelid" aria-label=".form-select example"> <!---->
-            <option value="-" selected>กรุณาเลือกรุ่นย่อย</option>
+            <option value="-" selected disabled>กรุณาเลือกรุ่นย่อย</option>
             <option value="MGEP+">MG EP+</option>
         </select>
         <div id="append-btn" style="display:none">

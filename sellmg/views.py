@@ -82,7 +82,7 @@ def addcolor(request):
        Colorsubmodels.objects.filter(id=idcolor_add).update(submodel=submodel_add, color=color_add)    
     elif doit_add == 'delete':
        Colorsubmodels.objects.filter(id=idcolor_add).delete() 
-    return render(request, 'addcolor.html')
+    return render(request, 'dashboard.html')
 def addregiscost(request):
     #ตัวเเปรเงื่อนไข
     doit_add = request.POST.get('doit') 
@@ -99,7 +99,7 @@ def addregiscost(request):
     elif doit_add == 'delete':
        Regiscosts.objects.filter(id=idregiscost_add).delete() 
     
-    return render(request, 'addregiscost.html')
+    return render(request, 'dashboard.html')
 def addproduct(request):
     #ตัวเเปรเงื่อนไข
     doit_add = request.POST.get('doit') 
@@ -116,7 +116,7 @@ def addproduct(request):
        Product.objects.filter(id=idproduct_add).update(mainmodel= mainmodel_add, submodel=submodel_add, price=price_add, margin=margin_add)    
     elif doit_add == 'delete':
        Product.objects.filter(id=idproduct_add).delete()    
-    return render(request, 'addproduct.html')
+    return render(request, 'dashboard.html')
 def addacc(request):
     #ตัวเเปรเงื่อนไข
     doit_add = request.POST.get('doit') 
@@ -134,7 +134,7 @@ def addacc(request):
        Accmgs.objects.filter(id=idacc_add).update(acc_code= acc_code_add, acc_name=acc_name_add, acc_price=acc_price_add, acc_type=acc_type_add, acc_model=acc_model_add)    
     elif doit_add == 'delete':
        Accmgs.objects.filter(id=idacc_add).delete()    
-    return render(request, 'addacc.html')
+    return render(request, 'dashboard.html')
 
 ##########################ฟังก์ชั่นฝั่ง user ################################
 def collectdata(request): 

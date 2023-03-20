@@ -134,7 +134,8 @@ def addacc(request):
        Accmgs.objects.filter(id=idacc_add).update(acc_code= acc_code_add, acc_name=acc_name_add, acc_price=acc_price_add, acc_type=acc_type_add, acc_model=acc_model_add)    
     elif doit_add == 'delete':
        Accmgs.objects.filter(id=idacc_add).delete()    
-    return render(request, 'dashboard.html')
+    dashaccmgs = Accmgs.objects.all().order_by("acc_code")
+    return render(request, 'dashboard.html', {'dashaccmgs':dashaccmgs})
 
 ##########################ฟังก์ชั่นฝั่ง user ################################
 def collectdata(request): 

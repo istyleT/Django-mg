@@ -1,8 +1,8 @@
 {% extends 'layout.html' %}
 {% load static %}
 {% block script %}
-   <script defer>
-    const tabledisplay = () => {
+   <script>
+    function tabledisplay() {
        console.log('function table display work');
        const dashdata = document.getElementById('dashdata').value;
        const dashproduct =document.getElementById('dashproduct');
@@ -10,6 +10,7 @@
        const dashcolorsubmodels =document.getElementById('dashcolorsubmodels');
        const dashaccmgs =document.getElementById('dashaccmgs');
        const dashhtrcustomer =document.getElementById('dashhtrcustomer');
+       console.log(dashdata);
        switch (dashdata){
            case "dashproduct" : dashproduct.removeAttribute("style"); 
                                 dashregiscosts.style.display = 'none'; 
@@ -47,12 +48,9 @@
                        dashaccmgs.style.display = 'none';
                        dashhtrcustomer.style.display = 'none'; 
                        break
-                                  
        }
     };
-      
-
-
+    window.addEventListener("load", tabledisplay);
    </script>
 {% endblock %}
 {% block style %}
@@ -65,12 +63,8 @@
     }           
   </style>
 {% endblock %}
-
-
 {% block content %}
-
 <div class="frm-body bg-white">
-  
     <div class="input-group mb-3">
       <label class="input-group-text btn btn-danger fw-bold font-monospace" for="inputGroupSelect02">Filter</label>
       <select class="form-select text-center fw-bold" id="dashdata" onchange="tabledisplay()">

@@ -69,6 +69,8 @@ def dashboard (request):
     #สั่ง render เเละส่งค่าเข้าสุ่ Template                  
     return render(request,'dashboard.html',{'dashproduct':dashproduct,'dashregiscosts':dashregiscosts,'dashaccmgs':dashaccmgs,'dashcolorsubmodels':dashcolorsubmodels, 'dashhtrcustomer':dashmsacustomer})
 def addcolor(request):
+    #ตัวเเปรเพื่อกลับไปหน้า dashboard ก่อนหน้า
+    statusdashboard = 'addcolor'
     #ตัวเเปรเงื่อนไข
     doit_add = request.POST.get('doit') 
     idcolor_add = request.POST.get('idcolor')                   
@@ -82,8 +84,17 @@ def addcolor(request):
        Colorsubmodels.objects.filter(id=idcolor_add).update(submodel=submodel_add, color=color_add)    
     elif doit_add == 'delete':
        Colorsubmodels.objects.filter(id=idcolor_add).delete() 
-    return render(request, 'dashboard.html')
+    #เรียกหาข้อมูลจาก database ที่ต้องการดู เก็บไว้ในตัวเเปร
+    dashproduct = Product.objects.all().order_by("mainmodel")
+    dashregiscosts = Regiscosts.objects.all().order_by("regis_code")
+    dashaccmgs = Accmgs.objects.all().order_by("acc_code")
+    dashcolorsubmodels = Colorsubmodels.objects.all().order_by("submodel")
+    dashmsacustomer = MSAcustomer.objects.all().order_by("-date")
+    #สั่ง render เเละส่งค่าเข้าสุ่ Template                  
+    return render(request,'dashboard.html',{'statusdashboard':statusdashboard,'dashproduct':dashproduct,'dashregiscosts':dashregiscosts,'dashaccmgs':dashaccmgs,'dashcolorsubmodels':dashcolorsubmodels, 'dashhtrcustomer':dashmsacustomer})
 def addregiscost(request):
+    #ตัวเเปรเพื่อกลับไปหน้า dashboard ก่อนหน้า
+    statusdashboard = 'addregiscost'
     #ตัวเเปรเงื่อนไข
     doit_add = request.POST.get('doit') 
     idregiscost_add = request.POST.get('idregiscost') 
@@ -98,9 +109,17 @@ def addregiscost(request):
        Regiscosts.objects.filter(id=idregiscost_add).update(regis_code= regis_code_add, regis_personal=regis_personal_add, regis_company=regis_company_add)    
     elif doit_add == 'delete':
        Regiscosts.objects.filter(id=idregiscost_add).delete() 
-    
-    return render(request, 'dashboard.html')
+    #เรียกหาข้อมูลจาก database ที่ต้องการดู เก็บไว้ในตัวเเปร
+    dashproduct = Product.objects.all().order_by("mainmodel")
+    dashregiscosts = Regiscosts.objects.all().order_by("regis_code")
+    dashaccmgs = Accmgs.objects.all().order_by("acc_code")
+    dashcolorsubmodels = Colorsubmodels.objects.all().order_by("submodel")
+    dashmsacustomer = MSAcustomer.objects.all().order_by("-date")
+    #สั่ง render เเละส่งค่าเข้าสุ่ Template                  
+    return render(request,'dashboard.html',{'statusdashboard':statusdashboard,'dashproduct':dashproduct,'dashregiscosts':dashregiscosts,'dashaccmgs':dashaccmgs,'dashcolorsubmodels':dashcolorsubmodels, 'dashhtrcustomer':dashmsacustomer})
 def addproduct(request):
+    #ตัวเเปรเพื่อกลับไปหน้า dashboard ก่อนหน้า
+    statusdashboard = 'addproduct'
     #ตัวเเปรเงื่อนไข
     doit_add = request.POST.get('doit') 
     idproduct_add = request.POST.get('idproduct') 
@@ -116,8 +135,17 @@ def addproduct(request):
        Product.objects.filter(id=idproduct_add).update(mainmodel= mainmodel_add, submodel=submodel_add, price=price_add, margin=margin_add)    
     elif doit_add == 'delete':
        Product.objects.filter(id=idproduct_add).delete()    
-    return render(request, 'dashboard.html')
+    #เรียกหาข้อมูลจาก database ที่ต้องการดู เก็บไว้ในตัวเเปร
+    dashproduct = Product.objects.all().order_by("mainmodel")
+    dashregiscosts = Regiscosts.objects.all().order_by("regis_code")
+    dashaccmgs = Accmgs.objects.all().order_by("acc_code")
+    dashcolorsubmodels = Colorsubmodels.objects.all().order_by("submodel")
+    dashmsacustomer = MSAcustomer.objects.all().order_by("-date")
+    #สั่ง render เเละส่งค่าเข้าสุ่ Template                  
+    return render(request,'dashboard.html',{'statusdashboard':statusdashboard,'dashproduct':dashproduct,'dashregiscosts':dashregiscosts,'dashaccmgs':dashaccmgs,'dashcolorsubmodels':dashcolorsubmodels, 'dashhtrcustomer':dashmsacustomer})
 def addacc(request):
+    #ตัวเเปรเพื่อกลับไปหน้า dashboard ก่อนหน้า
+    statusdashboard = 'addacc'
     #ตัวเเปรเงื่อนไข
     doit_add = request.POST.get('doit') 
     idacc_add = request.POST.get('idacc') 
@@ -134,8 +162,15 @@ def addacc(request):
        Accmgs.objects.filter(id=idacc_add).update(acc_code= acc_code_add, acc_name=acc_name_add, acc_price=acc_price_add, acc_type=acc_type_add, acc_model=acc_model_add)    
     elif doit_add == 'delete':
        Accmgs.objects.filter(id=idacc_add).delete()    
+    #เรียกหาข้อมูลจาก database ที่ต้องการดู เก็บไว้ในตัวเเปร
+    dashproduct = Product.objects.all().order_by("mainmodel")
+    dashregiscosts = Regiscosts.objects.all().order_by("regis_code")
     dashaccmgs = Accmgs.objects.all().order_by("acc_code")
-    return render(request, 'dashboard.html', {'dashaccmgs':dashaccmgs})
+    dashcolorsubmodels = Colorsubmodels.objects.all().order_by("submodel")
+    dashmsacustomer = MSAcustomer.objects.all().order_by("-date")
+    #สั่ง render เเละส่งค่าเข้าสุ่ Template                  
+    return render(request,'dashboard.html',{'statusdashboard':statusdashboard,'dashproduct':dashproduct,'dashregiscosts':dashregiscosts,'dashaccmgs':dashaccmgs,'dashcolorsubmodels':dashcolorsubmodels, 'dashhtrcustomer':dashmsacustomer})
+
 
 ##########################ฟังก์ชั่นฝั่ง user ################################
 def collectdata(request): 

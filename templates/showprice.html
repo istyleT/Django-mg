@@ -35,26 +35,26 @@
   </div>
   <form action="Payment" method="POST"> <!--เรียกข้อมูลที่ส่งมาเเสดง-->
    {% csrf_token %}
-       <label for="formGroupExampleInput2" class="col-sm col-form-label col-form-label"><strong>สีตัวถัง</strong></label>
+       <label for="formGroupExampleInput2" class="col-sm col-form-label col-form-label float-start"><strong>สีตัวถัง :</strong></label>
         <select onchange="checkcondition()" id="bodycolor" class="form-select form-select mb-3" name="bodycolor" aria-label=".form-select example">
            <option value="-" selected>เลือกสี</option> <!--ใช้ for loop run ตาม database-->
            {% for i in productcolor %}
            <option value={{i.color}}>{{i.color}}</option>
            {% endfor %}
         </select>
-       <label for="formGroupExampleInput2" class="col-sm col-form-label col-form-label"><strong>ประเภทการซื้อ</strong></label>
+       <label for="formGroupExampleInput2" class="col-sm col-form-label col-form-label float-start"><strong>ประเภทการซื้อ :</strong></label>
         <select onchange="checkcondition()" id="paytype" class="form-select form-select mb-3" name="paytype" aria-label=".form-select example">
            <option value="-" selected>เลือกประเภทการซื้อ</option>
            <option value="cash">เงินสด</option>
            <option value="finance">จัดไฟเเนนซ์</option>
         </select>
-       <label for="formGroupExampleInput2" class="col-sm col-form-label col-form-label"><strong>การจดทะเบียนภาษี</strong></label>
+       <label for="formGroupExampleInput2" class="col-sm col-form-label col-form-label float-start"><strong>การจดทะเบียนภาษี :</strong></label>
          <select onchange="checkcondition()" id="registype" class="form-select form-select mb-3" name="registype" aria-label=".form-select example">
              <option  value='N'  selected>เลือกประเภทการจดทะเบียน</option>
              <option value="person">บุคคล</option>
              <option value="company">นิติบุคคล</option>
          </select>
-       <label for="formGroupExampleInput2" class="col-sm col-form-label col-form-label"><strong>สาขา</strong></label>
+       <label for="formGroupExampleInput2" class="col-sm col-form-label col-form-label float-start"><strong>สาขา :</strong></label>
          <select onchange="checkcondition()" id="mgbranch" class="form-select form-select mb-3" name="mgbranch" aria-label=".form-select example">
              <option value="-" selected>เลือกสาขาที่จะออกรถ</option>
              <option value="Srinakarin">ศรีนครินทร์</option>

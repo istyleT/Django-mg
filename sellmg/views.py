@@ -232,10 +232,7 @@ def dataclient(request):
      for i in productdata :
            productprice =  int(i.price)
            #productmargin = int(i.margin)  
-     productcolor = Colorsubmodels.objects.filter( submodel = submodel).values_list('color', named=True)
-     for i in productcolor :
-           productcolor =  str(i.color)
-     return JsonResponse({'productprice': productprice,'productcolor': productcolor,'username':username,'branchset':branchset})
+     return JsonResponse({'productprice': productprice})
   else :
     
     #เก็บข้อมูลหน้าตัวเอง
@@ -409,6 +406,7 @@ def PaymentRegis(request):
         productprice =  int(i.price)
         #productmargin = int(i.margin)
     text_productprice = productprice
+    request.session['productprice'] = productprice
     regiscost = Regiscosts.objects.filter(regis_code = submodel).values_list('regis_personal','regis_company', named=True)
     for i in regiscost :
         if registype == 'person' :

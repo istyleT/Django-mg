@@ -23,18 +23,24 @@
      <select onchange="ajaxmodel()" name="submodel" id="submodelid" class="form-select form-select mb-2 text-center fst-italic text-secondary fw-bold" aria-label=".form-select example">
         <option value="-" selected disabled>กรุณาเลือก</option> <!--ใช้ for loop run ตาม database-->
         {% for i in datasubmodel %}
-        <option value={{i.submodel}}>{{i.submodel}}</option>
+        <option value={{i.submodel}} class="fw-bold">{{i.submodel}}</option>
         {% endfor %}
      </select>
-     <div id="inputbodycolor" style="display: none;">
       <label for="formGroupExampleInput2" class="col-sm col-form-label col-form-label fw-bold border-bottom border-danger border-2 mb-2 px-1 py-0 float-start">สีตัวถัง :</label>
       <select onchange="checkcondition()" id="bodycolor" class="form-select form-select mb-2 text-center fst-italic text-secondary fw-bold" name="bodycolor" aria-label=".form-select example">
          <option value="-" selected disabled>กรุณาเลือก</option> <!--ใช้ for loop run ตาม database-->
-         {% for i in productcolor %}
-         <option value={{i.color}}>{{i.color}}</option>
-         {% endfor %}
+         <option value="White" class="text-dark fw-bold">White</option>
+         <option value="Black" class="text-dark  fw-bold">Black</option>
+         <option value="Red" class="text-danger  fw-bold">Red</option>
+         <option value="Grey" class="text-secondary fw-bold">Grey</option>
+         <option value="Yellow" class="text-warning  fw-bold">Yellow</option>
+         <option value="Silver" class="text-secondary fw-bold">Silver</option>
+         <option value="Blue" class="text-primary  fw-bold">Blue</option>
+         <option value="White/Black" class="text-dark fw-bold">White/Black</option>
+         <option value="Grey/Black" class="text-secondary fw-bold">Grey/Black</option>
+         <option value="Green/Black" class="text-success    fw-bold">Green/Black</option>
+         <option value="Blue/Black" class=" text-primary fw-bold">Blue/Black</option>
       </select>
-     </div>
      <label for="formGroupExampleInput2" class="col-sm col-form-label col-form-label fw-bold border-bottom border-danger border-2 mb-2 px-1 py-0 float-start">ประเภทการซื้อ :</label>
      <select onchange="checkcondition()" id="paytype" class="form-select form-select mb-2 text-center fst-italic text-secondary fw-bold" name="paytype" aria-label=".form-select example">
         <option value="-" selected disabled>กรุณาเลือก</option>
@@ -76,9 +82,7 @@
         .then (response => {
            let productprice = response.data.productprice;
            let productcolor = response.data.productcolor;
-           console.log(productcolor);
            document.getElementById('show-price').style.display = 'block';
-           document.getElementById('inputbodycolor').style.display = 'block';
            document.getElementById('product-price').innerHTML = (productprice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')) + ' บาท';
         })
         .catch(error => {

@@ -5,13 +5,12 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MG Saengaree Auto</title>
+  <title>MG Saengaree Auto Navbar</title>
   <link rel="stylesheet"  href="{% static 'bootstrap/css/bootstrap.min.css' %}">
   {% block style  %} {% endblock %}
   <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"> </script>
   {% block script %} {% endblock %}              
   <style>
-    
     .navbar {
       display: flex;
       justify-content: space-between;
@@ -67,7 +66,7 @@
     <div class="navbar-logo" >
       <img class="image-navbar" src="{% static 'picture/logomg.png' %}"  alt="logonavbarmsa">
     </div>
-    {% if user.is_authenticated %}
+    {% comment %} {% if user.is_authenticated %}  {% endcomment %}
     <div class="navbar-menu">
       <a id="a-menu" href="/firstdata">
         <img class="menu-navbar" style="padding:2px;" src="{% static 'picture/icons8-home-page-100.png' %}" alt="image-home">
@@ -76,7 +75,7 @@
       <a id="a-menu" href="/dashboard">
         <img class="menu-navbar" style="padding:3px;" src="{% static 'picture/icons8-database-100.png' %}" alt="image-data">
       </a>
-      {% endif %}
+    {% endif %} 
       <a id="a-menu" href="/statuscustomer">
         <img class="menu-navbar" src="{% static 'picture/icons8-customer-100.png' %}" alt="image-customer">
       </a>
@@ -84,7 +83,7 @@
         <img class="menu-navbar" style="padding:3px;" src="{% static 'picture/icons8-logout-100.png' %}" alt="image-logout">
       </a>
     </div>
-    {% endif %}
+   {% comment %} {% endif %} {% endcomment %}
   </nav>
   {% block alert %}
           

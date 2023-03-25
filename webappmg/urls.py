@@ -24,7 +24,6 @@ urlpatterns = [
     path('static-js',views.static_js), #นำเข้า static js มาใช้ใน webappmg
     path('',views.loginform),
     path('firstdata',views.collectdata),  
-    path('queryprice',views.showprice),
     path('Payment',views.PaymentRegis),
     path('branchadd',views.branceadd),
     path('branchcash',views.branchcash),
@@ -35,8 +34,8 @@ urlpatterns = [
     path('editcard',views.editcard),
     path('updatedatacustomer',views.updatedatacustomer),
     path ('querydatacustomer',views.querydatacustomer),
-    path ('sellsummaryHead',views.sellsummaryHead),
-   
+    #path ของหน้าทดสอบ
+    path('cookie1',views.cookie_test),
     #path ของส่วน admin
     path('pageaddcolor', views.pageaddcolor),
     path('addcolor', views.addcolor),

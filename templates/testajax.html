@@ -1,0 +1,38 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block script %}
+  <script src="{% static 'js/axios.min.js' %}"></script>
+  {% comment %} <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> {% endcomment %}
+  
+{%  endblock %}
+
+{% block content %}
+<form method="GET" >
+    <div class="input-group mb-3">
+        <span class="input-group-text">@</span>
+        <input type="text" class="form-control"  id="test" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" name="testdata" onchange="ajaxSubmit()">
+    </div>
+    <button type="button" class="btn btn-danger" >Test send data with AJAX</button>
+</form>
+
+<script>
+   function ajaxSubmit() { 
+    let testdata = document.getElementById('test').value;
+    console.log(testdata);
+    axios ({
+        url: '',
+        method: 'get',
+        params: {'testdata': testdata},
+        timeout: 5000,
+        headers: {'X-Requested-With': 'XMLHttpRequest'},
+    })
+    .then (response => {
+      alert(testdata);
+    })
+    .catch(error => {
+      alert('fail');
+    });
+  }
+</script>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block style %}
+   <style>
+       th, td {padding: 5px;}
+       th {text-align: right;}
+   </style>
+{% endblock %}
+{% block content %}
+ <form method="POST">
+    <table>
+        {{ form.as_table }}
+        <caption align="bottom">
+            <br><button>Submit</button>
+        </caption>
+    </table>
+ </form>
+{% endblock %}
+

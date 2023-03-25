@@ -1,12 +1,12 @@
 from sellmg.quotations_mod import *
 from sellmg.models import *
-from django.shortcuts import render, redirect 
+from django.shortcuts import render, redirect, HttpResponse ;
 from django.contrib.auth import authenticate, login, logout;
 from django.db.models import Q ;
 from django.contrib.auth.decorators import login_required ;
 from django.contrib.auth.models import User
 from datetime import datetime
-
+from django.http import JsonResponse ; # ใช้สำหรับส่งค่ากลับเป็น json
 #########################นำ css / java static มาใช้งาน ##########################
 def static_css (request):
     return render(request, 'static-css.html')
@@ -173,7 +173,7 @@ def addacc(request):
 
 
 ##########################ฟังก์ชั่นฝั่ง user ################################
-def collectdata(request): 
+def collectdata(request):
     # เก็บข้อมูลการ login จาก user 
     username = str(request.POST.get('username'))
     password = str(request.POST.get('password'))
@@ -219,11 +219,25 @@ def collectdata(request):
         return render(request,'login.html',{"status_login":status_login})
 @login_required(login_url='/firstdata') 
 def dataclient(request): 
-    #เก็บข้อมูล username
-    username = str(request.session.get('username'))
-    firstname = str(request.session.get('firstname'))
-    sellbranch = str(request.session.get('sellbranch'))
-    branchset = str(request.session.get('branchset'))
+  #เก็บข้อมูล username
+  
+  username = str(request.session.get('username'))
+  firstname = str(request.session.get('firstname'))
+  sellbranch = str(request.session.get('sellbranch'))
+  branchset = str(request.session.get('branchset'))
+  #ตรวจสอบว่ามีการส่งค่าเป็น Ajax มาหรือไม่
+  if request.headers.get('x-requested-with') == 'XMLHttpRequest' :
+     submodel = request.GET.get('submodel',None)
+     productdata = Product.objects.filter( submodel = submodel).values_list('price','margin', named=True)
+     for i in productdata :
+           productprice =  int(i.price)
+           #productmargin = int(i.margin)  
+     productcolor = Colorsubmodels.objects.filter( submodel = submodel).values_list('color', named=True)
+     for i in productcolor :
+           productcolor =  str(i.color)
+     return JsonResponse({'productprice': productprice,'productcolor': productcolor,'username':username,'branchset':branchset})
+  else :
+    
     #เก็บข้อมูลหน้าตัวเอง
     teamsell = str(request.POST.get('teamsell'))
     mainmodel = str(request.POST.get('mainmodel'))
@@ -237,22 +251,9 @@ def dataclient(request):
     request.session['contactcustomer'] = contactcustomer
     #เก็บข้อมลูลูกค้าเข้า database
     MSAcustomer.objects.create(msabranch=sellbranch,teamsell=teamsell ,firstname = firstname, mainmodel = mainmodel, customername = customername, contactcustomer= contactcustomer, chanelcustomer = chanelcustomer, statuscustomer = statuscustomer)
-    if mainmodel == "MG5":
-       return render(request ,'Model_A.html',{'username': username,'branchset':branchset})
-    elif mainmodel == "MGVSHEV" :
-        return render(request ,'Model_B.html',{'username': username,'branchset':branchset})
-    elif mainmodel == "MGZS" :
-        return render(request ,'Model_C.html',{'username': username,'branchset':branchset})
-    elif mainmodel == "MGETD" :
-        return render(request ,'Model_D.html',{'username': username,'branchset':branchset})
-    elif mainmodel == "MGHSPHEV" :
-        return render(request ,'Model_E.html',{'username': username,'branchset':branchset})
-    elif mainmodel == "MGHS" :
-        return render(request ,'Model_F.html',{'username': username,'branchset':branchset})
-    elif mainmodel == "MG4" :
-        return render(request ,'Model_G.html',{'username': username,'branchset':branchset})
-    elif mainmodel == "MGEP" :
-        return render(request ,'Model_H.html',{'username': username,'branchset':branchset})
+    #Query หารุ่นย่อนตามรุ่นหลัก
+    datasubmodel = Product.objects.filter( mainmodel = mainmodel).values_list('submodel', named=True)
+    return HttpResponse(loader.get_template('dataproduct.html').render({'username': username,'branchset':branchset,'mainmodel':mainmodel, 'datasubmodel':datasubmodel}))
 @login_required(login_url='/firstdata') 
 def statuscustomer(request):
     #เก็บข้อมูลทำเงื่อนในการมองเห็น
@@ -387,43 +388,27 @@ def updatedatacustomer(request):
             Pathstatusmsa.objects.filter(id_msacustomer = idcard).delete()
     return  redirect('/statuscustomer')
 @login_required(login_url='/firstdata') 
-def showprice(request): 
-    # เก็บตัวเเปรผู้ใช้งาน
-    branchset = str(request.session.get('branchset'))
-    # สร้างตัวเเปรมาเก็บข้อมูลจากหน้าปัจจุบัน   
-    submodel = request.POST.get('submodel')
-    #ส่งข้อมูลออก
-    request.session['submodel'] = submodel
-    productdata = Product.objects.filter( submodel = submodel).values_list('price','margin', named=True)
-    productcolor = Colorsubmodels.objects.filter(submodel = submodel).values_list('submodel','color', named=True)
-    for i in productdata :
-            productprice =  int(i.price)
-            #productmargin = int(i.margin)               
-    request.session['productprice'] = productprice     
-    #request.session['productmargin'] = productmargin     
-    return render(request, 'showprice.html',{"productprice": '{:,}'.format(productprice), "submodel": submodel, "productcolor": productcolor,'branchset':branchset})
-@login_required(login_url='/firstdata') 
 def PaymentRegis(request):
     #สร้างตัวเเปรการเก็บของข้อมูลรุ่นจากข้อมูลที่ส่งมาก่อนหน้า ใช้ request.session
-    submodel = request.session.get('submodel')
     mainmodel = request.session.get('mainmodel')
-    productprice = int(request.session.get('productprice'))
     branchset = str(request.session.get('branchset'))
     #productmargin = int(request.session.get('productmargin'))
     
-    text_productprice = productprice
-    
     # สร้างตัวเเปรมาเก็บข้อมูลจากหน้าปัจจุบัน
-    paytype = request.POST.get('paytype') 
-    bodycolor = request.POST.get('bodycolor') 
-    mgbranch = request.POST.get('mgbranch') 
-    registype = request.POST.get('registype') 
+    submodel = request.GET.get('submodel')
+    paytype = request.GET.get('paytype') 
+    mgbranch = request.GET.get('mgbranch') 
+    registype = request.GET.get('registype') 
    
     #ส่งข้อมูลออก
     request.session['paytype'] = paytype
-    request.session['bodycolor'] = bodycolor
     request.session['mgbranch'] = mgbranch
     request.session['registype'] = registype
+    productdata = Product.objects.filter( submodel = submodel).values_list('price','margin', named=True)
+    for i in productdata :
+        productprice =  int(i.price)
+        #productmargin = int(i.margin)
+    text_productprice = productprice
     regiscost = Regiscosts.objects.filter(regis_code = submodel).values_list('regis_personal','regis_company', named=True)
     for i in regiscost :
         if registype == 'person' :
@@ -1131,7 +1116,44 @@ def showdata(request):
    }
    return render(request, 'quotation.html', dataquo)
 
-###############ใบสรุปการขาย#######################
-@login_required(login_url='/firstdata')
-def sellsummaryHead(request):
-    return render(request,'sellsummary.html')
+###############หน้าทดสอบ#######################
+
+from django.template import loader ; # ใช้สำหรับเรียกใช้ template
+from django.views.decorators.csrf import csrf_exempt ;
+from .forms import SigninForm ;
+@csrf_exempt
+def cookie_test(request) :
+    if request.method == 'POST' :
+        form = SigninForm(request.POST)
+        if form.is_valid() :
+            username = request.POST.get('username','')
+            password = request.POST.get('password','')
+            save = request.POST.get('save',False)
+            
+            tmp = loader.get_template('cookietest.html')
+            data = {'form':form}
+            response = HttpResponse(tmp.render(data))
+            # ถ้ากด  save ให้เก็บค่าไว้ใน cookie และ ถ้าไม่กดให้ลบค่าใน cookie 
+            if save :
+                response.set_cookie('username',username,30,)
+                response.set_cookie('password',password,30)
+                response.set_cookie('save',save,30)
+            else :
+                response.delete_cookie('username')
+                response.delete_cookie('password')
+                response.delete_cookie('save')
+              
+            return response
+    # ถ้าไม่มีการส่งค่ามาจาก form ให้ตรวจสอบว่ามีค่าใน cookie หรือไม่
+    elif 'username' in request.COOKIES :
+        username = request.COOKIES.get('username','')
+        password = request.COOKIES.get('password','')
+        save = request.COOKIES.get('save',False)
+        form = SigninForm(
+            initial = {'username':username,'password':password,'save':save}
+        )
+    # ถ้าไม่มีค่าใน cookie ให้ใช้ค่าเริ่มต้น
+    else :
+        form = SigninForm()
+        
+    return render(request,'cookietest.html',{'form':form})

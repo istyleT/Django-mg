@@ -1,0 +1,125 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block script %}
+  <script src="{% static 'js/axios.min.js' %}" defer></script>
+{% endblock %}
+{% block content %}
+{% comment %} สร้างให้ javascript เก็บค่า mainmodel {% endcomment %}
+<p id="mainmodel" style="display: none;" >{{mainmodel}}</p> 
+{% comment %} show รูปตามรุ่นหลัก {% endcomment %}
+<div align="center" id="carshadow" class="mt-5 p-0">
+    <img  id="mainimage" src="{% static 'picture/carshadow.png' %}" class="img-fluid" alt="carshadow"/>
+ </div>
+{% comment %} จบ show รูป {% endcomment %}
+{% comment %} เเเสดงราคาเมื่อเปลี่ยนรุ่นย่อย {% endcomment %}
+<div class=" justify-content-center align-items-center" id="show-price" style="display: none;">
+    <h3 class="fw-bold fst-italic">ราคา : <span id="product-price"></span></h3>
+</div>
+{% comment %} จบการขึ้นเเจ้งเตือนราคา {% endcomment %}
+{% comment %} form สำหรับกรอกข้อมูล {% endcomment %}
+<div class="frm-body bg-white">
+  <form action="Payment" method="GET">
+    <label for="formGroupExampleInput2" class="col-sm col-form-label col-form-label fw-bold border-bottom border-danger border-2 mb-2 px-1 py-0 float-start">เกรด :</label>
+     <select onchange="ajaxmodel()" name="submodel" id="submodelid" class="form-select form-select mb-2 text-center fst-italic text-secondary fw-bold" aria-label=".form-select example">
+        <option value="-" selected disabled>กรุณาเลือก</option> <!--ใช้ for loop run ตาม database-->
+        {% for i in datasubmodel %}
+        <option value={{i.submodel}}>{{i.submodel}}</option>
+        {% endfor %}
+     </select>
+     <div id="inputbodycolor" style="display: none;">
+      <label for="formGroupExampleInput2" class="col-sm col-form-label col-form-label fw-bold border-bottom border-danger border-2 mb-2 px-1 py-0 float-start">สีตัวถัง :</label>
+      <select onchange="checkcondition()" id="bodycolor" class="form-select form-select mb-2 text-center fst-italic text-secondary fw-bold" name="bodycolor" aria-label=".form-select example">
+         <option value="-" selected disabled>กรุณาเลือก</option> <!--ใช้ for loop run ตาม database-->
+         {% for i in productcolor %}
+         <option value={{i.color}}>{{i.color}}</option>
+         {% endfor %}
+      </select>
+     </div>
+     <label for="formGroupExampleInput2" class="col-sm col-form-label col-form-label fw-bold border-bottom border-danger border-2 mb-2 px-1 py-0 float-start">ประเภทการซื้อ :</label>
+     <select onchange="checkcondition()" id="paytype" class="form-select form-select mb-2 text-center fst-italic text-secondary fw-bold" name="paytype" aria-label=".form-select example">
+        <option value="-" selected disabled>กรุณาเลือก</option>
+        <option value="cash">เงินสด</option>
+        <option value="finance">จัดไฟเเนนซ์</option>
+     </select>
+    <label for="formGroupExampleInput2" class="col-sm col-form-label col-form-label fw-bold border-bottom border-danger border-2 mb-2 px-1 py-0 float-start">การจดทะเบียนภาษี :</label>
+      <select onchange="checkcondition()" id="registype" class="form-select form-select mb-2 text-center fst-italic text-secondary fw-bold" name="registype" aria-label=".form-select example">
+          <option  value='N'  selected disabled>กรุณาเลือก</option>
+          <option value="person">บุคคล</option>
+          <option value="company">นิติบุคคล</option>
+      </select>
+    <label for="formGroupExampleInput2" class="col-sm col-form-label col-form-label fw-bold border-bottom border-danger border-2 mb-2 px-1 py-0 float-start">สาขา :</label>
+      <select onchange="checkcondition()" id="mgbranch" class="form-select form-select mb-2 text-center fst-italic text-secondary fw-bold" name="mgbranch" aria-label=".form-select example">
+          <option value="-" selected disabled>กรุณาเลือก</option>
+          <option value="Srinakarin">ศรีนครินทร์</option>
+          <option value="Ransit">รังสิตคลองสี่</option>
+          <option value="Hathairat">หทัยราษฎร์</option>
+      </select>
+      <div id="append-btn" class="mt-4" style="display:none;">
+        <div class="d-grid gap-1">
+          <button class="btn btn-danger fw-bold" type="submit">ดำเนินการต่อ</button>
+        </div>
+      </div>  
+  </form>
+ {% comment %} จบ form สำหรับกรอกข้อมูล {% endcomment %}
+</div>
+<script>
+    {% comment %} ฟังก์ชันส่งข้อมูลเบบ Ajax เกรดเเล้วเอาไปหาสี {% endcomment %}
+    function ajaxmodel() { 
+        let submodel = document.getElementById('submodelid').value;
+        axios ({
+          url: '',
+          method: 'get',
+          params: {submodel: submodel},
+          timeout: 5000,
+          headers: {'X-Requested-With': 'XMLHttpRequest'},
+        })
+        .then (response => {
+           let productprice = response.data.productprice;
+           let productcolor = response.data.productcolor;
+           console.log(productcolor);
+           document.getElementById('show-price').style.display = 'block';
+           document.getElementById('inputbodycolor').style.display = 'block';
+           document.getElementById('product-price').innerHTML = (productprice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')) + ' บาท';
+        })
+        .catch(error => {
+          alert("เกิดข้อผิดพลาด กรุณาเลือกเกรดของรถ")
+        })
+        checkcondition()
+    }
+    {% comment %} fuction เเสดงรูปตามรุ่นหลักตอนที่ render ครั้งเเรก {% endcomment %}
+    function appendpic() {
+        const choosemainmodel = String(document.getElementById('mainmodel').innerHTML) ;  
+        const mainmodelimage = document.getElementById('mainimage');  
+        switch (choosemainmodel){
+            case "MG5" : mainmodelimage.src = "{% static 'picture/MG5-full.png' %}";break
+            case "MGVSHEV" : mainmodelimage.src = "{% static 'picture/MGVSHEV-full.png' %}";break
+            case "MGZS" : mainmodelimage.src = "{% static 'picture/MGZS-full.png' %}";break
+            case "MGETD" : mainmodelimage.src = "{% static 'picture/MGETD-full.png' %}"; break
+            case "MGHSPHEV" : mainmodelimage.src = "{% static 'picture/MGHSPHEV-full.png' %}"; break
+            case "MGHS" : mainmodelimage.src = "{% static 'picture/Newmghs.png' %}";break
+            case "MG4" : mainmodelimage.src = "{% static 'picture/MG4-full.png' %}";break 
+            case "MGEP" : mainmodelimage.src = "{% static 'picture/MGEP-full.png' %}";break 
+            case "MGZSEV" : mainmodelimage.src = "{% static 'picture/MGZSEV-full.png' %}";break 
+            case "MGES" : mainmodelimage.src = "{% static 'picture/MGES-full.png' %}";break 
+            case "MGMAXUS9" : mainmodelimage.src = "{% static 'picture/MGMAXUS9-full.png' %}";break 
+         return (choosemainmodel)
+        }
+    }
+    function checkcondition(){
+      const submodel = document.getElementById('submodelid').value;
+      const paytype = document.getElementById('paytype').value;
+      const registype = document.getElementById('registype').value;
+      const mgbranch = document.getElementById('mgbranch').value;
+      const appendbtn = document.getElementById('append-btn');
+      
+      if (submodel != "-" && paytype != "-" && registype != "N" && mgbranch != "-"){
+           appendbtn.style.display = 'block';
+      }
+      else{
+           appendbtn.style.display = 'none';
+      }  
+      return
+    };
+    window.addEventListener("load",appendpic);
+</script>
+{% endblock %}

@@ -15,7 +15,7 @@ from pathlib import Path
 import os 
 from os import environ
 import dj_database_url
-# import django_on_heroku
+#import django_on_heroku
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -105,7 +105,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS =[os.path.join(BASE_DIR, 'static')]
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_STORAGE = 'whitenoise.storage.CompressManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT  = os.path.join(BASE_DIR, 'media/')

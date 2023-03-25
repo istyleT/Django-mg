@@ -23,15 +23,18 @@
    <div class="input-group mb-3" style="margin-top: 1vh; ">
       <label class="input-group-text btn-success " for="inputGroupSelect01">รุ่นรถ*</label>
       <select class="form-select text-center"  id="choosemainmodel" name="mainmodel" onchange="appendpic()">
-        <option value="-" selected >กรุณาเลือกรุ่น</option>
-        <option value="MG5">NEW MG 5 MY2022</option>
-        <option value="MGVSHEV">NEW MG VS HEV</option>
-        <option value="MGZS">MG ZS</option>
-        <option value="MGETD">MG EXTENDER</option>
-        <option value="MGHSPHEV">MG HS PHEV</option>
-        <option value="MGHS">MG HS</option>
-        <option value="MG4">MG 4</option>
-        <option value="MGEP">MG EP</option>
+        <option class="font-monospace" value="-" selected >กรุณาเลือกรุ่น</option>
+        <option class="font-monospace" value="MGES">MGES</option>
+        <option class="font-monospace" value="MGMAXUS9">MG MAXUS9</option>
+        <option class="font-monospace" value="MG5">MG5 (MY2022)</option>
+        <option class="font-monospace" value="MGVSHEV">MGVS HEV</option>
+        <option class="font-monospace" value="MGZS">MGZS</option>
+        <option class="font-monospace" value="MGZSEV">MGZS (EV)</option>
+        <option class="font-monospace" value="MGETD">MG EXTENDER</option>
+        <option class="font-monospace" value="MGHSPHEV">MGHS (PHEV)</option>
+        <option class="font-monospace" value="MGHS">MGHS</option>
+        <option class="font-monospace" value="MG4">MG4 ELECTRIC</option>
+        <option class="font-monospace" value="MGEP">MGEP</option>
       </select>
     </div>          
              
@@ -75,6 +78,15 @@
   <div align="center" id="carshadow" style="margin-top: 8vh">
      <img  src="{% static 'picture/carshadow.png' %}" class="img-fluid" alt="carshadow"/>
   </div>
+  <div align="center" id="picmges" style="display: none;">
+     <img  src="{% static 'picture/MGES.png' %}" class="img-fluid" alt="Newmg5"/>
+  </div>
+  <div align="center" id="picmgmaxus9" style="display: none;">
+     <img  src="{% static 'picture/MGMAXUS9.png' %}" class="img-fluid" alt="Newmg5"/>
+  </div>
+  <div align="center" id="picmgzsev" style="display: none;">
+     <img  src="{% static 'picture/MGZSEV.png' %}" class="img-fluid" alt="Newmg5"/>
+  </div>
   <div align="center" id="picmg5" style="display: none;">
      <img  src="{% static 'picture/Newmg5.png' %}" class="img-fluid" alt="Newmg5"/>
   </div>
@@ -82,7 +94,7 @@
      <img  src="{% static 'picture/Newmgvshev.png' %}" class="img-fluid" alt="Newmgvshev"/>
   </div>
   <div align="center" id="picmgzs" style="display: none;">
-     <img  src="{% static 'picture/MGZSEV.png' %}" class="img-fluid" alt="Newmgzs"/>
+     <img  src="{% static 'picture/Newmgzs.png' %}" class="img-fluid" alt="Newmgzs"/>
   </div>
   <div align="center" id="picmgetd" style="display: none;">
      <img  src="{% static 'picture/Newmgextendergc.png' %}" class="img-fluid" alt="Newmgextendergc"/>
@@ -101,11 +113,15 @@
   </div>
 </div>
 <script>
+ 
    function appendpic() {
       const carshadow = document.getElementById('carshadow');
+      const picmges = document.getElementById('picmges');
+      const picmgmaxus9 = document.getElementById('picmgmaxus9');
       const picmg5 = document.getElementById('picmg5');
       const picmgvshev =document.getElementById('picmgvshev');
       const picmgzs = document.getElementById('picmgzs');
+      const picmgzsev = document.getElementById('picmgzsev');
       const picmgetd = document.getElementById('picmgetd');
       const picmghsphev = document.getElementById('picmghsphev');
       const picmghs = document.getElementById('picmghs');
@@ -122,6 +138,10 @@
                       picmg4.style.display = "none";
                       picmgep.style.display = "none";
                       carshadow.style.display = "none";
+                      picmgmaxus9.style.display = "none";
+                      picmgzsev.style.display = "none";
+                      picmges.style.display = "none";
+                      
          break
          case "MGVSHEV" : picmgvshev.style.display = "block"; 
                           picmg5.style.display = "none";
@@ -132,6 +152,9 @@
                           picmg4.style.display = "none";
                           picmgep.style.display = "none";
                           carshadow.style.display = "none";
+                          picmgmaxus9.style.display = "none";
+                          picmgzsev.style.display = "none";
+                          picmges.style.display = "none";
          break
          case "MGZS" : picmgzs.style.display = "block";
                        picmgvshev.style.display = "none";
@@ -142,6 +165,9 @@
                        picmg4.style.display = "none";
                        picmgep.style.display = "none";
                        carshadow.style.display = "none";
+                       picmgmaxus9.style.display = "none";
+                       picmgzsev.style.display = "none";
+                       picmges.style.display = "none";
          break
          case "MGETD" : picmgetd.style.display = "block";
                         picmgvshev.style.display = "none";
@@ -152,6 +178,9 @@
                         picmg4.style.display = "none";
                         picmgep.style.display = "none";
                         carshadow.style.display = "none";
+                        picmgmaxus9.style.display = "none";
+                        picmgzsev.style.display = "none";
+                        picmges.style.display = "none";
          break
          case "MGHSPHEV" : picmghsphev.style.display = "block";
                            picmgvshev.style.display = "none";
@@ -162,6 +191,9 @@
                            picmg4.style.display = "none";
                            picmgep.style.display = "none";
                            carshadow.style.display = "none";
+                           picmgmaxus9.style.display = "none";
+                           picmgzsev.style.display = "none";
+                           picmges.style.display = "none";
          break
          case "MGHS" : picmghs.style.display = "block";
                        picmgvshev.style.display = "none";
@@ -172,6 +204,9 @@
                        picmg4.style.display = "none"; 
                        picmgep.style.display = "none";
                        carshadow.style.display = "none";
+                       picmgmaxus9.style.display = "none";
+                       picmgzsev.style.display = "none";
+                       picmges.style.display = "none";
          break
          case "MG4" : picmghs.style.display = "none";
                        picmgvshev.style.display = "none";
@@ -182,6 +217,9 @@
                        picmg4.style.display = "block";
                        picmgep.style.display = "none"; 
                        carshadow.style.display = "none";
+                       picmgmaxus9.style.display = "none";
+                       picmgzsev.style.display = "none";
+                       picmges.style.display = "none";
          break
          case "MGEP" : picmghs.style.display = "none";
                        picmgvshev.style.display = "none";
@@ -192,6 +230,48 @@
                        picmg4.style.display = "none";
                        picmgep.style.display = "block"; 
                        carshadow.style.display = "none";
+                       picmgmaxus9.style.display = "none";
+                       picmgzsev.style.display = "none";
+                       picmges.style.display = "none";
+         break
+         case "MGZSEV" : picmghs.style.display = "none";
+                       picmgvshev.style.display = "none";
+                       picmgzs.style.display = "none";
+                       picmgetd.style.display = "none";
+                       picmghsphev.style.display = "none";
+                       picmg5.style.display = "none";
+                       picmg4.style.display = "none";
+                       picmgep.style.display = "none"; 
+                       carshadow.style.display = "none";
+                       picmgmaxus9.style.display = "none";
+                       picmgzsev.style.display = "block";
+                       picmges.style.display = "none";
+         break
+         case "MGES" : picmghs.style.display = "none";
+                       picmgvshev.style.display = "none";
+                       picmgzs.style.display = "none";
+                       picmgetd.style.display = "none";
+                       picmghsphev.style.display = "none";
+                       picmg5.style.display = "none";
+                       picmg4.style.display = "none";
+                       picmgep.style.display = "none"; 
+                       carshadow.style.display = "none";
+                       picmgmaxus9.style.display = "none";
+                       picmgzsev.style.display = "none";
+                       picmges.style.display = "block";
+         break
+         case "MGMAXUS9" : picmghs.style.display = "none";
+                           picmgvshev.style.display = "none";
+                           picmgzs.style.display = "none";
+                           picmgetd.style.display = "none";
+                           picmghsphev.style.display = "none";
+                           picmg5.style.display = "none";
+                           picmg4.style.display = "none";
+                           picmgep.style.display = "none"; 
+                           carshadow.style.display = "none";
+                           picmgmaxus9.style.display = "block";
+                           picmgzsev.style.display = "none";
+                           picmges.style.display = "none";
          break
          default : carshadow.style.display = "block";
                    picmgvshev.style.display = "none";
@@ -202,6 +282,9 @@
                    picmg4.style.display = "none";
                    picmghs.style.display = "none";
                    picmgep.style.display = "none";
+                   picmgmaxus9.style.display = "none";
+                   picmgzsev.style.display = "none";
+                   picmges.style.display = "none";
          
       };
       checkdataclient();

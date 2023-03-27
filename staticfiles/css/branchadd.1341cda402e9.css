@@ -1,0 +1,31 @@
+.table {
+    margin-top: 0.5vh;   
+}
+.accordion-button{
+  border-left: 1px solid gray;
+  border-right: 1px solid gray;
+}
+.input-group {
+  padding: 1vh 2vw;
+  margin-bottom: 0px !important;
+  margin-top: 0px !important;
+}
+.table {
+  border : none;
+  text-align : center;
+  border-radius : 15px;
+}
+#tab-top {
+  border-left: 1px solid gray; 
+  border-right: 1px solid gray; 
+  border-top: 1px solid gray; 
+  border-top-right-radius: 10px; 
+  border-top-left-radius: 10px;
+}
+#tab-buttom {
+  border-left: 1px solid gray; 
+  border-right: 1px solid gray; 
+  border-bottom: 1px solid gray; 
+  border-bottom-right-radius: 10px; 
+  border-bottom-left-radius: 10px;
+}

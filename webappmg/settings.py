@@ -11,20 +11,36 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 """
 
-from pathlib import Path
-import os 
-from os import environ
 import dj_database_url
+import os 
+from django.test.runner import DiscoverRunner
+from pathlib import Path
+from os import environ 
 #import django_on_heroku
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+IS_HEROKU = "DYNO" in os.environ
+
 SECRET_KEY = environ.get('SECRET_KEY')
 
-DEBUG = True
+if 'SECRET_KEY' in os.environ:
+    SECRET_KEY = os.environ["SECRET_KEY"]
 
-ALLOWED_HOSTS = ['djwebappmg-version1.herokuapp.com']
+#DEBUG = True
 
+if IS_HEROKU:
+    ALLOWED_HOSTS = ['djwebappmg-version1.herokuapp.com']
+else:
+    ALLOWED_HOSTS = []
+    
+    
+#ALLOWED_HOSTS = ['djwebappmg-version1.herokuapp.com']
+
+if not IS_HEROKU:
+    DEBUG = True 
+    
+    
 LOGIN_URL = "auth/login"
 
 INSTALLED_APPS = [
@@ -102,8 +118,8 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-STATIC_URL = '/static/'
 STATICFILES_DIRS =[os.path.join(BASE_DIR, 'static')]
+STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 

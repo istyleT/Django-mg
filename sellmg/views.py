@@ -398,6 +398,7 @@ def PaymentRegis(request):
     registype = request.GET.get('registype') 
    
     #ส่งข้อมูลออก
+    request.session['submodel'] = submodel
     request.session['paytype'] = paytype
     request.session['mgbranch'] = mgbranch
     request.session['registype'] = registype

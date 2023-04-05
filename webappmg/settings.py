@@ -27,7 +27,7 @@ SECRET_KEY = environ.get('SECRET_KEY')
 if 'SECRET_KEY' in os.environ:
     SECRET_KEY = os.environ["SECRET_KEY"]
 
-#DEBUG = True
+
 
 if IS_HEROKU:
     ALLOWED_HOSTS = ['djwebappmg-version1.herokuapp.com']
@@ -124,10 +124,10 @@ STATIC_ROOT = os.path.join(BASE_DIR , 'staticfiles')
 #STATICFILES_DIRS =[os.path.join(BASE_DIR, 'static')]
 #STATIC_URL = '/static/'
 #STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
+DEBUG =  False
 #django_on_heroku.settings(locals())
 
 
